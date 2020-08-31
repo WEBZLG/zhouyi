@@ -1,26 +1,27 @@
 //封装请求函数
 const UTIL = require('./util.js')
-const API_BASE_URL = 'https://api-zhouyi.chengyue.online';
-const IMG_BASE_URL = 'https://images-zhouyi.chengyue.online';
-const request = (url, method,data,uid) => {
-  let _url,token;
-  //获取token 判断如果有用用户的token否则用下面的token
-  let loginToken = wx.getStorageSync('loginToken');
-  console.log(loginToken)
-  if(loginToken){
-    token = loginToken
+const API_BASE_URL = 'https://api-zhouyi.chengyue.online';//api地址
+const IMG_BASE_URL = 'https://images-zhouyi.chengyue.online';//图片地址
+const request = (url, method,data,uid,token) => {
+  let _url,loginToken;
+  //获取登录token 判断如果有 用登录token否则用固定的token
+  if(token){
+    loginToken = token
   }else{
-    token = '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K'
+    loginToken = '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K'
   }
-  if(uid==undefined){
+  //判断传入的参数中是否存在uid,存在即在url地址后拼接uid
+  if(uid==undefined||uid==''){
     _url = API_BASE_URL + url;
   }else{
     console.log(uid)
     uid = '/'+uid.uid
     _url = API_BASE_URL + url + uid;
   }
+  //获取的当前时间戳（10位）
   data.timestamp = Math.round(new Date().getTime()/1000).toString();
-  data.sign = UTIL.getMD5Sign(data,token) 
+  //通过md5加密验签
+  data.sign = UTIL.getMD5Sign(data,loginToken) 
   return new Promise((resolve, reject) => {
     wx.request({
       url: _url,
@@ -76,8 +77,8 @@ module.exports = {
     return request('/carousel/get','post', data)
   },
   //退出登录
-  signOut:(data) => {
-    return request('/logout','post', data)
+  signOut:(data,token) => {
+    return request('/logout','post',data,'',token)
   },
   //检验是否登录
   isSignIn:(data,uid) => {

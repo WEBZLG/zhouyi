@@ -17,9 +17,10 @@ Page({
       content: '确定要退出登录吗？',
       success: function (sm) {
         if (sm.confirm) {
+          let token = wx.getStorageSync('loginToken');
           API.signOut({
               user_id: _this.data.userInfo.user_id,
-            })
+            },token)
             .then(res => {
               console.log(res)
               wx.showToast({

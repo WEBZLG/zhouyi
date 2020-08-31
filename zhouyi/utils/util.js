@@ -1,18 +1,4 @@
 const MD5 = require('./md5');
-
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
 // 时间戳转日期（13位）
 const timestampToTime = timestamp => {
   var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -93,4 +79,18 @@ module.exports = {
   timestampToTime: timestampToTime,
   getMD5Sign: getMD5Sign,
   checkLogin:checkLogin
+}
+
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
 }
