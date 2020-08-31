@@ -1,0 +1,30 @@
+/* pages/magicDetail/magicDetail.wxss */
+.flex{
+  display: flex;
+}
+.flex van-cell{
+  flex: 1;
+}
+.van-cell__value{
+  flex: 3 !important;
+  width: 100%; 
+}
+.top{
+  text-align: left;
+  width: 100%;
+}
+.middle{
+  text-align: center;
+  margin: 10rpx 0;
+}
+.bottom{
+  text-align-last: justify;
+  text-align: justify;
+  width: 100%;  
+}
+.border-color{
+  border: 1px solid #666666;
+}
+.column-box{
+  margin:10rpx 30rpx
+}
