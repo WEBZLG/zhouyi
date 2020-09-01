@@ -1,0 +1,7 @@
+/* pages/home/home.wxss */
+.nav-title{
+  font-size: 12px;
+}
+.swiper-item{
+  height: 400rpx;
+}
