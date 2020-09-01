@@ -1,0 +1,7 @@
+/* pages/magic/magic.wxss */
+.btn-box{
+  margin: 30rpx;
+}
+.van-button--primary {
+  width: 100%;
+}
