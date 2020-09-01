@@ -23,6 +23,9 @@ const request = (url, method,data,uid,token) => {
   //通过md5加密验签
   data.sign = UTIL.getMD5Sign(data,loginToken) 
   return new Promise((resolve, reject) => {
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: _url,
       method: method,
@@ -33,6 +36,7 @@ const request = (url, method,data,uid,token) => {
       success(request) {
         if(request.statusCode=='200'){
           resolve(request.data)
+          wx.hideLoading()
         }else{
           wx.showToast({
             title:request.data.message,
@@ -57,7 +61,6 @@ const request = (url, method,data,uid,token) => {
 //   })
 //   .then(res => {})
 // 结果api
-
 module.exports = {
   IMG_BASE_URL,
   // 注册
@@ -83,5 +86,9 @@ module.exports = {
   //检验是否登录
   isSignIn:(data,uid) => {
     return request('/check_login','post', data,uid)
+  },
+  //奇门排盘
+  special:(data) => {
+    return request('/special/get','post', data)
   },
 }

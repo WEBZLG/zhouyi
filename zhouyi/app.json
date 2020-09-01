@@ -53,7 +53,9 @@
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-skeleton": "@vant/weapp/skeleton/index"
   },
   "sitemapLocation": "sitemap.json"
 }

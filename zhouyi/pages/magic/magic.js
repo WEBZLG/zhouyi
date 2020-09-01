@@ -1,7 +1,6 @@
 // pages/magic/magic.js
-const util = require('../../utils/util.js')
+const UTIL = require('../../utils/util.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -10,8 +9,11 @@ Page({
     showDate:false,//日期弹窗控制显隐
     showGame:false,//定局显隐
     active:0,//tab选中
+    minDate:new Date(1900,1, 1).getTime(),
+    maxDate:new Date(2099, 11, 31).getTime(),
     currentDate: new Date().getTime(),//默认日期
-    chooseDate:util.timestampToTime(new Date().getTime()),//选择后日期
+    chooseDate:UTIL.timestampToTime(new Date().getTime()),//选择后日期
+    changeDate:UTIL.timestampToTime(new Date().getTime()),//传送参数
     game:'茅道',//定局选择
     actions: [{//定局选项
         name: '茅道',
@@ -43,7 +45,14 @@ Page({
   onConfirm(event) {
     this.setData({
       currentDate: event.detail,
-      chooseDate:util.timestampToTime(event.detail)
+      chooseDate:UTIL.timestampToTime(event.detail),
+      changeDate:UTIL.timestampToTime(event.detail),
+      // changeDate:{
+      //   year:UTIL.timestampToTime(event.detail).split('-')[0],
+      //   month:UTIL.timestampToTime(event.detail).split('-')[1],
+      //   day:UTIL.timestampToTime(event.detail).split('-')[2].split(' ')[0],
+      //   hour:UTIL.timestampToTime(event.detail).split(' ')[1].split(':')[0]
+      // }
     });
     this.onClose()
   },
@@ -53,20 +62,27 @@ Page({
   },
   // 定局选中事件
   onSelect(event) {
-    console.log(event.detail.name)
     this.setData({game:event.detail.name})
   },
   //详情
   onDetail(){
+    let changeDate = JSON.stringify(this.data.changeDate)
     wx.navigateTo({
-      url: '../magicDetail/magicDetail',
+      url: '../magicDetail/magicDetail?time='+changeDate,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.setData({
+    //   changeDate:{
+    //     year:UTIL.timestampToTime(this.data.currentDate).split('-')[0],
+    //     month:UTIL.timestampToTime(this.data.currentDate).split('-')[1],
+    //     day:UTIL.timestampToTime(this.data.currentDate).split('-')[2].split(' ')[0],
+    //     hour:UTIL.timestampToTime(this.data.currentDate).split(' ')[1].split(':')[0]
+    //   }
+    // })
   },
 
   /**
