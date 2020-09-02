@@ -1,17 +1,58 @@
 <!--pages/magic/magic.wxml-->
 <view>
 	<van-tabs active="{{ active }}">
-		<van-tab wx:for="{{tabList}}" wx:key="index" title="{{item.title}}"></van-tab>
+		<van-tab wx:for="{{tabList}}" wx:key="index" title="{{item.title}}">
+		<!-- 时家开始 -->
+			<view wx:if="{{index==0}}">
+				<van-cell-group>
+					<van-cell title="起局时间" is-link bind:click="showPopup" value="{{chooseDate}}" />
+					<van-cell title="定局" is-link value="{{game}}" bind:click="showGame" />
+				</van-cell-group>
+				<!-- 起局弹出 -->
+				<van-popup show="{{ showDate }}" bind:close="onClose" position="bottom">
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+				</van-popup>
+				<!-- 定局弹出 -->
+				<van-action-sheet show="{{ showGame }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+				<view class="btn-box">
+					<van-button type="primary" catchtap="onDetail">起局</van-button>
+				</view>
+			</view>
+			<!-- 时家结束 -->
+			<!-- 搜局开始 -->
+			<view wx:if="{{index==1}}">
+				<van-cell-group>
+					<van-cell title="起局时间" is-link bind:click="showPopupFun" data-type="0" value="{{chooseDateStart}}" />
+					<van-cell title="结束时间" is-link bind:click="showPopupFun" data-type="1" value="{{chooseDateEnd}}" />
+					<van-cell title="奇门" is-link value="{{magic}}" data-type="2" bind:click="showPopupFun" />
+					<van-cell title="八门" is-link bind:click="showPopupFun" data-type="3" value="{{chooseDateBm}}" />
+					<van-cell title="天盘干" is-link bind:click="showPopupFun" data-type="4" value="{{chooseDateTpg}}" />
+					<van-cell title="底盘干" is-link bind:click="showPopupFun" data-type="5" value="{{chooseDateDpg}}" />
+					<van-cell title="格局" is-link bind:click="showPopupFun" data-type="6" value="{{chooseDateGj}}" />
+				</van-cell-group>
+				<!-- 起局事件弹出 -->
+				<van-popup show="{{ showDateStart }}" bind:close="onClose" position="bottom">
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+				</van-popup>
+				<!-- 结束事件弹出 -->
+				<van-popup show="{{ showDateEnd }}" bind:close="onClose" position="bottom">
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+				</van-popup>
+				<!-- 奇门弹出 -->
+				<van-action-sheet show="{{ showMagic }}" actions="{{ actionsMagic }}" bind:close="onClose" bind:select="onSelectMagic" />
+				<!-- 八门弹出 -->
+				<van-action-sheet show="{{ showBm }}" actions="{{ actionsBm }}" bind:close="onClose" bind:select="onSelectBm" />
+				<!-- 天盘干弹出 -->
+				<van-action-sheet show="{{ showTpg }}" actions="{{ actionsTpg }}" bind:close="onClose" bind:select="onSelectTpg" />
+				<!-- 底盘干弹出 -->
+				<van-action-sheet show="{{ showDpg }}" actions="{{ actionsDpg }}" bind:close="onClose" bind:select="onSelectDpg" />
+				<!-- 格局弹出 -->
+				<van-action-sheet show="{{ showGj }}" actions="{{ actionsGj }}" bind:close="onClose" bind:select="onSelectGj" />
+				<view class="btn-box">
+					<van-button type="primary" catchtap="onDetail">起局</van-button>
+				</view>
+			</view>
+			<!-- 搜局结束 -->
+		</van-tab>
 	</van-tabs>
-	<van-cell-group>
-		<van-cell title="起局时间" is-link bind:click="showPopup" value="{{chooseDate}}" />
-		<van-cell title="定局" is-link value="{{game}}" bind:click="showGame" />
-	</van-cell-group>
-	<van-popup show="{{ showDate }}" bind:close="onClose" position="bottom">
-		<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
-	</van-popup>
-	<van-action-sheet show="{{ showGame }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
-	<view class="btn-box">
-		<van-button type="primary" catchtap="onDetail">起局</van-button>
-	</view>
 </view>

@@ -14,3 +14,17 @@ van-button {
 .van-button--small{
   border: none !important;
 }
+.logo-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: #ffffff;
+}
+.login-bg{
+  position: relative;
+  height: 440rpx;
+  width: 100%;
+}

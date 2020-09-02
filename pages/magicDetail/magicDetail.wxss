@@ -8,6 +8,10 @@
 .van-cell{
   padding: 10rpx 30rpx !important;
 }
+.van-cell__title{
+  flex: none !important;
+  width: 80rpx;
+}
 .van-cell__value{
   flex: 3 !important;
   width: 100%; 
@@ -17,6 +21,9 @@
   width: 100%;
   height: 76rpx;
   line-height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .middle{
   text-align: center;
@@ -42,4 +49,16 @@
 }
 .van-grid-item__content {
   padding: 0 20rpx !important;
+}
+.text-left{
+  text-align: left;
+}
+.text-content{
+  width: 90%;
+  box-sizing: border-box;
+  padding: 30rpx;
+  font-size: 12px;
+}
+.text-item{
+  line-height: 20px;
 }

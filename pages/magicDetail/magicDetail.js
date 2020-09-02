@@ -8,12 +8,15 @@ Page({
     show:false,//弹窗控制显隐
     time:'',//传参
     specialData:'',//返回参数
+    specialContent:[],
     sudoku:'',//排盘重组
     loading:true
   },
   // 弹窗显示触发
-  showPopup() {
-    this.setData({ show: true });
+  showPopup(e) {
+    console.log(e.currentTarget.dataset.content)
+    let content = e.currentTarget.dataset.content
+    this.setData({ show: true,specialContent: content});
   },
   // 弹窗关闭触发
   onClose() {
@@ -25,7 +28,6 @@ Page({
   onLoad: function (options) {
     let _this = this
     let time = JSON.parse(options.time) 
-    console.log(time)
     this.setData({
       time:time
     })

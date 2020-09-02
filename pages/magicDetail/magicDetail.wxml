@@ -4,27 +4,33 @@
 	<van-cell-group>
 		<view class="flex">
 			<van-cell title="排法" value="茅道" />
-			<van-cell title="旬首" value="{{specialData.ob.list_first}}{{specialData.ob.ob_first}}" />
+			<!-- <van-cell title="旬首" value="{{specialData.ob.list_first}}{{specialData.ob.ob_first}}" /> -->
 		</view>
 		<van-cell title="节气">
-			<view class="van-cell-value">{{specialData.prev_solar}}</view>
-			<view class="van-cell-value">{{specialData.next_solar}}</view>
+			<view class="van-cell-value text-left">{{specialData.prev_solar}}</view>
+			<view class="van-cell-value text-left">{{specialData.next_solar}}</view>
 		</van-cell>
 		<van-cell title="时间">
-			<view class="van-cell-value">公历 {{specialData.gregorian_calendar}}</view>
-			<view class="van-cell-value">农历 {{specialData.lunar}}</view>
+			<view class="van-cell-value text-left">公历 {{specialData.gregorian_calendar}}</view>
+			<view class="van-cell-value text-left">农历 {{specialData.lunar}}</view>
+			<view class="van-cell-value text-left">{{specialData.era.year+'  '}}{{specialData.era.month+'  '}}{{specialData.era.day+'  '}}{{specialData.era.hour}}; 日空：{{specialData.ob.kw}}   日马：{{specialData.horse}}</view>
 		</van-cell>
 		<van-cell title="">
-			<view class="van-cell-value">{{specialData.era.year+' '}}{{specialData.era.month+' '}}{{specialData.era.day+' '}}{{specialData.era.hour}}</view>
-			<view class="van-cell-value">局：{{specialData.layout_name+'；'}}值符：{{specialData.zhifu_star+'；'}}值使：{{specialData.zhishi_door}}</view>
+			<view class="van-cell-value text-left">旬首：{{specialData.ob.list_first}}{{specialData.ob.ob_first+'；'}}值符：{{specialData.zhifu_star+'；'}}值使：{{specialData.zhishi_door+'；'}}局：{{specialData.layout_name}}</view>
 		</van-cell>
 	</van-cell-group>
 	</van-skeleton>
 	<van-skeleton  animate row="7" loading="{{ loading }}">
 	<view class="column-box" wx:if="{{sudoku}}">
 		<van-grid column-num="3" border="{{ true }}" square="{{true}}" custom-class="border-color">
-			<van-grid-item use-slot wx:for="{{sudoku}}" custom-class="border-color" wx:key="index" bind:click="showPopup">
-				<view class="top">{{item.god}}</view>
+			<van-grid-item use-slot wx:for="{{sudoku}}" custom-class="border-color" wx:key="index" data-content="{{item.content}}" bind:click="showPopup">
+				<view class="top">
+					<view>{{item.god}}</view>
+					<view>
+						<text wx:if="{{item.kw>0}}">空</text>
+						<text wx:if="{{item.horse>0}}">马</text>
+					</view>
+				</view>
 				<view class="middle">{{item._ts_meter}}</view>
 				<view class="bottom">
 					<text>{{item.ts_meter}}</text>
@@ -34,6 +40,8 @@
 			</van-grid-item>
 		</van-grid>
 	</view>
-	<van-popup show="{{ show }}" bind:close="onClose">内容</van-popup>
+	<van-popup show="{{ show }}" bind:close="onClose" custom-class="text-content">
+		<view class="text-item" wx:for="{{specialContent}}" wx:key="index">{{item}}</view>
+	</van-popup>
 	</van-skeleton>
 </view>
