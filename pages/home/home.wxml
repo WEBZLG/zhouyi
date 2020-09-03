@@ -5,17 +5,30 @@
 			<block wx:for="{{background}}" wx:key="image">
 				<swiper-item>
 					<view class="swiper-item">
-						<van-image width="100%" height="100%"  wx:if='{{item.image}}' show-loading src="{{imgUrl+item.image}}"/>
+						<van-image width="100%" height="100%" wx:if='{{item.image}}' show-loading src="{{imgUrl+item.image}}" />
 					</view>
 				</swiper-item>
 			</block>
 		</swiper>
 	</view>
-
 	<van-grid column-num="4" border="{{ false }}">
 		<van-grid-item use-slot wx:for="{{ iconNav }}" wx:key="id" catchtap="onMagic" data-url="{{item.url}}">
 			<image style="width:50px; height: 50px;border-radius:10px" src="{{item.imgPath}}" />
-      <text class="nav-title">{{item.title}}</text>
+			<text class="nav-title">{{item.title}}</text>
 		</van-grid-item>
 	</van-grid>
+	<van-cell-group>
+		<van-cell title="推荐" value="" />
+	</van-cell-group>
+	<van-cell custom-class="flex" wx:for="{{6}}" wx:key="index">
+		<view slot="title" class="user-box">
+			<view class="van-cell-text">
+				<van-image width="30" height="30" round show-loading src="https://img.yzcdn.cn/vant/cat.jpeg" />
+			</view>
+			<view class="user-info">
+				<view class="user-name">某某某</view>
+				<view class="user-unit">某某公司</view>
+			</view>
+		</view>
+	</van-cell>
 </view>

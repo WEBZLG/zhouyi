@@ -1,6 +1,6 @@
 <!--pages/magic/magic.wxml-->
 <view>
-	<van-tabs active="{{ active }}">
+	<van-tabs active="{{ active }}" color="#277CFB">
 		<van-tab wx:for="{{tabList}}" wx:key="index" title="{{item.title}}">
 		<!-- 时家开始 -->
 			<view wx:if="{{index==0}}">
@@ -10,12 +10,12 @@
 				</van-cell-group>
 				<!-- 起局弹出 -->
 				<van-popup show="{{ showDate }}" bind:close="onClose" position="bottom">
-					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" data-type="0"  bind:confirm="onConfirm" bind:cancel="onCancel" />
 				</van-popup>
 				<!-- 定局弹出 -->
 				<van-action-sheet show="{{ showGame }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
 				<view class="btn-box">
-					<van-button type="primary" catchtap="onDetail">起局</van-button>
+					<van-button type="info" round catchtap="onDetail">起局</van-button>
 				</view>
 			</view>
 			<!-- 时家结束 -->
@@ -32,24 +32,24 @@
 				</van-cell-group>
 				<!-- 起局事件弹出 -->
 				<van-popup show="{{ showDateStart }}" bind:close="onClose" position="bottom">
-					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDateStart }}" data-type="1" bind:confirm="onConfirm" bind:cancel="onCancel" />
 				</van-popup>
 				<!-- 结束事件弹出 -->
 				<van-popup show="{{ showDateEnd }}" bind:close="onClose" position="bottom">
-					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+					<van-datetime-picker type="datetime" min-date="{{ minDate }}"  max-date="{{ maxDate }}" value="{{ currentDateEnd }}" data-type="2" bind:confirm="onConfirm" bind:cancel="onCancel" />
 				</van-popup>
 				<!-- 奇门弹出 -->
 				<van-action-sheet show="{{ showMagic }}" actions="{{ actionsMagic }}" bind:close="onClose" bind:select="onSelectMagic" />
 				<!-- 八门弹出 -->
-				<van-action-sheet show="{{ showBm }}" actions="{{ actionsBm }}" bind:close="onClose" bind:select="onSelectBm" />
+				<van-action-sheet show="{{ showBm }}" actions="{{ actionsBm }}" bind:close="onClose" data-type="0" bind:select="onSelectFun" />
 				<!-- 天盘干弹出 -->
-				<van-action-sheet show="{{ showTpg }}" actions="{{ actionsTpg }}" bind:close="onClose" bind:select="onSelectTpg" />
+				<van-action-sheet show="{{ showTpg }}" actions="{{ actionsPg }}" bind:close="onClose" data-type="1" bind:select="onSelectFun" />
 				<!-- 底盘干弹出 -->
-				<van-action-sheet show="{{ showDpg }}" actions="{{ actionsDpg }}" bind:close="onClose" bind:select="onSelectDpg" />
+				<van-action-sheet show="{{ showDpg }}" actions="{{ actionsPg }}" bind:close="onClose" data-type="2" bind:select="onSelectFun" />
 				<!-- 格局弹出 -->
-				<van-action-sheet show="{{ showGj }}" actions="{{ actionsGj }}" bind:close="onClose" bind:select="onSelectGj" />
+				<van-action-sheet show="{{ showGj }}" actions="{{ actionsGj }}" bind:close="onClose" data-type="3" bind:select="onSelectFun" />
 				<view class="btn-box">
-					<van-button type="primary" catchtap="onDetail">起局</van-button>
+					<van-button type="info" round catchtap="onDetailSj">起局</van-button>
 				</view>
 			</view>
 			<!-- 搜局结束 -->

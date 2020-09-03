@@ -34,17 +34,53 @@ const request = (url, method,data,uid,token) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success(request) {
+        console.log(request)
         if(request.statusCode=='200'){
           resolve(request.data)
           wx.hideLoading()
+        }else if(request.statusCode=='401'){
+          wx.hideLoading()
+          if(request.data.message=="您当前不是会员或会员已过期，请开通会员后再访问"){
+            wx.showModal({
+              title: '提示',
+              content: '您当前不是会员或会员已过期，是否立即开通会员或续费？',
+              success: function (sm) {
+                if (sm.confirm) {
+                  wx.redirectTo({
+                    url: '../vip/vip',
+                  })
+                } else if (sm.cancel) {
+                  wx.navigateBack({
+                    delta: 0,
+                  })
+                }
+              }
+            })
+          }else{
+            wx.showToast({
+              title:request.data.message,
+              icon:'none'
+            })
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 0,
+              })
+            }, 1500);
+          }
         }else{
           wx.showToast({
             title:request.data.message,
             icon:'none'
           })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 0,
+            })
+          }, 1500);
         }
       },
       fail(error) {
+        console.log(error)
         reject(error)
         wx.showToast({
           title:error.data.message,
@@ -88,7 +124,11 @@ module.exports = {
     return request('/check_login','post', data,uid)
   },
   //奇门排盘
-  special:(data) => {
-    return request('/special/get','post', data)
+  special:(data,token) => {
+    return request('/special/get','post', data,'',token)
+  },
+   //搜局
+   search:(data,token) => {
+    return request('/special/search','post', data,'',token)
   },
 }

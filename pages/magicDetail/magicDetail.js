@@ -28,10 +28,12 @@ Page({
   onLoad: function (options) {
     let _this = this
     let time = JSON.parse(options.time) 
+    let uid = wx.getStorageSync('userInfo').user_id;
+    let token = wx.getStorageSync('loginToken');
     this.setData({
       time:time
     })
-    API.special({time:time})
+    API.special({time:time,user_id:uid},token)
     .then(res => {
       console.log(res)
       let sudoku = []

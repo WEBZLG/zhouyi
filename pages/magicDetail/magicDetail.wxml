@@ -13,10 +13,21 @@
 		<van-cell title="时间">
 			<view class="van-cell-value text-left">公历 {{specialData.gregorian_calendar}}</view>
 			<view class="van-cell-value text-left">农历 {{specialData.lunar}}</view>
-			<view class="van-cell-value text-left">{{specialData.era.year+'  '}}{{specialData.era.month+'  '}}{{specialData.era.day+'  '}}{{specialData.era.hour}}; 日空：{{specialData.ob.kw}}   日马：{{specialData.horse}}</view>
+			<view class="van-cell-value text-left flex">
+			<text class="black-color tgdz">{{specialData.era.year+'  '}}{{specialData.era.month+'  '}}{{specialData.era.day+'  '}}{{specialData.era.hour}}</text>
+			<view>
+				日空：<text  class="yellow-color">{{specialData.ob.kw}}</text>日马：<text class="yellow-color">{{specialData.horse}}</text></view>
+			</view>
 		</van-cell>
 		<van-cell title="">
-			<view class="van-cell-value text-left">旬首：{{specialData.ob.list_first}}{{specialData.ob.ob_first+'；'}}值符：{{specialData.zhifu_star+'；'}}值使：{{specialData.zhishi_door+'；'}}局：{{specialData.layout_name}}</view>
+			<view class="van-cell-value text-left flex">
+			<view>
+				旬首：{{specialData.ob.list_first}}{{specialData.ob.ob_first+';'}}
+				<text class="red-color">值符：{{specialData.zhifu_star}}</text>;
+				值使：<text class="red-color">{{specialData.zhishi_door}}门</text>
+			</view>
+			<text class="black-color">局：{{specialData.layout_name}}	</text>
+			</view>
 		</van-cell>
 	</van-cell-group>
 	</van-skeleton>
@@ -25,17 +36,25 @@
 		<van-grid column-num="3" border="{{ true }}" square="{{true}}" custom-class="border-color">
 			<van-grid-item use-slot wx:for="{{sudoku}}" custom-class="border-color" wx:key="index" data-content="{{item.content}}" bind:click="showPopup">
 				<view class="top">
-					<view>{{item.god}}</view>
 					<view>
+						<text wx:if="{{item.god == '值符'}}" class="red-color">{{item.god}}</text>
+						<text wx:else >{{item.god}}</text>
+					</view>
+					<view class="yellow-color">
 						<text wx:if="{{item.kw>0}}">空</text>
 						<text wx:if="{{item.horse>0}}">马</text>
 					</view>
 				</view>
 				<view class="middle">{{item._ts_meter}}</view>
+				<view class="pattern">
+					<view class="pattern-item" wx:for="{{item.pattern}}" wx:for-item="pat" wx:key="index">{{pat}}</view>
+				</view>
 				<view class="bottom">
 					<text>{{item.ts_meter}}</text>
-					<text>{{item.star}}</text>
-					<text>{{item.door}}</text>
+					<text wx:if="{{item.god == '值符'}}" class="red-color">{{item.star}}</text>
+					<text wx:else >{{item.star}}</text>
+					<text wx:if="{{specialData.zhishi_door==item.door}}" class="red-color">{{item.door}}</text>
+					<text wx:else>{{item.door}}</text>
 				</view>
 			</van-grid-item>
 		</van-grid>

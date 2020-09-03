@@ -5,3 +5,30 @@
 .swiper-item{
   height: 400rpx;
 }
+.van-grid-item__content{
+  padding-top: 0 !important;
+}
+.van-grid{
+  padding-top: 32rpx;
+  background-color: #ffffff;
+}
+.user-box{
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  line-height: 14px;
+  color: #999999;
+}
+.user-info{
+  margin-left: 20rpx;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user-name{
+  color: #333333;
+  font-size: 14px;
+  font-weight: bold;
+}

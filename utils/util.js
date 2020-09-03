@@ -33,6 +33,7 @@ function paramsStrSort(paramsStr,token) {
     }else{
       let urlStr = url.split("&").sort().join("&");
       let newUrl = urlStr + '&token=' + token;
+      console.log(newUrl)
       return MD5(newUrl).toUpperCase();
     }
 }

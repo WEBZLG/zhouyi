@@ -1,5 +1,6 @@
 // pages/magic/magic.js
 const UTIL = require('../../utils/util.js')
+const DATA = require('../../utils/data.js')
 Page({
   /**
    * 页面的初始数据
@@ -10,11 +11,11 @@ Page({
     showDate: false, //时家日期弹窗控制显隐
     showGame: false, //时家定局显隐
     active: 0, //tab选中
-    minDate: new Date(1900, 1, 1).getTime(),
-    maxDate: new Date(2099, 11, 31).getTime(),
-    currentDate: new Date().getTime(), //默认日期
-    chooseDate: UTIL.timestampToTime(new Date().getTime()), //时家选择后日期
-    changeDate: UTIL.timestampToTime(new Date().getTime()), //时家传送参数
+    minDate: new Date(1900, 1, 1).getTime(), //最早日期
+    maxDate: new Date(2099, 11, 31).getTime(), //最晚日期
+    currentDate:'', //默认日期
+    chooseDate: '', //时家选择后日期
+    changeDate:'', //时家传送参数
     game: '茅道', //时家定局选择
     actions: [{ //时家定局选项
       name: '茅道',
@@ -27,20 +28,30 @@ Page({
       title: '搜局'
     }],
     // 搜局数据
-    chooseDateStart: '',
-    chooseDateEnd: '',
-    magic: '',
-    chooseDateBm: '',
-    chooseDateTpg: '',
-    chooseDateDpg: '',
-    chooseDateGj: '',
-    showDateStart: false,
-    showDateEnd: false,
-    showMagic: false,
-    showBm: false,
-    showTpg: false,
-    showDpg: false,
-    showgj: false,
+    chooseDateStart: '', //开始日期
+    chooseDateEnd: '', //结束日期
+    magic: '时家', //奇门
+    chooseDateBm: '', //八门
+    chooseDateTpg: '', //天盘干
+    chooseDateDpg: '', //底盘干
+    chooseDateGj: '', //格局
+    showDateStart: false, //开始日期弹窗控制显隐
+    showDateEnd: false, //结束日期弹窗控制显隐
+    showMagic: false, //奇门弹窗控制显隐
+    showBm: false, //八门弹窗控制显隐
+    showTpg: false, //天盘干弹窗控制显隐
+    showDpg: false, //底盘干弹窗控制显隐
+    showGj: false, //格局弹窗控制显隐
+    currentDateStart: '', //默认开始日期
+    currentDateEnd: '', //默认结束日期
+    changeDateStart: '',
+    changeDateEnd: '',
+    actionsMagic: [{ //奇门选项
+      name: '时家',
+    }],
+    actionsBm: DATA.ACTION_BM, //八门
+    actionsPg: DATA.ACTION_PG, //天地盘干
+    actionsGj: DATA.ACTION_GJ, //格局
   },
 
   // 时家事件---------------
@@ -60,23 +71,51 @@ Page({
   onClose() {
     this.setData({
       showDate: false,
-      showGame: false
+      showGame: false,
+      showDateStart: false,
+      showDateEnd: false,
+      showMagic: false,
+      showBm: false,
+      showTpg: false,
+      showDpg: false,
+      showGj: false
     });
   },
   // 选择日期确定事件
+  //0:时家开始事件,1:搜局开始事件.2:搜局结束事件
   onConfirm(event) {
-    this.setData({
-      currentDate: event.detail,
-      chooseDate: UTIL.timestampToTime(event.detail),
-      changeDate: UTIL.timestampToTime(event.detail),
-    });
+    let _this = this
+    let type = event.target.dataset.type
+    switch (type) {
+      case '0':
+        _this.setData({
+          currentDate: event.detail,
+          chooseDate: UTIL.timestampToTime(event.detail),
+          changeDate: UTIL.timestampToTime(event.detail),
+        });
+        break;
+      case '1':
+        _this.setData({
+          currentDateStart: event.detail,
+          chooseDateStart: UTIL.timestampToTime(event.detail),
+          changeDateStart: UTIL.timestampToTime(event.detail),
+        });
+        break;
+      case '2':
+        _this.setData({
+          currentDateEnd: event.detail,
+          chooseDateEnd: UTIL.timestampToTime(event.detail),
+          changeDateEnd: UTIL.timestampToTime(event.detail),
+        });
+        break;
+    }
     this.onClose()
   },
   // 选择日期取消事件
   onCancel() {
     this.onClose()
   },
-  // 定局选中事件
+  // 选中事件
   onSelect(event) {
     this.setData({
       game: event.detail.name
@@ -92,64 +131,105 @@ Page({
 
 
   // 搜局事件--------------------
+  // 各事件弹出
+  //0:开始事件,1:结束事件.2:奇门,3:八门，4：天盘干，5：底盘干，6：格局
   showPopupFun(e) {
     let _this = this
     let type = e.target.dataset.type
-    console.log(type)
     switch (type) {
-      case 0:
-        console.log(type+'123')
+      case '0':
         _this.setData({
           showDateStart: true
         });
         break;
-      case 1:
-        this.setData({
+      case '1':
+        _this.setData({
           showDateEnd: true
         });
         break;
-      case 2:
-        this.setData({
+      case '2':
+        _this.setData({
           showMagic: true
         });
         break;
-      case 3:
-        this.setData({
+      case '3':
+        _this.setData({
           showBm: true
         });
         break;
-      case 4:
-        this.setData({
+      case '4':
+        _this.setData({
           showTpg: true
         });
         break;
-      case 5:
-        this.setData({
+      case '5':
+        _this.setData({
           showDpg: true
         });
         break;
-      case 6:
-        this.setData({
-          showgj: true
+      case '6':
+        _this.setData({
+          showGj: true
         });
         break;
-      default:
+    }
+  },
+  // 选中事件
+  //0:八门,1:天盘干.2:底盘干,3:格局
+  onSelectFun(e) {
+    let _this = this
+    let type = e.target.dataset.type
+    let name = ''
+    if(e.detail.name=='任意'){
+      name = ''
+    }else{
+      name = e.detail.name
+    }
+    switch (type) {
+      case '0':
+        _this.setData({
+          chooseDateBm: name
+        });
+        break;
+      case '1':
+        _this.setData({
+          chooseDateTpg: name
+        });
+        break;
+      case '2':
+        _this.setData({
+          chooseDateDpg:name
+        });
+        break;
+      case '3':
+        _this.setData({
+          chooseDateGj: name
+        });
         break;
     }
+  },
+  // 搜局详情
+  onDetailSj() {
+    let _this = this
+    let param = {
+      start_date:_this.data.chooseDateStart,
+      end_date:_this.data.chooseDateEnd,
+      door: _this.data.chooseDateBm,
+      sky:_this.data.chooseDateTpg,
+      ground:_this.data.chooseDateDpg,
+      pattern:_this.data.chooseDateGj
+    }
+    param = JSON.stringify(param)
+    wx.navigateTo({
+      url: '../dateList/dateList?param=' + param,
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   changeDate:{
-    //     year:UTIL.timestampToTime(this.data.currentDate).split('-')[0],
-    //     month:UTIL.timestampToTime(this.data.currentDate).split('-')[1],
-    //     day:UTIL.timestampToTime(this.data.currentDate).split('-')[2].split(' ')[0],
-    //     hour:UTIL.timestampToTime(this.data.currentDate).split(' ')[1].split(':')[0]
-    //   }
-    // })
+
   },
 
   /**
@@ -163,7 +243,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      currentDate:new Date().getTime(),
+      chooseDate: UTIL.timestampToTime(new Date().getTime()), //时家选择后日期
+      changeDate: UTIL.timestampToTime(new Date().getTime()), //时家传送参数
+      chooseDateStart: UTIL.timestampToTime(new Date().getTime()), //开始日期
+      chooseDateEnd: UTIL.timestampToTime(new Date().getTime()), //结束日期
+      currentDateStart: new Date().getTime(), //默认开始日期
+      currentDateEnd: new Date().getTime(), //默认结束日期
+    })
   },
 
   /**

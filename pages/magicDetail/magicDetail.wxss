@@ -1,22 +1,29 @@
 /* pages/magicDetail/magicDetail.wxss */
-.flex{
+.flex {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.flex van-cell{
+
+.flex van-cell {
   flex: 1;
 }
-.van-cell{
+
+.van-cell {
   padding: 10rpx 30rpx !important;
 }
-.van-cell__title{
+
+.van-cell__title {
   flex: none !important;
   width: 80rpx;
 }
-.van-cell__value{
+
+.van-cell__value {
   flex: 3 !important;
-  width: 100%; 
+  width: 100%;
 }
-.top{
+
+.top {
   text-align: left;
   width: 100%;
   height: 76rpx;
@@ -25,40 +32,69 @@
   align-items: center;
   justify-content: space-between;
 }
-.middle{
+
+.middle {
   text-align: center;
   height: 76rpx;
   line-height: 76rpx;
+  font-size: 18px;
+  font-weight: bold;
   /* letter-spacing: 8px; */
 }
-.bottom{
-  /* text-align-last: justify;
-  text-align: justify; */
+
+.bottom {
   height: 76rpx;
-  width: 100%;  
+  width: 100%;
   display: flex;
   line-height: 76rpx;
+  font-size: 18px;
+  font-weight: bold;
   justify-content: space-between;
 }
-.border-color{
+
+.border-color {
   font-size: 14px;
   border: 1px solid #666666;
 }
-.column-box{
-  margin:10rpx 30rpx
+
+.column-box {
+  margin: 10rpx 30rpx
 }
+
 .van-grid-item__content {
   padding: 0 20rpx !important;
 }
-.text-left{
+
+.text-left {
   text-align: left;
 }
-.text-content{
+
+.text-content {
   width: 90%;
   box-sizing: border-box;
   padding: 30rpx;
   font-size: 12px;
 }
-.text-item{
+
+.text-item {
   line-height: 20px;
+}
+
+.pattern {
+  position: absolute;
+  top: 60rpx;
+  right: 4rpx;
+  font-size: 8px;
+}
+.red-color{
+  color: #ff0000;
+}
+.yellow-color{
+  color:#0dfd01;
+}
+.black-color{
+  color: #000000;
+}
+.tgdz{
+  margin-left: 64rpx;
 }

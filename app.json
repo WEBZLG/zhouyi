@@ -8,7 +8,9 @@
     "pages/my/my",
     "pages/magic/magic",
     "pages/naming/naming",
-    "pages/resetPwd/resetPwd"
+    "pages/resetPwd/resetPwd",
+    "pages/dateList/dateList",
+    "pages/vip/vip"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -22,7 +24,7 @@
   },
   "tabBar": {
     "color": "#444444",
-    "selectedColor": "#ff9999",
+    "selectedColor": "#277CFB",
     "borderStyle": "black",
     "list": [
       {
@@ -32,7 +34,7 @@
         "text": "首页"
       },
       {
-        "selectedIconPath":"images/wd2.png",
+        "selectedIconPath": "images/wd2.png",
         "iconPath": "images/wd1.png",
         "pagePath": "pages/my/my",
         "text": "我的"

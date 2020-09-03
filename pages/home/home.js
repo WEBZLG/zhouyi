@@ -21,6 +21,36 @@ Page({
         imgPath: '../../images/qiming.jpg',
         title: "起名",
         url: "../naming/naming"
+      },
+      {
+        imgPath: '../../images/qiming.jpg',
+        title: "八字",
+        url: ""
+      },
+      {
+        imgPath: '../../images/qiming.jpg',
+        title: "风水",
+        url: ""
+      },
+      {
+        imgPath: '../../images/qimen.jpg',
+        title: "奇门教学",
+        url: ""
+      },
+      {
+        imgPath: '../../images/qiming.jpg',
+        title: "起名教学",
+        url: ""
+      },
+      {
+        imgPath: '../../images/qiming.jpg',
+        title: "八字教学",
+        url: ""
+      },
+      {
+        imgPath: '../../images/qiming.jpg',
+        title: "风水教学",
+        url: ""
       }
     ]
   },
