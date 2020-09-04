@@ -17,18 +17,24 @@
 			<text class="nav-title">{{item.title}}</text>
 		</van-grid-item>
 	</van-grid>
-	<!-- <van-cell-group>
+	<van-cell-group>
 		<van-cell title="推荐" value="" />
 	</van-cell-group>
-	<van-cell custom-class="flex" wx:for="{{6}}" wx:key="index">
+	<van-cell custom-class="flex" wx:for="{{6}}" wx:key="index" is-link>
 		<view slot="title" class="user-box">
 			<view class="van-cell-text">
 				<van-image width="30" height="30" round show-loading src="https://img.yzcdn.cn/vant/cat.jpeg" />
 			</view>
-			<view class="user-info">
+			<view class="user-info flex">
+			<view>
 				<view class="user-name">某某某</view>
-				<view class="user-unit">某某公司</view>
+				<view class="user-unit">擅长</view>
+			</view>
+			<view>
+				<view class="user-unit">年龄</view>
+				<view class="user-unit">地区</view>
+			</view>
 			</view>
 		</view>
-	</van-cell> -->
+	</van-cell>
 </view>

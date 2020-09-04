@@ -153,9 +153,7 @@ Page({
   //详情
   onDetail() {
     let changeDate = this.data.changeDate
-    let uid = wx.getStorageSync('userInfo').user_id
-    let token = wx.getStorageSync('loginToken')
-    API.special({time:changeDate,user_id:uid},token)
+    API.special({time:changeDate})
     .then(res => {
       let sudoku = []
       sudoku.push(res.data.sudoku[4])
@@ -269,15 +267,18 @@ Page({
         icon:'none'
       })
     }else{
-      let uid = wx.getStorageSync('userInfo').user_id;
-      let token = wx.getStorageSync('loginToken');
-      param.user_id = uid
-      API.search(param,token)
+      API.search(param)
       .then(res => {
-        let param = JSON.stringify(res.data.times)
-        wx.navigateTo({
-          url: '../dateList/dateList?param=' + param,
-        })
+        if(res.data.times.length==0){
+          wx.showToast({
+            title: '无搜索结果',
+          })
+        }else{
+          let param = JSON.stringify(res.data.times)
+          wx.navigateTo({
+            url: '../dateList/dateList?param=' + param,
+          })
+        }
       })
     }
   },

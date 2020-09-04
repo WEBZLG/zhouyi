@@ -8,6 +8,6 @@
 		<van-field value="{{ password }}" type="password" label="新密码" bindinput='getPwdValue' placeholder="请输入新密码" />
 	</van-cell-group>
 	<view class="btn-box">
-		<van-button type="info" round catchtap="onRegist">修改密码</van-button>
+		<van-button type="info" round catchtap="onRegist">重置密码</van-button>
 	</view>
 </view>

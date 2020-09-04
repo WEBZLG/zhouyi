@@ -1,20 +1,22 @@
 <!--pages/my/my.wxml-->
 <view>
 	<view class="user-bg">
-	<image src="../../images/my_bg.png"></image>
-	<view class="user-box">
-		<van-image width="100" height="100" round fit="cover" show-loading src="https://img.yzcdn.cn/vant/cat.jpeg" />
-		<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
-		<view wx:else catchtap="onLogin">登录</view>
-	</view>
+		<image src="../../images/my_bg.png"></image>
+		<view class="user-box">
+			<van-uploader bind:after-read="afterRead">
+				<van-image wx:if="{{userInfo.head_img}}" width="100" height="100" round fit="cover" show-loading src="{{userInfo.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':imgUrl+userInfo.head_img}}" />
+			</van-uploader>
+			<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
+			<view wx:else catchtap="onLogin">登录</view>
+		</view>
 	</view>
 	<view class="nav-box">
 		<van-cell-group>
-			<van-cell title="单元格" value="内容" />
-			<van-cell title="单元格" is-link />
-			<van-cell title="单元格" is-link value="内容" />
-			<van-cell title="单元格" is-link />
-			<van-cell title="重置密码" is-link link-type="navigateTo" url="/pages/resetPwd/resetPwd"/>
+			<van-cell title="实名认证" value="姓名" is-link />
+			<van-cell title="修改手机" is-link link-type="navigateTo" url="/pages/changePhone/changePhone" />
+			<van-cell title="修改密码" is-link link-type="navigateTo" url="/pages/changePwd/changePwd" />
+			<van-cell title="我的推荐" is-link />
+			<van-cell title="成为大师/大师资料" is-link />
 		</van-cell-group>
 	</view>
 	<view class="btn-box" wx:if="{{userInfo}}">

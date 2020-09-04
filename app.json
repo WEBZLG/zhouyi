@@ -10,7 +10,9 @@
     "pages/naming/naming",
     "pages/resetPwd/resetPwd",
     "pages/dateList/dateList",
-    "pages/vip/vip"
+    "pages/vip/vip",
+    "pages/changePwd/changePwd",
+    "pages/changePhone/changePhone"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -57,7 +59,8 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-loading": "@vant/weapp/loading/index",
-    "van-skeleton": "@vant/weapp/skeleton/index"
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-uploader": "@vant/weapp/uploader/index"
   },
   "sitemapLocation": "sitemap.json"
 }
