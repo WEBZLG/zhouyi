@@ -1,6 +1,6 @@
 //搜局action数据
 //八门
-const ACTION_BM = [{name: '任意'}, {name: '休门'}, {name: '生门'}, {name: '伤门'}, {name: '杜门'}, {name: '景门'}, {name: '死门'}, {name: '惊门'}, {name: '开门'}]
+const ACTION_BM = [{name: '任意'}, {name: '休'}, {name: '生'}, {name: '伤'}, {name: '杜'}, {name: '景'}, {name: '死'}, {name: '惊'}, {name: '开'}]
 //天、地盘干
 const ACTION_PG = [{name: '任意'}, {name: '乙'}, {name: '丙'}, {name: '丁'}, {name: '戊'}, {name: '己'}, {name: '庚'}, {name: '辛'}, {name: '壬'}, {name: '癸'}]
 //格局

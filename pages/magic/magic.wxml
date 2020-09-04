@@ -25,10 +25,10 @@
 					<van-cell title="起局时间" is-link bind:click="showPopupFun" data-type="0" value="{{chooseDateStart}}" />
 					<van-cell title="结束时间" is-link bind:click="showPopupFun" data-type="1" value="{{chooseDateEnd}}" />
 					<van-cell title="奇门" is-link value="{{magic}}" data-type="2" bind:click="showPopupFun" />
-					<van-cell title="八门" is-link bind:click="showPopupFun" data-type="3" value="{{chooseDateBm}}" />
-					<van-cell title="天盘干" is-link bind:click="showPopupFun" data-type="4" value="{{chooseDateTpg}}" />
-					<van-cell title="底盘干" is-link bind:click="showPopupFun" data-type="5" value="{{chooseDateDpg}}" />
-					<van-cell title="格局" is-link bind:click="showPopupFun" data-type="6" value="{{chooseDateGj}}" />
+					<van-cell title="八门" is-link bind:click="showPopupFun" data-type="3" value="{{chooseDateBm==''?'任意':chooseDateBm}}" />
+					<van-cell title="天盘干" is-link bind:click="showPopupFun" data-type="4" value="{{chooseDateTpg==''?'任意':chooseDateTpg}}" />
+					<van-cell title="底盘干" is-link bind:click="showPopupFun" data-type="5" value="{{chooseDateDpg==''?'任意':chooseDateDpg}}" />
+					<van-cell title="格局" is-link bind:click="showPopupFun" data-type="6" value="{{chooseDateGj==''?'任意':chooseDateGj}}" />
 				</van-cell-group>
 				<!-- 起局事件弹出 -->
 				<van-popup show="{{ showDateStart }}" bind:close="onClose" position="bottom">

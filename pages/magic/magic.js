@@ -1,6 +1,7 @@
 // pages/magic/magic.js
 const UTIL = require('../../utils/util.js')
 const DATA = require('../../utils/data.js')
+const API = require('../../utils/api');
 Page({
   /**
    * 页面的初始数据
@@ -11,11 +12,11 @@ Page({
     showDate: false, //时家日期弹窗控制显隐
     showGame: false, //时家定局显隐
     active: 0, //tab选中
-    minDate: new Date(1900, 1, 1).getTime(), //最早日期
-    maxDate: new Date(2099, 11, 31).getTime(), //最晚日期
-    currentDate:'', //默认日期
+    minDate: '', //最早日期
+    maxDate: '', //最晚日期
+    currentDate: '', //默认日期
     chooseDate: '', //时家选择后日期
-    changeDate:'', //时家传送参数
+    changeDate: '', //时家传送参数
     game: '茅道', //时家定局选择
     actions: [{ //时家定局选项
       name: '茅道',
@@ -100,6 +101,20 @@ Page({
           chooseDateStart: UTIL.timestampToTime(event.detail),
           changeDateStart: UTIL.timestampToTime(event.detail),
         });
+        if (_this.data.currentDateStart > _this.data.currentDateEnd) {
+          wx.showToast({
+            title: '起局时间不得晚于结束时间',
+            icon: 'none'
+          })
+          _this.setData({
+            changeDateStart: UTIL.timestampToTime(new Date().getTime()),
+            changeDateEnd: UTIL.timestampToTime(new Date().getTime()),
+            chooseDateStart: UTIL.timestampToTime(new Date().getTime()), //开始日期
+            chooseDateEnd: UTIL.timestampToTime(new Date().getTime()), //结束日期
+            currentDateStart: new Date().getTime(), //默认开始日期
+            currentDateEnd: new Date().getTime(), //默认结束日期
+          });
+        }
         break;
       case '2':
         _this.setData({
@@ -107,6 +122,20 @@ Page({
           chooseDateEnd: UTIL.timestampToTime(event.detail),
           changeDateEnd: UTIL.timestampToTime(event.detail),
         });
+        if (_this.data.currentDateStart > _this.data.currentDateEnd) {
+          wx.showToast({
+            title: '起局时间不得晚于结束时间',
+            icon: 'none'
+          })
+          _this.setData({
+            changeDateStart: UTIL.timestampToTime(new Date().getTime()),
+            changeDateEnd: UTIL.timestampToTime(new Date().getTime()),
+            chooseDateStart: UTIL.timestampToTime(new Date().getTime()), //开始日期
+            chooseDateEnd: UTIL.timestampToTime(new Date().getTime()), //结束日期
+            currentDateStart: new Date().getTime(), //默认开始日期
+            currentDateEnd: new Date().getTime(), //默认结束日期
+          });
+        }
         break;
     }
     this.onClose()
@@ -123,13 +152,28 @@ Page({
   },
   //详情
   onDetail() {
-    let changeDate = JSON.stringify(this.data.changeDate)
-    wx.navigateTo({
-      url: '../magicDetail/magicDetail?time=' + changeDate,
+    let changeDate = this.data.changeDate
+    let uid = wx.getStorageSync('userInfo').user_id
+    let token = wx.getStorageSync('loginToken')
+    API.special({time:changeDate,user_id:uid},token)
+    .then(res => {
+      let sudoku = []
+      sudoku.push(res.data.sudoku[4])
+      sudoku.push(res.data.sudoku[9])
+      sudoku.push(res.data.sudoku[2])
+      sudoku.push(res.data.sudoku[3])
+      sudoku.push(res.data.sudoku[5])
+      sudoku.push(res.data.sudoku[7])
+      sudoku.push(res.data.sudoku[8])
+      sudoku.push(res.data.sudoku[1])
+      sudoku.push(res.data.sudoku[6])
+      let param = JSON.stringify(res.data)
+      sudoku = JSON.stringify(sudoku)
+      wx.navigateTo({
+        url: '../magicDetail/magicDetail?param=' + param+'&sudoku='+sudoku,
+      })
     })
   },
-
-
   // 搜局事件--------------------
   // 各事件弹出
   //0:开始事件,1:结束事件.2:奇门,3:八门，4：天盘干，5：底盘干，6：格局
@@ -180,9 +224,9 @@ Page({
     let _this = this
     let type = e.target.dataset.type
     let name = ''
-    if(e.detail.name=='任意'){
+    if (e.detail.name == '任意') {
       name = ''
-    }else{
+    } else {
       name = e.detail.name
     }
     switch (type) {
@@ -198,7 +242,7 @@ Page({
         break;
       case '2':
         _this.setData({
-          chooseDateDpg:name
+          chooseDateDpg: name
         });
         break;
       case '3':
@@ -212,19 +256,39 @@ Page({
   onDetailSj() {
     let _this = this
     let param = {
-      start_date:_this.data.chooseDateStart,
-      end_date:_this.data.chooseDateEnd,
+      start_date: _this.data.chooseDateStart,
+      end_date: _this.data.chooseDateEnd,
       door: _this.data.chooseDateBm,
-      sky:_this.data.chooseDateTpg,
-      ground:_this.data.chooseDateDpg,
-      pattern:_this.data.chooseDateGj
+      sky: _this.data.chooseDateTpg,
+      ground: _this.data.chooseDateDpg,
+      pattern: _this.data.chooseDateGj
     }
-    param = JSON.stringify(param)
-    wx.navigateTo({
-      url: '../dateList/dateList?param=' + param,
-    })
+    if(param.door==''&&param.sky==''&&param.ground==''&&param.pattern==''){
+      wx.showToast({
+        title: '至少有一个查询条件不为任意',
+        icon:'none'
+      })
+    }else{
+      let uid = wx.getStorageSync('userInfo').user_id;
+      let token = wx.getStorageSync('loginToken');
+      param.user_id = uid
+      API.search(param,token)
+      .then(res => {
+        let param = JSON.stringify(res.data.times)
+        wx.navigateTo({
+          url: '../dateList/dateList?param=' + param,
+        })
+      })
+    }
   },
-
+   getYear(year) {
+    var time = new Date();
+     time.setFullYear(time.getFullYear() + year);
+     var y = time.getFullYear();
+     var m = time.getMonth() + 1;
+     var d = time.getDate();
+     return y + "," + m + ',' + d;
+   },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -243,14 +307,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let minDate = this.getYear(-10)
+    let maxDate = this.getYear(10)
     this.setData({
-      currentDate:new Date().getTime(),
+      currentDate: new Date().getTime(),
       chooseDate: UTIL.timestampToTime(new Date().getTime()), //时家选择后日期
       changeDate: UTIL.timestampToTime(new Date().getTime()), //时家传送参数
       chooseDateStart: UTIL.timestampToTime(new Date().getTime()), //开始日期
       chooseDateEnd: UTIL.timestampToTime(new Date().getTime()), //结束日期
       currentDateStart: new Date().getTime(), //默认开始日期
       currentDateEnd: new Date().getTime(), //默认结束日期
+      minDate: new Date(minDate).getTime(), //最早日期
+      maxDate: new Date(maxDate).getTime(), //最晚日期
+      chooseDateBm:'',
+      chooseDateTpg:'',
+      chooseDateDpg:'',
+      chooseDateGj:''
     })
   },
 

@@ -34,7 +34,6 @@ const request = (url, method,data,uid,token) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success(request) {
-        console.log(request)
         if(request.statusCode=='200'){
           resolve(request.data)
           wx.hideLoading()

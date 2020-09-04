@@ -17,7 +17,7 @@
 			<text class="nav-title">{{item.title}}</text>
 		</van-grid-item>
 	</van-grid>
-	<van-cell-group>
+	<!-- <van-cell-group>
 		<van-cell title="推荐" value="" />
 	</van-cell-group>
 	<van-cell custom-class="flex" wx:for="{{6}}" wx:key="index">
@@ -30,5 +30,5 @@
 				<view class="user-unit">某某公司</view>
 			</view>
 		</view>
-	</van-cell>
+	</van-cell> -->
 </view>
