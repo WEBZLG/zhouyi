@@ -7,16 +7,51 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrl:API.IMG_BASE_URL,
-    userInfo: null
+    imgUrl: API.IMG_BASE_URL,
+    userInfo: null,
+    fileList: []
   },
+  // 跳转认证
+  goCertification() {
+    wx.navigateTo({
+      url: '../certification/certification',
+    })
+  },
+  // 跳转修改手机号
+  goChangePhone() {
+    wx.navigateTo({
+      url: '../changePhone/changePhone',
+    })
+  },
+  // 跳转修改密码
+  goChangePwd() {
+    wx.navigateTo({
+      url: '../changePwd/changePwd',
+    })
+  },
+  // 跳转我的推荐
+  goMyRecommend() {
+    wx.navigateTo({
+      url: '',
+    })
+  },
+  // 跳转大师
+  goMaster() {
+    wx.navigateTo({
+      url: '',
+    })
+  },
+  // 更换头像
   afterRead(event) {
     let _this = this
-    const {file} = event.detail;
+    const {
+      file
+    } = event.detail;
     let userInfo = wx.getStorageSync('userInfo');
     let param = {
       change_type: "head",
-      head_img: file.path
+      head_img: file.path,
+      user_id: userInfo.user_id
     }
     //获取的当前时间戳（10位）
     param.timestamp = Math.round(new Date().getTime() / 1000).toString();
@@ -24,29 +59,19 @@ Page({
     //通过md5加密验签
     param.sign = UTIL.getMD5Sign(param, token)
     wx.uploadFile({
-      url: 'https://api-zhouyi.chengyue.online/user/update', // 仅为示例，非真实的接口地址
+      url: API.API_BASE_URL + '/user/update', // 仅为示例，非真实的接口地址
       filePath: file.path,
       name: 'head_img',
       formData: param,
       success(res) {
-        console.log(res)
         let data = JSON.parse(res.data)
         wx.showToast({
           title: data.message,
         })
-        // let userInfo = wx.getStorageSync('userInfo');
-        // userInfo.head_img = data.head_img
-        // wx.setStorageSync('userInfo','userInfo')
-        const {
-          fileList = []
-        } = _this.data;
-        fileList.push({
-          ...file,
-          url: res.data
-        });
         _this.setData({
-          fileList
-        });
+          ['userInfo.head_img']: data.data.head_img
+        })
+        wx.setStorageSync('userInfo', _this.data.userInfo)
       },
     });
   },
@@ -81,6 +106,54 @@ Page({
       }
     })
   },
+  // 获取登录信息
+  getMessge(e) {
+    let _this = this
+    let type = e.target.dataset.type
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
+        })
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            switch (type) {
+              case 0:
+                _this.goCertification()
+                break;
+              case 1:
+                _this.goChangePhone()
+                break;
+              case 2:
+                _this.goChangePwd()
+                break;
+              case 3:
+                _this.goMyRecommend()
+                break;
+              case 4:
+                _this.goMaster()
+                break;
+            }
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 3000);
+          }
+        })
+    }
+  },
   // 跳转登录页
   onLogin() {
     wx.redirectTo({
@@ -95,7 +168,6 @@ Page({
     this.setData({
       userInfo: userInfo
     })
-    console.log(userInfo)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -86,7 +86,7 @@
   right: 4rpx;
   font-size: 8px;
 }
-/* .red-color{
+.red-color{
   color: #ff0000;
 }
 .yellow-color{
@@ -94,7 +94,7 @@
 }
 .black-color{
   color: #000000;
-} */
+}
 .tgdz{
   margin-left: 64rpx;
 }

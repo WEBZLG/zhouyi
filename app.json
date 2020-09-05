@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/certification/certification",
     "pages/magicDetail/magicDetail",
     "pages/login/login",
     "pages/regist/regist",
@@ -60,7 +61,8 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-loading": "@vant/weapp/loading/index",
     "van-skeleton": "@vant/weapp/skeleton/index",
-    "van-uploader": "@vant/weapp/uploader/index"
+    "van-uploader": "@vant/weapp/uploader/index",
+     "van-icon": "@vant/weapp/icon/index"
   },
   "sitemapLocation": "sitemap.json"
 }
