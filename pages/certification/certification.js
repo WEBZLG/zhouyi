@@ -37,11 +37,13 @@ Page({
         console.log(res)
         if (e.target.dataset.type == '1') {
           _this.setData({
-            faceImg: res.tempFiles[0].path
+            faceImg: res.tempFiles[0].path,
+            card_pic1: res.tempFiles[0].path
           })
         } else {
           _this.setData({
-            backImg: res.tempFiles[0].path
+            backImg: res.tempFiles[0].path,
+            card_pic2: res.tempFiles[0].path
           })
         }
       }

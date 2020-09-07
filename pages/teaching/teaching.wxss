@@ -1,0 +1,39 @@
+/* pages/teaching/teaching.wxss */
+.content {
+  font-size: 14px;
+  line-height: 24px;
+  text-indent: 24px;
+  padding: 30rpx;
+}
+.center{
+  text-align: center;
+}
+.title{
+  font-weight: bold;
+  font-size: 16px;
+  text-indent: 0;
+}
+.red-title{
+  font-weight: bold;
+  font-size: 16px;
+  color: #7B0C00;
+  text-indent: 0;
+}
+.master{
+  width: 100%;
+  height: 500rpx;
+  text-indent: 0;
+  margin: 30rpx 0;
+}
+.qmdj{
+  height: 300rpx;
+  width: 100%;
+  text-indent: 0;
+  margin: 30rpx 0;
+}
+.zgm{
+  height: 500rpx;
+  width: 100%;
+  text-indent: 0;
+  margin: 30rpx 0;
+}

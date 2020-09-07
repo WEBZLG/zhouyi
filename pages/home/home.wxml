@@ -1,5 +1,9 @@
 <!--pages/home/home.wxml-->
 <view>
+	<van-cell title="当前位置" is-link value="{{areaText}}" arrow-direction="down" catchtap="showPopup" />
+	<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+		<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+	</van-popup>
 	<view class="page-section page-section-spacing swiper">
 		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
 			<block wx:for="{{background}}" wx:key="image">
@@ -20,21 +24,25 @@
 	<van-cell-group>
 		<van-cell title="推荐" value="" />
 	</van-cell-group>
-	<van-cell custom-class="flex" wx:for="{{6}}" wx:key="index" is-link>
+	<van-cell custom-class="flex" wx:for="{{masterList}}" wx:key="index" is-link>
 		<view slot="title" class="user-box">
 			<view class="van-cell-text">
-				<van-image width="30" height="30" round show-loading src="https://img.yzcdn.cn/vant/cat.jpeg" />
+				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':'item.head_img'}}" />
 			</view>
 			<view class="user-info flex">
 			<view>
-				<view class="user-name">某某某</view>
-				<view class="user-unit">擅长</view>
+				<view class="user-name">{{item.real_name}}</view>
+				<view class="user-unit">年龄：{{item.age}}</view>
 			</view>
 			<view>
-				<view class="user-unit">年龄</view>
-				<view class="user-unit">地区</view>
+				<view class="user-unit">擅长：{{item.adept}}</view>
+				<view class="user-unit">地区：{{item.area}}</view>
 			</view>
 			</view>
 		</view>
 	</van-cell>
+	<view wx:if="{{masterList.length==0}}">
+		<van-empty description="暂无推荐" />
+	</view>
+
 </view>

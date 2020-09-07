@@ -1,0 +1,14 @@
+<!--pages/myRecommend/myRecommend.wxml-->
+	<van-cell custom-class="flex" wx:for="{{recommendList}}" wx:key="index" is-link>
+		<view slot="title" class="user-box">
+			<view class="van-cell-text">
+				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':'item.head_img'}}" />
+			</view>
+			<view class="user-info">
+        {{item.created_at}}
+			</view>
+		</view>
+	</van-cell>
+	<view wx:if="{{recommendList.length==0}}">
+		<van-empty description="暂无推荐" />
+	</view>

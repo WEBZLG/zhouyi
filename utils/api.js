@@ -1,7 +1,7 @@
 //封装请求函数
 const UTIL = require('./util.js')
-const API_BASE_URL = 'https://api-zhouyi.chengyue.online'; //api地址
-const IMG_BASE_URL = 'https://images-zhouyi.chengyue.online'; //图片地址
+const API_BASE_URL = 'https://api-yiqixue.chengyue.online'; //api地址
+const IMG_BASE_URL = 'https://images-yiqixue.chengyue.online'; //图片地址
 const request = (url, method, data, uid) => {
   let token = wx.getStorageSync('loginToken');
   let _url, loginToken;
@@ -86,11 +86,18 @@ const request = (url, method, data, uid) => {
       },
       fail(error) {
         console.log(error)
-        reject(error)
-        wx.showToast({
-          title: error.data.message,
-          icon: 'none'
-        })
+        if(error.errMsg){
+          wx.showToast({
+            title:'请求失败',
+            icon: 'none'
+          })
+        }else{
+          reject(error)
+          wx.showToast({
+            title: error.data.message,
+            icon: 'none'
+          })
+        }
       }
     })
   });
@@ -179,5 +186,17 @@ module.exports = {
   // 单图上传
   uploadImg:(param, path) => {
     return uploadImg(param, path)
+  },
+  // 获取大师推荐
+  master:(data) => {
+    return request('/user/sort', 'post', data)
+  },
+  // 获取我的推荐
+  myRecommend:(data) => {
+    return request('/user/report', 'post', data)
+  },
+  // 获取我的推荐
+  masterApply:(data) => {
+    return request('/user/role3', 'post', data)
   }
 }

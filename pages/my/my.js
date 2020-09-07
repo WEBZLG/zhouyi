@@ -32,13 +32,13 @@ Page({
   // 跳转我的推荐
   goMyRecommend() {
     wx.navigateTo({
-      url: '',
+      url: '../myRecommend/myRecommend',
     })
   },
   // 跳转大师
   goMaster() {
     wx.navigateTo({
-      url: '',
+      url: '../master/master',
     })
   },
   // 更换头像
@@ -59,7 +59,7 @@ Page({
     //通过md5加密验签
     param.sign = UTIL.getMD5Sign(param, token)
     wx.uploadFile({
-      url: API.API_BASE_URL + '/user/update', // 仅为示例，非真实的接口地址
+      url: API.API_BASE_URL + '/user/update',
       filePath: file.path,
       name: 'head_img',
       formData: param,
@@ -124,19 +124,19 @@ Page({
             wx.setStorageSync('loginToken', res.data.login_token);
             wx.setStorageSync('userInfo', res.data.user);
             switch (type) {
-              case 0:
+              case '0':
                 _this.goCertification()
                 break;
-              case 1:
+              case '1':
                 _this.goChangePhone()
                 break;
-              case 2:
+              case '2':
                 _this.goChangePwd()
                 break;
-              case 3:
+              case '3':
                 _this.goMyRecommend()
                 break;
-              case 4:
+              case '4':
                 _this.goMaster()
                 break;
             }
@@ -154,20 +154,53 @@ Page({
         })
     }
   },
+
+    // 获取更新信息
+    upMessge() {
+      let _this = this
+      let userInfo = wx.getStorageSync('userInfo');
+      if (userInfo == '' || userInfo == undefined) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        API.isSignIn({}, {
+            uid: userInfo.user_id
+          })
+          .then(res => {
+            console.log(res)
+            if (res.message == '已登录') {
+              wx.setStorageSync('loginToken', res.data.login_token);
+              wx.setStorageSync('userInfo', res.data.user);
+              this.setData({
+                userInfo: res.data.user
+              })
+            } else {
+              wx.showToast({
+                title: 'res.message',
+                icon: "none"
+              })
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }, 3000);
+            }
+          })
+      }
+    },
   // 跳转登录页
   onLogin() {
     wx.redirectTo({
       url: '../login/login',
     })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userInfo = wx.getStorageSync('userInfo');
-    this.setData({
-      userInfo: userInfo
-    })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -186,6 +219,7 @@ Page({
         selected: 2
       })
     }
+    this.upMessge()
   },
 
   /**
