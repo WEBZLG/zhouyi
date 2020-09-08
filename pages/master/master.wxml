@@ -2,6 +2,12 @@
 <view>
 	<van-field value="{{ phone }}" label="年龄" bindinput='getPhoneValue' placeholder="请输入真实年龄" />
 	<van-field value="{{ password }}" type="password" label="擅长" bindinput='getPwdValue' placeholder="请输入擅长项目" />
-	<van-field value="{{ password }}" type="password" label="职位" bindinput='getPwdValue' placeholder="请输入职位（选填）" />
-  
+	<van-cell title="地区" is-link value="{{areaText}}" arrow-direction="down" catchtap="showPopup" />
+	<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+		<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+	</van-popup>
+	<van-field value="{{ password }}" type="password" label="职位（选填）" bindinput='getPwdValue' placeholder="请输入职位" />
+	<van-cell title="证书（选填）">
+		<van-uploader file-list="{{ fileList }}" multiple="{{true}}" max-count="9" bind:after-read="afterRead" />
+	</van-cell>
 </view>

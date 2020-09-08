@@ -86,12 +86,12 @@ const request = (url, method, data, uid) => {
       },
       fail(error) {
         console.log(error)
-        if(error.errMsg){
+        if (error.errMsg) {
           wx.showToast({
-            title:'请求失败',
+            title: '请求失败',
             icon: 'none'
           })
-        }else{
+        } else {
           reject(error)
           wx.showToast({
             title: error.data.message,
@@ -135,6 +135,50 @@ const uploadImg = (param, path) => {
   })
 }
 
+//多张图片上传
+const uploadImgs = (param,tempFilePaths) => {
+  wx.showLoading({
+    title: "上传中"
+  });
+  return new Promise((presolve, preject) => {
+    let uploads = []
+    //获取的当前时间戳（10位）
+    param.timestamp = Math.round(new Date().getTime() / 1000).toString();
+    let token = wx.getStorageSync('loginToken');
+    //通过md5加密验签
+    param.sign = UTIL.getMD5Sign(param, token)
+    tempFilePaths.map((item, i) => {
+      uploads[i] = new Promise((resolve, reject) => {
+        wx.uploadFile({
+          url: API_BASE_URL + '/upload_img', 
+          filePath: item.path,
+          name: "file",
+          formData: param,
+          success(res) {
+          console.log(res)
+            resolve(JSON.parse(res.data))
+          },
+          fail(err) {
+            console.log(err)
+            wx.hideLoading()
+          }
+        })
+      })
+    })
+    Promise.all(uploads).then(res => {
+        //图片上传完成
+        presolve(res)
+        wx.hideLoading()
+    }).catch(err => {
+        preject(err)
+        wx.hideLoading()
+        wx.showToast({
+          title: '上传失败请重试',
+          icon: 'none'
+        })
+    })
+  })
+}
 // 结果api
 module.exports = {
   IMG_BASE_URL,
@@ -184,19 +228,23 @@ module.exports = {
     return request('/user/real', 'post', data)
   },
   // 单图上传
-  uploadImg:(param, path) => {
+  uploadImg: (param, path) => {
     return uploadImg(param, path)
   },
+  // 多图上传
+  uploadImgs:(param,data) =>{
+    return uploadImgs(param, data)
+  },
   // 获取大师推荐
-  master:(data) => {
+  master: (data) => {
     return request('/user/sort', 'post', data)
   },
   // 获取我的推荐
-  myRecommend:(data) => {
+  myRecommend: (data) => {
     return request('/user/report', 'post', data)
   },
   // 获取我的推荐
-  masterApply:(data) => {
+  masterApply: (data) => {
     return request('/user/role3', 'post', data)
   }
 }

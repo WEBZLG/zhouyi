@@ -1,1 +1,4 @@
 /* pages/master/master.wxss */
+.van-field__input{
+  text-align: right !important;
+}
