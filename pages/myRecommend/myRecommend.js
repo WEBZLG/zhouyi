@@ -63,6 +63,7 @@ Page({
     this.setData({
       page:1
     })
+    wx.stopPullDownRefresh();
   },
 
   /**

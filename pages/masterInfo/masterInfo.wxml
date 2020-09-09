@@ -1,0 +1,11 @@
+<!--pages/masterInfo/masterInfo.wxml-->
+<view>
+	<van-cell-group>
+		<van-cell title="姓名" value="{{userInfo.real.real_name}}" />
+		<van-cell title="年龄" value="{{userInfo.role3.age}}" />
+		<van-cell title="手机号" value="{{userInfo.mobile}}" />
+		<van-cell title="擅长" value="{{userInfo.role3.adept}}" />
+		<van-cell title="地区" value="{{userInfo.role3.city}}{{userInfo.role3.area}}" />
+		<van-cell title="职位" wx:if="{{userInfo.role3.post}}" value="{{userInfo.role3.post}}" />
+	</van-cell-group>
+</view>

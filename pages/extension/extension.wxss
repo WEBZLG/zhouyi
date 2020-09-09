@@ -1,0 +1,6 @@
+/* pages/extension/extension.wxss */
+page{
+  font-size: 14px;
+  padding: 30rpx;
+  line-height: 28px;
+}

@@ -1,0 +1,6 @@
+/* pages/education/education.wxss */
+page{
+  font-size: 14px;
+  padding: 30rpx;
+  line-height: 28px;
+}

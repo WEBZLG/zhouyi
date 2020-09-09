@@ -20,7 +20,14 @@
     "pages/bazi/bazi",
     "pages/fengshui/fengshui",
     "pages/calendar/calendar",
-    "pages/calendarDetail/calendarDetail"
+    "pages/chengyue/chengyue",
+    "pages/masterInfo/masterInfo",
+    "pages/routine/routine",
+    "pages/webs/webs",
+    "pages/appBuild/appBuild",
+    "pages/extension/extension",
+    "pages/education/education",
+    "pages/train/train"
   ],
   "networkTimeout": {
     "request": 10000,

@@ -1,0 +1,14 @@
+/* pages/chengyue/chengyue.wxss */
+.nav-title{
+  font-size: 12px;
+}
+.swiper-item{
+  height: 400rpx;
+}
+.van-grid-item__content{
+  padding-top: 0 !important;
+}
+.van-grid{
+  padding-top: 32rpx;
+  background-color: #ffffff;
+}

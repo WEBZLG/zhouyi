@@ -1,0 +1,11 @@
+<!--pages/webs/webs.wxml-->
+<view>
+	<van-cell title="企业官方站" />
+	<view style="height:800rpx"><image  src="../../images/wz01.jpg"></image></view>
+  <van-cell title="品牌创意站" />
+	<view style="height:800rpx"><image src="../../images/wz02.jpg"></image></view>
+  <van-cell title="门户平台站" />
+	<view style="height:800rpx"><image src="../../images/wz03.jpg"></image></view>
+  <van-cell title="营销型网站" />
+	<view style="height:800rpx"><image src="../../images/wz04.jpg"></image></view>
+</view>

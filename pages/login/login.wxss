@@ -45,3 +45,9 @@ van-button {
   margin-top: 50rpx;
   font-size: 14px;  
 }
+.logo{
+  height: 150rpx;
+width: 150rpx;
+margin: 12% auto 0;
+
+}

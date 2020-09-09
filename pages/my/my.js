@@ -41,6 +41,13 @@ Page({
       url: '../master/master',
     })
   },
+  goMasterInfo() {
+    let _this = this
+    let userInfo = JSON.stringify(_this.data.userInfo)
+    wx.navigateTo({
+      url: '../masterInfo/masterInfo?userInfo='+userInfo,
+    })
+  },
   // 更换头像
   afterRead(event) {
     let _this = this
@@ -88,7 +95,7 @@ Page({
               user_id: _this.data.userInfo.user_id,
             }, token)
             .then(res => {
-              console.log(res)
+              //console.log(res)
               wx.showToast({
                 title: res.message,
                 icon: 'none'
@@ -101,7 +108,7 @@ Page({
               }, 3000);
             })
         } else if (sm.cancel) {
-          console.log('用户点击取消')
+          //console.log('用户点击取消')
         }
       }
     })
@@ -123,6 +130,9 @@ Page({
           if (res.message == '已登录') {
             wx.setStorageSync('loginToken', res.data.login_token);
             wx.setStorageSync('userInfo', res.data.user);
+            _this.setData({
+              userInfo: res.data.user
+            })
             switch (type) {
               case '0':
                 _this.goCertification()
@@ -138,6 +148,9 @@ Page({
                 break;
               case '4':
                 _this.goMaster()
+                break;
+              case '5':
+                _this.goMasterInfo()
                 break;
             }
           } else {
@@ -155,47 +168,47 @@ Page({
     }
   },
 
-    // 获取更新信息
-    upMessge() {
-      let _this = this
-      let userInfo = wx.getStorageSync('userInfo');
-      if (userInfo == '' || userInfo == undefined) {
-        wx.redirectTo({
-          url: '../login/login',
+  // 获取更新信息
+  upMessge() {
+    let _this = this
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
         })
-      } else {
-        API.isSignIn({}, {
-            uid: userInfo.user_id
-          })
-          .then(res => {
-            console.log(res)
-            if (res.message == '已登录') {
-              wx.setStorageSync('loginToken', res.data.login_token);
-              wx.setStorageSync('userInfo', res.data.user);
-              this.setData({
-                userInfo: res.data.user
+        .then(res => {
+          //console.log(res)
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            this.setData({
+              userInfo: res.data.user
+            })
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
               })
-            } else {
-              wx.showToast({
-                title: 'res.message',
-                icon: "none"
-              })
-              setTimeout(() => {
-                wx.redirectTo({
-                  url: '../login/login',
-                })
-              }, 3000);
-            }
-          })
-      }
-    },
+            }, 3000);
+          }
+        })
+    }
+  },
   // 跳转登录页
   onLogin() {
     wx.redirectTo({
       url: '../login/login',
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */

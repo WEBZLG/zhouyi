@@ -26,34 +26,34 @@ Page({
     loading:true,
     areaText:'',
     iconNav: [{
-        imgPath: '../../images/qimen.jpg',
+        imgPath: '../../images/qimen.png',
         title: "奇门",
         url: "../magic/magic"
       },
       {
-        imgPath: '../../images/qiming.jpg',
+        imgPath: '../../images/jiaoxue.png',
         title: "奇门教学",
         url: "../teaching/teaching"
       },
       {
-        imgPath: '../../images/qiming.jpg',
+        imgPath: '../../images/qiming.png',
         title: "起名",
         url: "../naming/naming"
       },
       {
-        imgPath: '../../images/qiming.jpg',
+        imgPath: '../../images/bazi.png',
         title: "八字",
         url: "../bazi/bazi"
       },
       {
-        imgPath: '../../images/qiming.jpg',
+        imgPath: '../../images/fengshui.png',
         title: "风水",
         url: "../fengshui/fengshui"
       },
       {
-        imgPath: '../../images/qiming.jpg',
+        imgPath: '../../images/chengyue.png',
         title: "城约科技",
-        url: "../fengshui/fengshui"
+        url: "../chengyue/chengyue"
       }
 
     ]
@@ -81,7 +81,7 @@ Page({
     let _this = this
     API.carousel({})
       .then(res => {
-        console.log(res)
+        //console.log(res)
         _this.setData({
           background: res.data.carousels
         })
@@ -131,7 +131,7 @@ Page({
       city:city,
       area:area
     }).then(res => {
-      console.log(res)
+      //console.log(res)
       _this.setData({
         masterList:res.data.users
       })
@@ -202,7 +202,7 @@ Page({
         _this.getLocal(latitude, longitude)
       },
       fail: function (res) {
-        console.log('fail' + JSON.stringify(res))
+        //console.log('fail' + JSON.stringify(res))
       }
     })
   },
@@ -215,7 +215,7 @@ Page({
         longitude: longitude
       },
       success: function (res) {
-        console.log('getLocal')
+        //console.log('getLocal')
         let province = res.result.ad_info.province
         let city = res.result.ad_info.city
         let area = res.result.ad_info.district
@@ -284,6 +284,7 @@ Page({
       page:1
     })
     this.getMaster('1',_this.data.province,_this.data.city,_this.data.area)
+    wx.stopPullDownRefresh();
   },
 
   /**

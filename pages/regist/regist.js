@@ -131,7 +131,7 @@ Page({
           p_code: ''
         })
         .then(res => {
-          console.log(res)
+          //console.log(res)
           wx.showToast({
             title: res.message,
             icon: 'none'
