@@ -2,7 +2,7 @@
 <view>
 	<van-cell title="当前位置" is-link value="{{areaText}}" arrow-direction="down" catchtap="showPopup" />
 	<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
-		<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+		<van-area area-list="{{ areaList }}" bind:confirm="onConfirm"bind:cancel="onClose" columns-placeholder="{{ ['全部', '全部', '全部'] }}" />
 	</van-popup>
 	<view class="page-section page-section-spacing swiper">
 		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
@@ -27,7 +27,7 @@
 	<van-cell custom-class="flex" wx:for="{{masterList}}" wx:key="index" is-link data-id="{{item.id}}" catchtap="onMasterDetial">
 		<view slot="title" class="user-box">
 			<view class="van-cell-text">
-				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':imgUrl+item.head_img}}" />
+				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'/images/chengyue.png':imgUrl+item.head_img}}" />
 			</view>
 			<view class="user-info flex">
 			<view>

@@ -71,13 +71,14 @@ Page({
   },
 
   onConfirm(e) {
+    let _this = this
     this.setData({
-      areaText: e.detail.values[1].name + e.detail.values[2].name,
-      province: e.detail.values[0].name,
-      city: e.detail.values[1].name,
-      area: e.detail.values[2].name
+      areaText: (typeof(e.detail.values[0])=='undefined'||e.detail.values[0].code=='' ? '全国' : e.detail.values[0].name)+(typeof(e.detail.values[1])=='undefined'||e.detail.values[1].code=='' ? '' : e.detail.values[1].name)+(typeof(e.detail.values[2])=='undefined'||e.detail.values[2].code=='' ? '' : e.detail.values[2].name),
+      province: typeof(e.detail.values[0])=='undefined'||e.detail.values[0].code=='' ? '' : e.detail.values[0].name,
+      city:  typeof(e.detail.values[1])=='undefined'||e.detail.values[1].code=='' ? '' : e.detail.values[1].name,
+      area:  typeof(e.detail.values[2])=='undefined'||e.detail.values[2].code=='' ? '' : e.detail.values[2].name,
     })
-    this.getMaster('1', e.detail.values[0].name, e.detail.values[1].name, e.detail.values[2].name)
+    this.getMaster('1', _this.data.province,_this.data.city,_this.data.area)
     this.onClose();
   },
   // 推荐大师详情

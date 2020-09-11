@@ -6,7 +6,7 @@
 			<van-uploader bind:after-read="afterRead" wx:if="{{userInfo}}">
 				<van-image  width="100" height="100" round fit="cover" show-loading src="{{imgUrl+userInfo.head_img}}" />
 			</van-uploader>
-			<van-image wx:else width="100" height="100" round fit="cover" show-loading src="https://img.yzcdn.cn/vant/cat.jpeg" />
+			<van-image wx:else width="100" height="100" round fit="cover" show-loading src="/images/chengyue.png" />
 			<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
 			<view wx:else catchtap="onLogin">登录</view>
 		</view>
