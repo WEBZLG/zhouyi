@@ -128,7 +128,7 @@ Page({
           type: '',
           code: _this.data.code,
           password: _this.data.password,
-          p_code: ''
+          p_code: _this.data.invitationCode
         })
         .then(res => {
           //console.log(res)
@@ -136,8 +136,8 @@ Page({
             title: res.message,
             icon: 'none'
           })
-          wx.setStorageSync('loginToken', res.data.data.login_token);
-          wx.setStorageSync('userInfo', res.data.data.user);
+          wx.setStorageSync('loginToken', res.data.login_token);
+          wx.setStorageSync('userInfo', res.data.user);
           wx.reLaunch({
             url: '../home/home',
           })
@@ -149,7 +149,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let _this = this
+    let code =  wx.getStorageSync('p_code');
+    if(code){
+      _this.setData({
+        invitationCode:code
+      })
+    }
   },
 
   /**

@@ -117,6 +117,7 @@ Page({
               //console.log(res)
               wx.showToast({
                 title: res.message,
+                icon:'none'
               })
               setTimeout(() => {
                 wx.navigateBack({

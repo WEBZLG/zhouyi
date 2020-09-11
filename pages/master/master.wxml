@@ -9,9 +9,10 @@
 	<van-field value="{{ post }}" type="text" label="职位（选填）" bindinput='getPostValue' placeholder="请输入职位" />
 	<van-cell title="证书（选填）" value="点击相机图标上传图片"></van-cell>
 	<van-cell>
-		<van-uploader file-list="{{ fileList }}" multiple="{{true}}" max-count="9" bind:after-read="afterRead" />
+			<van-uploader wx:if="{{fileList.length>0}}" file-list="{{ fileList }}"  deletable="{{ true }}" multiple="{{true}}" max-count="9" bind:after-read="afterRead" bind:delete="deleteImg"/>
+			<van-uploader wx:else file-list="{{ fileList }}" multiple="{{true}}" max-count="9"  deletable="{{ true }}" bind:after-read="afterRead"  bind:delete="deleteImg"/>
 	</van-cell>
-	
+
 	<view class="btn-box">
 		<van-button type="info" round catchtap="onSubmit">提交</van-button>
 	</view>

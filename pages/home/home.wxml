@@ -5,7 +5,7 @@
 		<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
 	</van-popup>
 	<view class="page-section page-section-spacing swiper">
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
 			<block wx:for="{{background}}" wx:key="image">
 				<swiper-item>
 					<view class="swiper-item">
@@ -24,10 +24,10 @@
 	<van-cell-group>
 		<van-cell title="推荐" value="" />
 	</van-cell-group>
-	<van-cell custom-class="flex" wx:for="{{masterList}}" wx:key="index" is-link>
+	<van-cell custom-class="flex" wx:for="{{masterList}}" wx:key="index" is-link data-id="{{item.id}}" catchtap="onMasterDetial">
 		<view slot="title" class="user-box">
 			<view class="van-cell-text">
-				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':'item.head_img'}}" />
+				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'https://img.yzcdn.cn/vant/cat.jpeg':imgUrl+item.head_img}}" />
 			</view>
 			<view class="user-info flex">
 			<view>

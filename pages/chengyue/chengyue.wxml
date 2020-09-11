@@ -1,7 +1,7 @@
 <!--pages/chengyue/chengyue.wxml-->
 <view>
 	<view class="page-section page-section-spacing swiper">
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  circular="{{true}}">
 			<block wx:for="{{background}}" wx:key="image">
 				<swiper-item>
 					<view class="swiper-item">

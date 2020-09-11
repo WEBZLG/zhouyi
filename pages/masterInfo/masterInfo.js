@@ -1,10 +1,12 @@
 // pages/masterInfo/masterInfo.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imgUrl: API.IMG_BASE_URL, //图片路径
     userInfo:''
   },
 
@@ -13,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
     let userInfo = JSON.parse(options.userInfo)
-    //console.log(userInfo)
+    console.log(userInfo)
     this.setData({
       userInfo:userInfo
     })

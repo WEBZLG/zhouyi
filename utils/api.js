@@ -77,11 +77,6 @@ const request = (url, method, data, uid) => {
             title: request.data.message,
             icon: 'none'
           })
-          setTimeout(() => {
-            wx.navigateBack({
-              delta: 0,
-            })
-          }, 1500);
         }
       },
       fail(error) {
@@ -136,7 +131,7 @@ const uploadImg = (param, path) => {
 }
 
 //多张图片上传
-const uploadImgs = (param,tempFilePaths) => {
+const uploadImgs = (param, tempFilePaths) => {
   wx.showLoading({
     title: "上传中"
   });
@@ -150,12 +145,12 @@ const uploadImgs = (param,tempFilePaths) => {
     tempFilePaths.map((item, i) => {
       uploads[i] = new Promise((resolve, reject) => {
         wx.uploadFile({
-          url: API_BASE_URL + '/upload_img', 
+          url: API_BASE_URL + '/upload_img',
           filePath: item.path,
           name: "file",
           formData: param,
           success(res) {
-          console.log(res)
+            console.log(res)
             resolve(JSON.parse(res.data))
           },
           fail(err) {
@@ -166,23 +161,48 @@ const uploadImgs = (param,tempFilePaths) => {
       })
     })
     Promise.all(uploads).then(res => {
-        //图片上传完成
-        presolve(res)
-        wx.hideLoading()
+      //图片上传完成
+      presolve(res)
+      wx.hideLoading()
     }).catch(err => {
-        preject(err)
-        wx.hideLoading()
-        wx.showToast({
-          title: '上传失败请重试',
-          icon: 'none'
-        })
+      preject(err)
+      wx.hideLoading()
+      wx.showToast({
+        title: '上传失败请重试',
+        icon: 'none'
+      })
     })
   })
+}
+
+// 获取图片信息
+const getImage = (url) => {
+  return new Promise((resolve, reject) => {
+    wx.getImageInfo({
+      src: url,
+      success: function (res) {
+        resolve(res)
+      },
+      fail: function (error) {
+        reject(error)
+      }
+    })
+  })
+}
+const getImageAll = (image_src) => {
+  let that = this;
+  var all = [];
+  image_src.map(function (item) {
+    all.push(getImage(item))
+  })
+  return Promise.all(all)
 }
 // 结果api
 module.exports = {
   IMG_BASE_URL,
   API_BASE_URL,
+  getImage,
+  getImageAll,
   // 注册
   regist: (data) => {
     return request('/register', 'post', data)
@@ -232,7 +252,7 @@ module.exports = {
     return uploadImg(param, path)
   },
   // 多图上传
-  uploadImgs:(param,data) =>{
+  uploadImgs: (param, data) => {
     return uploadImgs(param, data)
   },
   // 获取大师推荐
@@ -246,5 +266,13 @@ module.exports = {
   // 成为大师
   masterApply: (data) => {
     return request('/user/role3', 'post', data)
+  },
+  // 太阳码
+  share: (data) => {
+    return request('/user/qrcode', 'post', data)
+  },
+  // 推荐大师详情
+  masterDetail: (data) => {
+    return request('/user/role3_detail', 'post', data)
   }
 }

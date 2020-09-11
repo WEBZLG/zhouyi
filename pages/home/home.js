@@ -12,19 +12,19 @@ Page({
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
     vertical: false,
-    autoplay: false,
-    interval: 2000,
+    autoplay: true,
+    interval: '',
     duration: 500,
-    page:1,
-    province:'黑龙江省',
-    city:'哈尔滨市',
-    area:'',
+    page: 1,
+    province: '黑龙江省',
+    city: '哈尔滨市',
+    area: '',
     latitude: '',
     longitude: '',
-    show:false,
-    areaList:AREA.default,
-    loading:true,
-    areaText:'',
+    show: false,
+    areaList: AREA.default,
+    loading: true,
+    areaText: '',
     iconNav: [{
         imgPath: '../../images/qimen.png',
         title: "奇门",
@@ -59,22 +59,41 @@ Page({
     ]
   },
   showPopup() {
-    this.setData({ show: true });
+    this.setData({
+      show: true
+    });
   },
 
   onClose() {
-    this.setData({ show: false });
+    this.setData({
+      show: false
+    });
   },
 
-  onConfirm(e){
+  onConfirm(e) {
     this.setData({
-      areaText:e.detail.values[1].name+e.detail.values[2].name,
-      province:e.detail.values[0].name,
-      city:e.detail.values[1].name,
-      area:e.detail.values[2].name
+      areaText: e.detail.values[1].name + e.detail.values[2].name,
+      province: e.detail.values[0].name,
+      city: e.detail.values[1].name,
+      area: e.detail.values[2].name
     })
-    this.getMaster('1',e.detail.values[0].name,e.detail.values[1].name,e.detail.values[2].name)
+    this.getMaster('1', e.detail.values[0].name, e.detail.values[1].name, e.detail.values[2].name)
     this.onClose();
+  },
+  // 推荐大师详情
+  onMasterDetial(e){
+    wx.showLoading()
+    console.log(e.currentTarget.dataset.id)
+    API.masterDetail({
+      role3_id:e.currentTarget.dataset.id
+    }).then(res =>{
+      wx.hideLoading()
+      console.log(res)
+      let userInfo = JSON.stringify(res.data.role3)
+      wx.navigateTo({
+        url: '../masterInfo/masterInfo?userInfo='+userInfo,
+      })
+    })
   },
   // 获取轮播图
   getCarouselData() {
@@ -83,7 +102,8 @@ Page({
       .then(res => {
         //console.log(res)
         _this.setData({
-          background: res.data.carousels
+          background: res.data.carousels,
+          interval:res.data.carousel_interval
         })
       })
   },
@@ -122,19 +142,35 @@ Page({
     }
   },
   // 大师推荐
-  getMaster(page,province,city,area) {
+  getMaster(page, province, city, area) {
     let _this = this
     API.master({
-      page:page,
-      page_size:'15',
-      province:province,
-      city:city,
-      area:area
+      page: page,
+      page_size: '15',
+      province: province,
+      city: city,
+      area: area
     }).then(res => {
-      //console.log(res)
-      _this.setData({
-        masterList:res.data.users
-      })
+      // console.log(res)
+      if(page>1){
+        if(res.data.users.length==0){
+          wx.showToast({
+            title: '无更多数据',
+            icon:'none'
+          })
+          _this.setData({
+            page:_this.data.page-1
+          })
+        }else{
+          _this.setData({
+            masterList: _this.data.masterList.concat(res.data.users)
+          })
+        }
+      }else{
+        _this.setData({
+          masterList: res.data.users
+        })
+      }
     })
   },
   // 获取位置
@@ -222,24 +258,27 @@ Page({
         _this.setData({
           province: province,
           city: city,
-          area:area,
+          area: area,
           latitude: latitude,
           longitude: longitude,
-          areaText:city+area
+          areaText: city + area
         })
-        _this.getMaster('1',_this.data.province,_this.data.city,_this.data.area)
+        _this.getMaster('1', _this.data.province, _this.data.city, _this.data.area)
       },
-      fail: function (res) {
-      },
-      complete: function (res) {
-      }
+      fail: function (res) {},
+      complete: function (res) {}
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCarouselData() //轮播
+    let _this = this;
+    if (options.scene){
+      const scene = decodeURIComponent(options.scene)
+      var code = scene.split('=')[1]
+      wx.setStorageSync('p_code', code);
+    }
     qqmapsdk = new QQMapWX({
       key: 'OQYBZ-GMQKD-X3I4Q-H4YNU-3TDQ5-PWFAQ' //自己的key秘钥
     });
@@ -256,9 +295,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getCarouselData() //轮播
     this.getUserLocation();
-
-
   },
 
   /**
@@ -281,9 +319,10 @@ Page({
   onPullDownRefresh: function () {
     let _this = this
     this.setData({
-      page:1
+      page: 1
     })
-    this.getMaster('1',_this.data.province,_this.data.city,_this.data.area)
+    this.getCarouselData() //轮播
+    this.getMaster('1', _this.data.province, _this.data.city, _this.data.area)
     wx.stopPullDownRefresh();
   },
 
@@ -293,15 +332,28 @@ Page({
   onReachBottom: function () {
     let _this = this
     this.setData({
-      page:_this.data.page*1 + 1
+      page: _this.data.page * 1 + 1
     })
-    this.getMaster(_this.data.page,_this.data.province,_this.data.city,_this.data.area)
+    this.getMaster(_this.data.page, _this.data.province, _this.data.city, _this.data.area)
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '易启诚学',
+      path: '/page/home/home'
+    }
+  },
+  onShareTimeline(res){
+    return {
+      title: '易启诚学'
+    }
   }
 })

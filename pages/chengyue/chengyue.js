@@ -6,6 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    interval: '',
+    duration: 500,
     imgUrl: API.IMG_BASE_URL, //图片路径
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     iconNav: [{
@@ -47,7 +52,8 @@ Page({
       .then(res => {
         //console.log(res)
         _this.setData({
-          background: res.data.carousels
+          background: res.data.carousels,
+          interval:res.data.carousel_interval
         })
       })
   },

@@ -12,3 +12,6 @@
   padding-top: 32rpx;
   background-color: #ffffff;
 }
+swiper{
+  height: 400rpx;
+}

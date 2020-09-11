@@ -150,7 +150,7 @@ Page({
                 _this.goMaster()
                 break;
               case '5':
-                _this.goMasterInfo()
+                _this.goMaster()
                 break;
             }
           } else {
@@ -197,7 +197,7 @@ Page({
               wx.redirectTo({
                 url: '../login/login',
               })
-            }, 3000);
+            }, 1500);
           }
         })
     }
@@ -266,7 +266,20 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '易启诚学',
+      path: '/page/home/home'
+    }
+  },
+  onShareTimeline(res){
+    return {
+      title: '易启诚学'
+    }
   }
 })

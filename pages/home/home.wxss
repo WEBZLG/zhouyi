@@ -33,3 +33,6 @@
   font-size: 14px;
   font-weight: bold;
 }
+swiper{
+  height:400rpx;
+}
