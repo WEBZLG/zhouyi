@@ -51,16 +51,13 @@ Page({
   // 更换头像
   afterRead(event) {
     let _this = this
-    const {
-      file
-    } = event.detail;
+    const {file} = event.detail;
     let userInfo = wx.getStorageSync('userInfo');
     let param = {
       change_type: "head",
-      head_img: file.path,
-      user_id: userInfo.user_id
+      user_id: userInfo.user_id,
     }
-    //获取的当前时间戳（10位）
+    // //获取的当前时间戳（10位）
     param.timestamp = Math.round(new Date().getTime() / 1000).toString();
     let token = wx.getStorageSync('loginToken');
     //通过md5加密验签
@@ -71,6 +68,7 @@ Page({
       name: 'head_img',
       formData: param,
       success(res) {
+        console.log(res)
         let data = JSON.parse(res.data)
         wx.showToast({
           title: data.message,

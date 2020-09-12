@@ -2,26 +2,14 @@
 const UTIL = require('./util.js')
 const API_BASE_URL = 'https://api-yiqixue.chengyue.online'; //api地址
 const IMG_BASE_URL = 'https://images-yiqixue.chengyue.online'; //图片地址
-const request = (url, method, data, uid) => {
-  let token = wx.getStorageSync('loginToken');
-  let _url, loginToken;
-  //获取登录token 判断如果有 用登录token否则用固定的token
-  if (token) {
-    loginToken = token
-  } else {
-    loginToken = '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K'
-  }
-  //判断传入的参数中是否存在uid,存在即在url地址后拼接uid
-  if (uid == undefined || uid == '') {
-    _url = API_BASE_URL + url;
-  } else {
-    // console.log(uid)
-    uid = '/' + uid.uid
-    _url = API_BASE_URL + url + uid;
-  }
+// noToken不传用户token传固定token/noUid不传用户user_id
+const request = (url, method, data, noToken, noUid) => {
+  //获取登录token 
+  let userToken = wx.getStorageSync('loginToken');
+  let loginToken = noToken == true ? '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K' : userToken;
   // 获取用户id
-  let userInfoId = wx.getStorageSync('userInfo').user_id;
-  if (userInfoId) {
+  if (noUid == ''||noUid == undefined) {
+    let userInfoId = wx.getStorageSync('userInfo').user_id;
     data.user_id = userInfoId
   }
   //获取的当前时间戳（10位）
@@ -33,7 +21,7 @@ const request = (url, method, data, uid) => {
       title: '加载中',
     })
     wx.request({
-      url: _url,
+      url:API_BASE_URL+url,
       method: method,
       data: data,
       header: {
@@ -83,7 +71,7 @@ const request = (url, method, data, uid) => {
         console.log(error)
         if (error.errMsg) {
           wx.showToast({
-            title: '请求失败',
+            title: error.errMsg,
             icon: 'none'
           })
         } else {
@@ -106,9 +94,10 @@ const uploadImg = (param, path) => {
   return new Promise((resolve, reject) => {
     //获取的当前时间戳（10位）
     param.timestamp = Math.round(new Date().getTime() / 1000).toString();
-    let token = wx.getStorageSync('loginToken');
+    let token = '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K';
     //通过md5加密验签
     param.sign = UTIL.getMD5Sign(param, token)
+    console.log(param)
     wx.uploadFile({
       url: API_BASE_URL + '/upload_img',
       filePath: path,
@@ -139,7 +128,7 @@ const uploadImgs = (param, tempFilePaths) => {
     let uploads = []
     //获取的当前时间戳（10位）
     param.timestamp = Math.round(new Date().getTime() / 1000).toString();
-    let token = wx.getStorageSync('loginToken');
+    let token = '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K';
     //通过md5加密验签
     param.sign = UTIL.getMD5Sign(param, token)
     tempFilePaths.map((item, i) => {
@@ -150,7 +139,6 @@ const uploadImgs = (param, tempFilePaths) => {
           name: "file",
           formData: param,
           success(res) {
-            console.log(res)
             resolve(JSON.parse(res.data))
           },
           fail(err) {
@@ -205,11 +193,11 @@ module.exports = {
   getImageAll,
   // 注册
   regist: (data) => {
-    return request('/register', 'post', data)
+    return request('/register', 'post', data, true, true)
   },
   // 登录
   login: (data) => {
-    return request('/login', 'post', data)
+    return request('/login', 'post', data, true, true)
   },
   // 重置密码
   resetPwd: (data) => {
@@ -217,7 +205,7 @@ module.exports = {
   },
   // 轮播图
   carousel: (data) => {
-    return request('/carousel/get', 'post', data)
+    return request('/carousel/get', 'post', data, true, true)
   },
   //退出登录
   signOut: (data) => {
@@ -225,14 +213,14 @@ module.exports = {
   },
   //检验是否登录
   isSignIn: (data, uid) => {
-    return request('/check_login', 'post', data, uid)
+    return request('/check_login/'+uid.uid, 'post', data, true, true)
   },
   //奇门排盘
-  special: (data, ) => {
+  special: (data ) => {
     return request('/special/get', 'post', data)
   },
   //搜局
-  search: (data, ) => {
+  search: (data) => {
     return request('/special/search', 'post', data)
   },
   //修改密码
@@ -243,7 +231,7 @@ module.exports = {
   changePhone: (data) => {
     return request('/user/update', 'post', data)
   },
-  //修改手机
+  //实名
   certification: (data) => {
     return request('/user/real', 'post', data)
   },
@@ -257,7 +245,7 @@ module.exports = {
   },
   // 获取大师推荐
   master: (data) => {
-    return request('/user/sort', 'post', data)
+    return request('/user/sort', 'post', data,true,true)
   },
   // 获取我的推荐
   myRecommend: (data) => {
