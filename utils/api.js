@@ -261,6 +261,6 @@ module.exports = {
   },
   // 推荐大师详情
   masterDetail: (data) => {
-    return request('/user/role3_detail', 'post', data)
+    return request('/user/role3_detail', 'post', data,true,true)
   }
 }

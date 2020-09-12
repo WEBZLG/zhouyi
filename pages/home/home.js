@@ -84,12 +84,12 @@ Page({
   // 推荐大师详情
   onMasterDetial(e){
     wx.showLoading()
-    console.log(e.currentTarget.dataset.id)
+    // console.log(e.currentTarget.dataset.id)
     API.masterDetail({
       role3_id:e.currentTarget.dataset.id
     }).then(res =>{
       wx.hideLoading()
-      console.log(res)
+      // console.log(res)
       let userInfo = JSON.stringify(res.data.role3)
       wx.navigateTo({
         url: '../masterInfo/masterInfo?userInfo='+userInfo,
