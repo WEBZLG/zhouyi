@@ -9,39 +9,40 @@ Page({
     indicatorDots: true,
     vertical: false,
     autoplay: true,
-    interval: '',
+    interval: '3000',
     duration: 500,
     imgUrl: API.IMG_BASE_URL, //图片路径
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    background: ['/images/b1.jpg', '/images/b2.jpg'],
+    loading:true,
     iconNav: [{
+      id:5,
       imgPath: '../../images/wzjs.png',
-      title: "网站建设",
-      url: "../webs/webs"
+      title: "网站建设"
     },
     {
+      id:6,
       imgPath: '../../images/xcx.png',
-      title: "小程序",
-      url: "../routine/routine"
+      title: "小程序"
     },
     {
+      id:7,
       imgPath: '../../images/app.png',
-      title: "APP研发",
-      url: "../appBuild/appBuild"
+      title: "APP研发"
     },
     {
+      id:8,
       imgPath: '../../images/cdjy.png',
-      title: "城德教育",
-      url: "../education/education"
+      title: "城德教育"
     },
     {
+      id:9,
       imgPath: '../../images/wltg.png',
-      title: "网络推广",
-      url: "../extension/extension"
+      title: "网络推广"
     },
     {
+      id:10,
       imgPath: '../../images/itpx.png',
-      title: "IT培训",
-      url: "../train/train"
+      title: "IT培训"
     }
   ]
   },
@@ -58,25 +59,33 @@ Page({
       })
   },
   onPage(e){
-    let url = e.currentTarget.dataset.url
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: url
+      url: '../teaching/teaching?id='+id
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCarouselData()
+    // this.getCarouselData()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      loading:false
+    })
   },
-
+  // 打电话
+  onPhone(e){
+    // let phone = e.currentTarget.dataset.phone
+    wx.makePhoneCall({
+      phoneNumber: '18745042089',
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -115,7 +124,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

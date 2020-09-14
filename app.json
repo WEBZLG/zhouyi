@@ -8,7 +8,6 @@
     "pages/index/index",
     "pages/my/my",
     "pages/magic/magic",
-    "pages/naming/naming",
     "pages/resetPwd/resetPwd",
     "pages/dateList/dateList",
     "pages/vip/vip",
@@ -17,17 +16,9 @@
     "pages/myRecommend/myRecommend",
     "pages/teaching/teaching",
     "pages/master/master",
-    "pages/bazi/bazi",
-    "pages/fengshui/fengshui",
     "pages/calendar/calendar",
     "pages/chengyue/chengyue",
-    "pages/masterInfo/masterInfo",
-    "pages/routine/routine",
-    "pages/webs/webs",
-    "pages/appBuild/appBuild",
-    "pages/extension/extension",
-    "pages/education/education",
-    "pages/train/train"
+    "pages/masterInfo/masterInfo"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -84,7 +75,8 @@
     "van-uploader": "@vant/weapp/uploader/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-empty": "@vant/weapp/empty/index",
-    "van-area": "@vant/weapp/area/index"
+    "van-area": "@vant/weapp/area/index",
+    "van-overlay": "@vant/weapp/overlay/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

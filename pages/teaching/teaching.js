@@ -1,18 +1,27 @@
 // pages/teaching/teaching.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    content:''
   },
-
+  getContent(id){
+    API.teachingDetail({},id).then(res=>{
+      console.log(res)
+      this.setData({
+        content:res.data.content
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let id = options.id
+    this.getContent(id)
   },
 
   /**
@@ -60,7 +69,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

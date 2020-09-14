@@ -68,7 +68,7 @@ Page({
     }
     return {
       title: '易启诚学',
-      path: '/page/home/home'
+      path: '/pages/home/home'
     }
   },
   onShareTimeline(res){

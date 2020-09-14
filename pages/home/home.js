@@ -25,38 +25,57 @@ Page({
     areaList: AREA.default,
     loading: true,
     areaText: '',
+    canvasShow: true,
+    codeShow: false,
     iconNav: [{
+        id: 0,
         imgPath: '../../images/qimen.png',
-        title: "奇门",
+        title: "奇门起局",
         url: "../magic/magic"
       },
       {
+        id: 1,
         imgPath: '../../images/jiaoxue.png',
         title: "奇门教学",
         url: "../teaching/teaching"
       },
       {
+        id: 2,
         imgPath: '../../images/qiming.png',
-        title: "起名",
-        url: "../naming/naming"
+        title: "起名教学",
+        url: "../teaching/teaching"
       },
       {
+        id: 3,
         imgPath: '../../images/bazi.png',
-        title: "八字",
-        url: "../bazi/bazi"
+        title: "八字教学",
+        url: "../teaching/teaching"
       },
       {
+        id: 4,
         imgPath: '../../images/fengshui.png',
-        title: "风水",
-        url: "../fengshui/fengshui"
+        title: "风水教学",
+        url: "../teaching/teaching"
       },
       {
+        id: 5,
         imgPath: '../../images/chengyue.png',
         title: "城约科技",
         url: "../chengyue/chengyue"
       }
 
     ]
+  },
+  onClickShow() {
+    this.setData({
+      codeShow: true
+    });
+  },
+
+  onClickHide() {
+    this.setData({
+      codeShow: false
+    });
   },
   showPopup() {
     this.setData({
@@ -73,26 +92,26 @@ Page({
   onConfirm(e) {
     let _this = this
     this.setData({
-      areaText: (typeof(e.detail.values[0])=='undefined'||e.detail.values[0].code=='' ? '全国' : e.detail.values[0].name)+(typeof(e.detail.values[1])=='undefined'||e.detail.values[1].code=='' ? '' : e.detail.values[1].name)+(typeof(e.detail.values[2])=='undefined'||e.detail.values[2].code=='' ? '' : e.detail.values[2].name),
-      province: typeof(e.detail.values[0])=='undefined'||e.detail.values[0].code=='' ? '' : e.detail.values[0].name,
-      city:  typeof(e.detail.values[1])=='undefined'||e.detail.values[1].code=='' ? '' : e.detail.values[1].name,
-      area:  typeof(e.detail.values[2])=='undefined'||e.detail.values[2].code=='' ? '' : e.detail.values[2].name,
+      areaText: (typeof (e.detail.values[0]) == 'undefined' || e.detail.values[0].code == '' ? '全国' : e.detail.values[0].name) + (typeof (e.detail.values[1]) == 'undefined' || e.detail.values[1].code == '' ? '' : e.detail.values[1].name) + (typeof (e.detail.values[2]) == 'undefined' || e.detail.values[2].code == '' ? '' : e.detail.values[2].name),
+      province: typeof (e.detail.values[0]) == 'undefined' || e.detail.values[0].code == '' ? '' : e.detail.values[0].name,
+      city: typeof (e.detail.values[1]) == 'undefined' || e.detail.values[1].code == '' ? '' : e.detail.values[1].name,
+      area: typeof (e.detail.values[2]) == 'undefined' || e.detail.values[2].code == '' ? '' : e.detail.values[2].name,
     })
-    this.getMaster('1', _this.data.province,_this.data.city,_this.data.area)
+    this.getMaster('1', _this.data.province, _this.data.city, _this.data.area)
     this.onClose();
   },
   // 推荐大师详情
-  onMasterDetial(e){
+  onMasterDetial(e) {
     wx.showLoading()
     // console.log(e.currentTarget.dataset.id)
     API.masterDetail({
-      role3_id:e.currentTarget.dataset.id
-    }).then(res =>{
+      role3_id: e.currentTarget.dataset.id
+    }).then(res => {
       wx.hideLoading()
       // console.log(res)
       let userInfo = JSON.stringify(res.data.role3)
       wx.navigateTo({
-        url: '../masterInfo/masterInfo?userInfo='+userInfo,
+        url: '../masterInfo/masterInfo?userInfo=' + userInfo,
       })
     })
   },
@@ -104,7 +123,7 @@ Page({
         //console.log(res)
         _this.setData({
           background: res.data.carousels,
-          interval:res.data.carousel_interval
+          interval: res.data.carousel_interval
         })
       })
   },
@@ -125,8 +144,9 @@ Page({
             wx.setStorageSync('loginToken', res.data.login_token);
             wx.setStorageSync('userInfo', res.data.user);
             let url = e.currentTarget.dataset.url
+            let id = e.currentTarget.dataset.id
             wx.navigateTo({
-              url: url
+              url: url+'?id='+id
             })
           } else {
             wx.showToast({
@@ -153,21 +173,21 @@ Page({
       area: area
     }).then(res => {
       // console.log(res)
-      if(page>1){
-        if(res.data.users.length==0){
+      if (page > 1) {
+        if (res.data.users.length == 0) {
           wx.showToast({
             title: '无更多数据',
-            icon:'none'
+            icon: 'none'
           })
           _this.setData({
-            page:_this.data.page-1
+            page: _this.data.page - 1
           })
-        }else{
+        } else {
           _this.setData({
             masterList: _this.data.masterList.concat(res.data.users)
           })
         }
-      }else{
+      } else {
         _this.setData({
           masterList: res.data.users
         })
@@ -270,12 +290,162 @@ Page({
       complete: function (res) {}
     });
   },
+  // 分享
+  share() {
+    let _this = this
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
+        })
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            API.share({}).then(res => {
+              let that = this
+              let codeUrl = API.IMG_BASE_URL + res.data.qrcode
+              let backUrl = API.IMG_BASE_URL + res.data.qrcode_base
+              wx.showLoading({
+                title: '生成海报中',
+              })
+              API.getImage(codeUrl).then(res => {
+                let codePath = res.path
+                API.getImage(backUrl).then(res => {
+                  let backPath = res.path
+                  API.getImageAll([codePath, backPath]).then((res) => {
+                    const ctx = wx.createCanvasContext('shareCanvas')
+                    // 底图
+                    ctx.drawImage(res[1].path, -15, 0, 300, 450);
+                    // 小程序码
+                    ctx.drawImage(res[0].path, 100, 310, 80, 80)
+                    ctx.stroke()
+                    ctx.draw()
+                    wx.hideLoading()
+                    that.setData({
+                      canvasShow: false
+                    })
+                  })
+                })
+              })
+            })
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 3000);
+          }
+        })
+    }
+
+  },
+  // 生成图片保存相册
+  savePhoto() {
+    let that = this
+    wx.showLoading({
+      title: '正在保存',
+      mask: true,
+    })
+    wx.canvasToTempFilePath({
+      canvasId: 'shareCanvas',
+      success: function (res) {
+        wx.hideLoading()
+        let tempFilePath = res.tempFilePath;
+        wx.saveImageToPhotosAlbum({
+          filePath: tempFilePath,
+          success(res) {
+            wx.showModal({
+              content: '图片已保存到相册，赶紧晒一下吧~',
+              showCancel: false,
+              confirmText: '好的',
+              confirmColor: '#333',
+              success: function (res) {
+                if (res.confirm) {
+                  that.setData({
+                    canvasShow: true
+                  })
+                }
+              },
+              fail: function (res) {
+                that.setData({
+                  canvasShow: true
+                })
+              }
+            })
+          },
+          fail: function (err) {
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              console.log("当初用户拒绝，再次发起授权")
+              wx.showModal({
+                content: '是否打开权限设置？',
+                showCancel: false,
+                confirmText: '好的',
+                confirmColor: '#333',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success(settingdata) {
+                        console.log(settingdata)
+                        if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                          wx.showToast({
+                            title: '点击保存到相册按钮',
+                            mask: true,
+                            icon: "none"
+                          })
+                        } else {
+                          wx.showToast({
+                            title: '拒绝权限，无法保存图片',
+                            mask: true,
+                            icon: "none"
+                          })
+                          setTimeout(() => {
+                            that.setData({
+                              canvasShow: true
+                            })
+                          }, 2000);
+                        }
+                      }
+                    })
+                  }
+                },
+                fail: function (res) {
+                  that.setData({
+                    canvasShow: true
+                  })
+                }
+              })
+            } else if (err.errMsg == "saveImageToPhotosAlbum:fail:auth denied") {
+              wx.showToast({
+                title: '拒绝权限，无法保存图片',
+                mask: true,
+                icon: "none"
+              })
+              setTimeout(() => {
+                that.setData({
+                  canvasShow: true
+                })
+              }, 2000);
+            }
+          }
+        })
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let _this = this;
-    if (options.scene){
+    if (options.scene) {
       const scene = decodeURIComponent(options.scene)
       var code = scene.split('=')[1]
       wx.setStorageSync('p_code', code);
@@ -289,7 +459,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      loading: false
+    })
   },
 
   /**
@@ -349,10 +521,10 @@ Page({
     }
     return {
       title: '易启诚学',
-      path: '/page/home/home'
+      path: '/pages/home/home'
     }
   },
-  onShareTimeline(res){
+  onShareTimeline(res) {
     return {
       title: '易启诚学'
     }

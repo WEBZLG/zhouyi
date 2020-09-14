@@ -36,3 +36,46 @@
 swiper{
   height:400rpx;
 }
+.caption .van-cell__value{
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.share{
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+}
+.canvas-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:9999;
+  text-align: center;
+  background:rgba(0,0,0,.6);
+}
+#shareCanvas{
+  height: 800rpx;
+  width: 500rpx;
+  margin: 20% auto 0;
+  border-radius: 15rpx;
+}
+.van-button {
+  width: 500rpx;
+  margin-top: 30rpx;
+}
+.van-button--info{
+  border: none !important;
+  outline: none !important;
+  background: #EE6907 !important;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

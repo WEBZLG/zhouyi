@@ -259,8 +259,12 @@ module.exports = {
   share: (data) => {
     return request('/user/qrcode', 'post', data)
   },
-  // 推荐大师详情
+  // 推荐大师详情content/detail
   masterDetail: (data) => {
     return request('/user/role3_detail', 'post', data,true,true)
+  },
+  // 推荐大师详情
+  teachingDetail: (data,id) => {
+    return request('/content/detail/'+id, 'post', data,true,true)
   }
 }
