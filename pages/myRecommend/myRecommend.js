@@ -66,6 +66,12 @@ Page({
       })
     })
   },
+    // 关闭分享
+    oncloseCode(){
+      this.setData({
+        canvasShow: true
+      })
+    },
   // 生成图片保存相册
   savePhoto() {
     let that = this

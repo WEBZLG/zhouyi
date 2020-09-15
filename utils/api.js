@@ -8,7 +8,7 @@ const request = (url, method, data, noToken, noUid) => {
   let userToken = wx.getStorageSync('loginToken');
   let loginToken = noToken == true ? '$10$Xmd/LvGEoHInQ4ISXisPJOm54ULeCFU82WgDyyM5U2j2WfO3rND2K' : userToken;
   // 获取用户id
-  if (noUid == ''||noUid == undefined) {
+  if (noUid == '' || noUid == undefined) {
     let userInfoId = wx.getStorageSync('userInfo').user_id;
     data.user_id = userInfoId
   }
@@ -21,7 +21,7 @@ const request = (url, method, data, noToken, noUid) => {
       title: '加载中',
     })
     wx.request({
-      url:API_BASE_URL+url,
+      url: API_BASE_URL + url,
       method: method,
       data: data,
       header: {
@@ -213,10 +213,10 @@ module.exports = {
   },
   //检验是否登录
   isSignIn: (data, uid) => {
-    return request('/check_login/'+uid.uid, 'post', data, true, true)
+    return request('/check_login/' + uid.uid, 'post', data, true, true)
   },
   //奇门排盘
-  special: (data ) => {
+  special: (data) => {
     return request('/special/get', 'post', data)
   },
   //搜局
@@ -245,7 +245,7 @@ module.exports = {
   },
   // 获取大师推荐
   master: (data) => {
-    return request('/user/sort', 'post', data,true,true)
+    return request('/user/sort', 'post', data, true, true)
   },
   // 获取我的推荐
   myRecommend: (data) => {
@@ -261,10 +261,18 @@ module.exports = {
   },
   // 推荐大师详情content/detail
   masterDetail: (data) => {
-    return request('/user/role3_detail', 'post', data,true,true)
+    return request('/user/role3_detail', 'post', data, true, true)
   },
   // 推荐大师详情
-  teachingDetail: (data,id) => {
-    return request('/content/detail/'+id, 'post', data,true,true)
+  teachingDetail: (data, id) => {
+    return request('/content/detail/' + id, 'post', data, true, true)
+  },
+  // 系统消息
+  sysMessage: (data) => {
+    return request('/message/get', 'post', data)
+  },
+  // 系统消息详情
+  sysDetail: (data, id) => {
+    return request('/message/detail/' + id, 'post', data)
   }
 }

@@ -24,6 +24,8 @@
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" title="大师资料" value="未审核" is-link />
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==1}}" title="大师资料"  is-link   data-type="5" catchtap="getMessge"/>
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==2}}" title="大师资料" value="审核失败" is-link   data-type="4" catchtap="getMessge"/>
+			<van-cell title="系统消息" is-link  catchtap="getSysMsg"/>
+			<van-cell title="联系客服" is-link  catchtap="getPhone"/>
 		</van-cell-group>
 	</view>
 	<view class="btn-box" wx:if="{{userInfo}}">

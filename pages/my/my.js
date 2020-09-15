@@ -45,13 +45,27 @@ Page({
     let _this = this
     let userInfo = JSON.stringify(_this.data.userInfo)
     wx.navigateTo({
-      url: '../masterInfo/masterInfo?userInfo='+userInfo,
+      url: '../masterInfo/masterInfo?userInfo=' + userInfo,
+    })
+  },
+  // 打电话
+  getPhone() {
+    wx.makePhoneCall({
+      phoneNumber: '18745042089',
+    })
+  },
+  // 系统消息
+  getSysMsg() {
+    wx.navigateTo({
+      url: '../sysMessage/sysMessage',
     })
   },
   // 更换头像
   afterRead(event) {
     let _this = this
-    const {file} = event.detail;
+    const {
+      file
+    } = event.detail;
     let userInfo = wx.getStorageSync('userInfo');
     let param = {
       change_type: "head",
@@ -275,7 +289,7 @@ Page({
       path: '/pages/home/home'
     }
   },
-  onShareTimeline(res){
+  onShareTimeline(res) {
     return {
       title: '易启诚学'
     }

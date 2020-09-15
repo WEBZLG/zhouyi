@@ -18,7 +18,9 @@
     "pages/master/master",
     "pages/calendar/calendar",
     "pages/chengyue/chengyue",
-    "pages/masterInfo/masterInfo"
+    "pages/masterInfo/masterInfo",
+    "pages/sysDetail/sysDetail",
+    "pages/sysMessage/sysMessage"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -76,7 +78,8 @@
     "van-icon": "@vant/weapp/icon/index",
     "van-empty": "@vant/weapp/empty/index",
     "van-area": "@vant/weapp/area/index",
-    "van-overlay": "@vant/weapp/overlay/index"
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-panel": "@vant/weapp/panel/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

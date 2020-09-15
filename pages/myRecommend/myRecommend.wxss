@@ -21,11 +21,31 @@
   border-radius: 15rpx;
 }
 .van-button {
-  width: 500rpx;
   margin-top: 30rpx;
 }
 .van-button--info{
   border: none !important;
   outline: none !important;
   background: #EE6907 !important;
+}
+.share-btn{
+  display: flex;
+  width: 500rpx;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.other-share{
+  font-size: 14px;
+  background-color: #ffffff;
+  line-height: 60rpx;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  padding: 30rpx 120rpx;  
+}
+.other-share .title{
+  font-weight: bold;
 }

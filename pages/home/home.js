@@ -290,6 +290,12 @@ Page({
       complete: function (res) {}
     });
   },
+  // 关闭分享
+  oncloseCode(){
+    this.setData({
+      canvasShow: true
+    })
+  },
   // 分享
   share() {
     let _this = this
