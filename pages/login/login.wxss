@@ -34,7 +34,7 @@ van-button {
 .forget-pwd {
   font-size: 14px;
   text-align: right;
-  padding: 0 30rpx;
+  padding: 30rpx 30rpx 0;
   color: #277CFB;
 }
 .regist-btn{
@@ -47,7 +47,6 @@ van-button {
 }
 .logo{
   height: 150rpx;
-width: 150rpx;
-margin: 12% auto 0;
-
+  width: 150rpx;
+  margin: 12% auto 0;
 }

@@ -5,3 +5,12 @@
 .van-button--info {
   width: 100%;
 }
+.flex{
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 30rpx 30rpx 0;
+}
+.agreement{
+  color: #1989FA;
+}

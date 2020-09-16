@@ -7,6 +7,10 @@
 			<van-button slot="button" size="small" type="info" round bindtap='getCode' disabled='{{disabled}}'>{{codename}}</van-button>
 		</van-field>
 		<van-field value="{{ invitationCode }}" label="邀请码" bindinput='getInvitationCode' placeholder="请输入邀请码（选填）" style="display:none"/>
+		<view class="flex">
+			<van-checkbox value="{{ checked }}" checked-color="#1989FA" icon-size="14px" bind:change="onChange">注册代表同意</van-checkbox>
+			<view class="agreement" catchtap="onAgreement">《用户协议》</view>
+		</view>
 	</van-cell-group>
 	<view class="btn-box">
 		<van-button type="info" round catchtap="onRegist">注册</van-button>

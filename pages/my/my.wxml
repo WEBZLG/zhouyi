@@ -17,15 +17,16 @@
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==0}}" value="未审核" is-link />
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==1}}" value="{{userInfo.real.real_name}}" is-link/>
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==2}}" value="审核失败" is-link data-type="0" catchtap="getMessge"/>
-			<van-cell title="修改手机" is-link  data-type="1" catchtap="getMessge"/>
-			<van-cell title="修改密码" is-link  data-type="2" catchtap="getMessge"/>
-			<van-cell title="我的推荐" is-link  data-type="3" catchtap="getMessge"/>
 			<van-cell wx:if="{{userInfo.role3==''}}" title="成为大师" is-link  data-type="4" catchtap="getMessge"/>
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" title="大师资料" value="未审核" is-link />
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==1}}" title="大师资料"  is-link   data-type="5" catchtap="getMessge"/>
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==2}}" title="大师资料" value="审核失败" is-link   data-type="4" catchtap="getMessge"/>
+			<van-cell title="修改手机" is-link  data-type="1" catchtap="getMessge"/>
+			<van-cell title="修改密码" is-link  data-type="2" catchtap="getMessge"/>
+			<van-cell title="我的推荐" is-link  data-type="3" catchtap="getMessge"/>
 			<van-cell title="系统消息" is-link  catchtap="getSysMsg"/>
 			<van-cell title="联系客服" is-link  catchtap="getPhone"/>
+			<van-cell title="用户协议" is-link  catchtap="getAgreement"/>
 		</van-cell-group>
 	</view>
 	<view class="btn-box" wx:if="{{userInfo}}">

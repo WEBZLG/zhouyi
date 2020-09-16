@@ -48,6 +48,12 @@ Page({
       url: '../masterInfo/masterInfo?userInfo=' + userInfo,
     })
   },
+  // 用户协议
+  getAgreement(){
+    wx.navigateTo({
+      url: '../agreement/agreement',
+    })
+  },
   // 打电话
   getPhone() {
     wx.makePhoneCall({
