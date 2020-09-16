@@ -1,18 +1,26 @@
 // pages/agreement/agreement.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    content:''
   },
-
+  getContent(){
+    API.teachingDetail({},11).then(res=>{
+      console.log(res)
+      this.setData({
+        content:res.data.content
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getContent()
   },
 
   /**
