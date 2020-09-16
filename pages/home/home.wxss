@@ -99,3 +99,11 @@ swiper{
 .other-share .title{
   font-weight: bold;
 }
+/* .address{
+  background-color: #267CFB !important;
+  color: #ffffff !important;
+}
+.address .van-cell__value,
+.van-icon-arrow-down{
+  color: #ffffff;
+} */
