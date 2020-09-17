@@ -1,0 +1,17 @@
+<!--pages/bazi/bazi.wxml-->
+<view>
+	<van-field label="姓名" value="{{ name }}" placeholder="请输入姓名" bind:input="getName" />
+	<van-radio-group value="{{ sex }}" bind:change="onChange">
+		<van-cell title="性别">
+			<van-radio name="1" icon-size="14px">男</van-radio>
+			<van-radio name="2" icon-size="14px">女</van-radio>
+		</van-cell>
+	</van-radio-group>
+	<van-cell title="生辰" is-link value="{{chooseTime}}" arrow-direction="down" bind:click="showPopup" />
+	<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+		<van-datetime-picker type="datetime" value="{{ currentDate }}" max-date="{{ maxDate }}" bind:confirm="onInput" bind:cancel="onClose"/>
+	</van-popup>
+	<view class="btn-box">
+		<van-button type="info" round catchtap="onSubmit">排盘</van-button>
+	</view>
+</view>

@@ -1,0 +1,4 @@
+/* pages/qimenList/qimenList.wxss */
+.van-cell__value{
+  font-size: 12px;
+}

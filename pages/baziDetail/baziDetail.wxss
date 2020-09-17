@@ -1,0 +1,32 @@
+/* pages/baziDetail/baziDetail.wxss */
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex van-cell {
+  flex: 1;
+}
+
+.van-cell {
+  padding: 10rpx 30rpx !important;
+}
+
+.van-cell__title {
+  flex: none !important;
+  width: 80rpx;
+}
+
+.flex .van-cell__value {
+  flex: 3 !important;
+  display: flex;
+  text-align: center;
+  align-items: top;
+  justify-content: space-between;
+}
+.van-cell__value view{
+  flex: 1;
+}
+.size .van-cell__value{
+  font-size: 20px;
+}

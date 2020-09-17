@@ -1,0 +1,103 @@
+<!--pages/baziDetail/baziDetail.wxml-->
+<view>
+	<van-skeleton title animate row="3" loading="{{ loading }}">
+		<van-cell-group>
+			<view class="flex">
+				<van-cell title="姓名" value="{{content.real_name}}" />
+				<van-cell title="性别" value="{{content.sex}}" />
+			</view>
+			<van-cell title="节气">
+				<view class="van-cell-value text-left">{{content.prev_solar}}</view>
+				<view class="van-cell-value text-left">{{content.next_solar}}</view>
+			</van-cell>
+			<van-cell title="出生时间">
+				<view class="van-cell-value text-left">公历 {{content.gregorian_calendar}}</view>
+				<view class="van-cell-value text-left">农历 {{content.lunar}}</view>
+			</van-cell>
+			<van-cell title="旬空" custom-class="flex">
+				<view>{{content.times.year.xunkong}}</view>
+				<view>{{content.times.month.xunkong}}</view>
+				<view>{{content.times.day.xunkong}}</view>
+				<view>{{content.times.hour.xunkong}}</view>
+			</van-cell>
+			<van-cell title="地势" custom-class="flex">
+				<view>{{content.times.year.dishi}}</view>
+				<view>{{content.times.month.dishi}}</view>
+				<view>{{content.times.day.dishi}}</view>
+				<view>{{content.times.hour.dishi}}</view>
+			</van-cell>
+			<van-cell title="十神" custom-class="flex">
+				<view>{{content.times.year.shishen}}</view>
+				<view>{{content.times.month.shishen}}</view>
+				<view>{{content.times.day.shishen}}</view>
+				<view>{{content.times.hour.shishen}}</view>
+			</van-cell>
+			<van-cell title="天干" custom-class="flex size">
+				<view>{{content.times.year.gan}}</view>
+				<view>{{content.times.month.gan}}</view>
+				<view>{{content.times.day.gan}}</view>
+				<view>{{content.times.hour.gan}}</view>
+			</van-cell>
+			<van-cell title="地支" custom-class="flex size">
+				<view>{{content.times.year.zhi}}</view>
+				<view>{{content.times.month.zhi}}</view>
+				<view>{{content.times.day.zhi}}</view>
+				<view>{{content.times.hour.zhi}}</view>
+			</van-cell>
+			<van-cell title="纳音" custom-class="flex">
+				<view>{{content.times.year.nayin}}</view>
+				<view>{{content.times.month.nayin}}</view>
+				<view>{{content.times.day.nayin}}</view>
+				<view>{{content.times.hour.nayin}}</view>
+			</van-cell>
+			<van-cell title="遁藏" custom-class="flex">
+				<view>
+					<view wx:for="{{content.times.year.duncang}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.month.duncang}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.day.duncang}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.hour.duncang}}" wx:key="index">{{item}}</view>
+				</view>
+			</van-cell>
+			<van-cell title="神煞" custom-class="flex">
+				<view>
+					<view wx:for="{{content.times.year.shensha}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.month.shensha}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.day.shensha}}" wx:key="index">{{item}}</view>
+				</view>
+				<view>
+					<view wx:for="{{content.times.hour.shensha}}" wx:key="index">{{item}}</view>
+				</view>
+			</van-cell>
+			<van-cell title="大运" custom-class="flex">
+				<block wx:for="{{content.dayun}}" wx:key="index">
+					<view>{{item}}</view>
+				</block>
+			</van-cell>
+      <van-cell title="交运" custom-class="flex">
+				<block wx:for="{{content.jiaoyun}}" wx:key="index">
+					<view>{{item}}</view>
+				</block>
+			</van-cell>
+      <van-cell title="实岁" custom-class="flex">
+				<block wx:for="{{content.shisui}}" wx:key="index">
+					<view>{{item}}</view>
+				</block>
+			</van-cell>
+      <van-cell title="流年" custom-class="flex">
+				<block wx:for="{{content.liunian}}" wx:key="index">
+					<view>{{item}}</view>
+				</block>
+			</van-cell>
+		</van-cell-group>
+	</van-skeleton>
+</view>

@@ -1,4 +1,4 @@
-// pages/agreement/agreement.js
+// pages/qimenDetail/qimenDetail.js
 const API = require('../../utils/api');
 Page({
 
@@ -8,9 +8,8 @@ Page({
   data: {
     content:''
   },
-  getContent(){
-    API.agreement({},11).then(res=>{
-      console.log(res)
+  getData(id){
+    API.teachingListDetail({},id).then(res=>{
       this.setData({
         content:res.data.content
       })
@@ -20,7 +19,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getContent()
+      let id = options.id
+      let title = options.title
+      if(title){
+        wx.setNavigationBarTitle({
+          title: title
+        })
+      }
+      this.getData(id)
   },
 
   /**
@@ -68,7 +74,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

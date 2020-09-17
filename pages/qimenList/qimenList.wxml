@@ -1,0 +1,9 @@
+<!--pages/qimenList/qimenList.wxml-->
+<view>
+<van-cell-group>
+  <block wx:for="{{dataList}}" wx:key="index">
+    <van-cell title="{{item.title}}" label="{{item.create}}" is-link data-id="{{item.id}}" center data-title="{{item.title}}" catchtap="onDetail"/>
+  </block>
+</van-cell-group>
+<van-empty  wx:if="{{dataList.length==0}}" description="暂无数据" />
+</view>

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/bazi/bazi",
     "pages/regist/regist",
     "pages/login/login",
     "pages/certification/certification",
@@ -21,7 +22,10 @@
     "pages/masterInfo/masterInfo",
     "pages/sysDetail/sysDetail",
     "pages/sysMessage/sysMessage",
-    "pages/agreement/agreement"
+    "pages/agreement/agreement",
+    "pages/baziDetail/baziDetail",
+    "pages/qimenList/qimenList",
+    "pages/qimenDetail/qimenDetail"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -82,7 +86,9 @@
     "van-overlay": "@vant/weapp/overlay/index",
     "van-panel": "@vant/weapp/panel/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
-    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

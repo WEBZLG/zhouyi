@@ -9,8 +9,7 @@ Page({
     content:''
   },
   getContent(id){
-    API.teachingDetail({},id).then(res=>{
-      console.log(res)
+    API.teachingTypeDetail({},id).then(res=>{
       this.setData({
         content:res.data.content
       })
@@ -21,6 +20,12 @@ Page({
    */
   onLoad: function (options) {
     let id = options.id
+    let title = options.title
+    if(title){
+      wx.setNavigationBarTitle({
+        title: title
+      })
+    }
     this.getContent(id)
   },
 

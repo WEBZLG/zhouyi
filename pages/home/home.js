@@ -37,7 +37,7 @@ Page({
         id: 1,
         imgPath: '../../images/jiaoxue.png',
         title: "奇门教学",
-        url: "../teaching/teaching"
+        url: "../qimenList/qimenList"
       },
       {
         id: 2,
@@ -50,6 +50,12 @@ Page({
         imgPath: '../../images/bazi.png',
         title: "八字教学",
         url: "../teaching/teaching"
+      },
+      {
+        id: 6,
+        imgPath: '../../images/bazi.png',
+        title: "八字排盘",
+        url: "../bazi/bazi"
       },
       {
         id: 4,
@@ -145,8 +151,9 @@ Page({
             wx.setStorageSync('userInfo', res.data.user);
             let url = e.currentTarget.dataset.url
             let id = e.currentTarget.dataset.id
+            let title = e.currentTarget.dataset.title
             wx.navigateTo({
-              url: url+'?id='+id
+              url: url+'?id='+id+'&title='+title
             })
           } else {
             wx.showToast({
@@ -157,7 +164,7 @@ Page({
               wx.redirectTo({
                 url: '../login/login',
               })
-            }, 3000);
+            }, 1500);
           }
         })
     }

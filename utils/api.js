@@ -2,7 +2,7 @@
 const UTIL = require('./util.js')
 const API_BASE_URL = 'https://api-yiqixue.chengyue.online'; //api地址
 const IMG_BASE_URL = 'https://images-yiqixue.chengyue.online'; //图片地址
-// noToken不传用户token传固定token/noUid不传用户user_id
+// noToken为true不传用户token传固定token/noUid为true不传用户user_id
 const request = (url, method, data, noToken, noUid) => {
   //获取登录token 
   let userToken = wx.getStorageSync('loginToken');
@@ -55,8 +55,8 @@ const request = (url, method, data, noToken, noUid) => {
               icon: 'none'
             })
             setTimeout(() => {
-              wx.navigateBack({
-                delta: 0,
+              wx.redirectTo({
+                url: '../login/login',
               })
             }, 1500);
           }
@@ -259,13 +259,21 @@ module.exports = {
   share: (data) => {
     return request('/user/qrcode', 'post', data)
   },
-  // 推荐大师详情content/detail
+  // 推荐大师详情
   masterDetail: (data) => {
     return request('/user/role3_detail', 'post', data, true, true)
   },
-  // 推荐大师详情
-  teachingDetail: (data, id) => {
-    return request('/content/detail/' + id, 'post', data, true, true)
+  // 教学列表
+  teachingList: (data) => {
+    return request('/content/get', 'post', data, true, true)
+  },
+  // 教学列表详情
+  teachingListDetail: (data, id) => {
+    return request('/content/detail_by_id/' + id, 'post', data, true, true)
+  },
+  // 教学类型详情
+  teachingTypeDetail: (data, id) => {
+    return request('/content/detail_by_menu/' + id, 'post', data, true, true)
   },
   // 系统消息
   sysMessage: (data) => {
@@ -274,5 +282,17 @@ module.exports = {
   // 系统消息详情
   sysDetail: (data, id) => {
     return request('/message/detail/' + id, 'post', data)
+  },
+  // 八字排盘
+  bazi: (data) => {
+    return request('/message/detail', 'post', data)
+  },
+  // 八字排盘详情
+  baziDetail: (data) => {
+    return request('/bazi/get', 'post', data)
+  },
+  // 用户协议
+  agreement(data, id) {
+    return request('/content/detail_by_menu/' + id, 'post', data, true, true)
   }
 }

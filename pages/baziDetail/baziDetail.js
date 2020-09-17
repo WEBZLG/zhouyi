@@ -1,33 +1,31 @@
-// pages/agreement/agreement.js
-const API = require('../../utils/api');
+// pages/baziDetail/baziDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    content:''
+    content:'',
+    loading:true
   },
-  getContent(){
-    API.agreement({},11).then(res=>{
-      console.log(res)
-      this.setData({
-        content:res.data.content
-      })
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getContent()
+    let content = JSON.parse(options.content)
+    this.setData({
+      content:content
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      loading:false
+    })
   },
 
   /**
