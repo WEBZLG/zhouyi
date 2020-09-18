@@ -33,16 +33,16 @@
 				<view>{{content.times.hour.shishen}}</view>
 			</van-cell>
 			<van-cell title="天干" custom-class="flex size">
-				<view>{{content.times.year.gan}}</view>
-				<view>{{content.times.month.gan}}</view>
-				<view>{{content.times.day.gan}}</view>
-				<view>{{content.times.hour.gan}}</view>
+				<view><rich-text nodes="{{content.times.year.gan}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.month.gan}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.day.gan}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.hour.gan}}"></rich-text></view>
 			</van-cell>
 			<van-cell title="地支" custom-class="flex size">
-				<view>{{content.times.year.zhi}}</view>
-				<view>{{content.times.month.zhi}}</view>
-				<view>{{content.times.day.zhi}}</view>
-				<view>{{content.times.hour.zhi}}</view>
+				<view><rich-text nodes="{{content.times.year.zhi}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.month.zhi}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.day.zhi}}"></rich-text></view>
+				<view><rich-text nodes="{{content.times.hour.zhi}}"></rich-text></view>
 			</van-cell>
 			<van-cell title="纳音" custom-class="flex">
 				<view>{{content.times.year.nayin}}</view>
@@ -93,9 +93,11 @@
 					<view>{{item}}</view>
 				</block>
 			</van-cell>
-      <van-cell title="流年" custom-class="flex">
+      <van-cell title="流年" >
 				<block wx:for="{{content.liunian}}" wx:key="index">
-					<view>{{item}}</view>
+					<view class="flex">
+						<view wx:for="{{item}}" wx:for-item="idx" wx:key="index">{{idx}}</view>
+					</view>
 				</block>
 			</van-cell>
 		</van-cell-group>

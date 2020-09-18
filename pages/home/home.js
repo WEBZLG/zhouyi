@@ -34,6 +34,18 @@ Page({
         url: "../magic/magic"
       },
       {
+        id: 6,
+        imgPath: '../../images/bazi.png',
+        title: "八字排盘",
+        url: "../bazi/bazi"
+      },
+      {
+        id: 7,
+        imgPath: '../../images/qiming.png',
+        title: "起名",
+        url: "../naming/naming"
+      },  
+      {
         id: 1,
         imgPath: '../../images/jiaoxue.png',
         title: "奇门教学",
@@ -41,27 +53,21 @@ Page({
       },
       {
         id: 2,
-        imgPath: '../../images/qiming.png',
+        imgPath: '../../images/qimingjiaoxue.png',
         title: "起名教学",
         url: "../teaching/teaching"
       },
       {
         id: 3,
-        imgPath: '../../images/bazi.png',
+        imgPath: '../../images/bazijiaoxue.png',
         title: "八字教学",
         url: "../teaching/teaching"
-      },
-      {
-        id: 6,
-        imgPath: '../../images/bazi.png',
-        title: "八字排盘",
-        url: "../bazi/bazi"
       },
       {
         id: 4,
         imgPath: '../../images/fengshui.png',
         title: "风水教学",
-        url: "../teaching/teaching"
+        url: "../teaching/teachingjiaoxue"
       },
       {
         id: 5,

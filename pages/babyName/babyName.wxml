@@ -1,0 +1,49 @@
+<!--pages/babyName/babyName.wxml-->
+<view>
+  <view class="banner">
+    <van-image width="100%" height="100%" lazy-load src="/images/bbqmbanner.jpg" />
+  </view>
+  <view>
+    <van-field label="姓氏" value="{{ surname }}" placeholder="请输入姓氏" bind:input="getName" />
+    <van-radio-group value="{{ sex }}" bind:change="onChange">
+      <van-cell title="性别">
+        <van-radio name="1" icon-size="14px">男</van-radio>
+        <van-radio name="2" icon-size="14px">女</van-radio>
+      </van-cell>
+    </van-radio-group>
+    <van-field label="出生时间" value="{{ chooseTime }}" placeholder="请选择出生时间" readonly is-link catchtap="showPopup" />
+    <van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <van-datetime-picker type="datetime" value="{{ currentDate }}" max-date="{{ maxDate }}" bind:confirm="onInput"
+        bind:cancel="onClose" />
+    </van-popup>
+    <van-field label="出生地点" value="{{ chooseAddress }}" placeholder="请选择出生地" readonly is-link
+      catchtap="showAddressPopup" />
+    <van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+    </van-popup>
+    <van-field label="期望性格" value="{{ character }}" placeholder="请选择期望性格（选填）" readonly is-link
+      catchtap="showCharacterPopup" />
+    <van-popup show="{{ characterShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <van-grid column-num="4" gutter="{{10}}">
+        <van-grid-item use-slot wx:for="{{ 3 }}" wx:for-item="index">
+          好奇心
+        </van-grid-item>
+      </van-grid>
+    </van-popup>
+    <view class="ding-box">
+      <van-field label="定字" value="{{ ding }}" maxlength="1" placeholder="请填写定字（选填）" bind:input="getDing" />
+      <van-radio-group value="{{ radio }}" bind:change="onChangeDing" class="flex">
+        <van-radio use-icon-slot value="{{ radio }}" name="1">
+          <image slot="icon" class="radio-icon" src="{{ radio === '1' ? icon.active1 : icon.normal1 }}" />
+        </van-radio>
+        <van-radio use-icon-slot value="{{ radio }}" name="2">
+          <image slot="icon" class="radio-icon" src="{{ radio === '2' ? icon.active2 : icon.normal2 }}" />
+        </van-radio>
+      </van-radio-group>
+    </view>
+    <view class="btn-box">
+      <van-button type="info" round catchtap="onSubmit">立即起名</van-button>
+    </view>
+
+  </view>
+</view>

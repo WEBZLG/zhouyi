@@ -1,4 +1,5 @@
 // pages/baziDetail/baziDetail.js
+const API = require('../../utils/api');
 Page({
 
   /**
@@ -8,15 +9,31 @@ Page({
     content:'',
     loading:true
   },
-
+  getData(param){
+    let _this = this
+    API.baziDetail({
+      real_name:param.name,
+      sex:param.sex,
+      time:param.time
+    }).then(res=>{
+      if(res.data==''){
+        wx.showToast({
+          title: '暂无排盘',
+          icon:'none'
+        })
+        return false;
+      }
+      _this.setData({
+        content:res.data
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let content = JSON.parse(options.content)
-    this.setData({
-      content:content
-    })
+    let param = JSON.parse(options.param)
+    this.getData(param)
   },
 
   /**

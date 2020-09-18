@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/babyName/babyName",
     "pages/home/home",
     "pages/bazi/bazi",
     "pages/regist/regist",
@@ -25,7 +26,9 @@
     "pages/agreement/agreement",
     "pages/baziDetail/baziDetail",
     "pages/qimenList/qimenList",
-    "pages/qimenDetail/qimenDetail"
+    "pages/qimenDetail/qimenDetail",
+    "pages/naming/naming"
+
   ],
   "networkTimeout": {
     "request": 10000,

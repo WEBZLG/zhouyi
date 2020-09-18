@@ -1,0 +1,58 @@
+<!--pages/naming/naming.wxml-->
+<view>
+	<view class="page-section page-section-spacing swiper">
+		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+			circular="{{true}}">
+			<block wx:for="{{background}}" wx:key="image">
+				<swiper-item>
+					<view class="swiper-item">
+						<!-- <van-image width="100%" height="100%" wx:if='{{item.image}}' show-loading src="{{imgUrl+item.image}}" /> -->
+						<van-image width="100%" height="100%" show-loading src="{{item}}" />
+					</view>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+	<van-skeleton animate row="3" loading="{{ loading }}">
+		<van-grid column-num="4" border="{{ false }}">
+			<van-grid-item use-slot wx:for="{{ iconNav }}" wx:key="id" catchtap="onPage" data-id="{{item.id}}">
+				<image style="width:50px; height: 50px;border-radius:10px" src="{{item.imgPath}}" />
+				<text class="nav-title">{{item.title}}</text>
+			</van-grid-item>
+		</van-grid>
+	</van-skeleton>
+
+	<van-cell-group>
+		<van-field label="姓氏" value="{{ surname }}" placeholder="请输入姓氏" bind:input="getName" />
+		<van-radio-group value="{{ sex }}" bind:change="onChange">
+			<van-cell title="性别">
+				<van-radio name="1" icon-size="14px">男</van-radio>
+				<van-radio name="2" icon-size="14px">女</van-radio>
+			</van-cell>
+		</van-radio-group>
+		<van-cell title="生辰" is-link value="{{chooseTime}}" arrow-direction="down" bind:click="showPopup" />
+		<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+			<van-datetime-picker type="datetime" value="{{ currentDate }}" max-date="{{ maxDate }}" bind:confirm="onInput"
+				bind:cancel="onClose" />
+		</van-popup>
+		<van-cell title="地点" is-link value="{{chooseAddress}}" arrow-direction="down" bind:click="showAddressPopup" />
+		<van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+			<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+		</van-popup>
+	</van-cell-group>
+	<view class="btn-box">
+		<van-button type="info" round catchtap="onSubmit">立即起名</van-button>
+	</view>
+	<van-grid column-num="2" border="{{ false }}" gutter="{{ 10 }}">
+		<van-grid-item use-slot>
+			<view class="pic-item">
+				<van-image width="100%" height="100%" src="/images/zidian.jpg" />
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="pic-item">
+				<van-image width="100%" height="100%" src="/images/baijiaxing.jpg" />
+			</view>
+		</van-grid-item>
+	</van-grid>
+</view>

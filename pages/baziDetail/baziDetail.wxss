@@ -15,6 +15,7 @@
 .van-cell__title {
   flex: none !important;
   width: 80rpx;
+  font-weight: bold;
 }
 
 .flex .van-cell__value {
@@ -23,9 +24,14 @@
   text-align: center;
   align-items: top;
   justify-content: space-between;
+  color: #333333;
+}
+.van-cell-value{
+  color: #333333;
 }
 .van-cell__value view{
   flex: 1;
+  color: #333333;
 }
 .size .van-cell__value{
   font-size: 20px;

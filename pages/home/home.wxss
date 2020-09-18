@@ -99,6 +99,7 @@ swiper{
 .other-share .title{
   font-weight: bold;
 }
+
 /* .address{
   background-color: #267CFB !important;
   color: #ffffff !important;

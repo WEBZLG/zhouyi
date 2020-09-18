@@ -1,6 +1,6 @@
 // pages/bazi/bazi.js
 const UTIL = require('../../utils/util.js')
-const API = require('../../utils/api');
+
 Page({
 
   /**
@@ -12,7 +12,6 @@ Page({
     show:false,
     maxDate:new Date().getTime(),
     currentDate: new Date().getTime(),
-
   },
   // 时间选择
   onInput(event) {
@@ -43,32 +42,23 @@ Page({
   },
   onSubmit(){
     let _this = this
-    let sex = this.data.sex==1?'男':'女'
-    let name = this.data.name
-    if(name==''){
+
+    let param = {
+      sex : _this.data.sex==1?'男':'女',
+      name : _this.data.name,
+      time:_this.data.chooseTime
+    }
+    if(param.name==''){
       wx.showToast({
         title: '请输入姓名',
         icon:'none'
       })
       return false
-    }
-    API.baziDetail({
-      real_name:name,
-      sex:sex,
-      time:this.data.chooseTime
-    }).then(res=>{
-      if(res.data==''){
-        wx.showToast({
-          title: '暂无排盘',
-          icon:'none'
-        })
-        return false;
-      }
+    }else{
       wx.navigateTo({
-        url: '../baziDetail/baziDetail?content='+JSON.stringify(res.data),
+        url: '../baziDetail/baziDetail?param='+JSON.stringify(param),
       })
-      console.log(res)
-    })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
