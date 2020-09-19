@@ -2,26 +2,29 @@
 const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
 const AREA = require('../../utils/area');
+const DATA = require('../../utils/data');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    character:'',
+    trueList:[],
     imgUrl: API.IMG_BASE_URL, //图片路径
     areaList: AREA.default,
+    characterList: DATA.CHARACTER_LIST,
     loading: true,
     surname: '',
     sex: '1',
     show: false,
-    characterShow:false,
-    addressShow:false,
+    characterShow: false,
+    addressShow: false,
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     chooseAddress: '',
     chooseTime: '',
-    radio: '1',
+    ding: '',
+    dingPosition:'1',
     icon: {
       normal1: '../../images/shou1.png',
       active1: '../../images/shou2.png',
@@ -48,8 +51,32 @@ Page({
     this.setData({
       show: false,
       addressShow: false,
-      characterShow:false
+      characterShow: false
     });
+  },
+  // 选择期望性格
+  checkMark(e) {
+    const index = e.currentTarget.dataset.index
+    const list = this.data.characterList
+    list[index].checked = !list[index].checked
+    let trueList = new Array()
+    list.forEach(element => {
+      if(element.checked==true){
+        trueList.push(element.title)
+      }
+    });
+    if(trueList.length>6){
+      wx.showToast({
+        title: '最多可选6个标签',
+        icon:'none'
+      })
+      list[index].checked = !list[index].checked
+    }else{
+      this.setData({
+        characterList:list,
+        trueList:trueList
+      })
+    }
   },
   // 时间选择
   onInput(event) {
@@ -65,10 +92,10 @@ Page({
       surname: e.detail
     })
   },
-  // 获取姓
+  // 获取定字
   getDing(e) {
     this.setData({
-      ding: e.detail==1?'首':'末'
+      ding: e.detail
     })
   },
   // 获取性别
@@ -77,9 +104,9 @@ Page({
       sex: event.detail,
     });
   },
-  onChangeDing(event){
+  onChangeDing(event) {
     this.setData({
-      radio: event.detail,
+      dingPosition: event.detail
     });
   },
   //获取地点
@@ -90,29 +117,40 @@ Page({
     this.onClose();
   },
 
-  onSubmit(){
+  onSubmit() {
     let param = {
-      surname:this.data.surname,
-      sex:this.data.sex==1?'男':'女',
-      time:this.data.chooseTime,
-      address:this.data.chooseAddress
+      surname: this.data.surname,
+      sex: this.data.sex == 1 ? '男' : '女',
+      time: this.data.chooseTime,
+      address: this.data.chooseAddress,
+      character:JSON.stringify(this.data.trueList),
+      ding:this.data.ding,
+      dingPosition:this.data.dingPosition == 1 ? '首' : '末'
     }
-    if(param.surname==''){
+    if (param.surname == '') {
       wx.showToast({
         title: '请输入姓氏',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else if(param.address=='请选择出生地'){
+    } else if (param.time == '') {
+      wx.showToast({
+        title: '请选择出生时间',
+        icon: 'none'
+      })
+      return false
+    }  else if (param.address == '请选择出生地') {
       wx.showToast({
         title: '请选择出生地',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else{
-      param = JSON.stringify(param)
-      wx.navigateTo({
-        url: '../babyName/babyName?param='+param,
+    } else {
+      API.babyName(param).then(res=>{
+        let content = JSON.stringify(res.data)
+        wx.navigateTo({
+          url: '../nameDetail/nameDetail?content='+content,
+        })
       })
     }
   },
@@ -120,8 +158,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.param){
-
+    if (options.param) {
+      let param = JSON.parse(options.param)
+      this.setData({
+        surname: param.surname,
+        sex: param.sex,
+        chooseTime: param.time,
+        chooseAddress: param.address,
+      })
     }
   },
 
@@ -175,7 +219,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

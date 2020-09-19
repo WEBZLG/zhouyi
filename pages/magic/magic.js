@@ -267,18 +267,9 @@ Page({
         icon:'none'
       })
     }else{
-      API.search(param)
-      .then(res => {
-        if(res.data.times.length==0){
-          wx.showToast({
-            title: '无搜索结果',
-          })
-        }else{
-          let param = JSON.stringify(res.data.times)
-          wx.navigateTo({
-            url: '../dateList/dateList?param=' + param,
-          })
-        }
+      let params = JSON.stringify(param)
+      wx.navigateTo({
+        url: '../dateList/dateList?param=' + params,
       })
     }
   },

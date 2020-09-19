@@ -1,0 +1,14 @@
+/* pages/teachingList/teachingList.wxss */
+.banner{
+  height: 400rpx;
+}
+.nav-title{
+  font-size: 12px;
+}
+.van-grid-item__content{
+  padding-top: 0 !important;
+}
+.van-grid{
+  padding-top: 32rpx;
+  background-color: #ffffff;
+}

@@ -1,0 +1,29 @@
+/* pages/nameDetail/nameDetail.wxss */
+.content{
+  padding:0 30rpx;
+  font-size: 14px;
+  line-height: 28px;
+}
+.flex{
+  display: flex;
+  align-items: center;
+}
+.sex{
+  margin-left: 60rpx;
+}
+.van-cell__title {
+  font-weight: bold;
+}
+.process{
+  flex: 1;
+  margin-left: 20rpx;
+}
+.van-cell{
+  color: #ffffff !important;
+  background-color: #1989FA !important;
+}
+.van-cell--borderless{
+  color: #323233 !important;
+  padding-left: 0 !important;
+  background-color: #ffffff !important;
+}

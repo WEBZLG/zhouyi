@@ -9,7 +9,7 @@
   height: 400rpx;
 }
 .van-grid-item__content{
-  padding-top: 0 !important;
+  padding:14rpx 0 !important;
 }
 .van-grid{
   padding-top: 32rpx;
@@ -56,4 +56,23 @@ van-button {
 }
 .ding-box{
   position: relative;
+}
+.check-mark{
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #999999;
+}
+.check-mark .van-button, 
+.check-mark van-button{
+  width: 100rpx;
+}
+.van-grid-item__content{
+  font-size: 14px;
+}
+.checked .van-grid-item__content{
+  color: #ffffff;
+  background-color: #1989FA;
 }

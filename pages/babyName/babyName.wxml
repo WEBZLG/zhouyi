@@ -21,23 +21,27 @@
     <van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
       <van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
     </van-popup>
-    <van-field label="期望性格" value="{{ character }}" placeholder="请选择期望性格（选填）" readonly is-link
+    <van-field label="期望性格" value="{{ trueList }}" placeholder="请选择期望性格（选填）" readonly is-link
       catchtap="showCharacterPopup" />
-    <van-popup show="{{ characterShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+    <van-popup show="{{ characterShow }}" position="bottom" custom-style="height: 50%;" bind:close="onClose">
+      <view class="check-mark">
+        <view>性格标签选择（已选择{{trueList.length}}/6个）</view>
+        <van-button type="info" size="mini" catchtap="onClose">确认</van-button>
+      </view>
       <van-grid column-num="4" gutter="{{10}}">
-        <van-grid-item use-slot wx:for="{{ 3 }}" wx:for-item="index">
-          好奇心
+        <van-grid-item use-slot wx:for="{{ characterList }}" wx:key="index" class="{{item.checked==true?'checked':''}}" data-index = "{{index}}" catchtap="checkMark">
+          <view>{{item.title}}</view>
         </van-grid-item>
       </van-grid>
     </van-popup>
     <view class="ding-box">
       <van-field label="定字" value="{{ ding }}" maxlength="1" placeholder="请填写定字（选填）" bind:input="getDing" />
-      <van-radio-group value="{{ radio }}" bind:change="onChangeDing" class="flex">
-        <van-radio use-icon-slot value="{{ radio }}" name="1">
-          <image slot="icon" class="radio-icon" src="{{ radio === '1' ? icon.active1 : icon.normal1 }}" />
+      <van-radio-group value="{{ dingPosition }}" bind:change="onChangeDing" class="flex">
+        <van-radio use-icon-slot value="{{ dingPosition }}" name="1">
+          <image slot="icon" class="radio-icon" src="{{ dingPosition === '1' ? icon.active1 : icon.normal1 }}" />
         </van-radio>
-        <van-radio use-icon-slot value="{{ radio }}" name="2">
-          <image slot="icon" class="radio-icon" src="{{ radio === '2' ? icon.active2 : icon.normal2 }}" />
+        <van-radio use-icon-slot value="{{ dingPosition }}" name="2">
+          <image slot="icon" class="radio-icon" src="{{ dingPosition === '2' ? icon.active2 : icon.normal2 }}" />
         </van-radio>
       </van-radio-group>
     </view>

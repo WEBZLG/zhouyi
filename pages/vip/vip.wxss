@@ -1,1 +1,18 @@
 /* pages/vip/vip.wxss */
+
+.banner{
+  height: 350rpx;
+  margin: 30rpx;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.vip-can{
+  margin-top: 20rpx;
+}
+.btn-box{
+  margin: 30rpx;
+}
+.van-button--info {
+  width: 100%;
+}

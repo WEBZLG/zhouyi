@@ -217,11 +217,11 @@ module.exports = {
   },
   //奇门排盘
   special: (data) => {
-    return request('/special/get', 'post', data)
+    return request('/special/get', 'post', data, true, true)
   },
   //搜局
   search: (data) => {
-    return request('/special/search', 'post', data)
+    return request('/special/search', 'post', data, true, true)
   },
   //修改密码
   changePwd: (data) => {
@@ -283,16 +283,17 @@ module.exports = {
   sysDetail: (data, id) => {
     return request('/message/detail/' + id, 'post', data)
   },
-  // 八字排盘
-  bazi: (data) => {
-    return request('/message/detail', 'post', data)
-  },
+
   // 八字排盘详情
   baziDetail: (data) => {
-    return request('/bazi/get', 'post', data)
+    return request('/bazi/get', 'post', data, true, true)
   },
   // 用户协议
   agreement(data, id) {
     return request('/content/detail_by_menu/' + id, 'post', data, true, true)
+  },
+  // 宝宝起名
+  babyName(data) {
+    return request('/qiming/baby', 'post', data)
   }
 }

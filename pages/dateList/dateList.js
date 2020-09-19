@@ -6,40 +6,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataList:[]
+    dataList: []
   },
   //详情
   onDetail(e) {
     let time = e.currentTarget.dataset.time
-    let uid = wx.getStorageSync('userInfo').user_id
-    let token = wx.getStorageSync('loginToken')
-    API.special({time:time,user_id:uid},token)
-    .then(res => {
-      let sudoku = []
-      sudoku.push(res.data.sudoku[4])
-      sudoku.push(res.data.sudoku[9])
-      sudoku.push(res.data.sudoku[2])
-      sudoku.push(res.data.sudoku[3])
-      sudoku.push(res.data.sudoku[5])
-      sudoku.push(res.data.sudoku[7])
-      sudoku.push(res.data.sudoku[8])
-      sudoku.push(res.data.sudoku[1])
-      sudoku.push(res.data.sudoku[6])
-      let param = JSON.stringify(res.data)
-      sudoku = JSON.stringify(sudoku)
-      wx.navigateTo({
-        url: '../magicDetail/magicDetail?param=' + param+'&sudoku='+sudoku,
+    API.special({
+        time: time
       })
-    })
+      .then(res => {
+        let sudoku = []
+        sudoku.push(res.data.sudoku[4])
+        sudoku.push(res.data.sudoku[9])
+        sudoku.push(res.data.sudoku[2])
+        sudoku.push(res.data.sudoku[3])
+        sudoku.push(res.data.sudoku[5])
+        sudoku.push(res.data.sudoku[7])
+        sudoku.push(res.data.sudoku[8])
+        sudoku.push(res.data.sudoku[1])
+        sudoku.push(res.data.sudoku[6])
+        let param = JSON.stringify(res.data)
+        sudoku = JSON.stringify(sudoku)
+        wx.navigateTo({
+          url: '../magicDetail/magicDetail?param=' + param + '&sudoku=' + sudoku,
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let _this = this
-    let param = JSON.parse(options.param) 
-    this.setData({
-      dataList : param
+    let param = JSON.parse(options.param)
+    API.search(param).then(res => {
+      _this.setData({
+        dataList: res.data.times
+      })
     })
   },
 

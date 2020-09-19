@@ -10,7 +10,8 @@ Page({
     name:'',
     sex:'1',
     show:false,
-    maxDate:new Date().getTime(),
+    minDate: new Date(1901, 1, 1).getTime(),
+    maxDate:new Date(2099,12,31).getTime(),
     currentDate: new Date().getTime(),
   },
   // 时间选择

@@ -1,2 +1,15 @@
 <!--pages/vip/vip.wxml-->
-<text>开通会员</text>
+<view>
+  <view class="banner">
+    <image src="../../images/vip0.png"></image>
+  </view>
+  <van-cell title="vip可享受一下权益" />
+  <view class="vip-can">
+    <van-grid gutter="{{ 10 }}" column-num="3">
+      <van-grid-item icon="photo-o" text="文字" wx:for="{{ 3 }}" />
+    </van-grid>
+  </view>
+  <view class="btn-box">
+		<van-button type="info" round catchtap="onSignOut">开通会员(9.9元)</van-button>
+	</view>
+</view>

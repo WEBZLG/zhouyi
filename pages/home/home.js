@@ -39,36 +39,36 @@ Page({
         title: "八字排盘",
         url: "../bazi/bazi"
       },
-      {
-        id: 7,
-        imgPath: '../../images/qiming.png',
-        title: "起名",
-        url: "../naming/naming"
-      },  
+      // {
+      //   id: 7,
+      //   imgPath: '../../images/qiming.png',
+      //   title: "起名",
+      //   url: "../naming/naming"
+      // },  
       {
         id: 1,
         imgPath: '../../images/jiaoxue.png',
-        title: "奇门教学",
-        url: "../qimenList/qimenList"
+        title: "教学",
+        url: "../teachingList/teachingList"
       },
-      {
-        id: 2,
-        imgPath: '../../images/qimingjiaoxue.png',
-        title: "起名教学",
-        url: "../teaching/teaching"
-      },
-      {
-        id: 3,
-        imgPath: '../../images/bazijiaoxue.png',
-        title: "八字教学",
-        url: "../teaching/teaching"
-      },
-      {
-        id: 4,
-        imgPath: '../../images/fengshui.png',
-        title: "风水教学",
-        url: "../teaching/teachingjiaoxue"
-      },
+      // {
+      //   id: 2,
+      //   imgPath: '../../images/qimingjiaoxue.png',
+      //   title: "起名教学",
+      //   url: "../teaching/teaching"
+      // },
+      // {
+      //   id: 3,
+      //   imgPath: '../../images/bazijiaoxue.png',
+      //   title: "八字教学",
+      //   url: "../teaching/teaching"
+      // },
+      // {
+      //   id: 4,
+      //   imgPath: '../../images/fengshui.png',
+      //   title: "风水教学",
+      //   url: "../teaching/teachingjiaoxue"
+      // },
       {
         id: 5,
         imgPath: '../../images/chengyue.png',
@@ -142,38 +142,44 @@ Page({
   // 奇门
   onMagic(e) {
     let _this = this
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo == '' || userInfo == undefined) {
-      wx.redirectTo({
-        url: '../login/login',
-      })
-    } else {
-      API.isSignIn({}, {
-          uid: userInfo.user_id
-        })
-        .then(res => {
-          if (res.message == '已登录') {
-            wx.setStorageSync('loginToken', res.data.login_token);
-            wx.setStorageSync('userInfo', res.data.user);
-            let url = e.currentTarget.dataset.url
-            let id = e.currentTarget.dataset.id
-            let title = e.currentTarget.dataset.title
-            wx.navigateTo({
-              url: url+'?id='+id+'&title='+title
-            })
-          } else {
-            wx.showToast({
-              title: 'res.message',
-              icon: "none"
-            })
-            setTimeout(() => {
-              wx.redirectTo({
-                url: '../login/login',
-              })
-            }, 1500);
-          }
-        })
-    }
+    let url = e.currentTarget.dataset.url
+    let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
+    wx.navigateTo({
+      url: url+'?id='+id+'&title='+title
+    })
+    // let userInfo = wx.getStorageSync('userInfo');
+    // if (userInfo == '' || userInfo == undefined) {
+    //   wx.redirectTo({
+    //     url: '../login/login',
+    //   })
+    // } else {
+    //   API.isSignIn({}, {
+    //       uid: userInfo.user_id
+    //     })
+    //     .then(res => {
+    //       if (res.message == '已登录') {
+    //         wx.setStorageSync('loginToken', res.data.login_token);
+    //         wx.setStorageSync('userInfo', res.data.user);
+    //         let url = e.currentTarget.dataset.url
+    //         let id = e.currentTarget.dataset.id
+    //         let title = e.currentTarget.dataset.title
+    //         wx.navigateTo({
+    //           url: url+'?id='+id+'&title='+title
+    //         })
+    //       } else {
+    //         wx.showToast({
+    //           title: 'res.message',
+    //           icon: "none"
+    //         })
+    //         setTimeout(() => {
+    //           wx.redirectTo({
+    //             url: '../login/login',
+    //           })
+    //         }, 1500);
+    //       }
+    //     })
+    // }
   },
   // 大师推荐
   getMaster(page, province, city, area) {

@@ -49,7 +49,7 @@ Page({
     })
   },
   // 用户协议
-  getAgreement(){
+  getAgreement() {
     wx.navigateTo({
       url: '../agreement/agreement',
     })
@@ -64,6 +64,12 @@ Page({
   getSysMsg() {
     wx.navigateTo({
       url: '../sysMessage/sysMessage',
+    })
+  },
+  // 开通会员
+  goVip(){
+    wx.navigateTo({
+      url: '../vip/vip',
     })
   },
   // 更换头像
@@ -145,6 +151,7 @@ Page({
           uid: userInfo.user_id
         })
         .then(res => {
+          console.log(res)
           if (res.message == '已登录') {
             wx.setStorageSync('loginToken', res.data.login_token);
             wx.setStorageSync('userInfo', res.data.user);
@@ -169,6 +176,9 @@ Page({
                 break;
               case '5':
                 _this.goMaster()
+                break;
+              case '6':
+                _this.goVip()
                 break;
             }
           } else {

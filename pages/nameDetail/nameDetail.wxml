@@ -1,0 +1,43 @@
+<!--pages/nameDetail/nameDetail.wxml-->
+<view>
+  <van-panel title="基本信息">
+    <view class="content">
+      <view class="flex">
+        <view>姓氏：{{content.surname}}</view>
+        <view class="sex">性别：{{content.sex}}</view>
+      </view>
+      <view>出生时间：{{content.address}}</view>
+      <view>出生地点：{{content.gregorian_calendar}}</view>
+      <view>真太阳：{{content.lunar}}</view>
+    </view>
+  </van-panel>
+  <van-panel title="用字分析">
+    <view class="content">
+      <view>
+        <van-cell title="国学用字分析" icon="circle" border="{{false}}"/>
+        <view>{{content.guoxue}}</view>
+      </view>
+      <view>
+        <van-cell title="五行强弱分析" icon="circle" border="{{false}}"/>
+        <view  wx:for="{{wuxing}}" wx:key="index" class="flex">
+          <view>{{item.title}}:</view>
+          <view class="process">
+            <van-progress percentage="{{item.num/total*100}}" stroke-width="8" />
+          </view>
+        </view>
+      </view>
+      <view>
+        <van-cell title="五行用字分析" icon="circle" border="{{false}}"/>
+        <view>{{content.wuxing_zi}}</view>
+      </view>
+      <view>
+        <van-cell title="星座用字分析" icon="circle" border="{{false}}"/>
+        <view>{{content.xingzuo}}</view>
+      </view>
+      <view>
+        <van-cell title="生肖用字分析" icon="circle" border="{{false}}"/>
+        <view>{{content.shengxiao}}</view>
+      </view>
+    </view>
+  </van-panel>
+</view>

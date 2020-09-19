@@ -15,7 +15,7 @@ Page({
     duration: 500,
     imgUrl: API.IMG_BASE_URL, //图片路径
     areaList: AREA.default,
-    background: ['/images/b1.jpg', '/images/b2.jpg'],
+    background: ['/images/bbqmbanner.jpg'],
     loading: true,
     surname: '',
     sex: '1',
@@ -133,7 +133,7 @@ Page({
   onSubmit(){
     let param = {
       surname:this.data.surname,
-      sex:this.data.sex==1?'男':'女',
+      sex:this.data.sex,
       time:this.data.chooseTime,
       address:this.data.chooseAddress
     }
