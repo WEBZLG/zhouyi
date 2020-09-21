@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    limit:20,
     dataList: []
   },
   //详情
@@ -84,7 +85,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let totalLenth = this.data.dataList.length
+    if(this.data.limit<totalLenth){
+      this.setData({
+        limit:this.data.limit*1+20
+      })
+    }
   },
 
   /**

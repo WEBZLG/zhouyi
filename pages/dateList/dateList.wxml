@@ -1,6 +1,9 @@
 <!--pages/dateList/dateList.wxml-->
 <view>
 	<van-cell-group>
-		<van-cell wx:for="{{dataList}}" wx:key="index" title="{{item.time}}" value="" is-link data-time = "{{item.time}}" bind:click="onDetail"/>
+		<van-cell wx:for="{{dataList}}" wx:key="index" title="{{item.time}}" wx:if="{{index<limit}}" value="" is-link data-time = "{{item.time}}" bind:click="onDetail"/>
 	</van-cell-group>
+	<view wx:if="{{dataList.length==0}}">
+		<van-empty description="暂无数据" />
+	</view>
 </view>

@@ -3,6 +3,7 @@ const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
 const AREA = require('../../utils/area');
 const DATA = require('../../utils/data');
+let thisDatePickerId = '';
 Page({
 
   /**
@@ -19,11 +20,14 @@ Page({
     show: false,
     characterShow: false,
     addressShow: false,
+    dateStr3: '',
+    chooseDate:'',
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     chooseAddress: '',
     chooseTime: '',
     ding: '',
+    isLunar:true,
     dingPosition:'1',
     icon: {
       normal1: '../../images/shou1.png',
@@ -78,6 +82,37 @@ Page({
       })
     }
   },
+  // 带时辰（不需要确认）
+  showDatepicker3(event) {
+    let _this = this
+    this.showPopup()
+    thisDatePickerId = 3;
+    let date = this.data['date' + thisDatePickerId];
+    let hour = this.data['hour' + thisDatePickerId];
+    let min = this.data['min' + thisDatePickerId];
+    // 获取日期组件对象实例，并初始化配置
+    this.selectComponent("#ruiDatepicker").init({
+      date: date,
+      hour: hour,
+      min:min,
+      confirm: false,
+      lunar: _this.data.isLunar
+    });
+  },
+  dateConfirm(event) {
+    let json = {};
+    json['date' + thisDatePickerId] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
+    json['hour' + thisDatePickerId] = event.detail.hour;
+    json['min' + thisDatePickerId] = event.detail.min;
+    json['dateStr' + thisDatePickerId] = event.detail.thisStr;
+    // 更新数据
+    this.setData(json);
+    let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
+    this.setData({
+      chooseDate:chooseDate,
+      show: false
+    })
+  },
   // 时间选择
   onInput(event) {
     this.setData({
@@ -121,7 +156,7 @@ Page({
     let param = {
       surname: this.data.surname,
       sex: this.data.sex == 1 ? '男' : '女',
-      time: this.data.chooseTime,
+      time: this.data.chooseDate,
       address: this.data.chooseAddress,
       character:JSON.stringify(this.data.trueList),
       ding:this.data.ding,
@@ -163,8 +198,10 @@ Page({
       this.setData({
         surname: param.surname,
         sex: param.sex,
-        chooseTime: param.time,
+        chooseDate: param.time,
+        dateStr3: param.postDate,
         chooseAddress: param.address,
+        isLunar:param.isLunar
       })
     }
   },

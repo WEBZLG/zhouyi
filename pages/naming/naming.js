@@ -2,6 +2,7 @@
 const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
 const AREA = require('../../utils/area');
+let thisDatePickerId = '';
 Page({
 
   /**
@@ -20,6 +21,10 @@ Page({
     surname: '',
     sex: '1',
     show: false,
+    dateStr3: '请选择生辰',
+    chooseDate:'',//选择后日期
+    postDate:'',//传送到下页数据
+    isLunar:true,//是否是农历
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     chooseAddress: '请选择出生地',
@@ -102,6 +107,40 @@ Page({
       addressShow: false
     });
   },
+  // 带时辰（不需要确认）
+  showDatepicker3(event) {
+    let _this = this
+    this.showPopup()
+    thisDatePickerId = 3;
+    let date = this.data['date' + thisDatePickerId];
+    let hour = this.data['hour' + thisDatePickerId];
+    let min = this.data['min' + thisDatePickerId];
+    // 获取日期组件对象实例，并初始化配置
+    this.selectComponent("#ruiDatepicker").init({
+      date: date,
+      hour: hour,
+      min:min,
+      confirm: false,
+      lunar:_this.data.isLunar
+    });
+  },
+  dateConfirm(event) {
+    let json = {};
+    json['date' + thisDatePickerId] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
+    json['hour' + thisDatePickerId] = event.detail.hour;
+    json['min' + thisDatePickerId] = event.detail.min;
+    json['dateStr' + thisDatePickerId] = event.detail.thisStr;
+    // 更新数据
+    this.setData(json);
+    let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
+    this.setData({
+      chooseDate:chooseDate,
+      show: false,
+      postDate:event.detail.thisStr,
+      isLunar:event.detail.lastTab=='lunar'?true:false
+    })
+    console.log(event)
+  },
   // 时间选择
   onInput(event) {
     this.setData({
@@ -134,12 +173,20 @@ Page({
     let param = {
       surname:this.data.surname,
       sex:this.data.sex,
-      time:this.data.chooseTime,
-      address:this.data.chooseAddress
+      time:this.data.chooseDate,
+      postDate:this.data.postDate,
+      address:this.data.chooseAddress,
+      isLunar:this.data.isLunar
     }
     if(param.surname==''){
       wx.showToast({
         title: '请输入姓氏',
+        icon:'none'
+      })
+      return false
+    }else if(param.time==''){
+      wx.showToast({
+        title: '请选择生辰',
         icon:'none'
       })
       return false

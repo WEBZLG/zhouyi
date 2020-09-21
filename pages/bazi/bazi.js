@@ -1,38 +1,46 @@
 // pages/bazi/bazi.js
 const UTIL = require('../../utils/util.js')
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name:'',
-    sex:'1',
-    show:false,
+    date:'',
+    hour:'',
+    min:'',
+    name: '',
+    sex: '1',
+    show: false,
+    dateStr3: '请选择生辰',
+    chooseDate:'',
     minDate: new Date(1901, 1, 1).getTime(),
-    maxDate:new Date(2099,12,31).getTime(),
+    maxDate: new Date(2099, 12, 31).getTime(),
     currentDate: new Date().getTime(),
   },
   // 时间选择
   onInput(event) {
     this.setData({
       currentDate: event.detail,
-      chooseTime:UTIL.timestampToTime(event.detail),
+      chooseTime: UTIL.timestampToTime(event.detail),
       show: false
     });
   },
   showPopup() {
-    this.setData({ show: true });
+    this.setData({
+      show: true
+    });
   },
 
   onClose() {
-    this.setData({ show: false });
+    this.setData({
+      show: false
+    });
   },
   // 获取姓名
-  getName(e){
+  getName(e) {
     this.setData({
-      name:e.detail
+      name: e.detail
     })
   },
   // 获取性别
@@ -41,26 +49,61 @@ Page({
       sex: event.detail,
     });
   },
-  onSubmit(){
+  // 带时辰（不需要确认）
+  showDatepicker3(event) {
+    this.showPopup()
+    let date = this.data.date;
+    let hour = this.data.hour;
+    let min = this.data.min;
+    // 获取日期组件对象实例，并初始化配置
+    this.selectComponent("#ruiDatepicker").init({
+      date: date,
+      hour: hour,
+      min:min,
+      confirm: false
+    });
+  },
+  dateConfirm(event) {
+    let json = {};
+    json['date'] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
+    json['hour'] = event.detail.hour;
+    json['min'] = event.detail.min;
+    json['dateStr'] = event.detail.thisStr;
+    // 更新数据
+    this.setData(json);
+    let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
+    this.setData({
+      chooseDate:chooseDate,
+      show: false,
+      dateStr3:event.detail.thisStr
+    })
+  },
+  onSubmit() {
     let _this = this
-
     let param = {
-      sex : _this.data.sex==1?'男':'女',
-      name : _this.data.name,
-      time:_this.data.chooseTime
+      sex: _this.data.sex == 1 ? '男' : '女',
+      name: _this.data.name,
+      time: _this.data.chooseDate
     }
-    if(param.name==''){
+    if (param.name == '') {
       wx.showToast({
         title: '请输入姓名',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else{
+    }else if (param.time == '请选择生辰') {
+      wx.showToast({
+        title: '请选择生辰',
+        icon: 'none'
+      })
+      return false
+    }else {
       wx.navigateTo({
-        url: '../baziDetail/baziDetail?param='+JSON.stringify(param),
+        url: '../baziDetail/baziDetail?param=' + JSON.stringify(param),
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -80,8 +123,8 @@ Page({
    */
   onShow: function () {
     this.setData({
-      currentDate:new Date().getTime(),
-      chooseTime:UTIL.timestampToTime(new Date().getTime())
+      currentDate: new Date().getTime(),
+      chooseTime: UTIL.timestampToTime(new Date().getTime())
     })
   },
 

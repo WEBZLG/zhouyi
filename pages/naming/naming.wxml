@@ -30,10 +30,14 @@
 				<van-radio name="2" icon-size="14px">女</van-radio>
 			</van-cell>
 		</van-radio-group>
-		<van-cell title="生辰" is-link value="{{chooseTime}}" arrow-direction="down" bind:click="showPopup" />
+		<!-- <van-cell title="生辰" is-link value="{{chooseTime}}" arrow-direction="down" bind:click="showPopup" />
 		<van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
 			<van-datetime-picker type="datetime" value="{{ currentDate }}" max-date="{{ maxDate }}" bind:confirm="onInput"
 				bind:cancel="onClose" />
+		</van-popup> -->
+		<van-cell title="生辰" is-link value="{{dateStr3}}" arrow-direction="down" bind:click="showDatepicker3" />
+		<van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose">
+			<rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
 		</van-popup>
 		<van-cell title="地点" is-link value="{{chooseAddress}}" arrow-direction="down" bind:click="showAddressPopup" />
 		<van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">

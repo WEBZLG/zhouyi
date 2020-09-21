@@ -29,8 +29,9 @@
     "pages/qimenList/qimenList",
     "pages/qimenDetail/qimenDetail",
     "pages/naming/naming",
-    "pages/teachingList/teachingList"
-
+    "pages/teachingList/teachingList",
+    "pages/live/live",
+    "pages/opinion/opinion"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -58,6 +59,12 @@
         "iconPath": "images/rili1.png",
         "pagePath": "pages/calendar/calendar",
         "text": "万年历"
+      },
+      {
+        "selectedIconPath": "images/rili2.png",
+        "iconPath": "images/rili1.png",
+        "pagePath": "pages/live/live",
+        "text": "直播间"
       },
       {
         "selectedIconPath": "images/wd2.png",

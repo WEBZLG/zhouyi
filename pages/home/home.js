@@ -39,12 +39,12 @@ Page({
         title: "八字排盘",
         url: "../bazi/bazi"
       },
-      // {
-      //   id: 7,
-      //   imgPath: '../../images/qiming.png',
-      //   title: "起名",
-      //   url: "../naming/naming"
-      // },  
+      {
+        id: 7,
+        imgPath: '../../images/qiming.png',
+        title: "起名",
+        url: "../naming/naming"
+      },  
       {
         id: 1,
         imgPath: '../../images/jiaoxue.png',

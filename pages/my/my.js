@@ -66,6 +66,12 @@ Page({
       url: '../sysMessage/sysMessage',
     })
   },
+  // 意见反馈
+  getOpinion(){
+    wx.navigateTo({
+      url: '../opinion/opinion',
+    })
+  },
   // 开通会员
   goVip(){
     wx.navigateTo({

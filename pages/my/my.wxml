@@ -28,6 +28,7 @@
 			<van-cell title="系统消息" is-link  catchtap="getSysMsg"/>
 			<van-cell title="联系客服" is-link  catchtap="getPhone"/>
 			<van-cell title="用户协议" is-link  catchtap="getAgreement"/>
+			<van-cell title="意见反馈" is-link  catchtap="getOpinion"/>
 		</van-cell-group>
 	</view>
 	<view class="btn-box" wx:if="{{userInfo}}">

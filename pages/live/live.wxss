@@ -1,0 +1,4 @@
+/* pages/live/live.wxss */
+live-player{
+  width: 100% !important;
+}
