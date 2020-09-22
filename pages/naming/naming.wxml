@@ -1,17 +1,19 @@
 <!--pages/naming/naming.wxml-->
 <view>
-	<view class="page-section page-section-spacing swiper">
+	<!-- <view class="page-section page-section-spacing swiper">
 		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
 			circular="{{true}}">
-			<block wx:for="{{background}}" wx:key="image">
+			<block wx:for="{{background}}" wx:key="index">
 				<swiper-item>
 					<view class="swiper-item">
-						<!-- <van-image width="100%" height="100%" wx:if='{{item.image}}' show-loading src="{{imgUrl+item.image}}" /> -->
-						<van-image width="100%" height="100%" show-loading src="{{item}}" />
+						<van-image width="100%" height="100%" wx:if='{{item}}' show-loading src="{{imgUrl+item}}" />
 					</view>
 				</swiper-item>
 			</block>
 		</swiper>
+	</view> -->
+	<view class="banner">
+		<van-image width="100%" height="100%" show-loading src="{{background[0]}}" />
 	</view>
 	<van-skeleton animate row="3" loading="{{ loading }}">
 		<van-grid column-num="4" border="{{ false }}">
@@ -36,9 +38,9 @@
 				bind:cancel="onClose" />
 		</van-popup> -->
 		<van-cell title="生辰" is-link value="{{dateStr3}}" arrow-direction="down" bind:click="showDatepicker3" />
-		<van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose">
+		<!-- <van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose"> -->
 			<rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
-		</van-popup>
+		<!-- </van-popup> -->
 		<van-cell title="地点" is-link value="{{chooseAddress}}" arrow-direction="down" bind:click="showAddressPopup" />
 		<van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
 			<van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />

@@ -17,9 +17,9 @@
         bind:cancel="onClose" />
     </van-popup> -->
     <van-field label="出生时间" value="{{ dateStr3 }}" placeholder="请选择出生时间" readonly is-link catchtap="showDatepicker3"/>
-		<van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose">
+		<!-- <van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose"> -->
 			<rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
-		</van-popup>
+		<!-- </van-popup> -->
     <van-field label="出生地点" value="{{ chooseAddress }}" placeholder="请选择出生地" readonly is-link
       catchtap="showAddressPopup" />
     <van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">

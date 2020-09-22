@@ -51,17 +51,14 @@ Page({
   },
   // 带时辰（不需要确认）
   showDatepicker3(event) {
-    this.showPopup()
-    let date = this.data.date;
-    let hour = this.data.hour;
-    let min = this.data.min;
     // 获取日期组件对象实例，并初始化配置
     this.selectComponent("#ruiDatepicker").init({
-      date: date,
-      hour: hour,
-      min:min,
+      date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
+      hour: new Date().getHours(),
+      min:new Date().getMinutes(),
       confirm: false
     });
+    // this.showPopup()
   },
   dateConfirm(event) {
     let json = {};

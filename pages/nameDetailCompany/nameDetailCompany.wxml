@@ -1,0 +1,24 @@
+<!--pages/nameDetailCompany/nameDetailCompany.wxml-->
+<view>
+  <van-panel title="基本信息">
+    <view class="content">
+      <view class="flex">
+        <view>注册地：哈尔滨</view>
+        <view class="sex">所属行业：网络科技</view>
+      </view>
+    </view>
+  </van-panel>
+  <van-panel title="法人八字排盘">
+    <view class="content">
+      <view>出生时间：{{content.address}}</view>
+      <view>出生地点：{{content.gregorian_calendar}}</view>
+      <view>五行分析：{{content.lunar}}</view>
+      <view>八字分析：{{content.lunar}}</view>
+    </view>
+  </van-panel>
+  <van-panel title="法人信息">
+    <view class="content">
+
+    </view>
+  </van-panel>
+</view>

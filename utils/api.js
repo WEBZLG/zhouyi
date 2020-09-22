@@ -294,6 +294,11 @@ module.exports = {
   },
   // 宝宝起名
   babyName(data) {
-    return request('/qiming/baby', 'post', data)
+    return request('/qiming/baby', 'post', data, true, true)
+  },
+  // 获取联系方式
+  getContace(data) {
+    return request('/contact_info', 'post', data, true, true)
   }
+  
 }

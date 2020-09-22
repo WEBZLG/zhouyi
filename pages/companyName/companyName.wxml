@@ -1,0 +1,45 @@
+<!--pages/companyName/companyName.wxml-->
+<view>
+  <view class="banner">
+    <van-image width="100%" height="100%" lazy-load src="/images/gs-banner.jpg" />
+  </view>
+  <view>
+    <van-field label="选择城市" value="{{ chooseCity }}" placeholder="请选择城市（必填）" readonly is-link data-type='city'
+      catchtap="showPopup" />
+    <van-popup show="{{ cityShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <van-area area-list="{{ areaList }}" columns-num="{{ 2 }}" data-type="city" bind:confirm="onConfirm"
+        bind:cancel="onClose" />
+    </van-popup>
+    <van-field label="选择行业" value="{{ chooseIndustry }}" placeholder="请选择行业（必填）" readonly is-link data-type="industry"
+      catchtap="showPopup" />
+    <van-popup show="{{ industryShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <view class="type-item" wx:for="{{ industryList }}" wx:key="index">
+        <view class="caption">{{item.type}}</view>
+        <van-grid column-num="3" gutter="{{10}}">
+          <van-grid-item use-slot wx:for="{{ item.list }}" wx:for-item="name" wx:key="index" data-name="{{name}}"  catchtap="checkMark">
+            <view>{{name}}</view>
+          </van-grid-item>
+        </van-grid>
+      </view>
+    </van-popup>
+  </view>
+  <view>
+    <van-field label="法人姓名" value="{{ name }}" placeholder="请输入法人姓名（选填）" bind:input="getName" />
+    <van-radio-group value="{{ sex }}" bind:change="onChange">
+      <van-cell title="性别">
+        <van-radio name="1" icon-size="14px">男</van-radio>
+        <van-radio name="2" icon-size="14px">女</van-radio>
+      </van-cell>
+    </van-radio-group>
+    <van-field label="出生时间" value="{{ birth }}" placeholder="请选择出生时间（选填）" readonly is-link catchtap="showDatepicker" />
+    <rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
+    <van-field label="出生地点" value="{{ chooseAddress }}" placeholder="请选择出生地（选填）" readonly is-link data-type="address"
+      catchtap="showPopup" />
+    <van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+      <van-area area-list="{{ areaList }}" data-type="address" bind:confirm="onConfirm" bind:cancel="onClose" />
+    </van-popup>
+  </view>
+  <view class="btn-box">
+      <van-button type="info" round catchtap="onSubmit">立即起名</van-button>
+    </view>
+</view>

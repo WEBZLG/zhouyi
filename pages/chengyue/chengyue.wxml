@@ -20,5 +20,5 @@
 			</van-grid-item>
 		</van-grid>
 	</van-skeleton>
-	<van-cell title="业务咨询" value="18745042089" is-link catchtap="onPhone" />
+	<van-cell title="业务咨询" value="{{phone}}" is-link catchtap="onPhone" />
 </view>

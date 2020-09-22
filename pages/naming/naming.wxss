@@ -2,7 +2,8 @@
 .nav-title{
   font-size: 12px;
 }
-.swiper-item{
+.swiper-item,
+.banner{
   height: 400rpx;
 }
 .van-grid-item__content{

@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/companyName/companyName",
     "pages/home/home",
-    "pages/nameDetail/nameDetail",
     "pages/babyName/babyName",
+    "pages/nameDetail/nameDetail",
     "pages/vip/vip",
     "pages/bazi/bazi",
     "pages/regist/regist",
@@ -31,7 +32,8 @@
     "pages/naming/naming",
     "pages/teachingList/teachingList",
     "pages/live/live",
-    "pages/opinion/opinion"
+    "pages/opinion/opinion",
+    "pages/nameDetailCompany/nameDetailCompany"
   ],
   "networkTimeout": {
     "request": 10000,

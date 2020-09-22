@@ -56,8 +56,10 @@ Page({
   },
   // 打电话
   getPhone() {
-    wx.makePhoneCall({
-      phoneNumber: '18745042089',
+    API.getContace({}).then(res=>{
+      wx.makePhoneCall({
+        phoneNumber:res.data.service_mobile,
+      })
     })
   },
   // 系统消息

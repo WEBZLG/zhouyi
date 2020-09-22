@@ -14,6 +14,7 @@ Page({
     imgUrl: API.IMG_BASE_URL, //图片路径
     background: ['/images/b1.jpg', '/images/b2.jpg'],
     loading:true,
+    phone:'',
     iconNav: [{
       id:5,
       imgPath: '../../images/wzjs.png',
@@ -69,6 +70,7 @@ Page({
    */
   onLoad: function (options) {
     // this.getCarouselData()
+    this.getPhone()
   },
 
   /**
@@ -83,7 +85,15 @@ Page({
   onPhone(e){
     // let phone = e.currentTarget.dataset.phone
     wx.makePhoneCall({
-      phoneNumber: '18745042089',
+      phoneNumber: this.data.phone,
+    })
+  },
+  // 打电话
+  getPhone() {
+    API.getContace({}).then(res=>{
+      this.setData({
+        phone:res.data.service_mobile
+      })
     })
   },
   /**

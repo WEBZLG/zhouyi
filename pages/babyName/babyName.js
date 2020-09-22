@@ -86,30 +86,26 @@ Page({
   showDatepicker3(event) {
     let _this = this
     this.showPopup()
-    thisDatePickerId = 3;
-    let date = this.data['date' + thisDatePickerId];
-    let hour = this.data['hour' + thisDatePickerId];
-    let min = this.data['min' + thisDatePickerId];
     // 获取日期组件对象实例，并初始化配置
     this.selectComponent("#ruiDatepicker").init({
-      date: date,
-      hour: hour,
-      min:min,
-      confirm: false,
-      lunar: _this.data.isLunar
+      date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
+      hour: new Date().getHours(),
+      min:new Date().getMinutes(),
+      confirm: false
     });
   },
   dateConfirm(event) {
     let json = {};
-    json['date' + thisDatePickerId] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
-    json['hour' + thisDatePickerId] = event.detail.hour;
-    json['min' + thisDatePickerId] = event.detail.min;
-    json['dateStr' + thisDatePickerId] = event.detail.thisStr;
+    json['date'] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
+    json['hour'] = event.detail.hour;
+    json['min'] = event.detail.min;
+    json['dateStr'] = event.detail.thisStr;
     // 更新数据
     this.setData(json);
     let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
     this.setData({
       chooseDate:chooseDate,
+      dateStr3:event.detail.thisStr,
       show: false
     })
   },
@@ -158,9 +154,9 @@ Page({
       sex: this.data.sex == 1 ? '男' : '女',
       time: this.data.chooseDate,
       address: this.data.chooseAddress,
-      character:JSON.stringify(this.data.trueList),
-      ding:this.data.ding,
-      dingPosition:this.data.dingPosition == 1 ? '首' : '末'
+      xingge:JSON.stringify(this.data.trueList),
+      zi:this.data.ding,
+      zi_type:this.data.dingPosition
     }
     if (param.surname == '') {
       wx.showToast({
@@ -181,11 +177,9 @@ Page({
       })
       return false
     } else {
-      API.babyName(param).then(res=>{
-        let content = JSON.stringify(res.data)
-        wx.navigateTo({
-          url: '../nameDetail/nameDetail?content='+content,
-        })
+      param = JSON.stringify(param)
+      wx.navigateTo({
+        url: '../nameDetail/nameDetail?param='+param,
       })
     }
   },

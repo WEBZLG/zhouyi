@@ -2,7 +2,6 @@
 const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
 const AREA = require('../../utils/area');
-let thisDatePickerId = '';
 Page({
 
   /**
@@ -75,7 +74,7 @@ Page({
         break;
       case 2:
         wx.navigateTo({
-          url: '../publicName/publicName'
+          url: '../babyName/babyName'
         })
         break;
       case 3:
@@ -109,20 +108,14 @@ Page({
   },
   // 带时辰（不需要确认）
   showDatepicker3(event) {
-    let _this = this
-    this.showPopup()
-    thisDatePickerId = 3;
-    let date = this.data['date' + thisDatePickerId];
-    let hour = this.data['hour' + thisDatePickerId];
-    let min = this.data['min' + thisDatePickerId];
     // 获取日期组件对象实例，并初始化配置
     this.selectComponent("#ruiDatepicker").init({
-      date: date,
-      hour: hour,
-      min:min,
-      confirm: false,
-      lunar:_this.data.isLunar
+      date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
+      hour: new Date().getHours(),
+      min:new Date().getMinutes(),
+      confirm: false
     });
+    // this.showPopup()
   },
   dateConfirm(event) {
     let json = {};
@@ -136,10 +129,10 @@ Page({
     this.setData({
       chooseDate:chooseDate,
       show: false,
+      dateStr3:event.detail.thisStr,
       postDate:event.detail.thisStr,
       isLunar:event.detail.lastTab=='lunar'?true:false
     })
-    console.log(event)
   },
   // 时间选择
   onInput(event) {

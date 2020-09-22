@@ -1,8 +1,8 @@
 import solarLunar from './solarlunar';
-// 设置年份数组1940-明年
-const thisYear = new Date().getFullYear() + 1;
+// 设置年份数组1901-明年
+const thisYear = new Date().getFullYear();
 const dafaultYearArr = [];
-for (let i = 1940; i <= 2099; i++) {
+for (let i = 1901; i <= 2099; i++) {
     dafaultYearArr.push(i);
 }
 // 日期选择最大值最小值
@@ -11,11 +11,12 @@ const solarMinDay = 8;
 const maxLunar = solarLunar.solar2lunar(2099, 12, 31);
 const lunarMaxMonth = maxLunar.lMonth;
 const lunarMaxDay = maxLunar.lDay;
+const nowDate = new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()
 
 // 默认初始配置数据
 const dafaultConfig = {
     confirm: true,//是否需要确认
-    date: '',//默认日期(新历)
+    date: nowDate,//默认日期(新历)
     hour: '',//默认时辰,未知
     min:'',
     showHour: true,//是否有时辰选项
@@ -38,8 +39,8 @@ Component({
             lunarStr: '',//农历: 1991年十一月廿六 0子时
             solarStr: '',//公历: 1991年12月31日 0时
             thisStr:'',//当前在什么下返回
-            hour: '',//时辰,为空表示不需要时辰，-1为未知时辰
-            min:''
+            hour: '00',//时辰,为空表示不需要时辰，-1为未知时辰
+            min:'00'//分钟
         },
         // 选择块数据
         selectArr: [],
@@ -47,6 +48,7 @@ Component({
         monthArr: [],
         dayArr: [],
         hourArr: [],
+        minArr:[],
         // 当前tab
         lunarTab: true,
         // 是否显示
@@ -58,6 +60,7 @@ Component({
     methods: {
         // 确认完成
         confirm() {
+            
             // 判断是否需要确认
             if(this.data.config.confirm){
                 // 判断是否在确认步骤[完成&确认]
@@ -79,13 +82,17 @@ Component({
                 });
                 this.triggerEvent('confirm', this.data.returnDate);
             } 
+
         },
         // 初始化插件数据并显示
         init(param) {
+            console.log(nowDate)
             // 合并对象,以默认配置为基础，返回新配置
-            let defaultSet = Object.assign({}, dafaultConfig, param);
+            // let defaultSet = Object.assign({}, dafaultConfig, param);
+            let defaultSet = param
             // 检测数据合法性
             defaultSet = this._checkConfig(defaultSet);
+            console.log(defaultSet)
             // 默认农历
             if(defaultSet.lunar == true){
                 //载入农历数据
@@ -115,6 +122,7 @@ Component({
                     isShow: false
                 });
             }
+            this.triggerEvent('cancel','');
     	},
         // 检测配置的合法性，防止程序报错
         _checkConfig(conf) {
@@ -131,12 +139,13 @@ Component({
                 conf.lunar = dafaultConfig.lunar
             }
             // 时辰格式，区间[-1,24]
-            if(parseInt(conf.hour) < -1 || parseInt(conf.hour)>24 || conf.hour==''){
+            // if(parseInt(conf.hour) < -1 || parseInt(conf.hour)>24 || conf.hour==''){
                 conf.hour = dafaultConfig.hour
-            }
+                conf.min = dafaultConfig.min
+            // }
             // 日期格式，1991-12-31
             let confDate = new Date(conf.date);
-            if(confDate == 'Invalid Date' || confDate.getFullYear() < 1940 || confDate.getFullYear() > 2030){
+            if(confDate == 'Invalid Date' || confDate.getFullYear() < 1901 || confDate.getFullYear() > 2099){
                 conf.date = dafaultConfig.date
             }
             return conf;
@@ -168,7 +177,7 @@ Component({
             if(this.data.lunarTab === true){
                 //在农历下
                 // 该年是否有闰月，0没有
-                const leapMonth = solarLunar.leapMonth(selectArr[0]+1940);
+                const leapMonth = solarLunar.leapMonth(selectArr[0]+1901);
                 const oldMonthArr = this.data.monthArr;
                 // 刷新月份数组
                 let monthArr = [];
@@ -187,19 +196,19 @@ Component({
                 if(leapMonth > 0){
                     if(selectArr[1] < leapMonth){
                         //月份小于闰月，+1
-                        maxDay = solarLunar.monthDays(selectArr[0]+1940, selectArr[1]+1)
+                        maxDay = solarLunar.monthDays(selectArr[0]+1901, selectArr[1]+1)
                     }else{
                         if(selectArr[1] == leapMonth){
-                            maxDay = solarLunar.leapDays(selectArr[0]+1940, leapMonth)
+                            maxDay = solarLunar.leapDays(selectArr[0]+1901, leapMonth)
                         }else{
                             // 月份大于闰月
-                            maxDay = solarLunar.monthDays(selectArr[0]+1940, selectArr[1])
+                            maxDay = solarLunar.monthDays(selectArr[0]+1901, selectArr[1])
                         }
                     }
                 }else{
                     //没有闰月，+1 (有闰月切换没闰月最大值处理)
                     let thisMonth = (selectArr[1] + 1) > monthArr.length ? monthArr.length : (selectArr[1] + 1);
-                    maxDay = solarLunar.monthDays(selectArr[0]+1940, thisMonth);
+                    maxDay = solarLunar.monthDays(selectArr[0]+1901, thisMonth);
                 }
                 for (let i = 1; i <= maxDay; i++) {
                     dayArr.push(this._getLunarName('day',i));
@@ -223,7 +232,7 @@ Component({
                 // 判断是否超出日期最大值
                 selectArr[2] = selectArr[2] >= maxDay ? maxDay-1 : selectArr[2];
                 // 判断到达年份最大
-                if(selectArr[0] == thisYear - 1940){
+                if(selectArr[0] == thisYear - 1901){
                     // 有无闰月
                     if(leapMonth > 0){
                         selectArr[1] = selectArr[1] > lunarMaxMonth ? lunarMaxMonth : selectArr[1];
@@ -249,7 +258,7 @@ Component({
                 //在公历下
                 // 刷新日期数组
                 let dayArr = [];
-                let maxDay = solarLunar.solarDays(selectArr[0]+1940, selectArr[1]+1);
+                let maxDay = solarLunar.solarDays(selectArr[0]+1901, selectArr[1]+1);
                 for (let i = 1; i <= maxDay; i++) {
                     dayArr.push(i);
                 }
@@ -281,13 +290,13 @@ Component({
             const selectArr = this.data.selectArr;
             let thisDateJson = {};
             thisDateJson.hour = this.data.config.showHour === false ? '' : selectArr[3];
-            thisDateJson.min = selectArr[4]
+            thisDateJson.min = selectArr[4];
             if(this.data.lunarTab === true){
                 //农历下
                 thisDateJson.lastTab = 'lunar';
                 // 公历数据
-                thisDateJson.lYear = selectArr[0] + 1940;
-                const leapMonth = solarLunar.leapMonth(selectArr[0]+1940);
+                thisDateJson.lYear = selectArr[0] + 1901;
+                const leapMonth = solarLunar.leapMonth(selectArr[0]+1901);
                 if(leapMonth > 0){
                     thisDateJson.lMonth = selectArr[1] >= leapMonth ? selectArr[1] : selectArr[1] + 1;
                 }else{
@@ -303,14 +312,14 @@ Component({
                 // 农历数据
                 let solarData = solarLunar.lunar2solar(thisDateJson.lYear, thisDateJson.lMonth, thisDateJson.lDay, thisDateJson.isLeap);
                 thisDateJson.year = solarData.cYear;
-                thisDateJson.month = solarData.cMonth;
+                thisDateJson.month = solarData.cMonth;  
                 thisDateJson.day = solarData.cDay;
                 thisDateJson.solarStr = '公历:'+ thisDateJson.year+'年'+thisDateJson.month+'月'+thisDateJson.day+'日';
             }else{
                 //公历下
                 thisDateJson.lastTab = 'solar';
                 // 公历数据
-                thisDateJson.year = selectArr[0] + 1940;
+                thisDateJson.year = selectArr[0] + 1901;
                 thisDateJson.month = selectArr[1] + 1;
                 thisDateJson.day = selectArr[2] + 1;
                 thisDateJson.solarStr = '公历:'+ thisDateJson.year+'年'+thisDateJson.month+'月'+thisDateJson.day+'日';
@@ -328,11 +337,11 @@ Component({
             }
             // 判断是否有选择时辰
             // if(thisDateJson.hour !== ''){
-                thisDateJson.solarStr += ' '+ (thisDateJson.hour<0?'时辰未知': (thisDateJson.hour+'时'));
-                thisDateJson.lunarStr += ' '+ (thisDateJson.hour<0?'时辰未知': (this._getLunarName('hour',thisDateJson.hour)+'时'));
-                thisDateJson.solarStr += ' '+ thisDateJson.min+'分';
-                thisDateJson.lunarStr += ' '+ this._getLunarName('min',thisDateJson.min)+'分';
+            //     thisDateJson.solarStr += ' '+ (thisDateJson.hour<0?'时辰未知': (thisDateJson.hour+'时'));
+            //     thisDateJson.lunarStr += ' '+ (thisDateJson.hour<0?'时辰未知': (this._getLunarName('hour',thisDateJson.hour)+'时'));
             // }
+                thisDateJson.solarStr += ' '+ thisDateJson.hour+'时'+' '+thisDateJson.min+'分';
+                thisDateJson.lunarStr += ' '+ this._getLunarName('hour',thisDateJson.hour)+'时'+' '+this._getLunarName('min',thisDateJson.min)+'分';
             //判断当前模式返回thisStr
             if(this.data.lunarTab === true){
                 thisDateJson.thisStr = thisDateJson.lunarStr;
@@ -388,16 +397,18 @@ Component({
             for (let i = 0; i <= 23; i++) {
                 hourArr.push(this._getLunarName('hour', i)+'时');
             }
+            
+            // 分钟组
             let minArr = [];
             for (let i = 0; i <= 59; i++) {
                 minArr.push(this._getLunarName('min', i)+'分');
             }
             // 设置位置
             let selectArr = [
-                lunarData.lYear-1940, 
+                lunarData.lYear-1901, 
                 (leapMonth > 0 && leapMonth <= lunarData.lMonth) ? lunarData.lMonth : lunarData.lMonth-1, 
                 lunarData.lDay-1, 
-                parseInt(hour),
+                parseInt(hour)+1,
                 parseInt(min)
             ];
             this.setData({
@@ -430,19 +441,20 @@ Component({
             for (let i = 0; i <= 23; i++) {
                 hourArr.push(i+'时');
             }
+            // 分钟组
             let minArr = [];
             for (let i = 0; i <= 59; i++) {
-                minArr.push(this._getLunarName('min', i)+'分');
+                minArr.push(i+'分');
             }
             // 设置位置
-            let selectArr = [dateArr[0]-1940, dateArr[1]-1, dateArr[2]-1, parseInt(hour),parseInt(min)];
+            let selectArr = [dateArr[0]-1901, dateArr[1]-1, dateArr[2]-1, parseInt(hour)+1,parseInt(min)];
             this.setData({
                 lunarTab: false,
                 monthArr: monthArr,
                 dayArr: dayArr,
                 hourArr: hourArr,
-                minArr:minArr,
-                selectArr: selectArr
+                selectArr: selectArr,
+                minArr:minArr
             })
         },
         // 阻塞事件冒泡，底层滑动

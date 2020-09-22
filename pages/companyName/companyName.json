@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "rui-datepicker": "/components/rui-datepicker"
+  },
+  "navigationBarTitleText": "公司起名"
+}

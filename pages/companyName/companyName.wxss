@@ -1,0 +1,40 @@
+/* pages/companyName/companyName.wxss */
+.van-cell__value{
+  display: flex;
+}
+.van-radio{
+  margin-right: 30rpx;
+}
+.van-cell__title,
+.van-field__label{
+  flex:none !important;
+  width: 140rpx !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+}
+.van-grid-item__content{
+  font-size: 14px;
+  padding: 10rpx 0 !important; 
+  border: 1px solid #1989FA;
+  color: #1989FA;
+  border-radius: 10rpx;
+}
+.caption{
+  padding:0rpx 30rpx 20rpx;
+}
+.type-item{
+  margin:20rpx 0
+}
+.van-cell__value .van-field__input{
+  width: 500rpx !important;
+}
+.btn-box {
+  padding: 30rpx;
+}
+
+.van-button {
+  width: 100%;
+}
+.banner{
+  height: 400rpx;
+}
