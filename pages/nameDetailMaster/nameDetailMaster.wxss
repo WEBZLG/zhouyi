@@ -1,0 +1,47 @@
+/* pages/nameDetailMaster/nameDetailMaster.wxss */
+.container{
+  font-size: 14px;
+}
+.content{
+  padding: 20rpx 30rpx;
+}
+.van-grid{
+  padding: 20rpx 10rpx;
+}
+.van-cell{
+  color: #ffffff !important;
+  background-color: #1989FA !important;
+}
+.van-grid-item .van-grid-item__content{
+  padding:8rpx 0 !important;
+  color: #07C160;
+  border: 1px solid #07C160;
+  border-radius: 10rpx;
+}
+.flex-jus{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price{
+  color: #07C160;
+  font-weight: bold;
+}
+.number{
+  font-size: 16px;
+  font-weight: bold;
+}
+.type{
+  font-size: 10px;
+  color: #999999;
+}
+van-button{
+  width: 48%;
+}
+.van-button{
+  width: 100%;
+}
+.concat{
+  padding: 20rpx 30rpx;
+  line-height: 60rpx;
+}

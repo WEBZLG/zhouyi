@@ -1,0 +1,23 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<view>
+  <view class="page-section page-section-spacing swiper">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+      circular="{{true}}">
+      <block wx:for="{{dataList.carousel_pic}}" wx:key="index">
+        <swiper-item>
+          <view class="swiper-item">
+            <van-image width="100%" height="100%" wx:if='{{item}}' show-loading src="{{imgUrl+item}}" />
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="content">
+    <view class="title">{{dataList.goods_name}}</view>
+    <view>价格:￥<text class="price">{{dataList.price}}</text></view>
+  </view>
+  <van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
+    商品详情
+  </van-divider>
+  <rich-text nodes="{{article}}"></rich-text>
+</view>

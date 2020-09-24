@@ -16,7 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrl:API.IMG_BASE_URL,
+    imgUrl: API.IMG_BASE_URL,
     province: '',
     city: '',
     area: '',
@@ -28,11 +28,67 @@ Page({
     age: '',
     adept: '',
     post: '',
-    newCertificate: [],//新的证书
-    isbeing:false,//是否提交过
-    urlArray: [],//网络地址变量
-    pathArray: [],//本地地址变量
-    storeList:[]//图片中间变量
+    newCertificate: [], //新的证书
+    isbeing: false, //是否提交过
+    urlArray: [], //网络地址变量
+    pathArray: [], //本地地址变量
+    storeList: [], //图片中间变量
+    noticeText: ['标准', '边框缺失', '边框缺失', '闪光强烈'],
+    nameValue: '',
+    idcardValue: '',
+    faceImg: '',
+    backImg: '',
+    card_pic1: '',
+    card_pic2: ''
+  },
+  //获取input输入框的值
+  nameValue(e) {
+    this.setData({
+      nameValue: e.detail
+    })
+  },
+  idcardValue(e) {
+    this.setData({
+      idcardValue: e.detail
+    })
+  },
+  // 选择图片
+  onChoose(e) {
+    let _this = this
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // console.log(res)
+        if (e.target.dataset.type == '1') {
+          _this.setData({
+            faceImg: res.tempFiles[0].path,
+            card_pic1: res.tempFiles[0].path
+          })
+        } else {
+          _this.setData({
+            backImg: res.tempFiles[0].path,
+            card_pic2: res.tempFiles[0].path
+          })
+        }
+      }
+    })
+  },
+  // 删除图片
+  onDelete(e) {
+    let _this = this
+    if (e.target.dataset.type == '1') {
+      _this.setData({
+        faceImg: '',
+        card_pic1: ''
+      })
+    } else {
+      _this.setData({
+        backImg: '',
+        card_pic2: ''
+      })
+    }
   },
   //获取input输入框的值
   getAgeValue(e) {
@@ -53,167 +109,224 @@ Page({
   // 提交
   onSubmit() {
     let _this = this
-    let age = this.data.age
-    let adept = this.data.adept
-    let post = this.data.post
-    let province = this.data.province
-    let city = this.data.city
-    let area = this.data.area
-    let certificate = this.data.storeList
-    if (age == '') {
+    let reg = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+    let param = {
+      real_name: _this.data.nameValue,
+      card_id: _this.data.idcardValue,
+      card_pic1: _this.data.card_pic1,
+      card_pic2: _this.data.card_pic2,
+      age: _this.data.age,
+      adept: _this.data.adept,
+      post: _this.data.post,
+      province: _this.data.province,
+      city: _this.data.city,
+      area: _this.data.area,
+      certificate: _this.data.storeList
+    }
+    if (param.real_name == '') {
+      wx.showToast({
+        title: '请填写真实姓名',
+      })
+    } else if (param.card_id == '') {
+      wx.showToast({
+        title: '请填写身份证号',
+      })
+    } else if (!reg.test(param.card_id)) {
+      wx.showToast({
+        title: '身份证号有误',
+      })
+    } else if (param.card_pic1 == '') {
+      wx.showToast({
+        title: '请上传身份证正面照片',
+      })
+    } else if (param.card_pic2 == '') {
+      wx.showToast({
+        title: '请上传身份证反面照片',
+      })
+    } else if (param.age == '') {
       wx.showToast({
         title: '请输入您的年龄',
         icon: 'none'
       })
-    } else if (adept == '') {
+    } else if (param.adept == '') {
       wx.showToast({
         title: '请输入您的擅长项目',
         icon: 'none'
       })
-    } else if (province == '') {
+    } else if (param.province == '') {
       wx.showToast({
         title: '请输入您所在地区',
         icon: 'none'
       })
     } else {
-      if(_this.data.isbeing==true){
-          wx.showModal({
-            title: '修改资料',
-            content: '重新提交信息需再次审核，是否提交？',
-            showCancel: true, //是否显示取消按钮
-            success: function (res) {
-              if (res.cancel) {
-                //点击取消,默认隐藏弹框
-              } else {
-                if (certificate.length == 0) {
-                  API.masterApply({
-                    age: age,
-                    adept: adept,
-                    post: post,
-                    province: province,
-                    city: city,
-                    area: area,
-                    certificate: ''
-                  }).then(res => {
-                    wx.showToast({
-                      title: res.message,
-                      icon: 'none'
-                    })
-                    setTimeout(() => {
-                      wx.navigateBack({
-                        delta: 0,
-                      })
-                    }, 1500);
+      if (_this.data.isbeing == false) {
+        // 正常提交
+        API.uploadImg({
+          'file_name': 'card_pic1'
+        }, param.card_pic1).then(res => {
+          _this.setData({
+            card_pic1: res.data.path
+          })
+          API.uploadImg({
+            'file_name': 'card_pic2'
+          }, param.card_pic2).then(res => {
+            _this.setData({
+              card_pic2: res.data.path
+            })
+            let param = {
+              real_name: _this.data.nameValue,
+              card_id: _this.data.idcardValue,
+              card_pic1: _this.data.card_pic1,
+              card_pic2: _this.data.card_pic2,
+              age: _this.data.age,
+              adept: _this.data.adept,
+              post: _this.data.post,
+              province: _this.data.province,
+              city: _this.data.city,
+              area: _this.data.area,
+              certificate: _this.data.storeList
+            }
+            if (param.certificate.length == 0) {
+              _this.postFun(param)
+            } else {
+              API.uploadImgs({
+                'file_name': 'certificate'
+              }, param.certificate).then(res => {
+                res.forEach(element => {
+                  // console.log(param)
+                  _this.setData({
+                    newCertificate: _this.data.newCertificate.concat(element.data.path)
                   })
-                } else {
-                  certificate.forEach(element => {
-                    if (element.url) {
-                      _this.setData({
-                        urlArray: _this.data.urlArray.concat(element.url)
-                      })
-                    } else {
-                      _this.setData({
-                        pathArray: _this.data.pathArray.concat(element)
-                      })
-                    }
-                  });
-                  API.uploadImgs({
-                    'file_name': 'certificate'
-                  }, _this.data.pathArray).then(res => {
-                    res.forEach(element => {
-                      console.log(element)
-                      _this.setData({
-                        urlArray: _this.data.urlArray.concat(element.data.path)
-                      })
-                    });
-                    API.masterApply({
-                      age: age,
-                      adept: adept,
-                      post: post,
-                      province: province,
-                      city: city,
-                      area: area,
-                      certificate: JSON.stringify(_this.data.urlArray)
-                    }).then(res => {
-                      wx.showToast({
-                        title: res.message,
-                        icon: 'none'
-                      })
-                      setTimeout(() => {
-                        wx.navigateBack({
-                          delta: 0,
-                        })
-                      }, 1500);
-                    })
-                  })
-                }
-              }
+                });
+                param.certificate = JSON.stringify(_this.data.newCertificate)
+                _this.postFun(param)
+              })
             }
           })
-      }else{
-        if (certificate.length == 0) {
-          API.masterApply({
-            age: age,
-            adept: adept,
-            post: post,
-            province: province,
-            city: city,
-            area: area,
-            certificate: ''
-          }).then(res => {
-            wx.showToast({
-              title: res.message,
-              icon: 'none'
+        })
+      } else {
+        // 数据回显提交
+        let str = new RegExp("http://tmp");
+        if (!str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
+          // console.log('都有')
+          _this.submitAgain()
+        } else if (!str.test(_this.data.faceImg) && str.test(_this.data.backImg)) {
+          // console.log('有正面')
+          API.uploadImg({
+            'file_name': 'card_pic2'
+          }, param.card_pic2).then(res => {
+            _this.setData({
+              card_pic2: res.data.path
             })
-            setTimeout(() => {
-              wx.navigateBack({
-                delta: 0,
-              })
-            }, 1500);
+            _this.submitAgain()
+          })
+        } else if (str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
+          // console.log('有反面')
+          API.uploadImg({
+            'file_name': 'card_pic1'
+          }, param.card_pic1).then(res => {
+            _this.setData({
+              card_pic1: res.data.path
+            })
+            _this.submitAgain()
           })
         } else {
-          API.uploadImgs({
-            'file_name': 'certificate'
-          }, certificate).then(res => {
-            res.forEach(element => {
-              //console.log(element)
+          API.uploadImg({
+            'file_name': 'card_pic1'
+          }, param.card_pic1).then(res => {
+            //// console.log(res)
+            _this.setData({
+              card_pic1: res.data.path
+            })
+            API.uploadImg({
+              'file_name': 'card_pic2'
+            }, param.card_pic2).then(res => {
               _this.setData({
-                newCertificate: _this.data.newCertificate.concat(element.data.path)
+                card_pic2: res.data.path
               })
-            });
-            API.masterApply({
-              age: age,
-              adept: adept,
-              post: post,
-              province: province,
-              city: city,
-              area: area,
-              certificate: JSON.stringify(_this.data.newCertificate)
-            }).then(res => {
-              wx.showToast({
-                title: res.message,
-                icon: 'none'
-              })
-              setTimeout(() => {
-                wx.navigateBack({
-                  delta: 0,
-                })
-              }, 1500);
+              _this.submitAgain()
             })
           })
         }
       }
     }
   },
-
+  // 二次提交
+  submitAgain() {
+    let _this = this
+    wx.showModal({
+      title: '修改资料',
+      content: '重新提交信息需再次审核，是否提交？',
+      showCancel: true, //是否显示取消按钮
+      success: function (res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        } else {
+          let param = {
+            real_name: _this.data.nameValue,
+            card_id: _this.data.idcardValue,
+            card_pic1: _this.data.card_pic1,
+            card_pic2: _this.data.card_pic2,
+            age: _this.data.age,
+            adept: _this.data.adept,
+            post: _this.data.post,
+            province: _this.data.province,
+            city: _this.data.city,
+            area: _this.data.area,
+            certificate: _this.data.storeList
+          }
+          if (param.certificate.length == 0) {
+            _this.postFun(param)
+          } else {
+            param.certificate.forEach(element => {
+              if (element.url) {
+                _this.setData({
+                  urlArray: _this.data.urlArray.concat(element.url)
+                })
+              } else {
+                _this.setData({
+                  pathArray: _this.data.pathArray.concat(element)
+                })
+              }
+            });
+            API.uploadImgs({
+              'file_name': 'certificate'
+            }, _this.data.pathArray).then(res => {
+              res.forEach(element => {
+                _this.setData({
+                  urlArray: _this.data.urlArray.concat(element.data.path)
+                })
+              });
+              param.certificate = JSON.stringify(_this.data.urlArray)
+              _this.postFun(param)
+            })
+          }
+        }
+      }
+    })
+  },
+  // 提交函数
+  postFun(param) {
+    API.masterApply(param).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 0,
+        })
+      }, 1500);
+    })
+  },
   // 删除图片
   deleteImg(index) {
-    console.log(index)
+    // console.log(index)
     let _this = this
     let idx = index.detail.index
     this.setData({
       fileList: _this.data.fileList.delete(idx),
-      storeList:_this.data.storeList.delete(idx)
+      storeList: _this.data.storeList.delete(idx)
     })
   },
   // 选择图片后本地地址
@@ -221,7 +334,7 @@ Page({
     let _this = this
     this.setData({
       fileList: _this.data.fileList.concat(event.detail.file),
-      storeList:_this.data.storeList.concat(event.detail.file)
+      storeList: _this.data.storeList.concat(event.detail.file)
     })
   },
   showPopup() {
@@ -251,28 +364,34 @@ Page({
   onLoad: function (options) {
     let _this = this
     let userInfo = wx.getStorageSync('userInfo').role3
-    console.log(userInfo)
+    // console.log(userInfo)
     let newCertificate = []
     if (userInfo != '') {
       _this.setData({
-        isbeing:true
+        isbeing: true
       })
-      if(userInfo.certificate!=''){
+      if (userInfo.certificate != '') {
         let imgArray = JSON.parse(userInfo.certificate)
         let imgUrl = _this.data.imgUrl
         imgArray.forEach(element => {
-          console.log(element)
+          // console.log(element)
           newCertificate.push({
             url: imgUrl + element
           })
           _this.setData({
-            storeList:_this.data.storeList.concat({
+            storeList: _this.data.storeList.concat({
               url: element
             })
           })
         });
       }
       _this.setData({
+        nameValue: userInfo.real_name,
+        idcardValue: userInfo.card_id,
+        faceImg: _this.data.imgUrl + userInfo.card_pic1,
+        backImg: _this.data.imgUrl + userInfo.card_pic2,
+        card_pic1: userInfo.card_pic1,
+        card_pic2: userInfo.card_pic2,
         province: userInfo.province,
         city: userInfo.city,
         area: userInfo.area,

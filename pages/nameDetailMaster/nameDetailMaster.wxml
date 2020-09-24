@@ -1,0 +1,40 @@
+<!--pages/nameDetailMaster/nameDetailMaster.wxml-->
+<view class="container">
+  <van-skeleton animate row="3" loading="{{ loading }}">
+    <van-panel title="简介">
+      <view class="content">{{content.des}}</view>
+    </van-panel>
+    <van-panel title="起名方向">
+      <van-grid column-num="4" gutter="{{10}}" custom-class="trait-box">
+        <van-grid-item use-slot wx:for="{{ content.trait }}" wx:key="index">
+          <view class="trait">{{item}}</view>
+        </van-grid-item>
+      </van-grid>
+    </van-panel>
+    <van-panel title="综合起名维度">
+      <van-grid column-num="3" gutter="{{10}}" custom-class="comprehensive-box">
+        <van-grid-item use-slot wx:for="{{ content.zonghe }}" wx:key="index">
+          <view class="comprehensive">{{item}}</view>
+        </van-grid-item>
+      </van-grid>
+    </van-panel>
+    <van-panel title="提供名字方案">
+      <view class="flex-jus content">
+        <view><text class="number">{{content.count}}</text>个 <text class="type">{{content.title}}</text> </view>
+        <view class="price">￥{{content.price}}</view>
+      </view>
+    </van-panel>
+    <view class="btn-box flex-jus content">
+      <van-button custom-class="submit" round type="info" catchtap="onMasterName">立即起名</van-button>
+      <van-button custom-class="consult" round type="primary" catchtap="onConsult">咨询</van-button>
+    </view>
+  </van-skeleton>
+  <van-dialog use-slot title="在线咨询" show="{{ show }}" confirm-button-color="#1989FA" bind:confirm="onClose">
+    <view class="concat">
+      <view>工作日9：00-12：00   13：00-17：00</view>
+      <view wx:if="{{concat.service_mobile}}">手机：{{concat.service_mobile}}</view>
+      <view wx:if="{{concat.service_wechat}}">微信：{{concat.service_wechat}}</view>
+      <view wx:if="{{concat.service_qq}}">QQ：{{concat.service_qq}}</view>
+    </view>
+  </van-dialog>
+</view>

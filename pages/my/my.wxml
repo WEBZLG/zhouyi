@@ -13,10 +13,10 @@
 	</view>
 	<view class="nav-box">
 		<van-cell-group>
-			<van-cell title="实名认证" wx:if="{{userInfo.real==''}}" value="去认证" is-link  data-type="0" catchtap="getMessge"/>
+			<!-- <van-cell title="实名认证" wx:if="{{userInfo.real==''}}" value="去认证" is-link  data-type="0" catchtap="getMessge"/>
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==0}}" value="未审核" is-link />
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==1}}" value="{{userInfo.real.real_name}}" is-link/>
-			<van-cell title="实名认证" wx:if="{{userInfo.real.status==2}}" value="审核失败" is-link data-type="0" catchtap="getMessge"/>
+			<van-cell title="实名认证" wx:if="{{userInfo.real.status==2}}" value="审核失败" is-link data-type="0" catchtap="getMessge"/> -->
 			<!-- <van-cell title="升级会员" is-link  data-type="6" catchtap="getMessge"/> -->
 			<van-cell wx:if="{{userInfo.role3==''}}" title="成为大师" is-link  data-type="4" catchtap="getMessge"/>
 			<van-cell wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" title="大师资料" value="未审核" is-link />

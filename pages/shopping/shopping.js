@@ -1,30 +1,44 @@
-// pages/live/live.js
+// pages/shopping/shopping.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgUrl: API.IMG_BASE_URL,
+    dataList:[],
+    loading: true
   },
-  statechange(e) {
-    console.log('live-player code:', e.detail.code)
+  onDetail(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?id='+id,
+    })
   },
-  error(e) {
-    console.error('live-player error:', e.detail.errMsg)
+  getData(){
+    API.goodsList({}).then(res=>{
+      this.setData({
+        dataList:res.data.goods
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getData()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    setTimeout(() => {
+      this.setData({
+        loading: false,
+      });
+    }, 1500);
   },
 
   /**
@@ -65,7 +79,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

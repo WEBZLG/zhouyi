@@ -1,0 +1,18 @@
+/* pages/goodsDetail/goodsDetail.wxss */
+.content {
+  font-size: 14px;
+  padding: 30rpx;
+  text-align: left;
+}
+
+.price {
+  font-weight: bold;
+  color: #ff0000;
+}
+
+.title {
+  font-weight: bold;
+}
+.swiper-item{
+  height: 400rpx;
+}

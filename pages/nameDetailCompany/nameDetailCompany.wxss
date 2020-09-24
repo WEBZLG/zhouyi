@@ -26,3 +26,29 @@
 .wh-item{
   margin-right: 20rpx;
 }
+.td{
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ababab;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+.paipan{
+  margin: 20rpx 0;
+}
+.company-name{
+  font-size: 14px;
+  font-weight: bold;
+  padding: 20rpx 30rpx;
+}
+.btn-box{
+  margin: 30rpx;
+}
+.van-button--info {
+  width: 100%;
+}
+.view-more{
+  text-align: center;
+  background: #eaf2ff;
+  padding: 30rpx 0;
+}

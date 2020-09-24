@@ -89,7 +89,7 @@ Page({
     }
   },
   // 协议
-  onAgreement(){
+  onAgreement() {
     wx.navigateTo({
       url: '../agreement/agreement',
     })
@@ -104,13 +104,13 @@ Page({
   onRegist() {
     let myreg = /^(14[0-9]|13[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9])\d{8}$$/;
     let _this = this
-    if(_this.data.checked==false){
+    if (_this.data.checked == false) {
       wx.showToast({
         title: '注册前请阅读用户协议并勾选',
-        icon:'none'
+        icon: 'none'
       })
       return false;
-    }else if(this.data.phone == "") {
+    } else if (this.data.phone == "") {
       wx.showToast({
         title: '手机号不能为空',
         icon: 'none',
@@ -133,26 +133,36 @@ Page({
       })
       return false;
     } else {
-      API.regist({
-          mobile: _this.data.phone,
-          type: '',
-          code: _this.data.code,
-          password: _this.data.password,
-          p_code: _this.data.invitationCode,
-          agreement:1
-        })
-        .then(res => {
-          //console.log(res)
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
-          wx.setStorageSync('loginToken', res.data.login_token);
-          wx.setStorageSync('userInfo', res.data.user);
-          wx.reLaunch({
-            url: '../home/home',
-          })
-        })
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            API.regist({
+                mobile: _this.data.phone,
+                type: '',
+                code: _this.data.code,
+                password: _this.data.password,
+                p_code: _this.data.invitationCode,
+                agreement: 1,
+                wechat_code: res.code
+              })
+              .then(res => {
+                //console.log(res)
+                wx.showToast({
+                  title: res.message,
+                  icon: 'none'
+                })
+                wx.setStorageSync('loginToken', res.data.login_token);
+                wx.setStorageSync('userInfo', res.data.user);
+                wx.reLaunch({
+                  url: '../home/home',
+                })
+              })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
     }
   },
 
@@ -161,10 +171,10 @@ Page({
    */
   onLoad: function (options) {
     let _this = this
-    let code =  wx.getStorageSync('p_code');
-    if(code){
+    let code = wx.getStorageSync('p_code');
+    if (code) {
       _this.setData({
-        invitationCode:code
+        invitationCode: code
       })
     }
   },

@@ -12,7 +12,7 @@ Page({
     name: '',
     sex: '1',
     show: false,
-    dateStr3: '请选择生辰',
+    dateStr3: '请选择时间',
     chooseDate:'',
     minDate: new Date(1901, 1, 1).getTime(),
     maxDate: new Date(2099, 12, 31).getTime(),

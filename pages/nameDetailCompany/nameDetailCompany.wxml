@@ -3,22 +3,37 @@
   <van-panel title="基本信息">
     <view class="content">
       <view class="flex">
-        <view>注册地：哈尔滨</view>
-        <view class="sex">所属行业：网络科技</view>
+        <view>注册地：{{content.city}}</view>
+        <view class="sex">所属行业：{{content.trade}}</view>
       </view>
-    </view>
-  </van-panel>
-  <van-panel title="法人八字排盘">
-    <view class="content">
-      <view>出生时间：{{content.address}}</view>
-      <view>出生地点：{{content.gregorian_calendar}}</view>
-      <view>五行分析：{{content.lunar}}</view>
-      <view>八字分析：{{content.lunar}}</view>
     </view>
   </van-panel>
   <van-panel title="法人信息">
     <view class="content">
-
+      <view>出生时间：{{content.gregorian_calendar}}</view>
+      <view>出生地点：{{content.address}}</view>
+      <view>五行分析：<text class="wh-item" wx:for="{{wuxing}}" wx:key="index">{{item.title}}:{{item.num}}</text></view>
+      <view>八字分析：{{content.fazifenxi}}</view>
+    </view>
+  </van-panel>
+  <van-panel title="法人八字排盘">
+    <view class="content paipan">
+      <block wx:for="{{content.paipan}}" wx:key="index">
+        <view class="flex" >
+          <view class="td" wx:for="{{item}}" wx:for-item="data" wx:key="index">{{data}}</view>
+        </view>
+      </block>
+    </view>
+  </van-panel>
+  <van-panel title="起名结果">
+    <view class="company-name" wx:for="{{content.ming}}" wx:key="index" >{{item.mingzi}}</view>
+    <view class="view-more" wx:if="{{isOrder==false}}">
+      <van-image width="100" height="100" lazy-load src="/images/suo.png" />
+      <view>获取更多名字</view>
+      <view>点击下方解锁查看</view>
+      <view class="btn-box">
+        <van-button type="info" round catchtap="onView">（9.9元）解锁查看</van-button>
+      </view>
     </view>
   </van-panel>
 </view>

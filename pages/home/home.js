@@ -27,7 +27,14 @@ Page({
     areaText: '',
     canvasShow: true,
     codeShow: false,
-    iconNav: [{
+    iconNav: [
+      {
+        id: 7,
+        imgPath: '../../images/qiming.png',
+        title: "起名",
+        url: "../naming/naming"
+      },
+       {
         id: 0,
         imgPath: '../../images/qimen.png',
         title: "奇门起局",
@@ -39,12 +46,6 @@ Page({
         title: "八字排盘",
         url: "../bazi/bazi"
       },
-      {
-        id: 7,
-        imgPath: '../../images/qiming.png',
-        title: "起名",
-        url: "../naming/naming"
-      },  
       {
         id: 1,
         imgPath: '../../images/jiaoxue.png',
@@ -145,41 +146,45 @@ Page({
     let url = e.currentTarget.dataset.url
     let id = e.currentTarget.dataset.id
     let title = e.currentTarget.dataset.title
-    wx.navigateTo({
-      url: url+'?id='+id+'&title='+title
-    })
-    // let userInfo = wx.getStorageSync('userInfo');
-    // if (userInfo == '' || userInfo == undefined) {
-    //   wx.redirectTo({
-    //     url: '../login/login',
-    //   })
-    // } else {
-    //   API.isSignIn({}, {
-    //       uid: userInfo.user_id
-    //     })
-    //     .then(res => {
-    //       if (res.message == '已登录') {
-    //         wx.setStorageSync('loginToken', res.data.login_token);
-    //         wx.setStorageSync('userInfo', res.data.user);
-    //         let url = e.currentTarget.dataset.url
-    //         let id = e.currentTarget.dataset.id
-    //         let title = e.currentTarget.dataset.title
-    //         wx.navigateTo({
-    //           url: url+'?id='+id+'&title='+title
-    //         })
-    //       } else {
-    //         wx.showToast({
-    //           title: 'res.message',
-    //           icon: "none"
-    //         })
-    //         setTimeout(() => {
-    //           wx.redirectTo({
-    //             url: '../login/login',
-    //           })
-    //         }, 1500);
-    //       }
-    //     })
-    // }
+    if(id==7){
+      let userInfo = wx.getStorageSync('userInfo');
+      if (userInfo == '' || userInfo == undefined) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        API.isSignIn({}, {
+            uid: userInfo.user_id
+          })
+          .then(res => {
+            if (res.message == '已登录') {
+              wx.setStorageSync('loginToken', res.data.login_token);
+              wx.setStorageSync('userInfo', res.data.user);
+              let url = e.currentTarget.dataset.url
+              let id = e.currentTarget.dataset.id
+              let title = e.currentTarget.dataset.title
+              wx.navigateTo({
+                url: url+'?id='+id+'&title='+title
+              })
+            } else {
+              wx.showToast({
+                title: 'res.message',
+                icon: "none"
+              })
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }, 1500);
+            }
+          })
+      }
+    }else{
+      wx.navigateTo({
+        url: url+'?id='+id+'&title='+title
+      })
+    }
+
   },
   // 大师推荐
   getMaster(page, province, city, area) {

@@ -77,7 +77,7 @@ const request = (url, method, data, noToken, noUid) => {
         } else {
           reject(error)
           wx.showToast({
-            title: error.data.message,
+            title: error.errMsg,
             icon: 'none'
           })
         }
@@ -106,12 +106,12 @@ const uploadImg = (param, path) => {
       success(res) {
         let data = JSON.parse(res.data)
         resolve(data)
-        console.log(data)
       },
       fail(error) {
+        console.log(error)
         reject(error)
         wx.showToast({
-          title: error.data.message,
+          title: error.errMsg,
           icon: 'none'
         })
       }
@@ -253,7 +253,7 @@ module.exports = {
   },
   // 成为大师
   masterApply: (data) => {
-    return request('/user/role3', 'post', data)
+    return request('/user/role31', 'post', data)
   },
   // 太阳码
   share: (data) => {
@@ -292,13 +292,34 @@ module.exports = {
   agreement(data, id) {
     return request('/content/detail_by_menu/' + id, 'post', data, true, true)
   },
-  // 宝宝起名
-  babyName(data) {
-    return request('/qiming/baby', 'post', data, true, true)
-  },
   // 获取联系方式
   getContace(data) {
     return request('/contact_info', 'post', data, true, true)
-  }
+  },
+  // 宝宝起名
+  babyName(data) {
+    return request('/qiming/baby', 'post', data)
+  },
+  // 公司起名
+  companyName(data) {
+    return request('/qiming/business', 'post', data)
+  },
+  // 大师起名
+  masterName(data) {
+    return request('/qiming/get_dashi_list', 'post', data)
+  },
+  // 起名支付
+  namePay(data) {
+    return request('/pay', 'post', data)
+  },
+  // 商品列表
+  goodsList(data) {
+    return request('/goods/get', 'post', data,true,true)
+  },
+  // 商品详情
+  goodsDetail(data,id) {
+    return request('/goods/detail/'+id, 'post', data,true,true)
+  },
+  
   
 }

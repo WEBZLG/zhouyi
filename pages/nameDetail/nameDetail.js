@@ -9,15 +9,43 @@ Page({
   data: {
     content: '',
     total:'',
-    wuxing:[]
+    wuxing:[],
+    param:'',
+    isOrder:false
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options)
-    let param = JSON.parse(options.param)
+  // 查看更多
+  onView(){
+    let _this = this
+    API.namePay({
+      pay_type:'qiming_baby'
+    }).then(res=>{
+      console.log(res)
+      let order = res.data.order_no
+      wx.requestPayment({
+        timeStamp: res.data.wechat_data.timeStamp.toString(),
+        nonceStr: res.data.wechat_data.nonceStr,
+        package: res.data.wechat_data.package,
+        signType: res.data.wechat_data.signType,
+        paySign: res.data.wechat_data.paySign,
+        success(res) {
+          let param = _this.data.param
+          delete param.sign
+          param.order_no = order
+          _this.getData(param);
+          _this.setData({
+            isOrder:true
+          })
+        },
+        fail(error) {
+          wx.showToast({
+            title: error.errMsg,
+            icon: "none"
+          })
+        }
+      })
+    })
+  },
+  getData(param){
     API.babyName(param).then(res=>{
       let total = 0
       let wuxing = new Array()
@@ -38,6 +66,17 @@ Page({
         total:total
       })
     })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let param = JSON.parse(options.param)
+    console.log(param)
+    this.setData({
+      param:param
+    })
+    this.getData(param);
   },
 
   /**
@@ -85,7 +124,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

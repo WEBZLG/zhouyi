@@ -1,16 +1,20 @@
 // pages/teaching/teaching.js
 const API = require('../../utils/api');
+const UTIL = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    content:''
+    content:'',
+    article:''
   },
   getContent(id){
     API.teachingTypeDetail({},id).then(res=>{
+      let article = UTIL.formatRichText(res.data.content.content)
       this.setData({
+        article:article,
         content:res.data.content
       })
     })

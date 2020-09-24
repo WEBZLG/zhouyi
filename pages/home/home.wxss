@@ -99,7 +99,9 @@ swiper{
 .other-share .title{
   font-weight: bold;
 }
-
+.name-box{
+  width: 130rpx;
+}
 /* .address{
   background-color: #267CFB !important;
   color: #ffffff !important;

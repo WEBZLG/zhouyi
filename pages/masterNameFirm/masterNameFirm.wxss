@@ -1,0 +1,8 @@
+/* pages/masterNameFirm/masterNameFirm.wxss */
+.btn-box {
+  padding: 30rpx;
+}
+
+.van-button {
+  width: 100%;
+}

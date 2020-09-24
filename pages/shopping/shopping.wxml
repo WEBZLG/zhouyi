@@ -1,0 +1,15 @@
+<!--pages/shopping/shopping.wxml-->
+<view class="container">
+  <van-skeleton  row="5" loading="{{ loading }}">
+    <van-grid column-num="2" gutter="{{ 10 }}" border="{{ false }}">
+      <van-grid-item use-slot wx:for="{{ dataList }}" wx:key="index" data-id="{{item.id}}" catchtap="onDetail">
+        <image style="width: 100%; height: 140px;" src="{{imgUrl+item.thumb_pic||'/images/goods.png'}}" />
+        <view class="content">
+          <view class="desc">{{item.goods_name}}</view>
+          <view>价格:￥<text class="price">{{item.price}}</text></view>
+        </view>
+      </van-grid-item>
+    </van-grid>
+  </van-skeleton>
+  <van-empty wx:if="{{dataList.length==0}}" description="暂无商品" />
+</view>

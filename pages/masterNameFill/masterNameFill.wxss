@@ -1,0 +1,73 @@
+/* pages/masterNameFill/masterNameFill.wxss */
+.banner{
+  height: 400rpx;
+}
+.nav-title{
+  font-size: 12px;
+}
+.swiper-item{
+  height: 400rpx;
+}
+.van-grid-item__content{
+  padding:14rpx 0 !important;
+}
+.van-grid{
+  padding-top: 32rpx;
+  background-color: #ffffff;
+}
+swiper{
+  height: 400rpx;
+}
+
+.van-cell__title,
+.van-field__label{
+  flex:none !important;
+  width: 140rpx !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+}
+
+.van-cell__value{
+  display: flex;
+}
+.van-radio{
+  margin-right: 30rpx;
+}
+.btn-box {
+  padding: 30rpx;
+}
+
+van-button {
+  width: 48%;
+}
+
+.van-button {
+  width: 100%;
+}
+.radio-icon{
+  height: 24px;
+  width: 24px;
+}
+
+.check-mark{
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #999999;
+}
+.check-mark .van-button, 
+.check-mark van-button{
+  width: 100rpx;
+}
+.van-grid-item__content{
+  font-size: 14px;
+}
+.checked .van-grid-item__content{
+  color: #ffffff;
+  background-color: #1989FA;
+}
+.van-field__body{
+  flex: 1 !important;
+}

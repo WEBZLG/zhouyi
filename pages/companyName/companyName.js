@@ -18,14 +18,14 @@ Page({
     name: '',
     sex: '1',
     birth: '',
-    postTime:'',
+    postTime: '',
     areaList: AREA.default,
-    industryList:DATA.INDUSTRY_LIST
+    industryList: DATA.INDUSTRY_LIST
   },
-  checkMark(e){
+  checkMark(e) {
     let name = e.currentTarget.dataset.name;
     this.setData({
-      chooseIndustry:name
+      chooseIndustry: name
     })
     this.onClose()
   },
@@ -77,10 +77,9 @@ Page({
     this.setData(json);
     let chooseDate = event.detail.year + '-' + event.detail.month + '-' + event.detail.day + ' ' + (event.detail.hour < 10 ? '0' + event.detail.hour : event.detail.hour) + ':' + (event.detail.min < 10 ? '0' + event.detail.min : event.detail.min);
     this.setData({
-      chooseDate: chooseDate,
       show: false,
       birth: event.detail.thisStr,
-      postTime: event.detail.thisStr,
+      postTime: chooseDate,
       isLunar: event.detail.lastTab == 'lunar' ? true : false
     })
   },
@@ -103,7 +102,7 @@ Page({
     switch (type) {
       case 'city':
         this.setData({
-          chooseCity: e.detail.values[0].name + e.detail.values[1].name
+          chooseCity: e.detail.values[1].name
         });
         break;
       case 'industry':
@@ -119,16 +118,58 @@ Page({
     }
     this.onClose();
   },
-  onSubmit(){
-    wx.navigateTo({
-      url: '../nameDetailCompany/nameDetailCompany',
-    })
+  onSubmit() {
+    let param = {
+      city: this.data.chooseCity,
+      trade: this.data.chooseIndustry,
+      address: this.data.chooseAddress,
+      real_name: this.data.name,
+      sex: this.data.sex == 1 ? '男' : '女',
+      time: this.data.postTime,
+      order_no:''
+    }
+    if (param.city == '') {
+      wx.showToast({
+        title: '请选择城市',
+        icon: 'none'
+      })
+      return false;
+    } else if (param.trade == '') {
+      wx.showToast({
+        title: '请选择行业',
+        icon: 'none'
+      })
+      return false;
+    } else if (param.real_name == '') {
+      wx.showToast({
+        title: '请填写姓名',
+        icon: 'none'
+      })
+      return false;
+    }else if (param.time == '') {
+      wx.showToast({
+        title: '请选择出生时间',
+        icon: 'none'
+      })
+      return false;
+    }else if (param.address == '') {
+      wx.showToast({
+        title: '请选择出生地点',
+        icon: 'none'
+      })
+      return false;
+    }else {
+      param = JSON.stringify(param)
+      wx.navigateTo({
+        url: '../nameDetailCompany/nameDetailCompany?param='+param,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.industryList)
+
   },
 
   /**
@@ -176,7 +217,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

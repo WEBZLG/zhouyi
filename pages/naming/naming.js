@@ -20,7 +20,7 @@ Page({
     surname: '',
     sex: '1',
     show: false,
-    dateStr3: '请选择生辰',
+    dateStr3: '请选择时间',
     chooseDate:'',//选择后日期
     postDate:'',//传送到下页数据
     isLunar:true,//是否是农历
@@ -119,10 +119,10 @@ Page({
   },
   dateConfirm(event) {
     let json = {};
-    json['date' + thisDatePickerId] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
-    json['hour' + thisDatePickerId] = event.detail.hour;
-    json['min' + thisDatePickerId] = event.detail.min;
-    json['dateStr' + thisDatePickerId] = event.detail.thisStr;
+    json['date'] = event.detail.year + '-' + event.detail.month + '-' + event.detail.day;
+    json['hour'] = event.detail.hour;
+    json['min'] = event.detail.min;
+    json['dateStr'] = event.detail.thisStr;
     // 更新数据
     this.setData(json);
     let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
@@ -179,7 +179,7 @@ Page({
       return false
     }else if(param.time==''){
       wx.showToast({
-        title: '请选择生辰',
+        title: '请选择时间',
         icon:'none'
       })
       return false

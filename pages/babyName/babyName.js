@@ -3,7 +3,6 @@ const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
 const AREA = require('../../utils/area');
 const DATA = require('../../utils/data');
-let thisDatePickerId = '';
 Page({
 
   /**
@@ -170,7 +169,7 @@ Page({
         icon: 'none'
       })
       return false
-    }  else if (param.address == '请选择出生地') {
+    }  else if (param.address == '') {
       wx.showToast({
         title: '请选择出生地',
         icon: 'none'
@@ -178,6 +177,7 @@ Page({
       return false
     } else {
       param = JSON.stringify(param)
+      console.log(param)
       wx.navigateTo({
         url: '../nameDetail/nameDetail?param='+param,
       })

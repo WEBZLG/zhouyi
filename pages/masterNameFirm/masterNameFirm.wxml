@@ -1,0 +1,16 @@
+<!--pages/masterNameFirm/masterNameFirm.wxml-->
+<view>
+	<van-cell-group>
+		<van-cell title="起名类型" value="{{content.title}}" />
+		<van-cell title="姓氏" value="{{param.surname}}" />
+		<van-cell title="性别" value="{{param.sex}}" />
+		<van-cell title="出生时间" value="{{param.time}}" />
+		<van-cell title="出生地点" value="{{param.address}}" />
+		<van-cell title="手机号" value="{{param.mobile}}" />
+		<van-cell title="价格" value="{{content.price}}" />
+		<van-cell title="数量" value="{{content.count}}" />
+  </van-cell-group>
+  <view class="btn-box">
+    <van-button type="info" data-type="" round catchtap="onSubmit">支付</van-button>
+  </view>
+</view>

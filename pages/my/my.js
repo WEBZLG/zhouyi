@@ -56,9 +56,9 @@ Page({
   },
   // 打电话
   getPhone() {
-    API.getContace({}).then(res=>{
+    API.getContace({}).then(res => {
       wx.makePhoneCall({
-        phoneNumber:res.data.service_mobile,
+        phoneNumber: res.data.service_mobile,
       })
     })
   },
@@ -69,13 +69,13 @@ Page({
     })
   },
   // 意见反馈
-  getOpinion(){
+  getOpinion() {
     wx.navigateTo({
       url: '../opinion/opinion',
     })
   },
   // 开通会员
-  goVip(){
+  goVip() {
     wx.navigateTo({
       url: '../vip/vip',
     })
@@ -155,52 +155,62 @@ Page({
         url: '../login/login',
       })
     } else {
-      API.isSignIn({}, {
-          uid: userInfo.user_id
-        })
-        .then(res => {
-          console.log(res)
-          if (res.message == '已登录') {
-            wx.setStorageSync('loginToken', res.data.login_token);
-            wx.setStorageSync('userInfo', res.data.user);
-            _this.setData({
-              userInfo: res.data.user
-            })
-            switch (type) {
-              case '0':
-                _this.goCertification()
-                break;
-              case '1':
-                _this.goChangePhone()
-                break;
-              case '2':
-                _this.goChangePwd()
-                break;
-              case '3':
-                _this.goMyRecommend()
-                break;
-              case '4':
-                _this.goMaster()
-                break;
-              case '5':
-                _this.goMaster()
-                break;
-              case '6':
-                _this.goVip()
-                break;
-            }
-          } else {
-            wx.showToast({
-              title: 'res.message',
-              icon: "none"
-            })
-            setTimeout(() => {
-              wx.redirectTo({
-                url: '../login/login',
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            API.isSignIn({}, {
+                uid: userInfo.user_id,
+                wechat_code: res.code
               })
-            }, 3000);
+              .then(res => {
+                console.log(res)
+                if (res.message == '已登录') {
+                  wx.setStorageSync('loginToken', res.data.login_token);
+                  wx.setStorageSync('userInfo', res.data.user);
+                  _this.setData({
+                    userInfo: res.data.user
+                  })
+                  switch (type) {
+                    case '0':
+                      _this.goCertification()
+                      break;
+                    case '1':
+                      _this.goChangePhone()
+                      break;
+                    case '2':
+                      _this.goChangePwd()
+                      break;
+                    case '3':
+                      _this.goMyRecommend()
+                      break;
+                    case '4':
+                      _this.goMaster()
+                      break;
+                    case '5':
+                      _this.goMaster()
+                      break;
+                    case '6':
+                      _this.goVip()
+                      break;
+                  }
+                } else {
+                  wx.showToast({
+                    title: 'res.message',
+                    icon: "none"
+                  })
+                  setTimeout(() => {
+                    wx.redirectTo({
+                      url: '../login/login',
+                    })
+                  }, 3000);
+                }
+              })
+          } else {
+            console.log('登录失败！' + res.errMsg)
           }
-        })
+        }
+      })
     }
   },
 

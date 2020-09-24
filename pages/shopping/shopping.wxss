@@ -1,0 +1,25 @@
+/* pages/shopping/shopping.wxss */
+.container {
+  font-size: 14px;
+  padding: 30rpx 10rpx;
+}
+
+.content {
+  width: 100%;
+  text-align: left;
+}
+
+.price {
+  font-weight: bold;
+  color: #ff0000;
+}
+
+.desc {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  padding-top: 20rpx;
+  height: 80rpx;
+}

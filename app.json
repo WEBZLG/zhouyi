@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/companyName/companyName",
     "pages/home/home",
+    "pages/masterNameFill/masterNameFill",
+    "pages/companyName/companyName",
     "pages/babyName/babyName",
     "pages/nameDetail/nameDetail",
     "pages/vip/vip",
@@ -31,9 +32,13 @@
     "pages/qimenDetail/qimenDetail",
     "pages/naming/naming",
     "pages/teachingList/teachingList",
-    "pages/live/live",
     "pages/opinion/opinion",
-    "pages/nameDetailCompany/nameDetailCompany"
+    "pages/nameDetailCompany/nameDetailCompany",
+    "pages/masterName/masterName",
+    "pages/nameDetailMaster/nameDetailMaster",
+    "pages/masterNameFirm/masterNameFirm",
+    "pages/shopping/shopping",
+    "pages/goodsDetail/goodsDetail"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -57,16 +62,16 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/rili2.png",
-        "iconPath": "images/rili1.png",
-        "pagePath": "pages/calendar/calendar",
-        "text": "万年历"
+        "selectedIconPath": "images/shop2.png",
+        "iconPath": "images/shop1.png",
+        "pagePath": "pages/shopping/shopping",
+        "text": "商城"
       },
       {
         "selectedIconPath": "images/rili2.png",
         "iconPath": "images/rili1.png",
-        "pagePath": "pages/live/live",
-        "text": "直播间"
+        "pagePath": "pages/calendar/calendar",
+        "text": "万年历"
       },
       {
         "selectedIconPath": "images/wd2.png",
@@ -103,7 +108,9 @@
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-radio": "@vant/weapp/radio/index",
     "van-radio-group": "@vant/weapp/radio-group/index",
-    "van-progress": "@vant/weapp/progress/index"
+    "van-progress": "@vant/weapp/progress/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-divider": "@vant/weapp/divider/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {
