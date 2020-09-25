@@ -20,4 +20,16 @@
     商品详情
   </van-divider>
   <rich-text nodes="{{article}}"></rich-text>
+  <view class="bottom"></view>
+  <view class="btn-box">
+    <van-button custom-class="consult" round type="primary" catchtap="onConsult">咨询</van-button>
+  </view>
+  <van-dialog use-slot title="在线咨询" show="{{ show }}" confirm-button-color="#1989FA" bind:confirm="onClose">
+    <view class="concat">
+      <view>工作日9：00-12：00   13：00-17：00</view>
+      <view wx:if="{{concat.service_mobile}}">手机：{{concat.service_mobile}}</view>
+      <view wx:if="{{concat.service_wechat}}">微信：{{concat.service_wechat}}</view>
+      <view wx:if="{{concat.service_qq}}">QQ：{{concat.service_qq}}</view>
+    </view>
+  </van-dialog>
 </view>

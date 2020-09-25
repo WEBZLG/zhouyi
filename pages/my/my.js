@@ -102,7 +102,6 @@ Page({
       name: 'head_img',
       formData: param,
       success(res) {
-        console.log(res)
         let data = JSON.parse(res.data)
         wx.showToast({
           title: data.message,
@@ -164,7 +163,6 @@ Page({
                 wechat_code: res.code
               })
               .then(res => {
-                console.log(res)
                 if (res.message == '已登录') {
                   wx.setStorageSync('loginToken', res.data.login_token);
                   wx.setStorageSync('userInfo', res.data.user);
@@ -314,18 +312,19 @@ Page({
    */
   onShareAppMessage: function (res) {
     var that = this;
+    let code =  wx.getStorageSync('userInfo').p_code;
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
-      title: '易启诚学',
-      path: '/pages/home/home'
+      title: '名师起名',
+      path: '/pages/home/home?p='+code
     }
   },
   onShareTimeline(res) {
     return {
-      title: '易启诚学'
+      title: '名师起名'
     }
   }
 })

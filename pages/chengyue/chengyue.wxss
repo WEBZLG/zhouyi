@@ -9,6 +9,7 @@
   padding-top: 0 !important;
 }
 .van-grid{
+  margin: 20rpx 0;
   padding-top: 32rpx;
   background-color: #ffffff;
 }

@@ -13,6 +13,21 @@
 .title {
   font-weight: bold;
 }
+swiper,
 .swiper-item{
   height: 400rpx;
+}
+.btn-box{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  background-color: #ffffff;
+}
+.van-button{
+  width: 100%;
+}
+.bottom{
+  height: 120rpx;
 }

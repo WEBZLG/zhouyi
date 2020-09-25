@@ -1,18 +1,33 @@
-// pages/calendar/calendar.js
+// pages/live/live.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    dataList:[],
   },
-
+  getData(){
+    API.liveList({}).then(res=>{
+      this.setData({
+        dataList:res.data.room_info
+      })
+    })
+  },
+  goTv(e){
+    let roomId = e.currentTarget.dataset.roomid
+    // let customParams = encodeURIComponent(JSON.stringify({ path: 'pages/index/index', pid: 3 })) 
+    wx.navigateTo({
+        // url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=${roomId}&custom_params=${customParams}`
+        url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=${roomId}`
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getData();
   },
 
   /**
@@ -47,7 +62,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getData()
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -60,21 +76,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
-    var that = this;
-    let code =  wx.getStorageSync('userInfo').p_code;
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '名师起名',
-      path: '/pages/home/home?p='+code
-    }
-  },
-  onShareTimeline(res){
-    return {
-      title: '名师起名'
-    }
-  }
+  // onShareAppMessage: function () {
+
+  // }
 })

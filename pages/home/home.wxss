@@ -9,6 +9,7 @@
   padding-top: 0 !important;
 }
 .van-grid{
+  margin: 20rpx 0;
   padding-top: 32rpx;
   background-color: #ffffff;
 }
@@ -64,13 +65,17 @@ swiper{
   margin: 20% auto 0;
   border-radius: 15rpx;
 }
-.van-button {
+/* .van-button {
   margin-top: 30rpx;
 }
 .van-button--info{
   border: none !important;
   outline: none !important;
   background: #EE6907 !important;
+} */
+.van-button--info{
+  padding-left: 10rpx !important;
+  padding-right: 10rpx !important;
 }
 .wrapper {
   display: flex;
@@ -102,11 +107,18 @@ swiper{
 .name-box{
   width: 130rpx;
 }
-/* .address{
+.address{
   background-color: #267CFB !important;
   color: #ffffff !important;
 }
 .address .van-cell__value,
 .van-icon-arrow-down{
   color: #ffffff;
-} */
+}
+.caption .van-cell__title{
+  font-weight: bold;
+}
+.caption .van-cell__value{
+  width: 244rpx;
+  flex: none !important;
+}

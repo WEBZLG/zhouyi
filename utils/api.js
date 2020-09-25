@@ -253,7 +253,7 @@ module.exports = {
   },
   // 成为大师
   masterApply: (data) => {
-    return request('/user/role31', 'post', data)
+    return request('/user/role3', 'post', data)
   },
   // 太阳码
   share: (data) => {
@@ -320,6 +320,9 @@ module.exports = {
   goodsDetail(data,id) {
     return request('/goods/detail/'+id, 'post', data,true,true)
   },
-  
+  // 直播间列表
+  liveList(data) {
+    return request('/live/get', 'post', data)
+  }, 
   
 }

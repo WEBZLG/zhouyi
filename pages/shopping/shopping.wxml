@@ -10,6 +10,6 @@
         </view>
       </van-grid-item>
     </van-grid>
+    <van-empty wx:if="{{dataList.length==0}}" description="暂无商品" />
   </van-skeleton>
-  <van-empty wx:if="{{dataList.length==0}}" description="暂无商品" />
 </view>

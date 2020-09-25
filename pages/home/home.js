@@ -28,12 +28,12 @@ Page({
     canvasShow: true,
     codeShow: false,
     iconNav: [
-      {
-        id: 7,
-        imgPath: '../../images/qiming.png',
-        title: "起名",
-        url: "../naming/naming"
-      },
+      // {
+      //   id: 7,
+      //   imgPath: '../../images/qiming.png',
+      //   title: "起名",
+      //   url: "../naming/naming"
+      // },
        {
         id: 0,
         imgPath: '../../images/qimen.png',
@@ -480,6 +480,10 @@ Page({
       var code = scene.split('=')[1]
       wx.setStorageSync('p_code', code);
     }
+    if(options.p){
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }
     qqmapsdk = new QQMapWX({
       key: 'OQYBZ-GMQKD-X3I4Q-H4YNU-3TDQ5-PWFAQ' //自己的key秘钥
     });
@@ -545,18 +549,19 @@ Page({
    */
   onShareAppMessage: function (res) {
     var that = this;
+    let code =  wx.getStorageSync('userInfo').p_code;
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
-      title: '易启诚学',
-      path: '/pages/home/home'
+      title: '名师起名',
+      path: '/pages/home/home?p='+code
     }
   },
   onShareTimeline(res) {
     return {
-      title: '易启诚学'
+      title: '名师起名'
     }
   }
 })

@@ -1,11 +1,11 @@
 <!--pages/myRecommend/myRecommend.wxml-->
-	<van-cell custom-class="flex" wx:for="{{recommendList}}" wx:key="index" is-link>
+	<van-cell custom-class="flex" wx:for="{{recommendList}}" wx:key="index">
 		<view slot="title" class="user-box">
 			<view class="van-cell-text">
-				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'/images/chengyue.png':'item.head_img'}}" />
+				<van-image width="30" height="30" round show-loading src="{{item.head_img==''?'/images/chengyue.png':imgUrl+item.head_img}}" />
 			</view>
 			<view class="user-info">
-        {{item.created_at}}
+        注册时间：{{item.created_at}}
 			</view>
 		</view>
 	</van-cell>

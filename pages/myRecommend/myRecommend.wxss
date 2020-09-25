@@ -49,3 +49,8 @@
 .other-share .title{
   font-weight: bold;
 }
+.user-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

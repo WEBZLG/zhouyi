@@ -16,7 +16,8 @@ Page({
     duration: 500,
     imgUrl: API.IMG_BASE_URL,
     dataList:'',
-    article:''
+    article:'',
+    show: false
   },
 
   getData(id){
@@ -27,6 +28,20 @@ Page({
         dataList:res.data.goods
       })
     })
+  },
+  onConsult() {
+    API.getContace({}).then(res => {
+      console.log(res)
+      this.setData({
+        concat:res.data,
+        show: true
+      });
+    })
+  },
+  onClose() {
+    this.setData({
+      show: false
+    });
   },
   /**
    * 生命周期函数--监听页面加载

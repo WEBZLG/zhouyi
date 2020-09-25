@@ -38,7 +38,8 @@
     "pages/nameDetailMaster/nameDetailMaster",
     "pages/masterNameFirm/masterNameFirm",
     "pages/shopping/shopping",
-    "pages/goodsDetail/goodsDetail"
+    "pages/goodsDetail/goodsDetail",
+    "pages/live/live"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -46,9 +47,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "易启诚学",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#267CFB",
+    "navigationBarTitleText": "起名大师",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#444444",
@@ -60,12 +61,6 @@
         "iconPath": "images/fx1.png",
         "pagePath": "pages/home/home",
         "text": "首页"
-      },
-      {
-        "selectedIconPath": "images/shop2.png",
-        "iconPath": "images/shop1.png",
-        "pagePath": "pages/shopping/shopping",
-        "text": "商城"
       },
       {
         "selectedIconPath": "images/rili2.png",
@@ -118,4 +113,5 @@
       "desc": "位置信息将用于小程序位置接口的效果展示"
     }
   }
+
 }
