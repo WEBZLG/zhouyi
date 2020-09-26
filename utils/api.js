@@ -201,7 +201,7 @@ module.exports = {
   },
   // 重置密码
   resetPwd: (data) => {
-    return request('/reset_pass', 'post', data)
+    return request('/reset_pass', 'post', data, true, true)
   },
   // 轮播图
   carousel: (data) => {
@@ -323,6 +323,10 @@ module.exports = {
   // 直播间列表
   liveList(data) {
     return request('/live/get', 'post', data)
+  }, 
+  // 直播间列表
+  opinion(data) {
+    return request('/opinion/create', 'post', data)
   }, 
   
 }

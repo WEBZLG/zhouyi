@@ -1,13 +1,42 @@
 // pages/opinion/opinion.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    content:''
   },
-
+  onTextarea(e){
+    this.setData({
+      content:e.detail.value
+    })
+  },
+  onSubmit(){
+    let value = this.data.content;
+    var len = parseInt(value.length)
+    if(len==0){
+      wx.showToast({
+        title: '请输入内容',
+        icon:'none'
+      })
+      return false;
+    }else{
+      API.opinion({
+        content:value
+      }).then(res=>{
+        wx.showToast({
+          title: res.message,
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 0,
+          })
+        }, 1000);
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -60,7 +89,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

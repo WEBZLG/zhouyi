@@ -172,7 +172,8 @@ Page({
   onLoad: function (options) {
     let _this = this
     let code = wx.getStorageSync('p_code');
-    if (code) {
+    console.log(code)
+    if (code&&code!==undefined) {
       _this.setData({
         invitationCode: code
       })

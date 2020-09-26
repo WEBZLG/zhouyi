@@ -29,3 +29,9 @@
   border-top-left-radius: 40rpx;
   border-bottom-left-radius: 40rpx;
 }
+.van-cell__title{
+  font-weight: bold;
+}
+.van-cell__label{
+  font-weight: initial;
+}

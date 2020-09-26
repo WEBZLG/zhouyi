@@ -7,7 +7,9 @@ Page({
    */
   data: {
     dataList:[],
+    content:[],
   },
+  // 获取直播列表
   getData(){
     API.liveList({}).then(res=>{
       this.setData({
@@ -15,19 +17,57 @@ Page({
       })
     })
   },
+  // 观看直播
   goTv(e){
     let roomId = e.currentTarget.dataset.roomid
+    console.log(roomId)
     // let customParams = encodeURIComponent(JSON.stringify({ path: 'pages/index/index', pid: 3 })) 
     wx.navigateTo({
         // url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=${roomId}&custom_params=${customParams}`
         url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=${roomId}`
     })
   },
+  // 往期直播列表
+  getList(page) {
+    let _this = this
+    API.teachingList({
+      menu_id: 12,
+      page: page,
+      page_size: 15
+    }).then(res => {
+      if(page>1){
+        if(res.data.total==0){
+          wx.showToast({
+            title: '无更多数据',
+          })
+          _this.setData({
+            page:_this.data.page-1
+          })
+        }
+        _this.setData({
+          content: _this.data.content.concat(res.data.contents) 
+        })
+      }else{
+        _this.setData({
+          content: res.data.contents
+        })
+      }
+    })
+  },
+
+  // 往期直播详情
+  onDetail(e){
+    let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
+    wx.navigateTo({
+      url: '../oldLive/oldLive?id='+id+'&title='+title,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData();
+
   },
 
   /**
@@ -41,7 +81,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData();
+    this.getList();
   },
 
   /**

@@ -52,24 +52,6 @@ Page({
         title: "教学",
         url: "../teachingList/teachingList"
       },
-      // {
-      //   id: 2,
-      //   imgPath: '../../images/qimingjiaoxue.png',
-      //   title: "起名教学",
-      //   url: "../teaching/teaching"
-      // },
-      // {
-      //   id: 3,
-      //   imgPath: '../../images/bazijiaoxue.png',
-      //   title: "八字教学",
-      //   url: "../teaching/teaching"
-      // },
-      // {
-      //   id: 4,
-      //   imgPath: '../../images/fengshui.png',
-      //   title: "风水教学",
-      //   url: "../teaching/teachingjiaoxue"
-      // },
       {
         id: 5,
         imgPath: '../../images/chengyue.png',
@@ -550,6 +532,9 @@ Page({
   onShareAppMessage: function (res) {
     var that = this;
     let code =  wx.getStorageSync('userInfo').p_code;
+    if(code==undefined){
+      code=''
+    }
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)

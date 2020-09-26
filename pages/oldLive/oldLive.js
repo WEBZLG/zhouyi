@@ -1,18 +1,32 @@
-// pages/calendar/calendar.js
+// pages/qimenDetail/qimenDetail.js
+const API = require('../../utils/api');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    content:''
   },
-
+  getData(id){
+    API.teachingListDetail({},id).then(res=>{
+      this.setData({
+        content:res.data.content
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      let id = options.id
+      let title = options.title
+      if(title){
+        wx.setNavigationBarTitle({
+          title: title
+        })
+      }
+      this.getData(id)
   },
 
   /**
@@ -60,24 +74,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
-    var that = this;
-    let code =  wx.getStorageSync('userInfo').p_code;
-    if(code==undefined){
-      code=''
-    }
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '名师起名',
-      path: '/pages/home/home?p='+code
-    }
-  },
-  onShareTimeline(res){
-    return {
-      title: '名师起名'
-    }
-  }
+  // onShareAppMessage: function () {
+
+  // }
 })

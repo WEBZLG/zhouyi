@@ -1,0 +1,10 @@
+<!--pages/oldLive/oldLive.wxml-->
+<view class="content">
+	<view class="title center">{{content.title}}</view>
+	<view class="time center">{{content.created_at}}</view>
+	<view>
+    <video wx:if="content.video!==''" src="{{content.video}}"></video>
+		<rich-text nodes="{{content.content}}"></rich-text>
+	</view>
+</view>
+

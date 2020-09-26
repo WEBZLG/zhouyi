@@ -37,6 +37,7 @@
   position: relative;
 }
 .name-item{
+  font-size: 14px;
   margin-bottom: 30rpx;
   background-color: #eaf2ff;
   padding: 30rpx;
