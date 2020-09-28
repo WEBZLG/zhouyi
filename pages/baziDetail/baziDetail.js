@@ -12,7 +12,7 @@ Page({
   getData(param){
     let _this = this
     API.baziDetail({
-      real_name:param.name,
+      // real_name:param.name,
       sex:param.sex,
       time:param.time
     }).then(res=>{

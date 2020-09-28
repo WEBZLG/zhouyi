@@ -135,7 +135,15 @@ Page({
       wx.showToast({
         title: '身份证号有误',
       })
-    }  else if (param.age == '') {
+    } else if (param.card_pic1 == '') {
+      wx.showToast({
+        title: '请上传身份证正面照片',
+      })
+    } else if (param.card_pic2 == '') {
+      wx.showToast({
+        title: '请上传身份证反面照片',
+      })
+    } else if (param.age == '') {
       wx.showToast({
         title: '请输入您的年龄',
         icon: 'none'
@@ -153,18 +161,18 @@ Page({
     } else {
       if (_this.data.isbeing == false) {
         // 正常提交
-        // API.uploadImg({
-        //   'file_name': 'card_pic1'
-        // }, param.card_pic1).then(res => {
-        //   _this.setData({
-        //     card_pic1: res.data.path
-        //   })
-        //   API.uploadImg({
-        //     'file_name': 'card_pic2'
-        //   }, param.card_pic2).then(res => {
-        //     _this.setData({
-        //       card_pic2: res.data.path
-        //     })
+        API.uploadImg({
+          'file_name': 'card_pic1'
+        }, param.card_pic1).then(res => {
+          _this.setData({
+            card_pic1: res.data.path
+          })
+          API.uploadImg({
+            'file_name': 'card_pic2'
+          }, param.card_pic2).then(res => {
+            _this.setData({
+              card_pic2: res.data.path
+            })
             let param = {
               real_name: _this.data.nameValue,
               card_id: _this.data.idcardValue,
@@ -194,53 +202,52 @@ Page({
                 _this.postFun(param)
               })
             }
-        //   })
-        // })
+          })
+        })
       } else {
         // 数据回显提交
-        _this.submitAgain()
-        // let str = new RegExp("http://tmp");
-        // if (!str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
-        //   // console.log('都有')
-        //   _this.submitAgain()
-        // } else if (!str.test(_this.data.faceImg) && str.test(_this.data.backImg)) {
-        //   // console.log('有正面')
-        //   API.uploadImg({
-        //     'file_name': 'card_pic2'
-        //   }, param.card_pic2).then(res => {
-        //     _this.setData({
-        //       card_pic2: res.data.path
-        //     })
-        //     _this.submitAgain()
-        //   })
-        // } else if (str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
-        //   // console.log('有反面')
-        //   API.uploadImg({
-        //     'file_name': 'card_pic1'
-        //   }, param.card_pic1).then(res => {
-        //     _this.setData({
-        //       card_pic1: res.data.path
-        //     })
-        //     _this.submitAgain()
-        //   })
-        // } else {
-        //   API.uploadImg({
-        //     'file_name': 'card_pic1'
-        //   }, param.card_pic1).then(res => {
-        //     //// console.log(res)
-        //     _this.setData({
-        //       card_pic1: res.data.path
-        //     })
-        //     API.uploadImg({
-        //       'file_name': 'card_pic2'
-        //     }, param.card_pic2).then(res => {
-        //       _this.setData({
-        //         card_pic2: res.data.path
-        //       })
-        //       _this.submitAgain()
-        //     })
-        //   })
-        // }
+        let str = new RegExp("http://tmp");
+        if (!str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
+          // console.log('都有')
+          _this.submitAgain()
+        } else if (!str.test(_this.data.faceImg) && str.test(_this.data.backImg)) {
+          // console.log('有正面')
+          API.uploadImg({
+            'file_name': 'card_pic2'
+          }, param.card_pic2).then(res => {
+            _this.setData({
+              card_pic2: res.data.path
+            })
+            _this.submitAgain()
+          })
+        } else if (str.test(_this.data.faceImg) && !str.test(_this.data.backImg)) {
+          // console.log('有反面')
+          API.uploadImg({
+            'file_name': 'card_pic1'
+          }, param.card_pic1).then(res => {
+            _this.setData({
+              card_pic1: res.data.path
+            })
+            _this.submitAgain()
+          })
+        } else {
+          API.uploadImg({
+            'file_name': 'card_pic1'
+          }, param.card_pic1).then(res => {
+            //// console.log(res)
+            _this.setData({
+              card_pic1: res.data.path
+            })
+            API.uploadImg({
+              'file_name': 'card_pic2'
+            }, param.card_pic2).then(res => {
+              _this.setData({
+                card_pic2: res.data.path
+              })
+              _this.submitAgain()
+            })
+          })
+        }
       }
     }
   },
@@ -381,10 +388,10 @@ Page({
       _this.setData({
         nameValue: userInfo.real_name,
         idcardValue: userInfo.card_id,
-        // faceImg: _this.data.imgUrl + userInfo.card_pic1,
-        // backImg: _this.data.imgUrl + userInfo.card_pic2,
-        // card_pic1: userInfo.card_pic1,
-        // card_pic2: userInfo.card_pic2,
+        faceImg: _this.data.imgUrl + userInfo.card_pic1,
+        backImg: _this.data.imgUrl + userInfo.card_pic2,
+        card_pic1: userInfo.card_pic1,
+        card_pic2: userInfo.card_pic2,
         province: userInfo.province,
         city: userInfo.city,
         area: userInfo.area,

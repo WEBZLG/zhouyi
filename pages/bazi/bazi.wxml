@@ -1,6 +1,9 @@
 <!--pages/bazi/bazi.wxml-->
 <view>
-	<van-field label="姓名" value="{{ name }}" placeholder="请输入姓名" bind:input="getName" />
+  <view class="banner">
+    <van-image width="100%" height="100%" lazy-load src="/images/bazi.jpg" />
+  </view>
+	<!-- <van-field label="姓名" value="{{ name }}" placeholder="请输入姓名" bind:input="getName" /> -->
 	<van-radio-group value="{{ sex }}" bind:change="onChange">
 		<van-cell title="性别">
 			<van-radio name="1" icon-size="14px">男</van-radio>

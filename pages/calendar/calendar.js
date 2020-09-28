@@ -76,8 +76,15 @@ Page({
     }
   },
   onShareTimeline(res){
+    let code =  wx.getStorageSync('userInfo').p_code;
+    if(code==undefined){
+      code=""
+    }
     return {
-      title: '名师起名'
+      title: '名师起名',
+      query: {
+        p: code
+      },
     }
   }
 })

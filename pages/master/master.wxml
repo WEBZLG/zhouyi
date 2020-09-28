@@ -5,7 +5,7 @@
 		<van-field label="身份证号" value="{{ idcardValue }}" placeholder="请输入身份证名" border="{{ false }}" bind:input="idcardValue" />
 	</van-cell-group>
 
-	<van-cell title="请拍摄并上传你的身份证" value="" border="{{ false }}" />
+	<!-- <van-cell title="请拍摄并上传你的身份证" value="" border="{{ false }}" />
 	<van-grid column-num="2" border="{{ false }}" custom-class="idcard">
 		<van-grid-item use-slot>
 			<image class="card-item" src="{{faceImg==''?'../../images/face1.png':faceImg}}" data-type="1" catchtap="onChoose"/>
@@ -22,7 +22,7 @@
 			<view>大陆公民持有的本人有效二代身份证；</view>
 			<view>拍摄时确保身份证<text class="red-color">边框完整，字迹清晰，亮度均匀；</text></view>
 		</view>
-	</van-cell>
+	</van-cell> -->
 	<!-- <van-grid column-num="4" border="{{ false }}">
 		<van-grid-item use-slot wx:for="{{noticeText}}" wx:for-item="index" wx:key="index">
 			<image class="smcard-item" src="../../images/show{{index+1}}.png" />

@@ -3,7 +3,7 @@
 	<van-skeleton title animate row="3" loading="{{ loading }}">
 		<van-cell-group>
 			<view class="flex">
-				<van-cell title="姓名" value="{{content.real_name}}" />
+				<!-- <van-cell title="姓名" value="{{content.real_name}}" /> -->
 				<van-cell title="性别" value="{{content.sex}}" />
 			</view>
 			<van-cell title="节气">

@@ -82,13 +82,14 @@ Page({
       name: _this.data.name,
       time: _this.data.chooseDate
     }
-    if (param.name == '') {
-      wx.showToast({
-        title: '请输入姓名',
-        icon: 'none'
-      })
-      return false
-    }else if (param.time == '请选择生辰') {
+    // if (param.name == '') {
+    //   wx.showToast({
+    //     title: '请输入姓名',
+    //     icon: 'none'
+    //   })
+    //   return false
+    // }else 
+    if (param.time == '请选择生辰') {
       wx.showToast({
         title: '请选择生辰',
         icon: 'none'

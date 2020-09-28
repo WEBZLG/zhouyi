@@ -1,4 +1,7 @@
 /* pages/bazi/bazi.wxss */
+.banner{
+  height: 400rpx;
+}
 .van-cell__title,
 .van-field__label{
   flex:none !important;
