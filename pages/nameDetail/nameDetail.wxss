@@ -25,7 +25,7 @@
 .van-cell--borderless{
   color: #323233 !important;
   padding-left: 0 !important;
-  background-color: #ffffff !important;
+  background-color: initial !important;
 }
 .wh-item{
   margin-right: 20rpx;
