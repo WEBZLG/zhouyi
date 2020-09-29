@@ -5,3 +5,20 @@
 .van-button--info {
   width: 100%;
 }
+
+.van-cell__title,
+.van-field__label{
+  flex:none !important;
+  width: 200rpx !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+  font-size: 20px !important;
+}
+
+.van-cell__value{
+  display: flex;
+  font-size: 20px !important;
+}
+.van-ellipsis{
+  font-size: 20px !important;
+}

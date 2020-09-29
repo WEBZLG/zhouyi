@@ -16,11 +16,15 @@
 .van-cell__title {
   flex: none !important;
   width: 80rpx;
+  font-size: 16px;
+  color: #000000;
 }
 
 .van-cell__value {
   flex: 3 !important;
   width: 100%;
+  font-size: 16px;
+  color: #333333 !important;
 }
 
 .top {
@@ -29,6 +33,7 @@
   height: 76rpx;
   line-height: 76rpx;
   display: flex;
+  font-size: 22px;
   align-items: center;
   justify-content: space-between;
 }
@@ -37,7 +42,7 @@
   text-align: center;
   height: 76rpx;
   line-height: 76rpx;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   /* letter-spacing: 8px; */
 }
@@ -47,18 +52,18 @@
   width: 100%;
   display: flex;
   line-height: 76rpx;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   justify-content: space-between;
 }
 
 .border-color {
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid #666666;
 }
 
 .column-box {
-  margin: 10rpx 30rpx
+  margin: 10rpx;
 }
 
 .van-grid-item__content {
@@ -77,14 +82,15 @@
 }
 
 .text-item {
-  line-height: 20px;
+  line-height: 30px;
+  font-size: 20px;
 }
 
 .pattern {
   position: absolute;
-  top: 60rpx;
+  top: 70rpx;
   right: 4rpx;
-  font-size: 8px;
+  font-size: 10px;
 }
 .red-color{
   color: #ff0000;
@@ -94,6 +100,7 @@
 }
 .black-color{
   color: #000000;
+  font-weight: bold;
 }
 .tgdz{
   margin-left: 64rpx;

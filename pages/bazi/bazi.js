@@ -89,9 +89,9 @@ Page({
     //   })
     //   return false
     // }else 
-    if (param.time == '请选择生辰') {
+    if (param.time == '') {
       wx.showToast({
-        title: '请选择生辰',
+        title: '请选择出生日期',
         icon: 'none'
       })
       return false

@@ -1,11 +1,12 @@
 /* pages/bazi/bazi.wxss */
+
 .banner{
   height: 400rpx;
 }
 .van-cell__title,
 .van-field__label{
   flex:none !important;
-  width: 100rpx !important;
+  width: 140rpx !important;
   min-width: 0 !important;
   margin-right: 0 !important;
 }
