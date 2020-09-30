@@ -28,13 +28,13 @@ Page({
     canvasShow: true,
     codeShow: false,
     iconNav: [
+      // {
+      //   id: 7,
+      //   imgPath: '../../images/qiming.png',
+      //   title: "起名",
+      //   url: "../naming/naming"
+      // },
       {
-        id: 7,
-        imgPath: '../../images/qiming.png',
-        title: "起名",
-        url: "../naming/naming"
-      },
-       {
         id: 0,
         imgPath: '../../images/qimen.png',
         title: "奇门起局",
@@ -128,7 +128,7 @@ Page({
     let url = e.currentTarget.dataset.url
     let id = e.currentTarget.dataset.id
     let title = e.currentTarget.dataset.title
-    if(id==7){
+    if (id == 7) {
       let userInfo = wx.getStorageSync('userInfo');
       if (userInfo == '' || userInfo == undefined) {
         wx.redirectTo({
@@ -146,7 +146,7 @@ Page({
               let id = e.currentTarget.dataset.id
               let title = e.currentTarget.dataset.title
               wx.navigateTo({
-                url: url+'?id='+id+'&title='+title
+                url: url + '?id=' + id + '&title=' + title
               })
             } else {
               wx.showToast({
@@ -161,9 +161,9 @@ Page({
             }
           })
       }
-    }else{
+    } else {
       wx.navigateTo({
-        url: url+'?id='+id+'&title='+title
+        url: url + '?id=' + id + '&title=' + title
       })
     }
 
@@ -297,7 +297,7 @@ Page({
     });
   },
   // 关闭分享
-  oncloseCode(){
+  oncloseCode() {
     this.setData({
       canvasShow: true
     })
@@ -311,52 +311,58 @@ Page({
         url: '../login/login',
       })
     } else {
-      API.isSignIn({}, {
-          uid: userInfo.user_id
-        })
-        .then(res => {
-          if (res.message == '已登录') {
-            wx.setStorageSync('loginToken', res.data.login_token);
-            wx.setStorageSync('userInfo', res.data.user);
-            API.share({}).then(res => {
-              let that = this
-              let codeUrl = API.IMG_BASE_URL + res.data.qrcode
-              let backUrl = API.IMG_BASE_URL + res.data.qrcode_base
-              wx.showLoading({
-                title: '生成海报中',
+      wx.login({
+        success(res) {
+          if (res.code) {
+            API.isSignIn({}, {
+                uid: userInfo.user_id,
+                wechat_code: res.code
               })
-              API.getImage(codeUrl).then(res => {
-                let codePath = res.path
-                API.getImage(backUrl).then(res => {
-                  let backPath = res.path
-                  API.getImageAll([codePath, backPath]).then((res) => {
-                    const ctx = wx.createCanvasContext('shareCanvas')
-                    // 底图
-                    ctx.drawImage(res[1].path, -15, 0, 300, 450);
-                    // 小程序码
-                    ctx.drawImage(res[0].path, 100, 310, 80, 80)
-                    ctx.stroke()
-                    ctx.draw()
-                    wx.hideLoading()
-                    that.setData({
-                      canvasShow: false
+              .then(res => {
+                if (res.message == '已登录') {
+                  wx.setStorageSync('loginToken', res.data.login_token);
+                  wx.setStorageSync('userInfo', res.data.user);
+                  API.share({}).then(res => {
+                    let codeUrl = API.IMG_BASE_URL + res.data.qrcode
+                    let backUrl = API.IMG_BASE_URL + res.data.qrcode_base
+                    wx.showLoading({
+                      title: '生成海报中',
+                    })
+                    API.getImage(codeUrl).then(res => {
+                      let codePath = res.path
+                      API.getImage(backUrl).then(res => {
+                        let backPath = res.path
+                        API.getImageAll([codePath, backPath]).then((res) => {
+                          const ctx = wx.createCanvasContext('shareCanvas')
+                          // 底图
+                          ctx.drawImage(res[1].path, 0, 0, 250, 400);
+                          // 小程序码
+                          ctx.drawImage(res[0].path, 85, 300, 80, 80)
+                          ctx.stroke()
+                          ctx.draw()
+                          wx.hideLoading()
+                          _this.setData({
+                            canvasShow: false
+                          })
+                        })
+                      })
                     })
                   })
-                })
+                } else {
+                  wx.showToast({
+                    title: 'res.message',
+                    icon: "none"
+                  })
+                  setTimeout(() => {
+                    wx.redirectTo({
+                      url: '../login/login',
+                    })
+                  }, 3000);
+                }
               })
-            })
-          } else {
-            wx.showToast({
-              title: 'res.message',
-              icon: "none"
-            })
-            setTimeout(() => {
-              wx.redirectTo({
-                url: '../login/login',
-              })
-            }, 3000);
           }
-        })
+        }
+      })
     }
 
   },
@@ -461,10 +467,11 @@ Page({
       const scene = decodeURIComponent(options.scene)
       var code = scene.split('=')[1]
       wx.setStorageSync('p_code', code);
-    }
-    if(options.p){
+    }else if (options.p) {
       let code = options.p
       wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
     }
     qqmapsdk = new QQMapWX({
       key: 'OQYBZ-GMQKD-X3I4Q-H4YNU-3TDQ5-PWFAQ' //自己的key秘钥
@@ -531,9 +538,9 @@ Page({
    */
   onShareAppMessage: function (res) {
     var that = this;
-    let code =  wx.getStorageSync('userInfo').p_code;
-    if(code==undefined){
-      code=''
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
     }
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -541,13 +548,13 @@ Page({
     }
     return {
       title: '名师起名',
-      path: '/pages/home/home?p='+code
+      path: '/pages/home/home?p=' + code
     }
   },
-  onShareTimeline(res){
-    let code =  wx.getStorageSync('userInfo').p_code;
-    if(code==undefined){
-      code=""
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
     }
     return {
       title: '名师起名',

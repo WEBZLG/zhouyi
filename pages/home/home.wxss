@@ -60,10 +60,9 @@ swiper{
   background:rgba(0,0,0,.6);
 }
 #shareCanvas{
-  height: 800rpx;
-  width: 500rpx;
+  height: 400px;
+  width: 250px;
   margin: 20% auto 0;
-  border-radius: 15rpx;
 }
 /* .van-button {
   margin-top: 30rpx;
@@ -86,7 +85,7 @@ swiper{
 .share-btn{
   display: flex;
   width: 500rpx;
-  margin: 0 auto;
+  margin: 20rpx auto 0;
   justify-content: space-between;
 }
 .other-share{

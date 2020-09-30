@@ -53,9 +53,9 @@ Page({
           API.getImageAll([codePath, backPath]).then((res) => {
             const ctx = wx.createCanvasContext('shareCanvas')
             // 底图
-            ctx.drawImage(res[1].path, -15, 0, 300, 450);
+            ctx.drawImage(res[1].path, 0, 0, 250, 400);
             // 小程序码
-            ctx.drawImage(res[0].path, 100, 340, 80, 80)
+            ctx.drawImage(res[0].path, 85, 300, 80, 80)
             ctx.stroke()
             ctx.draw()
             wx.hideLoading()
@@ -225,7 +225,26 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '名师起名',
+      path: '/pages/home/home?p=' + code
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '名师起名',
+      query: {
+        p: code
+      },
+    }
+  }
 })

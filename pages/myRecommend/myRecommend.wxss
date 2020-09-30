@@ -15,8 +15,8 @@
   background:rgba(0,0,0,.6);
 }
 #shareCanvas{
-  height: 800rpx;
-  width: 500rpx;
+  height: 400px;
+  width: 250px;
   margin: 20% auto 0;
   border-radius: 15rpx;
 }
