@@ -11,7 +11,8 @@ Page({
     total:'',
     wuxing:[],
     param:'',
-    isOrder:false
+    isOrder:false,
+    loading: true,
   },
   // 查看更多
   onView(){
@@ -63,6 +64,7 @@ Page({
       this.setData({
         content: res.data,
         wuxing:wuxing,
+        loading: false,
         total:total
       })
     })
@@ -72,7 +74,6 @@ Page({
    */
   onLoad: function (options) {
     let param = JSON.parse(options.param)
-    console.log(param)
     this.setData({
       param:param
     })
