@@ -25,6 +25,7 @@
 			<van-cell icon="phone-circle-o" title="修改手机" is-link  data-type="1" catchtap="getMessge"/>
 			<van-cell icon="eye-o" title="修改密码" is-link  data-type="2" catchtap="getMessge"/>
 			<van-cell icon="cluster-o" title="我的推荐" is-link  data-type="3" catchtap="getMessge"/>
+			<van-cell icon="orders-o" title="我的订单" is-link  data-type="7" catchtap="getMessge"/>
 			<van-cell icon="setting-o" title="系统消息" is-link  catchtap="getSysMsg"/>
 			<van-cell icon="contact" title="联系客服" is-link  catchtap="getPhone"/>
 			<van-cell icon="notes-o" title="用户协议" is-link  catchtap="getAgreement"/>

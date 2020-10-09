@@ -1,0 +1,11 @@
+/* pages/myOrder/myOrder.wxss */
+.van-card{
+  background-color: #ffffff !important;
+  margin-bottom: 20rpx !important;
+}
+.concat{
+  padding: 0 30rpx;
+}
+.van-button--mini{
+  margin-left: 10rpx;
+}

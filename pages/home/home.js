@@ -28,12 +28,12 @@ Page({
     canvasShow: true,
     codeShow: false,
     iconNav: [
-      // {
-      //   id: 7,
-      //   imgPath: '../../images/qiming.png',
-      //   title: "起名",
-      //   url: "../naming/naming"
-      // },
+      {
+        id: 7,
+        imgPath: '../../images/qiming.png',
+        title: "起名",
+        url: "../naming/naming"
+      },
       {
         id: 0,
         imgPath: '../../images/qimen.png',

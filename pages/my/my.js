@@ -80,6 +80,12 @@ Page({
       url: '../vip/vip',
     })
   },
+  // 我的订单
+  myOrder(){
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
+    })
+  },
   // 更换头像
   afterRead(event) {
     let _this = this
@@ -191,6 +197,9 @@ Page({
                     case '6':
                       _this.goVip()
                       break;
+                    case '7':
+                    _this.myOrder()
+                    break;
                   }
                 } else {
                   wx.showToast({

@@ -1,0 +1,18 @@
+<!--pages/myOrder/myOrder.wxml-->
+<view>
+  <van-card num="1" tag="标签" price="10.00" desc="描述信息" title="商品标题" thumb="{{ imageURL }}">
+    <view slot="footer">
+      <van-button size="mini" type="info" round plain catchtap="onOpen">退款</van-button>
+      <van-button size="mini" type="info" round plain>去支付</van-button>
+    </view>
+  </van-card>
+  <!-- <van-empty wx:if="{{dataList.length==0}}" description="暂无商品" /> -->
+  <van-dialog use-slot title="退款联系方式" show="{{ show }}" confirm-button-color="#1989FA" bind:confirm="onClose">
+    <view class="concat">
+      <view>工作日9：00-12：00—13：00-17：00</view>
+      <view wx:if="{{concat.service_mobile}}">手机：{{concat.service_mobile}}</view>
+      <view wx:if="{{concat.service_wechat}}">微信：{{concat.service_wechat}}</view>
+      <view wx:if="{{concat.service_qq}}">QQ：{{concat.service_qq}}</view>
+    </view>
+  </van-dialog>
+</view>

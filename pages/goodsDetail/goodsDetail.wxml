@@ -16,12 +16,15 @@
     <view class="title">{{dataList.goods_name}}</view>
     <view>价格:￥<text class="price">{{dataList.price}}</text></view>
   </view>
-  <van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
+  <van-divider contentPosition="center" customStyle="color: #333333; border-color: #333333; font-size: 18px;font-weight:bold">
     商品详情
   </van-divider>
   <rich-text nodes="{{article}}"></rich-text>
   <view class="bottom"></view>
   <view class="btn-box">
+    <van-button custom-class="consult" round type="primary" catchtap="buy-btn">立即购买</van-button>
+  </view>
+  <!-- <view class="btn-box">
     <van-button custom-class="consult" round type="primary" catchtap="onConsult">咨询</van-button>
   </view>
   <van-dialog use-slot title="在线咨询" show="{{ show }}" confirm-button-color="#1989FA" bind:confirm="onClose">
@@ -31,5 +34,5 @@
       <view wx:if="{{concat.service_wechat}}">微信：{{concat.service_wechat}}</view>
       <view wx:if="{{concat.service_qq}}">QQ：{{concat.service_qq}}</view>
     </view>
-  </van-dialog>
+  </van-dialog> -->
 </view>
