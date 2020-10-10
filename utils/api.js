@@ -217,11 +217,11 @@ module.exports = {
   },
   //奇门排盘
   special: (data) => {
-    return request('/special/get', 'post', data, true, true)
+    return request('/special/get', 'post', data)
   },
   //搜局
   search: (data) => {
-    return request('/special/search', 'post', data, true, true)
+    return request('/special/search', 'post', data)
   },
   //修改密码
   changePwd: (data) => {
@@ -286,7 +286,7 @@ module.exports = {
 
   // 八字排盘详情
   baziDetail: (data) => {
-    return request('/bazi/get', 'post', data, true, true)
+    return request('/bazi/get', 'post', data)
   },
   // 用户协议
   agreement(data, id) {
@@ -328,5 +328,20 @@ module.exports = {
   opinion(data) {
     return request('/opinion/create', 'post', data)
   }, 
-  
+  // 获取收货地址
+  getAddress(data) {
+    return request('/address/get', 'post', data)
+  }, 
+  // 获取收货地址
+  editAddress(data) {
+    return request('/address/edit', 'post', data)
+  }, 
+  // 删除收货地址
+  deleteAddress(data) {
+    return request('/address/del', 'post', data)
+  }, 
+  // 订单列表
+  getOrder(data) {
+    return request('/order/get', 'post', data)
+  }, 
 }

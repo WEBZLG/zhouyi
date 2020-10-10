@@ -1,0 +1,16 @@
+<!--pages/addAddress/addAddress.wxml-->
+<view>
+  <van-field label="收货人" value="{{ nameValue }}" placeholder="请输入收货人姓名" border="{{ true }}" bind:input="nameValue" />
+  <van-field label="联系电话" value="{{ phoneValue }}" placeholder="请输入联系电话" border="{{ false }}" bind:input="phoneValue" />
+  <van-field label="收货地址" value="{{ areaText }}" placeholder="请选择收货地址" border="{{ true }}" is-link readonly catchtap="showPopup" />
+  <van-popup show="{{ show }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
+    <van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onClose" />
+  </van-popup>
+  <van-field value="{{ addressDetail }}" type="text" label="详细地址" bindinput='addressDetail' placeholder="请输入详细地址" />
+  <van-cell title="设为默认">
+    <van-switch checked="{{ checked }}" size="20px" bind:change="onChange"/>
+  </van-cell>
+	<view class="btn-box">
+		<van-button type="info" round catchtap="onSubmit">提交</van-button>
+	</view>
+</view>

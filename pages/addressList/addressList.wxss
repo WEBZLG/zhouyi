@@ -1,0 +1,25 @@
+/* pages/addressList/addressList.wxss */
+.btn-box{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 30rpx;
+}
+.van-button--info {
+  width: 100%;
+}
+
+.van-cell{
+  margin-bottom: 20rpx;
+}
+.delete-btn{
+  height: 100%;
+  background: #ff0000;
+  color: #ffffff;
+  font-size: 14px;
+  width: 130rpx;
+  text-align: center;
+  line-height: 5;
+}

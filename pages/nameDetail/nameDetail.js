@@ -39,7 +39,7 @@ Page({
         },
         fail(error) {
           wx.showToast({
-            title: error.errMsg,
+            title:'支付失败',
             icon: "none"
           })
         }

@@ -1,0 +1,28 @@
+/* pages/orderFirm/orderFirm.wxss */
+.van-card{
+  background-color: #ffffff !important;
+  margin: 20rpx 0 !important;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+van-field{
+  flex: 1;
+}
+.mark{
+  height: 88rpx;
+}
+.addAddress{
+  text-align: center;
+  margin: 20rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+  line-height: 74rpx;
+  font-size: 14px;
+}
+/* .submit-btn{
+  border: 1px solid  #267CFB !important;
+  background-color: #267CFB !important;
+} */

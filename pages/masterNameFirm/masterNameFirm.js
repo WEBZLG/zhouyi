@@ -19,7 +19,6 @@ Page({
         signType: res.data.wechat_data.signType,
         paySign: res.data.wechat_data.paySign,
         success(res) {
-          console.log(res)
           if(res.errMsg=='requestPayment:ok'){
             wx.showToast({
               title: '支付成功，请等待大师与您联系',
@@ -38,9 +37,8 @@ Page({
           }
         },
         fail(res) {
-          console.log(res)
           wx.showToast({
-            title: res.errMsg,
+            title: '支付失败',
             icon: "none"
           })
         }

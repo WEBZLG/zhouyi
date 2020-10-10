@@ -6,7 +6,7 @@
 			<van-uploader bind:after-read="afterRead" wx:if="{{userInfo}}">
 				<van-image  width="100" height="100" round fit="cover" show-loading src="{{imgUrl+userInfo.head_img}}" />
 			</van-uploader>
-			<van-image wx:else width="100" height="100" round fit="cover" show-loading src="/images/chengyue.png" />
+			<van-image wx:else width="100" height="100" round fit="cover" show-loading src="/images/head.png" />
 			<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
 			<view wx:else catchtap="onLogin">登录</view>
 		</view>
@@ -26,6 +26,7 @@
 			<van-cell icon="eye-o" title="修改密码" is-link  data-type="2" catchtap="getMessge"/>
 			<van-cell icon="cluster-o" title="我的推荐" is-link  data-type="3" catchtap="getMessge"/>
 			<van-cell icon="orders-o" title="我的订单" is-link  data-type="7" catchtap="getMessge"/>
+			<van-cell icon="location-o" title="我的地址" is-link  data-type="8" catchtap="getMessge"/>
 			<van-cell icon="setting-o" title="系统消息" is-link  catchtap="getSysMsg"/>
 			<van-cell icon="contact" title="联系客服" is-link  catchtap="getPhone"/>
 			<van-cell icon="notes-o" title="用户协议" is-link  catchtap="getAgreement"/>

@@ -9,3 +9,19 @@
 .van-button--mini{
   margin-left: 10rpx;
 }
+.van-cell__label{
+  width: 570rpx;
+}
+.van-panel{
+  margin-bottom: 20rpx;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total{
+  font-size: 14px;
+  color: #ee0a24;
+  font-weight: bold;
+}

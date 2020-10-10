@@ -17,6 +17,12 @@
   width: 80rpx;
   font-weight: bold;
 }
+.red-color .van-cell__title{
+  color: #81341A;
+}
+.green-color .van-cell__title{
+  color: #709460;
+}
 
 .flex .van-cell__value {
   flex: 3 !important;
@@ -25,7 +31,14 @@
   align-items: top;
   justify-content: space-between;
   color: #333333;
+
 }
+
+.font-weight .van-cell__value{
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .van-cell-value{
   color: #333333;
 }

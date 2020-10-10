@@ -9,7 +9,7 @@ Page({
    */
   data: {
     imgUrl: API.IMG_BASE_URL, //图片路径
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    background: [],
     indicatorDots: true,
     vertical: false,
     autoplay: true,
@@ -128,7 +128,12 @@ Page({
     let url = e.currentTarget.dataset.url
     let id = e.currentTarget.dataset.id
     let title = e.currentTarget.dataset.title
-    if (id == 7) {
+    if (id == 1||id==5) {
+      wx.navigateTo({
+        url: url + '?id=' + id + '&title=' + title
+      })
+      return false;
+    } else {
       let userInfo = wx.getStorageSync('userInfo');
       if (userInfo == '' || userInfo == undefined) {
         wx.redirectTo({
@@ -161,10 +166,6 @@ Page({
             }
           })
       }
-    } else {
-      wx.navigateTo({
-        url: url + '?id=' + id + '&title=' + title
-      })
     }
 
   },

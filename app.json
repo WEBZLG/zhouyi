@@ -41,7 +41,11 @@
     "pages/goodsDetail/goodsDetail",
     "pages/live/live",
     "pages/oldLive/oldLive",
-    "pages/myOrder/myOrder"
+    "pages/myOrder/myOrder",
+    "pages/orderFirm/orderFirm",
+    "pages/addAddress/addAddress",
+    "pages/addressList/addressList",
+    "pages/orderDetail/orderDetail"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -120,7 +124,11 @@
     "van-progress": "@vant/weapp/progress/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-divider": "@vant/weapp/divider/index",
-    "van-card": "@vant/weapp/card/index"
+    "van-card": "@vant/weapp/card/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

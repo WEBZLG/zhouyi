@@ -86,6 +86,12 @@ Page({
       url: '../myOrder/myOrder',
     })
   },
+  // 我的地址
+  myAddress(){
+    wx.navigateTo({
+      url: '../addressList/addressList',
+    })
+  },
   // 更换头像
   afterRead(event) {
     let _this = this
@@ -199,6 +205,9 @@ Page({
                       break;
                     case '7':
                     _this.myOrder()
+                    break;
+                    case '8':
+                    _this.myAddress()
                     break;
                   }
                 } else {

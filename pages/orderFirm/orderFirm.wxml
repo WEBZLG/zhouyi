@@ -1,0 +1,40 @@
+<!--pages/orderFirm/orderFirm.wxml-->
+<view>
+  <van-cell center icon="location-o" is-link catchtap="showList" wx:if="{{addressList.length>0}}">
+    <view slot="title">
+      <view class="van-cell-text">{{address.receiver}} <text>{{address.mobile}}</text></view>
+      <view type="danger">{{address.province}}{{address.city}}{{address.area}}{{address.address}}</view>
+    </view>
+  </van-cell>
+  <view wx:else class="addAddress">
+    <view>还没有收货地址~</view>
+    <van-button icon="location-o" size="small" round type="info" catchtap="addAddress">添加地址</van-button>
+  </view>
+  <van-action-sheet show="{{ show }}" title="选择地址" bind:close="onClose">
+    <block wx:for="{{addressList}}" wx:key="index">
+      <van-cell center icon="location-o" is-link data-item="{{item}}" catchtap="chooseAddress">
+        <view slot="title">
+          <view class="van-cell-text">{{item.receiver}} <text>{{item.mobile}}</text></view>
+          <view type="danger">{{item.province}}{{item.city}}{{item.area}}{{item.address}}</view>
+        </view>
+      </van-cell>
+    </block>
+  </van-action-sheet>
+  <van-card num="{{number}}" price="{{dataList.price}}"  title="{{dataList.goods_name}}" thumb="{{ imgUrl+dataList.thumb_pic }}">
+    <view slot="footer" class="mark flex">
+      <view>购买数量</view>
+      <van-stepper value="{{number}}" bind:change="onChange" button-size="20px" />
+    </view>
+    <view slot="footer" class="mark flex">
+      <view>配送方式</view>
+      <view>普通方式（快递免邮）</view>
+    </view>
+    <view slot="footer" class="mark flex">
+      <view>订单备注</view>
+      <van-field model:value="{{ value }}" placeholder="选填" border="{{ false }}" />
+    </view>
+  </van-card>
+  <view hidden="{{ show }}">
+    <van-submit-bar  price="{{ price }}" button-class="submit-btn" button-text="提交并支付" bind:submit="onSubmit" />
+  </view>
+</view>

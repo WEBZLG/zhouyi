@@ -17,7 +17,8 @@ Page({
     imgUrl: API.IMG_BASE_URL,
     dataList:'',
     article:'',
-    show: false
+    show: false,
+    firmInfo:''
   },
 
   getData(id){
@@ -25,7 +26,13 @@ Page({
       let article = UTIL.formatRichText(res.data.goods.description)
       this.setData({
         article:article,
-        dataList:res.data.goods
+        dataList:res.data.goods,
+        firmInfo:{
+          id:res.data.goods.id,
+          goods_name:res.data.goods.goods_name,
+          thumb_pic:res.data.goods.thumb_pic,
+          price:res.data.goods.price
+        }
       })
     })
   },
@@ -42,6 +49,39 @@ Page({
     this.setData({
       show: false
     });
+  },
+  // 去购买
+  buyNow(){
+    let info = JSON.stringify(this.data.firmInfo)
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
+        })
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            wx.navigateTo({
+              url: '../orderFirm/orderFirm?info='+info,
+            })
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 1000);
+          }
+        })
+      }
   },
   /**
    * 生命周期函数--监听页面加载

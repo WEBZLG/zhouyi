@@ -38,7 +38,7 @@ Page({
       this.setData({
         loading: false,
       });
-    }, 1500);
+    }, 1000);
   },
 
   /**

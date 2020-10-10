@@ -14,43 +14,43 @@
 				<view class="van-cell-value text-left">公历 {{content.gregorian_calendar}}</view>
 				<view class="van-cell-value text-left">农历 {{content.lunar}}</view>
 			</van-cell>
-			<van-cell title="旬空" custom-class="flex">
+			<van-cell title="旬空" custom-class="flex green-color">
 				<view>{{content.times.year.xunkong}}</view>
 				<view>{{content.times.month.xunkong}}</view>
 				<view>{{content.times.day.xunkong}}</view>
 				<view>{{content.times.hour.xunkong}}</view>
 			</van-cell>
-			<van-cell title="地势" custom-class="flex">
+			<van-cell title="地势" custom-class="flex green-color">
 				<view>{{content.times.year.dishi}}</view>
 				<view>{{content.times.month.dishi}}</view>
 				<view>{{content.times.day.dishi}}</view>
 				<view>{{content.times.hour.dishi}}</view>
 			</van-cell>
-			<van-cell title="十神" custom-class="flex">
+			<van-cell title="十神" custom-class="flex green-color">
 				<view>{{content.times.year.shishen}}</view>
 				<view>{{content.times.month.shishen}}</view>
 				<view>{{content.times.day.shishen}}</view>
 				<view>{{content.times.hour.shishen}}</view>
 			</van-cell>
-			<van-cell title="天干" custom-class="flex size">
+			<van-cell title="天干" custom-class="flex size green-color">
 				<view><rich-text nodes="{{content.times.year.gan}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.month.gan}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.day.gan}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.hour.gan}}"></rich-text></view>
 			</van-cell>
-			<van-cell title="地支" custom-class="flex size">
+			<van-cell title="地支" custom-class="flex size green-color">
 				<view><rich-text nodes="{{content.times.year.zhi}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.month.zhi}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.day.zhi}}"></rich-text></view>
 				<view><rich-text nodes="{{content.times.hour.zhi}}"></rich-text></view>
 			</van-cell>
-			<van-cell title="纳音" custom-class="flex">
+			<van-cell title="纳音" custom-class="flex red-color">
 				<view>{{content.times.year.nayin}}</view>
 				<view>{{content.times.month.nayin}}</view>
 				<view>{{content.times.day.nayin}}</view>
 				<view>{{content.times.hour.nayin}}</view>
 			</van-cell>
-			<van-cell title="遁藏" custom-class="flex">
+			<van-cell title="遁藏" custom-class="flex  red-color">
 				<view>
 					<view wx:for="{{content.times.year.duncang}}" wx:key="index">{{item}}</view>
 				</view>
@@ -64,7 +64,7 @@
 					<view wx:for="{{content.times.hour.duncang}}" wx:key="index">{{item}}</view>
 				</view>
 			</van-cell>
-			<van-cell title="神煞" custom-class="flex">
+			<van-cell title="神煞" custom-class="flex  red-color">
 				<view>
 					<view wx:for="{{content.times.year.shensha}}" wx:key="index">{{item}}</view>
 				</view>
@@ -78,22 +78,22 @@
 					<view wx:for="{{content.times.hour.shensha}}" wx:key="index">{{item}}</view>
 				</view>
 			</van-cell>
-			<van-cell title="大运" custom-class="flex">
+			<van-cell title="大运" custom-class="flex  red-color font-weight">
 				<block wx:for="{{content.dayun}}" wx:key="index">
 					<view>{{item}}</view>
 				</block>
 			</van-cell>
-      <van-cell title="交运" custom-class="flex">
+      <van-cell title="交运" custom-class="flex  red-color">
 				<block wx:for="{{content.jiaoyun}}" wx:key="index">
 					<view>{{item}}</view>
 				</block>
 			</van-cell>
-      <van-cell title="实岁" custom-class="flex">
+      <van-cell title="实岁" custom-class="flex  red-color">
 				<block wx:for="{{content.shisui}}" wx:key="index">
 					<view>{{item}}</view>
 				</block>
 			</van-cell>
-      <van-cell title="流年" >
+      <van-cell title="流年" custom-class=" red-color">
 				<block wx:for="{{content.liunian}}" wx:key="index">
 					<view class="flex">
 						<view wx:for="{{item}}" wx:for-item="idx" wx:key="index">{{idx}}</view>
