@@ -12,16 +12,8 @@ Page({
   onSubmit(){
     let param = this.data.param
     API.namePay(param).then(res=>{
-      wx.requestPayment({
-        timeStamp: res.data.wechat_data.timeStamp.toString(),
-        nonceStr: res.data.wechat_data.nonceStr,
-        package: res.data.wechat_data.package,
-        signType: res.data.wechat_data.signType,
-        paySign: res.data.wechat_data.paySign,
-        success(res) {
-          if(res.errMsg=='requestPayment:ok'){
             wx.showToast({
-              title: '支付成功，请等待大师与您联系',
+              title: res.message,
               icon: "none"
             })
             setTimeout(() => {
@@ -29,20 +21,37 @@ Page({
                 delta: 4,
               })
             }, 1200);
-          }else{
-            wx.showToast({
-              title: res.errMsg,
-              icon: "none"
-            })
-          }
-        },
-        fail(res) {
-          wx.showToast({
-            title: '支付失败',
-            icon: "none"
-          })
-        }
-      })
+      // wx.requestPayment({
+      //   timeStamp: res.data.wechat_data.timeStamp.toString(),
+      //   nonceStr: res.data.wechat_data.nonceStr,
+      //   package: res.data.wechat_data.package,
+      //   signType: res.data.wechat_data.signType,
+      //   paySign: res.data.wechat_data.paySign,
+      //   success(res) {
+      //     if(res.errMsg=='requestPayment:ok'){
+      //       wx.showToast({
+      //         title: '支付成功，请等待大师与您联系',
+      //         icon: "none"
+      //       })
+      //       setTimeout(() => {
+      //         wx.navigateBack({
+      //           delta: 4,
+      //         })
+      //       }, 1200);
+      //     }else{
+      //       wx.showToast({
+      //         title: res.errMsg,
+      //         icon: "none"
+      //       })
+      //     }
+      //   },
+      //   fail(res) {
+      //     wx.showToast({
+      //       title: '支付失败',
+      //       icon: "none"
+      //     })
+      //   }
+      // })
     })
   },
   /**

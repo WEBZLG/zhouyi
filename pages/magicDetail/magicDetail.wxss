@@ -18,12 +18,14 @@
   width: 80rpx;
   font-size: 16px;
   color: #000000;
+  font-weight: bold !important;
 }
 
 .van-cell__value {
   flex: 3 !important;
   width: 100%;
   font-size: 16px;
+  font-weight: bold !important;
   color: #333333 !important;
 }
 
@@ -45,6 +47,12 @@
   font-size: 22px;
   font-weight: bold;
   /* letter-spacing: 8px; */
+}
+.angan{
+  position: absolute;
+  left: 20rpx;
+  font-size: 12px;
+  color: rgb(102, 41, 0);
 }
 
 .bottom {
@@ -72,6 +80,11 @@
 
 .text-left {
   text-align: left;
+ 
+}
+
+.brown-color{
+  color: rgb(102, 41, 0) !important;
 }
 
 .text-content {
@@ -104,4 +117,10 @@
 }
 .tgdz{
   margin-left: 64rpx;
+}
+.notice{
+  color: #ff0000;
+  font-weight: bold;
+  text-align: center;
+  padding: 30rpx;
 }

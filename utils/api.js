@@ -217,11 +217,15 @@ module.exports = {
   },
   //奇门排盘
   special: (data) => {
-    return request('/special/get', 'post', data)
+    return request('/special/get', 'post', data, true, true)
   },
   //搜局
   search: (data) => {
-    return request('/special/search', 'post', data)
+    return request('/special/search', 'post', data, true, true)
+  },
+  // 八字排盘详情
+  baziDetail: (data) => {
+    return request('/bazi/get', 'post', data, true, true)
   },
   //修改密码
   changePwd: (data) => {
@@ -283,11 +287,6 @@ module.exports = {
   sysDetail: (data, id) => {
     return request('/message/detail/' + id, 'post', data)
   },
-
-  // 八字排盘详情
-  baziDetail: (data) => {
-    return request('/bazi/get', 'post', data)
-  },
   // 用户协议
   agreement(data, id) {
     return request('/content/detail_by_menu/' + id, 'post', data, true, true)
@@ -311,14 +310,6 @@ module.exports = {
   // 起名支付
   namePay(data) {
     return request('/pay', 'post', data)
-  },
-  // 商品列表
-  goodsList(data) {
-    return request('/goods/get', 'post', data,true,true)
-  },
-  // 商品详情
-  goodsDetail(data,id) {
-    return request('/goods/detail/'+id, 'post', data,true,true)
   },
   // 直播间列表
   liveList(data) {
@@ -344,4 +335,32 @@ module.exports = {
   getOrder(data) {
     return request('/order/get', 'post', data)
   }, 
+  // 订单详情
+  orderDetail(data,id) {
+    return request('/order/detail/'+id, 'post', data)
+  }, 
+  // 确认收货
+  orderSuccess(data,id) {
+    return request('/order/edit/'+id, 'post', data)
+  }, 
+  // 商品分类
+  goodsType(data) {
+    return request('/goods/get_goods_type', 'post', data,true,true)
+  }, 
+  // 商品列表
+  goodsList(data) {
+    return request('/goods/get', 'post', data,true,true)
+  },
+  // 商品详情
+  goodsDetail(data,id) {
+    return request('/goods/detail/'+id, 'post', data,true,true)
+  },
+  // 价格列表
+  priceList(data){
+    return request('/vip/get_list', 'post', data,true,true)
+  },
+  //新华字典
+  dictionary(data){
+    return request('/query/xhzd', 'post', data)
+  }
 }

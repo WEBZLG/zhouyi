@@ -1,15 +1,21 @@
 <!--pages/vip/vip.wxml-->
 <view>
   <view class="banner">
-    <image src="../../images/vip0.png"></image>
+    <image src="../../images/vip.jpg"></image>
   </view>
-  <van-cell title="vip可享受一下权益" />
-  <view class="vip-can">
-    <van-grid gutter="{{ 10 }}" column-num="3">
-      <van-grid-item icon="photo-o" text="文字" wx:for="{{ 3 }}" />
+  <van-skeleton title avatar row="3" loading="{{ loading }}">
+  <view class="vip-can" wx:for="{{vipList}}" wx:key="index">
+    <van-cell title="{{item.name}}"/>
+    <van-grid column-num="{{index}}" gutter="{{10}}" wx:for="{{item.price}}" wx:for-item="price" wx:for-index="priceindex" wx:key="priceindex" data-index="{{index}}" data-priceindex
+    ="{{priceindex}}" custom-class="{{priceindex==checkindex?'checked':''}}" catchtap="checkPrice">
+      <van-grid-item use-slot >
+        <view>{{price.time_name}}</view>
+        <view>{{price.price}}元</view>
+      </van-grid-item>
     </van-grid>
   </view>
+</van-skeleton>
   <view class="btn-box">
-		<van-button type="info" round catchtap="onSignOut">开通会员(9.9元)</van-button>
+		<van-button type="info" round catchtap="onSubmit">开通/续费会员</van-button>
 	</view>
 </view>

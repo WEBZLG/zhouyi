@@ -1,18 +1,30 @@
 // pages/orderDetail/orderDetail.js
+const API = require('../../utils/api');
+const UTIL = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgUrl: API.IMG_BASE_URL, //图片路径
+    dataList:'',
+    uitl:UTIL.timestampToTime
+  },
+  getData(id){
+    API.orderDetail({},id).then(res=>{
+      this.setData({
+        dataList:res.data.order
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let id = options.id
+    this.getData(id);
   },
 
   /**
@@ -60,7 +72,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

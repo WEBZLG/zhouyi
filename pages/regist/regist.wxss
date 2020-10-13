@@ -14,3 +14,8 @@
 .agreement{
   color: #1989FA;
 }
+.van-field__input,
+.van-field__label,
+.van-button__text {
+  font-size: 22px;
+}

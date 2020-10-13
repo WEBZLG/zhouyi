@@ -51,7 +51,7 @@
 	</view>
 	<van-grid column-num="2" border="{{ false }}" gutter="{{ 10 }}">
 		<van-grid-item use-slot>
-			<view class="pic-item">
+			<view class="pic-item" catchtap="dictionary">
 				<van-image width="100%" height="100%" src="/images/zidian.jpg" />
 			</view>
 		</van-grid-item>

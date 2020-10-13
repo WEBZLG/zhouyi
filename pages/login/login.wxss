@@ -36,6 +36,7 @@ van-button {
   text-align: right;
   padding: 30rpx 30rpx 0;
   color: #277CFB;
+  font-size: 22px;
 }
 .regist-btn{
   color: #277CFB;
@@ -43,10 +44,17 @@ van-button {
 .regist-box{
   text-align: center;
   margin-top: 50rpx;
-  font-size: 14px;  
+  font-size: 22px;
+  font-weight: bold;
 }
 .logo{
   height: 150rpx;
   width: 150rpx;
   margin: 12% auto 0;
+}
+.van-button__text{
+  font-size: 22px;
+}
+.van-field__input {
+  font-size: 22px;
 }

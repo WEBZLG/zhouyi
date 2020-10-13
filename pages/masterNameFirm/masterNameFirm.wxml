@@ -11,6 +11,6 @@
 		<van-cell title="数量" value="{{content.count}}" />
   </van-cell-group>
   <view class="btn-box">
-    <van-button type="info" data-type="" round catchtap="onSubmit">支付</van-button>
+    <van-button type="info" data-type="" round catchtap="onSubmit">提交信息</van-button>
   </view>
 </view>

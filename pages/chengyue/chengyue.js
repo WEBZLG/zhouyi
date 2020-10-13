@@ -92,7 +92,7 @@ Page({
   getPhone() {
     API.getContace({}).then(res=>{
       this.setData({
-        phone:res.data.service_mobile
+        phone:res.data.teach_service_mobile
       })
     })
   },

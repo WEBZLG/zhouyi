@@ -16,3 +16,7 @@
 .van-button--info {
   width: 100%;
 }
+.checked .van-grid-item__content{
+  color: #ffffff;
+  background-color: #1989FA;
+}

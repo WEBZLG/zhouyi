@@ -1,1 +1,9 @@
 /* pages/orderDetail/orderDetail.wxss */
+.order-info{
+  font-size: 14px;
+  color: #999999;
+  line-height: 56rpx;
+}
+.timeAxisView{
+  margin-top: 30rpx;
+}

@@ -8,7 +8,9 @@ Page({
   data: {
     imgUrl: API.IMG_BASE_URL,
     dataList:[],
-    loading: true
+    loading: true,
+    active: 0,
+    goodsType:''
   },
   onDetail(e){
     let id = e.currentTarget.dataset.id
@@ -16,18 +18,32 @@ Page({
       url: '../goodsDetail/goodsDetail?id='+id,
     })
   },
-  getData(){
-    API.goodsList({}).then(res=>{
+  getGoodsType(){
+    let _this = this
+    API.goodsType({}).then(res=>{
+      this.setData({
+        goodsType: Object.assign({0:'全部'}, res.data.goods_type),
+      })
+    })
+  },
+  getData(type){
+    API.goodsList({
+      goods_type:type
+    }).then(res=>{
       this.setData({
         dataList:res.data.goods
       })
     })
   },
+  onChange(event) {
+    this.getData(event.detail.name)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData()
+    this.getGoodsType()
+    this.getData(0)
   },
 
   /**

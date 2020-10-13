@@ -13,7 +13,7 @@
 }
 .van-image--round{
   margin: 0 auto;
-  padding: 30rpx;
+  padding: 10rpx;
 }
 .nav-box{
   margin: 30rpx;
@@ -26,4 +26,21 @@
 }
 .van-button--info {
   width: 100%;
+}
+.open-vip{
+  color: #ffffff;
+  background-color: #FEA001;
+  border-radius: 30rpx;
+  padding: 2px 15rpx;
+  margin-top: 20rpx;
+  line-height: 30rpx;
+}
+.flex{
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+}
+.renew{
+  color: #FEA001;
+  margin-left: 10rpx;
 }

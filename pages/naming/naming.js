@@ -28,15 +28,16 @@ Page({
     currentDate: new Date().getTime(),
     chooseAddress: '请选择出生地',
     chooseTime: '',
-    iconNav: [{
-        id: 1,
-        imgPath: '../../images/bbqm.png',
-        title: "宝宝起名"
-      },
+    iconNav: [
       {
         id: 2,
         imgPath: '../../images/bzqm.png',
-        title: "起名"
+        title: "测名"
+      },
+      {
+        id: 1,
+        imgPath: '../../images/bbqm.png',
+        title: "宝宝起名"
       },
       {
         id: 3,
@@ -74,7 +75,7 @@ Page({
         break;
       case 2:
         wx.navigateTo({
-          url: '../babyName/babyName'
+          url: '../testName/testName'
         })
         break;
       case 3:
@@ -161,7 +162,12 @@ Page({
     })
     this.onClose();
   },
-
+  // 新华字典
+  dictionary(){
+    wx.navigateTo({
+      url: '../dictionary/dictionary',
+    })
+  },
   onSubmit(){
     let param = {
       surname:this.data.surname,

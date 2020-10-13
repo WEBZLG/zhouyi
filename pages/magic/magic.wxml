@@ -26,6 +26,7 @@
 					<van-cell title="结束时间" is-link bind:click="showPopupFun" data-type="1" value="{{chooseDateEnd}}" />
 					<van-cell title="奇门" is-link value="{{magic}}" data-type="2" bind:click="showPopupFun" />
 					<van-cell title="八门" is-link bind:click="showPopupFun" data-type="3" value="{{chooseDateBm==''?'任意':chooseDateBm}}" />
+					<van-cell title="宫位" is-link bind:click="showPopupFun" data-type="7" value="{{chooseDateGw==''?'任意':chooseDateGw}}" />
 					<van-cell title="天盘干" is-link bind:click="showPopupFun" data-type="4" value="{{chooseDateTpg==''?'任意':chooseDateTpg}}" />
 					<van-cell title="底盘干" is-link bind:click="showPopupFun" data-type="5" value="{{chooseDateDpg==''?'任意':chooseDateDpg}}" />
 					<van-cell title="格局" is-link bind:click="showPopupFun" data-type="6" value="{{chooseDateGj==''?'任意':chooseDateGj}}" />
@@ -42,6 +43,8 @@
 				<van-action-sheet show="{{ showMagic }}" actions="{{ actionsMagic }}" bind:close="onClose" bind:select="onSelectMagic" />
 				<!-- 八门弹出 -->
 				<van-action-sheet show="{{ showBm }}" actions="{{ actionsBm }}" bind:close="onClose" data-type="0" bind:select="onSelectFun" />
+				<!-- 宫位弹出 -->
+				<van-action-sheet show="{{ showGw }}" actions="{{ actionsGw }}" bind:close="onClose" data-type="4" bind:select="onSelectFun" />
 				<!-- 天盘干弹出 -->
 				<van-action-sheet show="{{ showTpg }}" actions="{{ actionsPg }}" bind:close="onClose" data-type="1" bind:select="onSelectFun" />
 				<!-- 底盘干弹出 -->

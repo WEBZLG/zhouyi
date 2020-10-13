@@ -1,5 +1,6 @@
 // pages/nameDetailMaster/nameDetailMaster.js
 const API = require('../../utils/api');
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 Page({
   /**
    * 页面的初始数据
@@ -8,13 +9,13 @@ Page({
     content: '',
     loading: true,
     show: false,
-    concat: ''
+    concat: '',
   },
   onConsult() {
     API.getContace({}).then(res => {
       console.log(res)
       this.setData({
-        concat:res.data,
+        concat: res.data,
         show: true
       });
     })
@@ -29,7 +30,6 @@ Page({
    */
   onLoad: function (options) {
     let param = JSON.parse(options.param)
-    console.log(param)
     this.setData({
       content: param
     })
@@ -49,11 +49,27 @@ Page({
     }, 1000);
   },
   // 跳转大师起名
-  onMasterName(){
+  onMasterName() {
+    let userInfo = wx.getStorageSync('userInfo');
     let content = JSON.stringify(this.data.content)
-    wx.navigateTo({
-      url: '../masterNameFill/masterNameFill?content='+content,
-    })
+    if (userInfo.vip_level == 0) {
+      Dialog.confirm({
+          title: '开通会员',
+          message: '您还不是会员，无法起名，是否开通会员？',
+        })
+        .then(() => {
+          wx.navigateTo({
+            url: '../vip/vip',
+          })
+        })
+        .catch(() => {
+          // on cancel
+        });
+    } else {
+      wx.navigateTo({
+        url: '../masterNameFill/masterNameFill?content=' + content,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示

@@ -10,24 +10,24 @@ Page({
       {
         id: 1,
         imgPath: '../../images/qimenjiaoxue.png',
-        title: "奇门教学",
+        title: "奇门",
         url: "../qimenList/qimenList"
       },{
         id: 2,
         imgPath: '../../images/qimingjiaoxue.png',
-        title: "起名教学",
+        title: "起名",
         url: "../teaching/teaching"
       },
       {
         id: 3,
         imgPath: '../../images/bazijiaoxue.png',
-        title: "八字教学",
+        title: "八字",
         url: "../teaching/teaching"
       },
       {
         id: 4,
         imgPath: '../../images/fengshuijiaoxue.png',
-        title: "风水教学",
+        title: "风水",
         url: "../teaching/teaching"
       },
     ]

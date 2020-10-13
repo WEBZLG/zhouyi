@@ -3,7 +3,8 @@
   height: 400rpx;
 }
 .nav-title{
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
 .van-grid-item__content{
   padding-top: 0 !important;

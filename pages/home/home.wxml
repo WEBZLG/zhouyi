@@ -26,7 +26,7 @@
 	<!-- <van-cell-group> -->
 		<van-cell title="大师推荐" custom-class="caption">
 				<van-button type="info" size="mini" round plain catchtap="onClickShow">关注公众号</van-button>
-				<van-button type="info" size="mini" round plain catchtap="share">推广分享</van-button>
+				<van-button type="info" size="mini" round plain catchtap="share">分享赚钱</van-button>
 		</van-cell>
 	<!-- </van-cell-group> -->
 	<van-cell custom-class="flex" wx:for="{{masterList}}" wx:key="index" is-link data-id="{{item.id}}" catchtap="onMasterDetial">
@@ -65,6 +65,7 @@
 		<view class="wrapper">
 		<view>
 			<van-image width="200" height="200"  show-loading src="/images/ewm.jpg" />
+			<view class="notice">手机截屏，微信扫描二维码</view>
 			<van-button type="info" block size="small" round catchtap="onClickHide">关闭</van-button>
 		</view>
 		</view>

@@ -17,6 +17,7 @@
 
 .van-cell__value{
   display: flex;
+  color: #000000 !important;
   font-size: 20px !important;
 }
 .van-ellipsis{

@@ -1,6 +1,7 @@
 /* pages/chengyue/chengyue.wxss */
 .nav-title{
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
 .swiper-item{
   height: 400rpx;

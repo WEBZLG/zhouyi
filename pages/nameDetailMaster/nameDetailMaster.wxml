@@ -37,4 +37,5 @@
       <view wx:if="{{concat.service_qq}}">QQ：{{concat.service_qq}}</view>
     </view>
   </van-dialog>
+  <van-dialog id="van-dialog" />
 </view>

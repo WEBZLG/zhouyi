@@ -12,7 +12,6 @@ Page({
   // 获取列表
   getData(){
     API.masterName({}).then(res=>{
-      console.log(res)
       this.setData({
         content:res.data
       })
@@ -20,7 +19,6 @@ Page({
   },
   // 详情
   onDetail(e){
-    console.log(e)
     let param = JSON.stringify(e.currentTarget.dataset.content)
     wx.navigateTo({
       url: '../nameDetailMaster/nameDetailMaster?param='+param,
@@ -41,7 +39,7 @@ Page({
       this.setData({
         loading:false
       })
-    }, 1500);
+    }, 500);
   },
 
   /**

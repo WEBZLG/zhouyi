@@ -1,6 +1,7 @@
 /* pages/home/home.wxss */
 .nav-title{
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
 .swiper-item{
   height: 400rpx;
@@ -120,4 +121,11 @@ swiper{
 .caption .van-cell__value{
   width: 244rpx;
   flex: none !important;
+}
+.notice{
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff0000;
+  padding: 20rpx 0;
 }

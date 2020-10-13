@@ -36,6 +36,7 @@ Page({
     chooseDateTpg: '', //天盘干
     chooseDateDpg: '', //底盘干
     chooseDateGj: '', //格局
+    chooseDateGw: '', //宫位
     showDateStart: false, //开始日期弹窗控制显隐
     showDateEnd: false, //结束日期弹窗控制显隐
     showMagic: false, //奇门弹窗控制显隐
@@ -43,6 +44,7 @@ Page({
     showTpg: false, //天盘干弹窗控制显隐
     showDpg: false, //底盘干弹窗控制显隐
     showGj: false, //格局弹窗控制显隐
+    showGw: false, //宫弹窗控制显隐
     currentDateStart: '', //默认开始日期
     currentDateEnd: '', //默认结束日期
     changeDateStart: '',
@@ -53,6 +55,7 @@ Page({
     actionsBm: DATA.ACTION_BM, //八门
     actionsPg: DATA.ACTION_PG, //天地盘干
     actionsGj: DATA.ACTION_GJ, //格局
+    actionsGw:DATA.ACTION_GW,//宫位
   },
 
   // 时家事件---------------
@@ -79,7 +82,8 @@ Page({
       showBm: false,
       showTpg: false,
       showDpg: false,
-      showGj: false
+      showGj: false,
+      showGw: false
     });
   },
   // 选择日期确定事件
@@ -214,10 +218,15 @@ Page({
           showGj: true
         });
         break;
+      case '7':
+        _this.setData({
+          showGw: true
+        });
+        break;
     }
   },
   // 选中事件
-  //0:八门,1:天盘干.2:底盘干,3:格局
+  //0:八门,1:天盘干.2:底盘干,3:格局,4宫位
   onSelectFun(e) {
     let _this = this
     let type = e.target.dataset.type
@@ -248,6 +257,11 @@ Page({
           chooseDateGj: name
         });
         break;
+      case '4':
+        _this.setData({
+          chooseDateGw: name
+        });
+        break;
     }
   },
   // 搜局详情
@@ -259,9 +273,10 @@ Page({
       door: _this.data.chooseDateBm,
       sky: _this.data.chooseDateTpg,
       ground: _this.data.chooseDateDpg,
-      pattern: _this.data.chooseDateGj
+      pattern: _this.data.chooseDateGj,
+      gong:_this.data.chooseDateGw
     }
-    if(param.door==''&&param.sky==''&&param.ground==''&&param.pattern==''){
+    if(param.door==''&&param.sky==''&&param.ground==''&&param.pattern==''&&param.gong==''){
       wx.showToast({
         title: '至少有一个查询条件不为任意',
         icon:'none'
@@ -314,7 +329,8 @@ Page({
       chooseDateBm:'',
       chooseDateTpg:'',
       chooseDateDpg:'',
-      chooseDateGj:''
+      chooseDateGj:'',
+      chooseDateGw:''
     })
   },
 

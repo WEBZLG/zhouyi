@@ -1,6 +1,8 @@
 //搜局action数据
 //八门
 const ACTION_BM = [{name: '任意'}, {name: '休'}, {name: '生'}, {name: '伤'}, {name: '杜'}, {name: '景'}, {name: '死'}, {name: '惊'}, {name: '开'}]
+// 宫位
+const ACTION_GW = [{name: '任意'}, {name: '巽'}, {name: '离'}, {name: '坤'}, {name: '兑'}, {name: '乾'}, {name: '坎'}, {name: '艮'}, {name: '震'}]
 //天、地盘干
 const ACTION_PG = [{name: '任意'}, {name: '乙'}, {name: '丙'}, {name: '丁'}, {name: '戊'}, {name: '己'}, {name: '庚'}, {name: '辛'}, {name: '壬'}, {name: '癸'}]
 //格局
@@ -15,6 +17,7 @@ module.exports = {
   ACTION_BM,
   ACTION_PG,
   ACTION_GJ,
+  ACTION_GW,
   CHARACTER_LIST,
   INDUSTRY_LIST
 }

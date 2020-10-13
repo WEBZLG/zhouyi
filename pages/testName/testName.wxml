@@ -1,0 +1,36 @@
+<!--pages/textName/textName.wxml-->
+<view class="banner">
+  <van-image width="100%" height="100%" show-loading src="{{background[0]}}" />
+</view>
+<van-cell-group>
+  <van-field label="姓名" value="{{ surname }}" placeholder="请输入姓名" bind:input="getName" />
+  <van-radio-group value="{{ sex }}" bind:change="onChangeSex">
+    <van-cell title="性别">
+      <van-radio name="1" icon-size="14px">男</van-radio>
+      <van-radio name="2" icon-size="14px">女</van-radio>
+    </van-cell>
+  </van-radio-group>
+
+  <van-cell title="出生日期" is-link value="{{dateStr3}}" arrow-direction="down" bind:click="showDatepicker3" />
+  <rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
+  <van-radio-group value="{{ marriage }}" bind:change="onChangeMarriage">
+    <van-cell title="婚姻状况">
+      <van-radio name="1" icon-size="14px">未婚</van-radio>
+      <van-radio name="2" icon-size="14px">已婚</van-radio>
+      <van-radio name="3" icon-size="14px">离异</van-radio>
+    </van-cell>
+  </van-radio-group>
+  <van-radio-group value="{{ children }}" bind:change="onChangeChildren">
+    <van-cell title="有无子女">
+      <van-radio name="1" icon-size="14px">有</van-radio>
+      <van-radio name="2" icon-size="14px">无</van-radio>
+    </van-cell>
+  </van-radio-group>
+</van-cell-group>
+<view class="btn-box">
+  <van-button type="info" round catchtap="onSubmit">立即测名</van-button>
+</view>
+<van-image width="100%" height="153" show-loading src="/images/c1.png" />
+<van-image width="100%" height="408" show-loading src="/images/c2.png" />
+<van-image width="100%" height="408" show-loading src="/images/c3.png" />
+<van-image width="100%" height="382" show-loading src="/images/c4.png" />

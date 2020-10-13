@@ -1,6 +1,7 @@
 /* pages/naming/naming.wxss */
 .nav-title{
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
 .swiper-item,
 .banner{

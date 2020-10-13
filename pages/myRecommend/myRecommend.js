@@ -22,6 +22,7 @@ Page({
         if(res.data.total==0){
           wx.showToast({
             title: '无更多数据',
+            icon:'none'
           })
           _this.setData({
             page:_this.data.page-1
@@ -219,7 +220,7 @@ Page({
     this.setData({
       page: _this.data.page*1+1
     })
-    this.getRecommend(page)
+    this.getRecommend(_this.data.page)
   },
 
   /**

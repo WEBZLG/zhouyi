@@ -5,3 +5,8 @@
 .van-button--info {
   width: 100%;
 }
+.van-field__input,
+.van-field__label,
+.van-button__text {
+  font-size: 22px;
+}

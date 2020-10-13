@@ -7,12 +7,12 @@
 				<!-- <van-cell title="旬首" value="{{specialData.ob.list_first}}{{specialData.ob.ob_first}}" /> -->
 			</view>
 			<van-cell title="节气:">
-				<view class="van-cell-value text-left">{{specialData.prev_solar}}</view>
-				<view class="van-cell-value text-left">{{specialData.next_solar}}</view>
+				<view class="van-cell-value text-left brown-color">{{specialData.prev_solar}}</view>
+				<view class="van-cell-value text-left brown-color">{{specialData.next_solar}}</view>
 			</van-cell>
 			<van-cell title="时间:">
-				<view class="van-cell-value text-left">公历 {{specialData.gregorian_calendar}}</view>
-				<view class="van-cell-value text-left">农历 {{specialData.lunar}}</view>
+				<view class="van-cell-value text-left brown-color">公历 {{specialData.gregorian_calendar}}</view>
+				<view class="van-cell-value text-left brown-color">农历 {{specialData.lunar}}</view>
 			</van-cell>
 			<van-cell title="">
 			<view class="van-cell-value text-left flex">
@@ -62,6 +62,7 @@
 						</view>
 					</view>
 					<view class="middle">{{item._ts_meter}}</view>
+					<view class="angan">{{item.angan}}</view>
 					<view class="pattern">
 						<view class="pattern-item" wx:for="{{item.pattern}}" wx:for-item="pat" wx:key="index">{{pat}}</view>
 					</view>
@@ -74,6 +75,7 @@
 					</view>
 				</van-grid-item>
 			</van-grid>
+			<view class="notice">点击九宫格查看格局</view>
 		</view>
 		<van-popup show="{{ show }}" bind:close="onClose" custom-class="text-content">
 			<view class="text-item" wx:for="{{specialContent}}" wx:key="index">{{item}}</view>

@@ -1,0 +1,12 @@
+/* pages/dictionary/dictionary.wxss */
+.van-cell__title {
+  flex: none !important;
+  width: 120rpx;
+  color: #000000;
+}
+ 
+.van-cell__value {
+  flex: 3 !important;
+  color: #333333 !important;
+  text-align: left !important;
+}

@@ -1,7 +1,7 @@
 /* pages/shopping/shopping.wxss */
 .container {
   font-size: 14px;
-  padding: 30rpx 10rpx;
+  padding:0 10rpx  30rpx;
 }
 
 .content {
@@ -22,4 +22,7 @@
   overflow: hidden;
   padding-top: 20rpx;
   height: 80rpx;
+}
+.van-skeleton__content {
+  margin-top: 20rpx;
 }

@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "time-line": "/components/timeLine/timeLine"
+  },
+  "navigationBarTitleText": "订单详情"
+ 
 }

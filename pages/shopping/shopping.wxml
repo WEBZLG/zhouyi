@@ -1,6 +1,11 @@
 <!--pages/shopping/shopping.wxml-->
 <view class="container">
-  <van-skeleton  row="5" loading="{{ loading }}">
+  <van-sticky>
+    <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tab wx:for="{{goodsType}}" wx:key="index" title="{{item}}" data-id="{{index}}"></van-tab>
+    </van-tabs>
+  </van-sticky>
+  <van-skeleton row="5" loading="{{ loading }}">
     <van-grid column-num="2" gutter="{{ 10 }}" border="{{ false }}">
       <van-grid-item use-slot wx:for="{{ dataList }}" wx:key="index" data-id="{{item.id}}" catchtap="onDetail">
         <image style="width: 100%; height: 140px;" src="{{imgUrl+item.thumb_pic||'/images/goods.png'}}" />

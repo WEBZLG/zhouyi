@@ -45,7 +45,11 @@
     "pages/orderFirm/orderFirm",
     "pages/addAddress/addAddress",
     "pages/addressList/addressList",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "components/timeLine/timeLine",
+    "pages/dictionary/dictionary",
+    "pages/testName/testName",
+    "pages/testNameDetail/testNameDetail"
   ],
   "networkTimeout": {
     "request": 10000,
@@ -128,7 +132,9 @@
     "van-stepper": "@vant/weapp/stepper/index",
     "van-submit-bar": "@vant/weapp/submit-bar/index",
     "van-switch": "@vant/weapp/switch/index",
-    "van-swipe-cell": "@vant/weapp/swipe-cell/index"
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-search": "@vant/weapp/search/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {
