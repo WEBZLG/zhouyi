@@ -49,27 +49,33 @@ Page({
     }, 1000);
   },
   // 跳转大师起名
+  // onMasterName() {
+  //   let userInfo = wx.getStorageSync('userInfo');
+  //   let content = JSON.stringify(this.data.content)
+  //   if (userInfo.vip_level == 0) {
+  //     Dialog.confirm({
+  //         title: '开通会员',
+  //         message: '您还不是会员，无法起名，是否开通会员？',
+  //       })
+  //       .then(() => {
+  //         wx.navigateTo({
+  //           url: '../vip/vip',
+  //         })
+  //       })
+  //       .catch(() => {
+  //         // on cancel
+  //       });
+  //   } else {
+  //     wx.navigateTo({
+  //       url: '../masterNameFill/masterNameFill?content=' + content,
+  //     })
+  //   }
+  // },
   onMasterName() {
-    let userInfo = wx.getStorageSync('userInfo');
     let content = JSON.stringify(this.data.content)
-    if (userInfo.vip_level == 0) {
-      Dialog.confirm({
-          title: '开通会员',
-          message: '您还不是会员，无法起名，是否开通会员？',
-        })
-        .then(() => {
-          wx.navigateTo({
-            url: '../vip/vip',
-          })
-        })
-        .catch(() => {
-          // on cancel
-        });
-    } else {
-      wx.navigateTo({
-        url: '../masterNameFill/masterNameFill?content=' + content,
-      })
-    }
+    wx.navigateTo({
+      url: '../masterNameFill/masterNameFill?content=' + content,
+    })
   },
   /**
    * 生命周期函数--监听页面显示

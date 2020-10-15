@@ -8,16 +8,16 @@ Page({
    */
   data: {
     imgUrl: API.IMG_BASE_URL, //图片路径
-    background: ['/images/bbqmbanner.jpg'],
+    background: ['/images/ceming.jpg'],
     surname: '',
     sex: '1',
-    marriage: '1',
-    children: '1',
+    marriage: '0',
+    children: '0',
     show: false,
     dateStr3: '请选择时间',
-    chooseDate:'',//选择后日期
-    postDate:'',//传送到下页数据
-    isLunar:true,//是否是农历
+    chooseDate: '', //选择后日期
+    postDate: '', //传送到下页数据
+    isLunar: true, //是否是农历
   },
   showPopup() {
     this.setData({
@@ -33,9 +33,9 @@ Page({
   showDatepicker3(event) {
     // 获取日期组件对象实例，并初始化配置
     this.selectComponent("#ruiDatepicker").init({
-      date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
+      date: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
       hour: new Date().getHours(),
-      min:new Date().getMinutes(),
+      min: new Date().getMinutes(),
       confirm: false
     });
     // this.showPopup()
@@ -48,13 +48,13 @@ Page({
     json['dateStr'] = event.detail.thisStr;
     // 更新数据
     this.setData(json);
-    let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
+    let chooseDate = event.detail.year + '-' + event.detail.month + '-' + event.detail.day + ' ' + (event.detail.hour < 10 ? '0' + event.detail.hour : event.detail.hour) + ':' + (event.detail.min < 10 ? '0' + event.detail.min : event.detail.min);
     this.setData({
-      chooseDate:chooseDate,
+      chooseDate: chooseDate,
       show: false,
-      dateStr3:event.detail.thisStr,
-      postDate:event.detail.thisStr,
-      isLunar:event.detail.lastTab=='lunar'?true:false
+      dateStr3: event.detail.thisStr,
+      postDate: event.detail.thisStr,
+      isLunar: event.detail.lastTab == 'lunar' ? true : false
     })
   },
   // 获取姓
@@ -81,30 +81,72 @@ Page({
       children: event.detail,
     });
   },
-  onSubmit(){
+  onSubmit() {
     let surname = this.data.surname
     let sex = this.data.sex
     let marriage = this.data.marriage
     let children = this.data.children
     let chooseDate = this.data.chooseDate
-    console.log(surname,sex,marriage,children,chooseDate)
-    if(surname==''){
+    let param = {
+      surname: surname,
+      sex: sex == 1 ? '男' : '女',
+      marriage: marriage,
+      children: children,
+      chooseDate: chooseDate
+    }
+    if (surname == '') {
       wx.showToast({
         title: '请填写姓名',
-        icon:'none'
+        icon: 'none'
       })
       return false;
-    }else if(chooseDate==''){
+    } else if (!API.isChinese(surname)) {
+      wx.showToast({
+        title: '请输入汉字',
+        icon: 'none'
+      })
+    } else if (chooseDate == '') {
       wx.showToast({
         title: '请选择出生日期',
-        icon:'none'
+        icon: 'none'
       })
       return false;
-    }else{
-
-      wx.navigateTo({
-        url: '../testNameDetail/testNameDetail',
+    } else {
+      let params = JSON.stringify(param)
+      this.upMessge(params)
+    }
+  },
+  // 获取更新信息
+  upMessge(params) {
+    let _this = this
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
       })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
+        })
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            wx.navigateTo({
+              url: '../testNameDetail/testNameDetail?param=' + params,
+            })
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 1000);
+          }
+        })
     }
   },
   /**

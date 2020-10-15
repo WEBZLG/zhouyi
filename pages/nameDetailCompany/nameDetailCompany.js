@@ -14,7 +14,6 @@ Page({
   },
   getData(param){
     API.companyName(param).then(res=>{
-      console.log(res)
       let wuxing = new Array()
       for (var prop in res.data.wuxingfenxi) {
         if (res.data.wuxingfenxi.hasOwnProperty(prop)) {
@@ -36,35 +35,8 @@ Page({
     onView(){
       let _this = this
       wx.navigateTo({
-        url: '../dictionary/dictionary',
+        url: '../vip/vip?type='+'gongsiqiming',
       })
-      // API.namePay({
-      //   pay_type:'qiming_business'
-      // }).then(res=>{
-      //   let order = res.data.order_no
-      //   wx.requestPayment({
-      //     timeStamp: res.data.wechat_data.timeStamp.toString(),
-      //     nonceStr: res.data.wechat_data.nonceStr,
-      //     package: res.data.wechat_data.package,
-      //     signType: res.data.wechat_data.signType,
-      //     paySign: res.data.wechat_data.paySign,
-      //     success(res) {
-      //       let param = _this.data.param
-      //       delete param.sign
-      //       param.order_no = order
-      //       _this.getData(param);
-      //       _this.setData({
-      //         isOrder:true
-      //       })
-      //     },
-      //     fail(error) {
-      //       wx.showToast({
-      //         title: '支付失败',
-      //         icon: "none"
-      //       })
-      //     }
-      //   })
-      // })
     },
   /**
    * 生命周期函数--监听页面加载

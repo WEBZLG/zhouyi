@@ -30,11 +30,6 @@ Page({
     chooseTime: '',
     iconNav: [
       {
-        id: 2,
-        imgPath: '../../images/bzqm.png',
-        title: "测名"
-      },
-      {
         id: 1,
         imgPath: '../../images/bbqm.png',
         title: "宝宝起名"
@@ -168,6 +163,12 @@ Page({
       url: '../dictionary/dictionary',
     })
   },
+  // 百家姓
+  familyNames(){
+    wx.navigateTo({
+      url: '../familyNames/familyNames',
+    })
+  },
   onSubmit(){
     let param = {
       surname:this.data.surname,
@@ -183,6 +184,11 @@ Page({
         icon:'none'
       })
       return false
+    }else if(!API.isChinese(param.surname)){
+      wx.showToast({
+        title: '请输入汉字',
+        icon:'none'
+      })
     }else if(param.time==''){
       wx.showToast({
         title: '请选择时间',

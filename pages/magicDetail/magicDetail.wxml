@@ -16,21 +16,15 @@
 			</van-cell>
 			<van-cell title="">
 			<view class="van-cell-value text-left flex">
-				<text
-					class="black-color tgdz">{{specialData.era.year+'  '}}{{specialData.era.month+'  '}}{{specialData.era.day+'  '}}{{specialData.era.hour}}</text>
 				<view>
-					日空：<text class="yellow-color">{{specialData.ob.kw}}</text>日马：<text
-						class="yellow-color">{{specialData.horse}}</text></view>
+					日空：<text class="yellow-color">{{specialData.ob.kw}}</text>
+					日马：<text class="yellow-color">{{specialData.horse}}</text>
+				</view>
+				<view>
+					局：<text class="black-color">{{specialData.layout_name}} </text>
+				</view>
 			</view>
 		</van-cell>
-			<van-cell title="">
-				<view class="van-cell-value text-left flex">
-					<view></view>
-					<view>
-						<text class="black-color">局：{{specialData.layout_name}} </text>
-					</view>
-				</view>
-			</van-cell>
 			<van-cell title="">
 				<view class="van-cell-value text-left flex">
 					<view>
@@ -50,7 +44,7 @@
 		<view class="column-box" wx:if="{{sudoku}}">
 			<van-grid column-num="3" border="{{ true }}" square="{{true}}" custom-class="border-color">
 				<van-grid-item use-slot wx:for="{{sudoku}}" custom-class="border-color" wx:key="index"
-					data-content="{{item.content}}" bind:click="showPopup">
+					data-content="{{item.content}}" bind:click="{{index==4?'':'showPopup'}}">
 					<view class="top">
 						<view>
 							<text wx:if="{{item.god == '值符'}}" class="red-color">{{item.god}}</text>
@@ -59,6 +53,12 @@
 						<view class="yellow-color">
 							<text wx:if="{{item.kw>0}}">空</text>
 							<text wx:if="{{item.horse>0}}">马</text>
+						</view>
+						<view class="flex" wx:if="{{index==4}}">
+							<view class="limit">{{specialData.era.year}}</view>
+							<view class="limit">{{specialData.era.month}}</view>
+							<view class="limit">{{specialData.era.day}}</view>
+							<view class="limit" style="color:#ff0000">{{specialData.era.hour}}</view>
 						</view>
 					</view>
 					<view class="middle">{{item._ts_meter}}</view>

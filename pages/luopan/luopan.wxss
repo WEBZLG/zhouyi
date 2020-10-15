@@ -1,0 +1,42 @@
+/* pages/luopan/luopan.wxss */
+page {
+  background-color: #ffffff;
+}
+.text {
+  text-align: center;
+  color: white;
+  font-size: 56rpx;
+  padding-top: 50rpx
+}
+.text text {
+  display: block;
+}
+
+.pic {
+  position: relative;
+  height: 650rpx;
+  width: 650rpx;
+  margin: 0 auto;
+}
+.line1{
+  position: absolute;
+  border-top: 1px solid #ff7272;
+  width: 102%;
+  top: 50%;
+  margin-top: -0.5px;
+  z-index: 9;
+  left: -1%;
+}
+.line2{
+  position: absolute;
+  border-left: 1px solid #ff0000;
+  height: 102%;
+  left: 50%;
+  margin-left: -0.5px;
+  z-index: 9;
+  top: -1%;
+}
+.nav-title{
+  font-size: 14px;
+  font-weight: bolder;
+}

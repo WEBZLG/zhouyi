@@ -21,6 +21,11 @@ Page({
         title: '请输入关键字',
         icon:'none'
       })
+    }else if(!API.isChinese(zi)){
+      wx.showToast({
+        title: '请输入汉字',
+        icon:'none'
+      })
     }else{
       API.dictionary({
         zi:zi
@@ -84,7 +89,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

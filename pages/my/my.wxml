@@ -9,7 +9,11 @@
 			<van-image wx:else width="100" height="100" round fit="cover" show-loading src="/images/head.png" />
 			<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
 			<view wx:else catchtap="onLogin">登录</view>
-			<view class="flex">
+			<!-- <view class="flex">
+				<view>余额：{{}}</view>
+				<view>提现</view>
+			</view> -->
+			<!-- <view class="flex">
 				<view class="open-vip" data-type="6" wx:if="{{userInfo.vip_level==0}}" catchtap="getMessge">成为会员</view>
 				<view class="vip-level"  wx:if="{{userInfo.vip_level==1}}">会员</view>
 				<view class="vip-level"  wx:if="{{userInfo.vip_level==2}}">高级会员</view>
@@ -19,7 +23,7 @@
 				<view wx:if="{{userInfo.vip_level>0&&userInfo.vip_expire_time!==''}}" class="flex">
 					<view>会员到期：{{userInfo.vip_expire_time}}</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 	<view class="nav-box">
@@ -28,6 +32,7 @@
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==0}}" value="未审核" is-link />
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==1}}" value="{{userInfo.real.real_name}}" is-link/>
 			<van-cell title="实名认证" wx:if="{{userInfo.real.status==2}}" value="审核失败" is-link data-type="0" catchtap="getMessge"/> -->
+			<van-cell icon="star-o" title="会员中心" is-link  data-type="6" catchtap="getMessge"/>
 			<van-cell icon="medal-o" wx:if="{{userInfo.role3==''}}" title="成为大师" is-link  data-type="4" catchtap="getMessge"/>
 			<van-cell icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" title="大师资料" value="未审核" is-link />
 			<van-cell icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==1}}" title="大师资料"  is-link   data-type="5" catchtap="getMessge"/>

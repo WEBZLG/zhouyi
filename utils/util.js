@@ -91,13 +91,22 @@ const formatRichText = (html) => {
   newContent = newContent.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"');
   return newContent;
 }
+//判断坐标系内顺时针还是逆时针
+function judgeturn(x1, y1, x3, y3) {
+  var x2 = 150
+  var y2 = 150
+  if ((x2 - x1) * (y3 - y2) - (y2 - y1) * (x3 - x2) > 0)
+  return false 
+  else  return true
+}
 
 module.exports = {
   formatRichText:formatRichText,
   formatTime: formatTime,
   timestampToTime: timestampToTime,
   getMD5Sign: getMD5Sign,
-  checkLogin: checkLogin
+  checkLogin: checkLogin,
+  judgeturn: judgeturn
 }
 
 const formatTime = date => {

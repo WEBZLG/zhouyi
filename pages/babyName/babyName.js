@@ -26,6 +26,8 @@ Page({
     chooseAddress: '',
     chooseTime: '',
     ding: '',
+    content:'',
+    article:'',
     isLunar:true,
     dingPosition:'1',
     icon: {
@@ -163,6 +165,12 @@ Page({
         icon: 'none'
       })
       return false
+    }else if(!API.isChinese(param.surname)){
+      wx.showToast({
+        title: '请输入汉字',
+        icon:'none'
+      })
+      return false
     } else if (param.time == '') {
       wx.showToast({
         title: '请选择出生时间',
@@ -177,16 +185,25 @@ Page({
       return false
     } else {
       param = JSON.stringify(param)
-      console.log(param)
       wx.navigateTo({
         url: '../nameDetail/nameDetail?param='+param,
       })
     }
   },
+  getContent(){
+    API.teachingTypeDetail({},13).then(res=>{
+      let article = UTIL.formatRichText(res.data.content.content)
+      this.setData({
+        article:article,
+        content:res.data.content
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getContent();
     if (options.param) {
       let param = JSON.parse(options.param)
       this.setData({

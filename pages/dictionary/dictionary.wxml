@@ -11,10 +11,12 @@
     <van-cell title="五笔：" value="{{dataList.wubi}}" />
     <van-cell title="部首：" value="{{dataList.bushou}}" />
     <van-cell title="笔画：" value="{{dataList.bihua}}" />
-    <van-cell title="简介：">
+    <van-cell title="简介："/>
+    <van-cell>
       <view wx:for="{{dataList.jianjie}}" wx:key="index">{{item}}</view>
     </van-cell>
-    <van-cell title="详解：">
+    <van-cell title="详解："/>
+    <van-cell>
       <view wx:for="{{dataList.xiangjie}}" wx:key="index">{{item}}</view>
     </van-cell>
   </van-cell-group>

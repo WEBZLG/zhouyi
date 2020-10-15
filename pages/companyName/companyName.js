@@ -97,7 +97,6 @@ Page({
   },
   //获取地点
   onConfirm(e) {
-    console.log(e)
     let type = e.currentTarget.dataset.type;
     switch (type) {
       case 'city':

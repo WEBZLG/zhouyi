@@ -19,6 +19,7 @@ const request = (url, method, data, noToken, noUid) => {
   return new Promise((resolve, reject) => {
     wx.showLoading({
       title: '加载中',
+      mask:true
     })
     wx.request({
       url: API_BASE_URL + url,
@@ -185,12 +186,20 @@ const getImageAll = (image_src) => {
   })
   return Promise.all(all)
 }
+// 检测是否是汉字
+const isChinese = (temp) => {
+  var re=/[^\u4E00-\u9FA5]/;
+  if (re.test(temp)) return false ;
+  return true ;
+}
+
 // 结果api
 module.exports = {
   IMG_BASE_URL,
   API_BASE_URL,
   getImage,
   getImageAll,
+  isChinese,
   // 注册
   regist: (data) => {
     return request('/register', 'post', data, true, true)
@@ -361,6 +370,18 @@ module.exports = {
   },
   //新华字典
   dictionary(data){
-    return request('/query/xhzd', 'post', data)
+    return request('/query/xhzd', 'post', data,true,true)
+  },
+  //百家姓
+  familyName(data){
+    return request('/query/bjx', 'post', data,true,true)
+  },
+  //测字
+  testName(data){
+    return request('/ceming', 'post', data)
+  },
+  // 罗盘
+  luopan(data){
+    return request('/luopan', 'post', data,true,true)
   }
 }

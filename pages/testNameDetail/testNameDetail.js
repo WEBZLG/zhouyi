@@ -15,43 +15,15 @@ Page({
     loading: true,
     userInfo:''
   },
-  // 查看更多
-  onView(){
-    let _this = this
-    wx.navigateTo({
-      url: '../dictionary/dictionary',
-    })
-    // API.namePay({
-    //   pay_type:'qiming_baby'
-    // }).then(res=>{
-    //   console.log(res)
-    //   let order = res.data.order_no
-    //   wx.requestPayment({
-    //     timeStamp: res.data.wechat_data.timeStamp.toString(),
-    //     nonceStr: res.data.wechat_data.nonceStr,
-    //     package: res.data.wechat_data.package,
-    //     signType: res.data.wechat_data.signType,
-    //     paySign: res.data.wechat_data.paySign,
-    //     success(res) {
-    //       let param = _this.data.param
-    //       delete param.sign
-    //       param.order_no = order
-    //       _this.getData(param);
-    //       _this.setData({
-    //         isOrder:true
-    //       })
-    //     },
-    //     fail(error) {
-    //       wx.showToast({
-    //         title:'支付失败',
-    //         icon: "none"
-    //       })
-    //     }
-    //   })
-    // })
-  },
+
   getData(param){
-    API.babyName(param).then(res=>{
+    API.testName({
+      real_name:param.surname,
+      sex:param.sex,
+      time:param.chooseDate,
+      is_married:param.marriage,
+      child:param.children
+    }).then(res=>{
       let total = 0
       let wuxing = new Array()
       for (var prop in res.data.wuxing_strong) {
@@ -71,6 +43,12 @@ Page({
         loading: false,
         total:total
       })
+    })
+  },
+  onView(){
+    let _this = this
+    wx.navigateTo({
+      url: '../vip/vip?type='+'ceming',
     })
   },
   /**

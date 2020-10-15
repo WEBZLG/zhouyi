@@ -1,24 +1,12 @@
 <!--pages/naming/naming.wxml-->
 <view>
-	<!-- <view class="page-section page-section-spacing swiper">
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
-			circular="{{true}}">
-			<block wx:for="{{background}}" wx:key="index">
-				<swiper-item>
-					<view class="swiper-item">
-						<van-image width="100%" height="100%" wx:if='{{item}}' show-loading src="{{imgUrl+item}}" />
-					</view>
-				</swiper-item>
-			</block>
-		</swiper>
-	</view> -->
 	<view class="banner">
 		<van-image width="100%" height="100%" show-loading src="{{background[0]}}" />
 	</view>
 	<van-skeleton animate row="3" loading="{{ loading }}">
-		<van-grid column-num="4" border="{{ false }}">
+		<van-grid column-num="3" border="{{ false }}">
 			<van-grid-item use-slot wx:for="{{ iconNav }}" wx:key="id" catchtap="onPage" data-id="{{item.id}}">
-				<image style="width:50px; height: 50px;border-radius:10px" src="{{item.imgPath}}" />
+				<image style="width:50px; height: 50px;border-radius:25px" src="{{item.imgPath}}" />
 				<text class="nav-title">{{item.title}}</text>
 			</van-grid-item>
 		</van-grid>
@@ -56,7 +44,7 @@
 			</view>
 		</van-grid-item>
 		<van-grid-item use-slot>
-			<view class="pic-item">
+			<view class="pic-item" catchtap="familyNames">
 				<van-image width="100%" height="100%" src="/images/baijiaxing.jpg" />
 			</view>
 		</van-grid-item>

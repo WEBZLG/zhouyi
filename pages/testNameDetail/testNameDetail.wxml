@@ -5,19 +5,27 @@
 		<van-panel title="基本信息">
 			<view class="content">
 				<view class="flex">
-					<view>姓氏：{{content.surname}}</view>
+					<view>姓名：{{content.real_name}}</view>
 					<view class="sex">性别：{{content.sex}}</view>
 				</view>
-				<view>出生时间：{{content.gregorian_calendar}}</view>
-				<view>农历：{{content.lunar}}</view>
-				<view>出生地点：{{content.address}}</view>
+				<view>出生时间：{{content.time}}</view>
+				<view>婚姻状况：
+					<text wx:if="{{content.is_married==0}}">未婚</text>
+					<text wx:if="{{content.is_married==1}}">已婚</text>
+					<text wx:if="{{content.is_married==2}}">离异</text>
+				</view>
+				<view>子女情况：{{content.child==1?'有女子':'无子女'}}</view>
 			</view>
 		</van-panel>
 		<van-panel title="用字分析">
 			<view class="content">
 				<view>
-					<van-cell title="国学用字分析" icon="circle" border="{{false}}" />
-					<view>{{content.guoxue}}</view>
+					<van-cell title="星座用字分析" icon="circle" border="{{false}}" />
+					<view>{{content.xingzuo}}</view>
+				</view>
+				<view>
+					<van-cell title="生肖用字分析" icon="circle" border="{{false}}" />
+					<view>{{content.shengxiao}}</view>
 				</view>
 				<view>
 					<van-cell title="五行强弱分析" icon="circle" border="{{false}}" />
@@ -32,59 +40,66 @@
 						<view class="wh-item" wx:for="{{wuxing}}" wx:key="index">{{item.title}}:{{item.num}}</view>
 					</view>
 				</view>
-				<!-- <view>
-        <van-cell title="五行用字分析" icon="circle" border="{{false}}" />
-        <view>{{content.wuxing_zi}}</view>
-      </view> -->
 				<view>
-					<van-cell title="星座用字分析" icon="circle" border="{{false}}" />
-					<view>{{content.xingzuo}}</view>
-				</view>
-				<view>
-					<van-cell title="生肖用字分析" icon="circle" border="{{false}}" />
-					<view>{{content.shengxiao}}</view>
+					<van-cell title="国学用字分析" icon="circle" border="{{false}}" />
+					<view>{{content.guoxue}}</view>
 				</view>
 			</view>
 		</van-panel>
-		<van-panel title="名字详情" wx:if="{{content.ming}}">
-			<view class="name-detail" wx:for="{{content.ming}}" wx:key="index">
-				<view class="name-item">
-					<view class="text-center">
-						<view class="name-caption">
-							<view class="flex">
-								<view class="name-box" wx:for="{{item.mingzi}}" wx:for-item="name" wx:key="index">
-									<image wx-if="{{name}}" src="../../images/tzg.png"></image>
-									<text wx-if="{{name}}" class="name-text">{{name}}</text>
-								</view>
-							</view>
-						</view>
-					</view>
-					<view class="title">{{item.shuli.title}}</view>
-					<view wx:if="{{item.shuli.hanyi!==''}}">
-						<van-cell title="含义" icon="circle" border="{{false}}" />
-						<view>{{item.shuli.hanyi}}</view>
-					</view>
-					<view wx:if="{{item.shuli.jiankang!==''}}">
-						<van-cell title="健康" icon="circle" border="{{false}}" />
-						<view>{{item.shuli.jiankang}}</view>
-					</view>
-					<view wx:if="{{item.shuli.jiating!==''}}">
-						<van-cell title="家庭" icon="circle" border="{{false}}" />
-						<view>{{item.shuli.jiating}}</view>
-					</view>
-					<view wx:if="{{item.shuli.jiye!==''}}">
-						<van-cell title="基业" icon="circle" border="{{false}}" />
-						<view>{{item.shuli.jiye}}</view>
-					</view>
+		<van-panel title="五格分析" wx:if="{{userInfo.ceming_vip!==0}}">
+			<view class="content">
+				<view>
+					<van-cell title="天格分析" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.tiange.shu}}</view>
+					<view>凶吉：{{content.wuge.tiange.shuli.xj}}</view>
+					<view>含义：{{content.wuge.tiange.shuli.hanyi}}</view>
+				</view>
+				<view>
+					<van-cell title="人格分析" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.renge.shu}}</view>
+					<view>凶吉：{{content.wuge.renge.shuli.xj}}</view>
+					<view>含义：{{content.wuge.renge.shuli.hanyi}}</view>
+				</view>
+				<view>
+					<van-cell title="地格分析" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.dige.shu}}</view>
+					<view>凶吉：{{content.wuge.dige.shuli.xj}}</view>
+					<view>含义：{{content.wuge.dige.shuli.hanyi}}</view>
+				</view>
+				<view>
+					<van-cell title="总格分析" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.zongge.shu}}</view>
+					<view>凶吉：{{content.wuge.zongge.shuli.xj}}</view>
+					<view>含义：{{content.wuge.zongge.shuli.hanyi}}</view>
+				</view>
+				<view>
+					<van-cell title="外格分析" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.waige.shu}}</view>
+					<view>凶吉：{{content.wuge.waige.shuli.xj}}</view>
+					<view>含义：{{content.wuge.waige.shuli.hanyi}}</view>
 				</view>
 			</view>
-			<view class="view-more" wx:if="{{userInfo.vip_level==0}}">
-				<van-image width="100" height="100" lazy-load src="/images/suo.png" />
-				<view>开通会员解锁更多名字</view>
+		</van-panel>
+		<van-panel title="姓名分析"  wx:if="{{userInfo.ceming_vip!==0}}">
+			<view class="content">
+				<view class="padding-bottom">
+					<van-cell title="" icon="circle" border="{{false}}" />
+					<view>数理：{{content.wuge.zongge.shu}}</view>
+					<view>凶吉：{{content.wuge.zongge.shuli.xj}}</view>
+					<view>基业：{{content.wuge.zongge.shuli.jiye}}</view>
+					<view>家庭：{{content.wuge.zongge.shuli.jiating}}</view>
+					<view>健康：{{content.wuge.zongge.shuli.jiankang}}</view>
+					<view>含义：{{content.wuge.zongge.shuli.hanyi}}</view>
+				</view>
+			</view>
+		</van-panel>
+		<view class="view-more" wx:if="{{userInfo.ceming_vip==0}}">
+      <van-image width="100" height="100" lazy-load src="/images/suo.png" />
+      <view>想知道您的名字是大富大贵还是碌碌无为？</view>
+			<view>开通会员解锁更多名字分析</view>
 				<view class="btn-box">
-					<van-button type="info" round catchtap="onView">开通会员</van-button>
+					<van-button type="info" round catchtap="onView">开通测名会员</van-button>
 				</view>
-			</view>
-		</van-panel>
+    </view>
 	</van-skeleton>
 </view>

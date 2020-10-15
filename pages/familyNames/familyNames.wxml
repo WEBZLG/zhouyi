@@ -1,0 +1,15 @@
+<!--pages/familyNames/familyNames.wxml-->
+<van-sticky>
+  <van-search value="{{ value }}" placeholder="请输入搜索姓氏" use-action-slot bind:change="onChange" bind:search="onSearch">
+    <view slot="action" bind:tap="onSearch">搜索</view>
+  </van-search>
+</van-sticky>
+<block wx:if="{{dataList!==''}}">
+  <van-cell-group>
+    <van-cell title="姓：" value="{{dataList.xing}}" />
+    <van-cell title="简介："/>
+    <van-cell>
+      <rich-text nodes="{{dataList.content}}"></rich-text>
+    </van-cell>
+  </van-cell-group>
+</block>

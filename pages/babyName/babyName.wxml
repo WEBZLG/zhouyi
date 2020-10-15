@@ -1,9 +1,9 @@
 <!--pages/babyName/babyName.wxml-->
 <view>
   <view class="banner">
-    <van-image width="100%" height="100%" lazy-load src="/images/bbqmbanner.jpg" />
+    <van-image width="100%" height="100%" lazy-load src="/images/quming.png" />
   </view>
-  <view>
+  <view class="form">
     <van-field label="姓氏" value="{{ surname }}" placeholder="请输入姓氏" bind:input="getName" />
     <van-radio-group value="{{ sex }}" bind:change="onChange">
       <van-cell title="性别">
@@ -16,10 +16,10 @@
       <van-datetime-picker type="datetime" value="{{ currentDate }}" max-date="{{ maxDate }}" bind:confirm="onInput"
         bind:cancel="onClose" />
     </van-popup> -->
-    <van-field label="出生时间" value="{{ dateStr3 }}" placeholder="请选择出生时间" readonly is-link catchtap="showDatepicker3"/>
-		<!-- <van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose"> -->
-			<rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
-		<!-- </van-popup> -->
+    <van-field label="出生时间" value="{{ dateStr3 }}" placeholder="请选择出生时间" readonly is-link catchtap="showDatepicker3" />
+    <!-- <van-popup show="{{ show }}" position="bottom" custom-style="height: 446rpx;" bind:close="onClose"> -->
+    <rui-datepicker id="ruiDatepicker" bind:confirm="dateConfirm" bind:cancel="onClose"></rui-datepicker>
+    <!-- </van-popup> -->
     <van-field label="出生地点" value="{{ chooseAddress }}" placeholder="请选择出生地" readonly is-link
       catchtap="showAddressPopup" />
     <van-popup show="{{ addressShow }}" position="bottom" custom-style="height: 60%;" bind:close="onClose">
@@ -33,7 +33,8 @@
         <van-button type="info" size="mini" catchtap="onClose">确认</van-button>
       </view>
       <van-grid column-num="4" gutter="{{10}}">
-        <van-grid-item use-slot wx:for="{{ characterList }}" wx:key="index" class="{{item.checked==true?'checked':''}}" data-index = "{{index}}" catchtap="checkMark">
+        <van-grid-item use-slot wx:for="{{ characterList }}" wx:key="index" class="{{item.checked==true?'checked':''}}"
+          data-index="{{index}}" catchtap="checkMark">
           <view>{{item.title}}</view>
         </van-grid-item>
       </van-grid>
@@ -52,6 +53,10 @@
     <view class="btn-box">
       <van-button type="info" round catchtap="onSubmit">立即起名</van-button>
     </view>
-
   </view>
+  <van-panel title="{{content.title}}">
+    <view class="desc">
+      <rich-text nodes="{{article}}"></rich-text>
+    </view>
+  </van-panel>
 </view>

@@ -4,18 +4,21 @@
     <image src="../../images/vip.jpg"></image>
   </view>
   <van-skeleton title avatar row="3" loading="{{ loading }}">
-  <view class="vip-can" wx:for="{{vipList}}" wx:key="index">
-    <van-cell title="{{item.name}}"/>
-    <van-grid column-num="{{index}}" gutter="{{10}}" wx:for="{{item.price}}" wx:for-item="price" wx:for-index="priceindex" wx:key="priceindex" data-index="{{index}}" data-priceindex
-    ="{{priceindex}}" custom-class="{{priceindex==checkindex?'checked':''}}" catchtap="checkPrice">
-      <van-grid-item use-slot >
-        <view>{{price.time_name}}</view>
-        <view>{{price.price}}元</view>
-      </van-grid-item>
-    </van-grid>
-  </view>
-</van-skeleton>
+    <view class="vip-can" wx:for="{{vipList}}" wx:key="index">
+      <van-cell title="{{item.name}}" wx:if="{{item.name=='宝宝起名会员'}}" value="{{userInfo.qiming_vip_expire_time==''?'':userInfo.qiming_vip_expire_time+'到期'}}"/>
+      <van-cell title="{{item.name}}" wx:if="{{item.name=='公司起名会员'}}" value="{{userInfo.business_qiming_vip_expire_time==''?'':userInfo.business_qiming_vip_expire_time+'到期'}}"/>
+      <van-cell title="{{item.name}}" wx:if="{{item.name=='测名会员'}}" value="{{userInfo.ceming_vip_expire_time==''?'':userInfo.ceming_vip_expire_time+'到期'}}"/>
+      <van-grid column-num="{{item.price.length}}" gutter="{{10}}">
+        <van-grid-item use-slot  wx:for="{{item.price}}" wx:for-item="price"
+        wx:for-index="priceindex" wx:key="priceindex" data-index="{{index}}" data-type="{{item.name}}" data-priceindex="{{priceindex}}"
+        custom-class="{{priceindex==checkindex&&item.name==type?'checked':''}}" catchtap="checkPrice">
+          <view>{{price.time_name}}</view>
+          <view>{{price.price}}元</view>
+        </van-grid-item>
+      </van-grid>
+    </view>
+  </van-skeleton>
   <view class="btn-box">
-		<van-button type="info" round catchtap="onSubmit">开通/续费会员</van-button>
-	</view>
+    <van-button type="info" round catchtap="onSubmit">开通/续费会员</van-button>
+  </view>
 </view>

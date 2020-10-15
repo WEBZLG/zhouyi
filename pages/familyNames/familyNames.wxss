@@ -1,4 +1,4 @@
-/* pages/dictionary/dictionary.wxss */
+/* pages/familyNames/familyNames.wxss */
 .van-cell__title {
   flex: none !important;
   width: 120rpx;

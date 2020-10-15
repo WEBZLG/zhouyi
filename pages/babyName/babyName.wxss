@@ -19,8 +19,8 @@ swiper{
   height: 400rpx;
 }
 
-.van-cell__title,
-.van-field__label{
+.form .van-cell__title,
+.form .van-field__label{
   flex:none !important;
   width: 140rpx !important;
   min-width: 0 !important;
@@ -29,6 +29,7 @@ swiper{
 
 .van-cell__value{
   display: flex;
+  text-align: left !important;
 }
 .van-radio{
   margin-right: 30rpx;
@@ -75,4 +76,8 @@ van-button {
 .checked .van-grid-item__content{
   color: #ffffff;
   background-color: #1989FA;
+}
+.desc{
+  padding: 20rpx 30rpx;
+  line-height: 48rpx;
 }

@@ -6,32 +6,46 @@ Page({
    * 页面的初始数据
    */
   data: {
-    vipList:[],
-    checkindex:1,
-    typeindex:1,
+    vipList: [],
+    checkindex: '',
+    typeindex: '',
     loading: true,
+    type: '',
+    userInfo:''
   },
-  getPrice(){
-    API.priceList({}).then(res=>{
+  getPrice() {
+    API.priceList({}).then(res => {
       this.setData({
-        vipList:res.data
+        vipList: res.data
       })
     })
   },
-  checkPrice(e){
+  checkPrice(e) {
     let idx = e.currentTarget.dataset.index
     let pidx = e.currentTarget.dataset.priceindex
+    let type = e.currentTarget.dataset.type
     this.setData({
-      typeindex:idx,
-      checkindex:pidx
+      typeindex: idx,
+      checkindex: pidx,
+      type: type
     })
   },
-  onSubmit(){
+  onSubmit() {
+    let type = this.data.typeindex
+    let time = this.data.checkindex
+    console.log(type, time)
+    if (type == '' && time == '') {
+      wx.showToast({
+        title: '请选择要开通的会员类型',
+        icon: 'none'
+      })
+      return false
+    }
     API.namePay({
-      pay_type:'vip',
-      type:this.data.typeindex,
-      time:this.data.checkindex
-    }).then(res=>{
+      pay_type: 'vip',
+      type: type,
+      time: time
+    }).then(res => {
       wx.requestPayment({
         timeStamp: res.data.wechat_data.timeStamp.toString(),
         nonceStr: res.data.wechat_data.nonceStr,
@@ -39,7 +53,7 @@ Page({
         signType: res.data.wechat_data.signType,
         paySign: res.data.wechat_data.paySign,
         success(res) {
-          if(res.errMsg=='requestPayment:ok'){
+          if (res.errMsg == 'requestPayment:ok') {
             wx.showToast({
               title: '支付成功',
               icon: "none"
@@ -56,9 +70,9 @@ Page({
                     delta: 2,
                   })
                 }, 1200);
-              } 
+              }
             })
-          }else{
+          } else {
             wx.showToast({
               title: res.errMsg,
               icon: "none"
@@ -79,6 +93,33 @@ Page({
    */
   onLoad: function (options) {
     this.getPrice()
+    let type = options.type
+    switch (type) {
+      case 'qiming':
+        this.setData({
+          typeindex: 'qiming',
+          checkindex: 0,
+          type: '起名会员'
+        })
+        break;
+      case 'ceming':
+        this.setData({
+          typeindex: 'ceming',
+          checkindex: 0,
+          type: '测名会员'
+        })
+        break;
+      case 'gongsiqiming':
+        this.setData({
+          typeindex: 'business_qiming',
+          checkindex: 0,
+          type: '公司会员'
+        })
+        break;
+      default:
+        break;
+    }
+
   },
 
   /**
@@ -96,8 +137,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let userInfo = wx.getStorageSync('userInfo');
+    this.setData({
+      userInfo:userInfo
+    })
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -49,7 +49,9 @@
     "components/timeLine/timeLine",
     "pages/dictionary/dictionary",
     "pages/testName/testName",
-    "pages/testNameDetail/testNameDetail"
+    "pages/testNameDetail/testNameDetail",
+    "pages/familyNames/familyNames",
+    "pages/luopan/luopan"
   ],
   "networkTimeout": {
     "request": 10000,

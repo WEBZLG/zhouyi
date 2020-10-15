@@ -29,6 +29,12 @@ Page({
     codeShow: false,
     iconNav: [
       {
+        id: 8,
+        imgPath: '../../images/ceming.png',
+        title: "测名",
+        url: "../testName/testName"
+      },
+      {
         id: 7,
         imgPath: '../../images/qiming.png',
         title: "起名",
@@ -47,6 +53,12 @@ Page({
         url: "../bazi/bazi"
       },
       {
+        id: 9,
+        imgPath: '../../images/lpan.png',
+        title: "风水罗盘",
+        url: "../luopan/luopan"
+      },
+      {
         id: 1,
         imgPath: '../../images/jiaoxue.png',
         title: "学习资料",
@@ -58,7 +70,6 @@ Page({
         title: "城约科技",
         url: "../chengyue/chengyue"
       }
-
     ]
   },
   onClickShow() {
@@ -128,48 +139,48 @@ Page({
     let url = e.currentTarget.dataset.url
     let id = e.currentTarget.dataset.id
     let title = e.currentTarget.dataset.title
-    wx.navigateTo({
-      url: url + '?id=' + id + '&title=' + title
-    })
-    // if (id == 1||id==5) {
-    //   wx.navigateTo({
-    //     url: url + '?id=' + id + '&title=' + title
-    //   })
-    //   return false;
-    // } else {
-    //   let userInfo = wx.getStorageSync('userInfo');
-    //   if (userInfo == '' || userInfo == undefined) {
-    //     wx.redirectTo({
-    //       url: '../login/login',
-    //     })
-    //   } else {
-    //     API.isSignIn({}, {
-    //         uid: userInfo.user_id
-    //       })
-    //       .then(res => {
-    //         if (res.message == '已登录') {
-    //           wx.setStorageSync('loginToken', res.data.login_token);
-    //           wx.setStorageSync('userInfo', res.data.user);
-    //           let url = e.currentTarget.dataset.url
-    //           let id = e.currentTarget.dataset.id
-    //           let title = e.currentTarget.dataset.title
-    //           wx.navigateTo({
-    //             url: url + '?id=' + id + '&title=' + title
-    //           })
-    //         } else {
-    //           wx.showToast({
-    //             title: 'res.message',
-    //             icon: "none"
-    //           })
-    //           setTimeout(() => {
-    //             wx.redirectTo({
-    //               url: '../login/login',
-    //             })
-    //           }, 1500);
-    //         }
-    //       })
-    //   }
-    // }
+    // wx.navigateTo({
+    //   url: url + '?id=' + id + '&title=' + title
+    // })
+    if (id !== 7) {
+      wx.navigateTo({
+        url: url + '?id=' + id + '&title=' + title
+      })
+      return false;
+    } else {
+      let userInfo = wx.getStorageSync('userInfo');
+      if (userInfo == '' || userInfo == undefined) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        API.isSignIn({}, {
+            uid: userInfo.user_id
+          })
+          .then(res => {
+            if (res.message == '已登录') {
+              wx.setStorageSync('loginToken', res.data.login_token);
+              wx.setStorageSync('userInfo', res.data.user);
+              // let url = e.currentTarget.dataset.url
+              // let id = e.currentTarget.dataset.id
+              // let title = e.currentTarget.dataset.title
+              wx.navigateTo({
+                url: url + '?id=' + id + '&title=' + title
+              })
+            } else {
+              wx.showToast({
+                title: 'res.message',
+                icon: "none"
+              })
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }, 1000);
+            }
+          })
+      }
+    }
 
   },
   // 大师推荐

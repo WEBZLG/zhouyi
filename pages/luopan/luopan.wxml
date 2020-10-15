@@ -1,0 +1,19 @@
+<!--pages/luopan/luopan.wxml-->
+<view class="container" style="background-color:{{backgroundColor}}">
+  <view class="text" style="color:{{color}}">
+    <text>{{direction}}</text>
+    <text>{{angle}}°</text>
+    <text>{{lname}}</text>
+  </view>
+  <view class="pic">
+    <view class="line1"></view>
+    <view class="line2"></view>
+    <image src="{{imgUrl+compass}}" style="transform: rotate({{rotate}}deg);"></image>
+  </view>
+  <van-grid column-num="5" border="{{ false }}">
+		<van-grid-item use-slot wx:for="{{ iconNav }}" wx:key="index" catchtap="onChange" data-id="{{index}}" data-title="{{item.name}}" data-url="{{item.image}}">
+			<image style="width:50px; height: 50px;border-radius:25px" src="{{imgUrl+item.image}}" />
+			<text class="nav-title">{{item.name}}</text>
+		</van-grid-item>
+	</van-grid>
+</view>

@@ -148,7 +148,7 @@ Page({
                 wx.reLaunch({
                   url: '../home/home',
                 })
-              }, 3000);
+              }, 1000);
             })
         } else if (sm.cancel) {
           //console.log('用户点击取消')
@@ -219,7 +219,7 @@ Page({
                     wx.redirectTo({
                       url: '../login/login',
                     })
-                  }, 3000);
+                  }, 1000);
                 }
               })
           } else {
@@ -259,7 +259,7 @@ Page({
               wx.redirectTo({
                 url: '../login/login',
               })
-            }, 1500);
+            }, 1000);
           }
         })
     }

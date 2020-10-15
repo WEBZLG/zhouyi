@@ -78,11 +78,11 @@
 					</view>
 				</view>
 			</view>
-			<view class="view-more" wx:if="{{userInfo.vip_level==0}}">
+			<view class="view-more" wx:if="{{userInfo.qiming_vip==0}}">
 				<van-image width="100" height="100" lazy-load src="/images/suo.png" />
-				<view>开通会员解锁更多名字</view>
+				<view>开通起名会员解锁更多名字</view>
 				<view class="btn-box">
-					<van-button type="info" round catchtap="onView">开通会员</van-button>
+					<van-button type="info" round catchtap="onView">开通起名会员</van-button>
 				</view>
 			</view>
 		</van-panel>

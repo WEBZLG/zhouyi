@@ -13,7 +13,7 @@
 }
 .van-image--round{
   margin: 0 auto;
-  padding: 10rpx;
+  padding: 30rpx;
 }
 .nav-box{
   margin: 30rpx;

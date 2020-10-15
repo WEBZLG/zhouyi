@@ -73,3 +73,11 @@
 .title{
   font-weight: bold;
 }
+.padding-bottom{
+  padding-bottom: 30rpx;
+}
+.view-more{
+  text-align: center;
+  background: #eaf2ff;
+  padding: 30rpx 0;
+}

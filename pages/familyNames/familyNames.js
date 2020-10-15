@@ -1,47 +1,54 @@
-// pages/magicDetail/magicDetail.js
+// pages/dictionary/dictionary.js
 const API = require('../../utils/api');
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    show:false,//弹窗控制显隐
-    specialData:'',//返回参数
-    specialContent:[],
-    sudoku:'',//排盘重组
-    loading:true
+    value:'',
+    dataList:''
   },
-  // 弹窗显示触发
-  showPopup(e) {
-    let content = e.currentTarget.dataset.content
-    this.setData({ show: true,specialContent: content});
+  onChange(e) {
+    this.setData({
+      value: e.detail,
+    });
   },
-  // 弹窗关闭触发
-  onClose() {
-    this.setData({ show: false });
+  onSearch() {
+    let zi = this.data.value
+    if(zi==''){
+      wx.showToast({
+        title: '请输入关键字',
+        icon:'none'
+      })
+    }else if(!API.isChinese(zi)){
+      wx.showToast({
+        title: '请输入汉字',
+        icon:'none'
+      })
+    }else{
+      API.familyName({
+        xing:zi
+      }).then(res=>{
+        this.setData({
+          dataList:res.data
+        })
+      })
+    }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _this = this
-    let param = JSON.parse(options.param) 
-    let sudoku = JSON.parse(options.sudoku) 
-    this.setData({
-      specialData:param,
-      sudoku:sudoku
-    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    setTimeout(() => {
-      this.setData({
-        loading:false
-      })
-    }, 500);
+
   },
 
   /**
