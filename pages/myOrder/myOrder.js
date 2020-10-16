@@ -7,19 +7,19 @@ Page({
    */
   data: {
     imgUrl: API.IMG_BASE_URL, //图片路径
-    show:false,
-    concat:'',
-    page:1,
-    dataList:[]
+    show: false,
+    concat: '',
+    page: 1,
+    dataList: []
   },
   // 支付
-  orderPay(e){
+  orderPay(e) {
     let _this = this
     let orderId = e.currentTarget.dataset.id
     API.namePay({
-      pay_type:'buy',
-      order_id:orderId
-    }).then(res=>{
+      pay_type: 'buy',
+      order_id: orderId
+    }).then(res => {
       wx.requestPayment({
         timeStamp: res.data.wechat_data.timeStamp.toString(),
         nonceStr: res.data.wechat_data.nonceStr,
@@ -27,7 +27,7 @@ Page({
         signType: res.data.wechat_data.signType,
         paySign: res.data.wechat_data.paySign,
         success(res) {
-          if(res.errMsg=='requestPayment:ok'){
+          if (res.errMsg == 'requestPayment:ok') {
             wx.showToast({
               title: '支付成功',
               icon: "none"
@@ -35,7 +35,7 @@ Page({
             setTimeout(() => {
               _this.getOrder()
             }, 1200);
-          }else{
+          } else {
             wx.showToast({
               title: res.errMsg,
               icon: "none"
@@ -65,46 +65,69 @@ Page({
   onOpen() {
     API.getContace({}).then(res => {
       this.setData({
-        concat:res.data,
+        concat: res.data,
         show: true
       });
     })
   },
-  getOrder(page){
+  getOrder(page) {
     let _this = this
     API.getOrder({
-      page:page
+      page: page
     }).then(res => {
-      if(page>1){
-        if(res.data.orders.length==0){
+      if (page > 1) {
+        if (res.data.orders.length == 0) {
           wx.showToast({
             title: '无更多数据',
-            icon:'none'
+            icon: 'none'
           })
           _this.setData({
-            page:_this.data.page-1
+            page: _this.data.page - 1
           })
         }
         _this.setData({
-          dataList: _this.data.dataList.concat(res.data.orders) 
+          dataList: _this.data.dataList.concat(res.data.orders)
         })
-      }else{
+      } else {
         _this.setData({
           dataList: res.data.orders
         })
       }
     })
   },
-  orderDetail(e){
+  orderDetail(e) {
     let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '../orderDetail/orderDetail?id='+id,
-    })
+    let type = e.currentTarget.dataset.type
+    switch (type) {
+      case '购买商品':
+        wx.navigateTo({
+          url: '../orderDetail/orderDetail?id=' + id,
+        })
+        break;
+      case '公司起名':
+        wx.navigateTo({
+          url: '../orderDetailGong/orderDetailGong?id=' + id,
+        })
+        break;
+      case '宝宝起名':
+        wx.navigateTo({
+          url: '../orderDetailBao/orderDetailBao?id=' + id,
+        })
+        break;
+      case '测名':
+        wx.navigateTo({
+          url: '../orderDetailCe/orderDetailCe?id=' + id,
+        })
+        break;
+      default:
+        break;
+    }
+
   },
-  orderSuccess(e){
+  orderSuccess(e) {
     let _this = this
     let id = e.currentTarget.dataset.id
-    API.orderSuccess({},id).then(res => {
+    API.orderSuccess({}, id).then(res => {
       wx.showToast({
         title: res.message,
       })
@@ -158,7 +181,7 @@ Page({
   onReachBottom: function () {
     let _this = this
     this.setData({
-      page: _this.data.page*1+1
+      page: _this.data.page * 1 + 1
     })
     this.getOrder(_this.data.page)
   },

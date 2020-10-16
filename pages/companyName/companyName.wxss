@@ -38,3 +38,7 @@
 .banner{
   height: 400rpx;
 }
+.desc{
+  padding: 20rpx 30rpx;
+  line-height: 48rpx;
+}

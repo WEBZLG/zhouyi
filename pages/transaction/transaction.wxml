@@ -1,0 +1,12 @@
+<!--pages/transaction/transaction.wxml-->
+<view>
+  <van-collapse accordion value="{{ activeName }}" bind:change="onChange">
+    <block wx:for="{{dataList}}" wx:key="index">
+      <van-collapse-item title="{{item.created_at}}" value="{{item.type}}" name="{{index}}">
+        <view>变动金额：{{item.amount}}</view>
+        <view>账户余额：{{item.balance}}</view>
+        <view>备注：{{item.remark}}</view>
+      </van-collapse-item>
+    </block>
+  </van-collapse>
+</view>

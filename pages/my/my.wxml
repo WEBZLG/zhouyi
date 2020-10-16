@@ -10,8 +10,8 @@
 			<view wx:if="{{userInfo}}">{{userInfo.nickname||userInfo.mobile}}</view>
 			<view wx:else catchtap="onLogin">登录</view>
 			<!-- <view class="flex">
-				<view>余额：{{}}</view>
-				<view>提现</view>
+				<view>余额：9.9元</view>
+				<view class="renew" catchtap="cashOut">提现</view>
 			</view> -->
 			<!-- <view class="flex">
 				<view class="open-vip" data-type="6" wx:if="{{userInfo.vip_level==0}}" catchtap="getMessge">成为会员</view>
@@ -27,26 +27,25 @@
 		</view>
 	</view>
 	<view class="nav-box">
-		<van-cell-group>
-			<!-- <van-cell title="实名认证" wx:if="{{userInfo.real==''}}" value="去认证" is-link  data-type="0" catchtap="getMessge"/>
-			<van-cell title="实名认证" wx:if="{{userInfo.real.status==0}}" value="未审核" is-link />
-			<van-cell title="实名认证" wx:if="{{userInfo.real.status==1}}" value="{{userInfo.real.real_name}}" is-link/>
-			<van-cell title="实名认证" wx:if="{{userInfo.real.status==2}}" value="审核失败" is-link data-type="0" catchtap="getMessge"/> -->
-			<van-cell icon="star-o" title="会员中心" is-link  data-type="6" catchtap="getMessge"/>
-			<van-cell icon="medal-o" wx:if="{{userInfo.role3==''}}" title="成为大师" is-link  data-type="4" catchtap="getMessge"/>
-			<van-cell icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" title="大师资料" value="未审核" is-link />
-			<van-cell icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==1}}" title="大师资料"  is-link   data-type="5" catchtap="getMessge"/>
-			<van-cell icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==2}}" title="大师资料" value="审核失败{{'('+userInfo.role3.remark+')'}}" is-link   data-type="4" catchtap="getMessge"/>
-			<van-cell icon="phone-circle-o" title="修改手机" is-link  data-type="1" catchtap="getMessge"/>
-			<van-cell icon="eye-o" title="修改密码" is-link  data-type="2" catchtap="getMessge"/>
-			<van-cell icon="cluster-o" title="我的推荐" is-link  data-type="3" catchtap="getMessge"/>
-			<van-cell icon="orders-o" title="我的订单" is-link  data-type="7" catchtap="getMessge"/>
-			<van-cell icon="location-o" title="我的地址" is-link  data-type="8" catchtap="getMessge"/>
-			<van-cell icon="setting-o" title="系统消息" is-link  catchtap="getSysMsg"/>
-			<van-cell icon="contact" title="联系客服" is-link  catchtap="getPhone"/>
-			<van-cell icon="notes-o" title="用户协议" is-link  catchtap="getAgreement"/>
-			<van-cell icon="records" title="意见反馈" is-link  catchtap="getOpinion"/>
-		</van-cell-group>
+		<van-skeleton  animate row="3" loading="{{ loading }}">
+		<van-grid direction="horizontal" column-num="2">
+			<van-grid-item icon="medal-o" wx:if="{{userInfo.role3==''}}" text="成为大师" data-type="4" catchtap="getMessge"/>
+			<van-grid-item icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==0}}" text="大师资料" value="未审核"/>
+			<van-grid-item icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==1}}" text="大师资料" data-type="5" catchtap="getMessge"/>
+			<van-grid-item icon="medal-o" wx:if="{{userInfo.role3!=''&&userInfo.role3.status==2}}" text="大师资料" value="审核失败{{'('+userInfo.role3.remark+')'}}"  data-type="4" catchtap="getMessge"/>
+			<van-grid-item icon="paid" data-type="10" catchtap="getMessge" text="我的钱包" />
+			<van-grid-item icon="orders-o" text="我的订单" data-type="7" catchtap="getMessge"/>
+			<van-grid-item icon="cluster-o" text="我的推荐" data-type="3" catchtap="getMessge"/>
+			<van-grid-item icon="vip-card-o" text="账户设置"  data-type="9" catchtap="getMessge"/>
+			<van-grid-item icon="location-o" text="我的地址"  data-type="8" catchtap="getMessge"/>
+			<!-- <van-grid-item icon="phone-circle-o" text="修改手机"   data-type="1" catchtap="getMessge"/>
+			<van-grid-item icon="eye-o" text="修改密码" data-type="2" catchtap="getMessge" /> -->
+			<van-grid-item icon="setting-o" text="系统消息"  catchtap="getSysMsg"/>
+			<van-grid-item icon="contact" text="联系客服"  catchtap="getPhone"/>
+			<van-grid-item icon="notes-o" text="用户协议" catchtap="getAgreement"/>
+			<van-grid-item icon="edit" text="意见反馈"   catchtap="getOpinion"/>
+		</van-grid>
+	</van-skeleton>
 	</view>
 	<view class="btn-box" wx:if="{{userInfo}}">
 		<van-button type="info" round plain catchtap="onSignOut">退出登录</van-button>

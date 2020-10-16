@@ -73,7 +73,7 @@ Page({
         icon:'none'
       })
     }else{
-    API.namePay({
+    API.namePayNew({
       pay_type:'buy',
       goods_id:id,
       addr_id:addressId,

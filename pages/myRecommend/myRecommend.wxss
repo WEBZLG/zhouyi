@@ -54,3 +54,7 @@
   align-items: center;
   justify-content: space-between;
 }
+.flex{
+  display: flex;
+  align-items: center;
+}

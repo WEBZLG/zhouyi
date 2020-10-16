@@ -1,7 +1,7 @@
 <!--pages/myOrder/myOrder.wxml-->
 <view>
-  <view wx:for="{{dataList}}" wx:key="index" data-id="{{item.id}}" catchtap="orderDetail">
-    <van-panel title="订单时间：{{item.created_at}}" desc="订单号：{{item.order_no}}" status="{{item.status_name}}" use-footer-slot>
+  <view wx:for="{{dataList}}" wx:key="index" data-id="{{item.id}}" data-type="{{item.type}}" catchtap="orderDetail">
+    <van-panel title="订单类型：{{item.type}}" desc="订单时间：{{item.created_at}}" status="{{item.status_name}}" use-footer-slot>
       <block wx:for="{{item.order_goods}}" wx:for-item="goods" wx:key="index">
         <van-card num="{{goods.num}}" tag="" price="{{goods.price}}" title="{{goods.goods_name}}"
           thumb="{{ imgUrl+goods.thumb_pic }}" />

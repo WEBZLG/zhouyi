@@ -320,6 +320,10 @@ module.exports = {
   namePay(data) {
     return request('/pay', 'post', data)
   },
+  // 起名支付(新)
+  namePayNew(data) {
+    return request('/pay/create', 'post', data)
+  },
   // 直播间列表
   liveList(data) {
     return request('/live/get', 'post', data)
@@ -365,8 +369,12 @@ module.exports = {
     return request('/goods/detail/'+id, 'post', data,true,true)
   },
   // 价格列表
+  // priceList(data){
+  //   return request('/vip/get_list', 'post', data,true,true)
+  // },
+  // 价格列表
   priceList(data){
-    return request('/vip/get_list', 'post', data,true,true)
+    return request('/vip/get_price_list', 'post', data,true,true)
   },
   //新华字典
   dictionary(data){
@@ -383,5 +391,18 @@ module.exports = {
   // 罗盘
   luopan(data){
     return request('/luopan', 'post', data,true,true)
+  },
+  // 提现
+  cashOut(data){
+    return request('/user/withdraw', 'post', data)
+  },
+  // 提现记录
+  cashOutList(data){
+    return request('/user/withdraw_list', 'post', data)
+  },
+  // 交易记录
+  transaction(data){
+    return request('/user/balance_log', 'post', data)
   }
+  
 }

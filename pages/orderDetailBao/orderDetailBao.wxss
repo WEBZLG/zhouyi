@@ -1,4 +1,5 @@
-/* pages/testNameDetail/testNameDetail.wxss */
+/* pages/orderDetailBao/orderDetailBao.wxss */
+/* pages/nameDetail/nameDetail.wxss */
 .content{
   padding:0 30rpx;
   font-size: 14px;
@@ -13,10 +14,6 @@
 }
 .van-cell__title {
   font-weight: bold;
-}
-.size .van-cell__title {
-  font-weight: bold;
-  font-size: 18px;
 }
 .process{
   flex: 1;
@@ -75,17 +72,5 @@
   padding: 30rpx 0;
 }
 .title{
-  font-weight: bold;
-}
-.padding-bottom{
-  padding-bottom: 40rpx;
-}
-.view-more{
-  text-align: center;
-  background: #eaf2ff;
-  padding: 30rpx 0;
-}
-.red-color{
-  color: #ff0000;
   font-weight: bold;
 }

@@ -20,7 +20,9 @@ Page({
     birth: '',
     postTime: '',
     areaList: AREA.default,
-    industryList: DATA.INDUSTRY_LIST
+    industryList: DATA.INDUSTRY_LIST,
+    article:'',
+    content:''
   },
   checkMark(e) {
     let name = e.currentTarget.dataset.name;
@@ -95,6 +97,15 @@ Page({
       sex: event.detail,
     });
   },
+  getContent(){
+    API.teachingTypeDetail({},14).then(res=>{
+      let article = UTIL.formatRichText(res.data.content.content)
+      this.setData({
+        article:article,
+        content:res.data.content
+      })
+    })
+  },
   //获取地点
   onConfirm(e) {
     let type = e.currentTarget.dataset.type;
@@ -168,7 +179,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getContent()
   },
 
   /**

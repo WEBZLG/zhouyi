@@ -1,0 +1,55 @@
+/* pages/orderDetailGong/orderDetailGong.wxss */
+/* pages/nameDetailCompany/nameDetailCompany.wxss */
+.content{
+  padding:0 30rpx;
+  font-size: 14px;
+  line-height: 28px;
+}
+.flex{
+  display: flex;
+  align-items: center;
+}
+.sex{
+  margin-left: 60rpx;
+}
+.van-cell__title {
+  font-weight: bold;
+}
+.van-cell{
+  color: #ffffff !important;
+  background-color: #1989FA !important;
+}
+.van-cell--borderless{
+  color: #323233 !important;
+  padding-left: 0 !important;
+  background-color: #ffffff !important;
+}
+.wh-item{
+  margin-right: 20rpx;
+}
+.td{
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ababab;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+.paipan{
+  margin: 20rpx 0;
+}
+.company-name{
+  font-size: 14px;
+  font-weight: bold;
+  padding: 20rpx 30rpx;
+}
+.btn-box{
+  margin: 30rpx;
+}
+.van-button--info {
+  width: 100%;
+}
+.view-more{
+  text-align: center;
+  background: #eaf2ff;
+  padding: 30rpx 0;
+}

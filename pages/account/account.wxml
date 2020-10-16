@@ -1,0 +1,7 @@
+<!--pages/account/account.wxml-->
+<view>
+  <van-cell-group>
+    <van-cell icon="phone-circle-o" title="修改手机号" is-link catchtap="goChangePhone" />
+    <van-cell icon="eye-o" title="修改密码" is-link catchtap="goChangePwd" />
+  </van-cell-group>
+</view>

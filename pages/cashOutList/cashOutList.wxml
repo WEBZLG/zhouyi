@@ -1,0 +1,13 @@
+<!--pages/cashOutList/cashOutList.wxml-->
+<view>
+  <van-collapse accordion value="{{ activeName }}" bind:change="onChange">
+    <block wx:for="{{dataList}}" wx:key="index">
+      <van-collapse-item title="{{item.created_at}}" value="{{item.status}}" name="{{index}}">
+        <view>姓名：{{item.bank_user_name}}</view>
+        <view>提现方式：{{item.bank_name}}</view>
+        <view>提现账号：{{item.bank_card}}</view>
+        <view>提现金额：{{item.amount}}</view>
+      </van-collapse-item>
+    </block>
+  </van-collapse>
+</view>

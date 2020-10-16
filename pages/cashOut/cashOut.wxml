@@ -1,0 +1,13 @@
+<!--pages/cashOut/cashOut.wxml-->
+<view>
+  <van-cell-group>
+    <van-field label="姓名" value="{{ name }}" placeholder="请输入真实姓名" border="{{ false }}" bind:input="getName"/>
+    <van-field label="提现方式" value="{{ bank }}" placeholder="请输入选择提现方式" is-link border="{{ false }}"  readonly catchtap="showPopupFun"/>
+    <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+    <van-field label="账号" value="{{ account }}" placeholder="请输入账号" border="{{ false }}" bind:input="getAccount"/>
+    <van-field label="金额" value="{{ amount }}" placeholder="请输入金额" border="{{ false }}" bind:input="getAmount"/>
+  </van-cell-group>
+  <view class="btn-box">
+		<van-button type="info" round catchtap="cashOut">提交</van-button>
+	</view>
+</view>

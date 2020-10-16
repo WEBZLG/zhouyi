@@ -1,0 +1,21 @@
+/* pages/myWallet/myWallet.wxss */
+.banner{
+  position: relative;
+  height: 400rpx;
+}
+.total-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: #ffffff;
+}
+.zichan-icon{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 50rpx auto 30rpx;
+}

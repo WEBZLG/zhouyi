@@ -20,31 +20,38 @@ Page({
       })
     })
   },
+  // checkPrice(e) {
+  //   let idx = e.currentTarget.dataset.index
+  //   let pidx = e.currentTarget.dataset.priceindex
+  //   let type = e.currentTarget.dataset.type
+  //   this.setData({
+  //     typeindex: idx,
+  //     checkindex: pidx,
+  //     type: type
+  //   })
+  // },
   checkPrice(e) {
-    let idx = e.currentTarget.dataset.index
-    let pidx = e.currentTarget.dataset.priceindex
     let type = e.currentTarget.dataset.type
     this.setData({
-      typeindex: idx,
-      checkindex: pidx,
       type: type
     })
   },
   onSubmit() {
-    let type = this.data.typeindex
-    let time = this.data.checkindex
-    console.log(type, time)
-    if (type == '' && time == '') {
+    let type = this.data.type
+    // let type = this.data.typeindex
+    // let time = this.data.checkindex
+    if (type == '') {
       wx.showToast({
         title: '请选择要开通的会员类型',
         icon: 'none'
       })
       return false
     }
-    API.namePay({
-      pay_type: 'vip',
-      type: type,
-      time: time
+    API.namePayNew({
+      // pay_type: 'vip',
+      // type: type,
+      // time: time
+      pay_type:type
     }).then(res => {
       wx.requestPayment({
         timeStamp: res.data.wechat_data.timeStamp.toString(),
@@ -97,23 +104,26 @@ Page({
     switch (type) {
       case 'qiming':
         this.setData({
-          typeindex: 'qiming',
-          checkindex: 0,
-          type: '起名会员'
+          type:'qiming'
+          // typeindex: 'qiming',
+          // checkindex: 0,
+          // type: '起名会员'
         })
         break;
       case 'ceming':
         this.setData({
-          typeindex: 'ceming',
-          checkindex: 0,
-          type: '测名会员'
+          type:'ceming'
+          // typeindex: 'ceming',
+          // checkindex: 0,
+          // type: '测名会员'
         })
         break;
       case 'gongsiqiming':
         this.setData({
-          typeindex: 'business_qiming',
-          checkindex: 0,
-          type: '公司会员'
+          type:'business_qiming'
+          // typeindex: 'business_qiming',
+          // checkindex: 0,
+          // type: '公司会员'
         })
         break;
       default:

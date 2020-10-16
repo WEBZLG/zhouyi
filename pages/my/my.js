@@ -9,7 +9,20 @@ Page({
   data: {
     imgUrl: API.IMG_BASE_URL,
     userInfo: null,
-    fileList: []
+    fileList: [],
+    loading: true,
+  },
+  // 提现
+  cashOut(){
+    wx.navigateTo({
+      url: '../cashOut/cashOut',
+    })
+  },
+  // 会员订单
+  vipOrder(){
+    wx.navigateTo({
+      url: '../vipOrder/vipOrder',
+    })
   },
   // 跳转认证
   goCertification() {
@@ -75,15 +88,21 @@ Page({
     })
   },
   // 开通会员
-  goVip() {
+  account() {
     wx.navigateTo({
-      url: '../vip/vip',
+      url: '../account/account',
     })
   },
   // 我的订单
   myOrder(){
     wx.navigateTo({
       url: '../myOrder/myOrder',
+    })
+  },
+  // 我的钱包
+  myWallet(){
+    wx.navigateTo({
+      url: '../myWallet/myWallet',
     })
   },
   // 我的地址
@@ -185,12 +204,12 @@ Page({
                     case '0':
                       _this.goCertification()
                       break;
-                    case '1':
-                      _this.goChangePhone()
-                      break;
-                    case '2':
-                      _this.goChangePwd()
-                      break;
+                    // case '1':
+                    //   _this.goChangePhone()
+                    //   break;
+                    // case '2':
+                    //   _this.goChangePwd()
+                    //   break;
                     case '3':
                       _this.goMyRecommend()
                       break;
@@ -209,6 +228,13 @@ Page({
                     case '8':
                     _this.myAddress()
                     break;
+                    case '9':
+                    _this.account()
+                    break;
+                    case '10':
+                    _this.myWallet()
+                    break;
+                    
                   }
                 } else {
                   wx.showToast({
@@ -281,7 +307,11 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    setTimeout(() => {
+      this.setData({
+        loading: false
+      })
+    }, 500);
   },
 
   /**

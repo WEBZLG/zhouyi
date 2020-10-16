@@ -1,4 +1,4 @@
-/* pages/testNameDetail/testNameDetail.wxss */
+/* pages/orderDetailCe/orderDetailCe.wxss */
 .content{
   padding:0 30rpx;
   font-size: 14px;
@@ -78,7 +78,7 @@
   font-weight: bold;
 }
 .padding-bottom{
-  padding-bottom: 40rpx;
+  padding-bottom: 30rpx;
 }
 .view-more{
   text-align: center;

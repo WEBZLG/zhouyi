@@ -1,0 +1,17 @@
+<!--pages/myWallet/myWallet.wxml-->
+<view>
+  <view class="banner">
+    <image src="../../images/my_bg.png"></image>
+    <view class="total-box">
+      <view class="zichan-icon"><image src="../../images/zichan.png"></image></view>
+      <view>总资产</view>
+      <view>{{userInfo.balance}}</view>
+    </view>
+  </view>
+  <van-cell-group>
+    <van-cell icon="vip-card-o" title="开通会员" is-link catchtap="openVip" />
+    <van-cell icon="cash-back-record" title="申请提现" is-link catchtap="cashOut" />
+    <van-cell icon="notes-o" title="提现记录" is-link catchtap="cashOutList" />
+    <van-cell icon="completed" title="交易记录" is-link catchtap="transaction" />
+  </van-cell-group>
+</view>

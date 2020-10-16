@@ -101,11 +101,11 @@ Page({
     wx.onCompassChange(function (res) {
       // 罗盘数据保留两位小数
       var directions = res.direction.toFixed(2);
-      var radios = res.direction.toFixed(0);
-      that.location(radios,that.data.location)
+      var radios = res.direction.toFixed(1);
+      that.location(radios)
       that.setData({
         angle: directions,
-        rotate: 360 - radios,
+        rotate: 360 - radios, 
         direction: check(radios),
         lname:that.data.lname
       })

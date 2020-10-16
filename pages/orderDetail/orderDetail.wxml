@@ -31,7 +31,7 @@
       <view slot="footer" class="flex order-info">
         <view class='timeAxisView'> 
           <block wx:for="{{dataList.order_handle}}" wx:key="index">
-            <time-line isCurent="{{dataList.order_handle.length==(index+1)?true:false}}" isShowLeftLine="{{dataList.order_handle.length==(index+1)?false:true}}" axisTitle="{{item.remark}}" axisTime="{{dateUtil.dateFormat(item.created_at,'YYYY-MM-dd hh:mm:ss')}}"/>
+            <time-line isCurent="{{dataList.order_handle.length==(index+1)?true:false}}" isShowLeftLine="{{dataList.order_handle.length==(index+1)?false:true}}" axisTitle="{{item.remark}}" axisTime="{{item.created_at}}"/>
           </block>
           <!-- <timeAxis axisTitle="买家修改申请" axisTime="2019-05-21 21:09:09"/>
           <timeAxis textArray="{{textArray}}" axisTime="2019-05-21 21:09:09"/>
