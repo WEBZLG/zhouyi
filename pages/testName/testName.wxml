@@ -28,7 +28,7 @@
   </van-radio-group>
 </van-cell-group>
 <view class="btn-box">
-  <van-button type="info" round catchtap="onSubmit">立即测名</van-button>
+  <van-button type="info" round catchtap="isSign">立即测名</van-button>
 </view>
 <van-image width="100%" height="153" show-loading src="/images/c1.png" />
 <van-image width="100%" height="408" show-loading src="/images/c2.png" />

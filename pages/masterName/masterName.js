@@ -80,7 +80,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '名师起名',
+      path: '/pages/naming/naming?p=' + code
+    }
+  },
 })

@@ -94,7 +94,13 @@ Page({
 
   },
   //事件处理函
-  onLoad: function () {
+  onLoad: function (options) {
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
     // 罗盘Api
     var that = this;
     this.luopan();
@@ -146,5 +152,33 @@ Page({
   },
   onUnload: function () {
     wx.offCompassChange()
+  },
+  // 分享
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '风水罗盘',
+      path: '/pages/luopan/luopan?p=' + code
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '风水罗盘',
+      query: {
+        p: code
+      },
+    }
   }
 })

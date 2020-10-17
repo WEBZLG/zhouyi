@@ -145,7 +145,9 @@
     "van-sticky": "@vant/weapp/sticky/index",
     "van-search": "@vant/weapp/search/index",
     "van-collapse": "@vant/weapp/collapse/index",
-    "van-collapse-item": "@vant/weapp/collapse-item/index"
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

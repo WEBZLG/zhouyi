@@ -61,8 +61,9 @@ Page({
   },
   onPage(e){
     let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: '../teaching/teaching?id='+id
+      url: '../teaching/teaching?id='+id+'&title='+title
     })
   },
   /**

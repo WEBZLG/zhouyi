@@ -35,7 +35,7 @@
 		</van-popup>
 	</van-cell-group>
 	<view class="btn-box">
-		<van-button type="info" round catchtap="onSubmit">立即起名</van-button>
+		<van-button type="info" round catchtap="isSign">立即起名</van-button>
 	</view>
 	<van-grid column-num="2" border="{{ false }}" gutter="{{ 10 }}">
 		<van-grid-item use-slot>

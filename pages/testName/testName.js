@@ -81,6 +81,36 @@ Page({
       children: event.detail,
     });
   },
+    // 验证登录
+    isSign() {
+      let userInfo = wx.getStorageSync('userInfo');
+      if (userInfo == '' || userInfo == undefined) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        API.isSignIn({}, {
+            uid: userInfo.user_id
+          })
+          .then(res => {
+            if (res.message == '已登录') {
+              wx.setStorageSync('loginToken', res.data.login_token);
+              wx.setStorageSync('userInfo', res.data.user);
+              this.onSubmit()
+            } else {
+              wx.showToast({
+                title: 'res.message',
+                icon: "none"
+              })
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }, 1000);
+            }
+          })
+      }
+    },
   onSubmit() {
     let surname = this.data.surname
     let sex = this.data.sex
@@ -113,47 +143,21 @@ Page({
       return false;
     } else {
       let params = JSON.stringify(param)
-      this.upMessge(params)
-    }
-  },
-  // 获取更新信息
-  upMessge(params) {
-    let _this = this
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo == '' || userInfo == undefined) {
-      wx.redirectTo({
-        url: '../login/login',
+      wx.navigateTo({
+        url: '../testNameDetail/testNameDetail?param=' + params,
       })
-    } else {
-      API.isSignIn({}, {
-          uid: userInfo.user_id
-        })
-        .then(res => {
-          if (res.message == '已登录') {
-            wx.setStorageSync('loginToken', res.data.login_token);
-            wx.setStorageSync('userInfo', res.data.user);
-            wx.navigateTo({
-              url: '../testNameDetail/testNameDetail?param=' + params,
-            })
-          } else {
-            wx.showToast({
-              title: 'res.message',
-              icon: "none"
-            })
-            setTimeout(() => {
-              wx.redirectTo({
-                url: '../login/login',
-              })
-            }, 1000);
-          }
-        })
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
   },
 
   /**
@@ -204,7 +208,31 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '测名',
+      path: '/pages/testName/testName?p=' + code
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '测名',
+      query: {
+        p: code
+      },
+    }
+  }
 })

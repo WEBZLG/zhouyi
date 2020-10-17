@@ -16,6 +16,13 @@
 .van-button--info {
   width: 100%;
 }
+.van-grid-item{
+  margin: 20rpx 0;
+}
+.van-grid-item__content{
+  color: #1989FA;
+  border: 1px solid #1989FA;
+}
 .checked .van-grid-item__content{
   color: #ffffff;
   background-color: #1989FA;

@@ -56,3 +56,14 @@
 .size .van-cell__value{
   font-size: 20px;
 }
+.small-size{
+  font-size: 14px !important;
+}
+.dizhi{
+  position: relative;
+}
+.absolute{
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+}

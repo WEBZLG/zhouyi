@@ -1,4 +1,7 @@
 /* pages/magic/magic.wxss */
+.banner{
+  height: 400rpx;
+}
 .btn-box{
   margin: 30rpx;
 }

@@ -7,7 +7,8 @@ Page({
    */
   data: {
     content:'',
-    loading:true
+    loading:true,
+    param:''
   },
   getData(param){
     let _this = this
@@ -32,8 +33,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      param:options.param
+    })
     let param = JSON.parse(options.param)
     this.getData(param)
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
   },
 
   /**
@@ -83,7 +93,32 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '排盘详情',
+      path: '/pages/baziDetail/baziDetail?p=' + code+'&param='+this.data.param
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '排盘详情',
+      query: {
+        p: code,
+        param:this.data.param
+      },
+    }
+  }
 })

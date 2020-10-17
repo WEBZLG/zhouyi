@@ -25,7 +25,6 @@ Page({
       name: e.detail
     })
   },
-
   // 获取账号
   getAccount(e) {
     this.setData({

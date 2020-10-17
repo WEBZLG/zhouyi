@@ -157,23 +157,8 @@ Page({
   //详情
   onDetail() {
     let changeDate = this.data.changeDate
-    API.special({time:changeDate})
-    .then(res => {
-      let sudoku = []
-      sudoku.push(res.data.sudoku[4])
-      sudoku.push(res.data.sudoku[9])
-      sudoku.push(res.data.sudoku[2])
-      sudoku.push(res.data.sudoku[3])
-      sudoku.push(res.data.sudoku[5])
-      sudoku.push(res.data.sudoku[7])
-      sudoku.push(res.data.sudoku[8])
-      sudoku.push(res.data.sudoku[1])
-      sudoku.push(res.data.sudoku[6])
-      let param = JSON.stringify(res.data)
-      sudoku = JSON.stringify(sudoku)
-      wx.navigateTo({
-        url: '../magicDetail/magicDetail?param=' + param+'&sudoku='+sudoku,
-      })
+    wx.navigateTo({
+      url: '../magicDetail/magicDetail?changeDate=' + changeDate
     })
   },
   // 搜局事件--------------------
@@ -300,7 +285,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
   },
 
   /**
@@ -365,7 +355,31 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '奇门',
+      path: '/pages/magin/magin?p=' + code
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '奇门',
+      query: {
+        p: code
+      },
+    }
+  }
 })

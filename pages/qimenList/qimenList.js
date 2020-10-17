@@ -13,7 +13,7 @@ Page({
     let id = e.currentTarget.dataset.id
     let title = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: '../qimenDetail/qimenDetail?id='+id+'&title='+title,
+      url: '../teaching/teaching?id='+id+'&title='+title,
     })
   },
   // 获取列表

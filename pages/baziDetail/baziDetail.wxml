@@ -32,10 +32,10 @@
 				<view><rich-text nodes="{{content.times.hour.gan}}"></rich-text></view>
 			</van-cell>
 			<van-cell title="地支" custom-class="flex size green-color">
-				<view><rich-text nodes="{{content.times.year.zhi}}"></rich-text></view>
-				<view><rich-text nodes="{{content.times.month.zhi}}"></rich-text></view>
-				<view><rich-text nodes="{{content.times.day.zhi}}"></rich-text></view>
-				<view><rich-text nodes="{{content.times.hour.zhi}}"></rich-text></view>
+				<view class="dizhi"><rich-text nodes="{{content.times.year.zhi}}"></rich-text><text class="red-color small-size absolute">{{content.times.year.dizhi_shishen}}</text></view>
+				<view class="dizhi"><rich-text nodes="{{content.times.month.zhi}}"></rich-text><text class="red-color small-size absolute">{{content.times.year.dizhi_shishen}}</text></view>
+				<view class="dizhi"><rich-text nodes="{{content.times.day.zhi}}"></rich-text><text class="red-color small-size absolute">{{content.times.year.dizhi_shishen}}</text></view>
+				<view class="dizhi"><rich-text nodes="{{content.times.hour.zhi}}"></rich-text><text class="red-color small-size absolute">{{content.times.year.dizhi_shishen}}</text></view>
 			</van-cell>
 			<van-cell title="遁藏" custom-class="flex  red-color">
 				<view>

@@ -1,5 +1,8 @@
 <!--pages/magic/magic.wxml-->
 <view>
+	<view class="banner">
+		<image src="../../images/qmen.jpg"></image>
+	</view>
 	<van-tabs active="{{ active }}" color="#277CFB">
 		<van-tab wx:for="{{tabList}}" wx:key="index" title="{{item.title}}">
 		<!-- 时家开始 -->

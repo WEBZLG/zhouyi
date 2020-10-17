@@ -403,6 +403,10 @@ module.exports = {
   // 交易记录
   transaction(data){
     return request('/user/balance_log', 'post', data)
+  },
+  // 订单、提款状态
+  getStatus(data){
+    return request('/query/status', 'post', data,true,true)
   }
   
 }

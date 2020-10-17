@@ -16,19 +16,19 @@ Page({
         id: 2,
         imgPath: '../../images/qimingjiaoxue.png',
         title: "起名",
-        url: "../teaching/teaching"
+        url: "../qimenList/qimenList"
       },
       {
         id: 3,
         imgPath: '../../images/bazijiaoxue.png',
         title: "八字",
-        url: "../teaching/teaching"
+        url: "../qimenList/qimenList"
       },
       {
         id: 4,
         imgPath: '../../images/fengshuijiaoxue.png',
         title: "风水",
-        url: "../teaching/teaching"
+        url: "../qimenList/qimenList"
       },
     ]
   },

@@ -21,15 +21,14 @@ Page({
     sex: '1',
     show: false,
     dateStr3: '请选择时间',
-    chooseDate:'',//选择后日期
-    postDate:'',//传送到下页数据
-    isLunar:true,//是否是农历
+    chooseDate: '', //选择后日期
+    postDate: '', //传送到下页数据
+    isLunar: true, //是否是农历
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     chooseAddress: '请选择出生地',
     chooseTime: '',
-    iconNav: [
-      {
+    iconNav: [{
         id: 1,
         imgPath: '../../images/bbqm.png',
         title: "宝宝起名"
@@ -62,28 +61,55 @@ Page({
   // 跳转
   onPage(e) {
     let id = e.currentTarget.dataset.id
-    switch (id) {
-      case 1:
-        wx.navigateTo({
-          url: '../babyName/babyName'
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
         })
-        break;
-      case 2:
-        wx.navigateTo({
-          url: '../testName/testName'
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            switch (id) {
+              case 1:
+                wx.navigateTo({
+                  url: '../babyName/babyName'
+                })
+                break;
+              case 2:
+                wx.navigateTo({
+                  url: '../testName/testName'
+                })
+                break;
+              case 3:
+                wx.navigateTo({
+                  url: '../companyName/companyName'
+                })
+                break;
+              case 4:
+                wx.navigateTo({
+                  url: '../masterName/masterName'
+                })
+                break;
+            }
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 1000);
+          }
         })
-        break;
-      case 3:
-        wx.navigateTo({
-          url: '../companyName/companyName'
-        })
-        break;
-      case 4:
-        wx.navigateTo({
-          url: '../masterName/masterName'
-        })
-        break;
     }
+
   },
 
   showPopup() {
@@ -106,9 +132,9 @@ Page({
   showDatepicker3(event) {
     // 获取日期组件对象实例，并初始化配置
     this.selectComponent("#ruiDatepicker").init({
-      date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
+      date: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
       hour: new Date().getHours(),
-      min:new Date().getMinutes(),
+      min: new Date().getMinutes(),
       confirm: false
     });
     // this.showPopup()
@@ -121,13 +147,13 @@ Page({
     json['dateStr'] = event.detail.thisStr;
     // 更新数据
     this.setData(json);
-    let chooseDate =  event.detail.year + '-' + event.detail.month + '-' + event.detail.day+' '+(event.detail.hour<10?'0'+event.detail.hour:event.detail.hour)+':'+ (event.detail.min<10?'0'+event.detail.min:event.detail.min);
+    let chooseDate = event.detail.year + '-' + event.detail.month + '-' + event.detail.day + ' ' + (event.detail.hour < 10 ? '0' + event.detail.hour : event.detail.hour) + ':' + (event.detail.min < 10 ? '0' + event.detail.min : event.detail.min);
     this.setData({
-      chooseDate:chooseDate,
+      chooseDate: chooseDate,
       show: false,
-      dateStr3:event.detail.thisStr,
-      postDate:event.detail.thisStr,
-      isLunar:event.detail.lastTab=='lunar'?true:false
+      dateStr3: event.detail.thisStr,
+      postDate: event.detail.thisStr,
+      isLunar: event.detail.lastTab == 'lunar' ? true : false
     })
   },
   // 时间选择
@@ -158,53 +184,83 @@ Page({
     this.onClose();
   },
   // 新华字典
-  dictionary(){
+  dictionary() {
     wx.navigateTo({
       url: '../dictionary/dictionary',
     })
   },
   // 百家姓
-  familyNames(){
+  familyNames() {
     wx.navigateTo({
       url: '../familyNames/familyNames',
     })
   },
-  onSubmit(){
-    let param = {
-      surname:this.data.surname,
-      sex:this.data.sex,
-      time:this.data.chooseDate,
-      postDate:this.data.postDate,
-      address:this.data.chooseAddress,
-      isLunar:this.data.isLunar
+  // 验证登录
+  isSign() {
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo == '' || userInfo == undefined) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else {
+      API.isSignIn({}, {
+          uid: userInfo.user_id
+        })
+        .then(res => {
+          if (res.message == '已登录') {
+            wx.setStorageSync('loginToken', res.data.login_token);
+            wx.setStorageSync('userInfo', res.data.user);
+            this.onSubmit()
+          } else {
+            wx.showToast({
+              title: 'res.message',
+              icon: "none"
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }, 1000);
+          }
+        })
     }
-    if(param.surname==''){
+  },
+  onSubmit() {
+    let param = {
+      surname: this.data.surname,
+      sex: this.data.sex,
+      time: this.data.chooseDate,
+      postDate: this.data.postDate,
+      address: this.data.chooseAddress,
+      isLunar: this.data.isLunar
+    }
+    if (param.surname == '') {
       wx.showToast({
         title: '请输入姓氏',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else if(!API.isChinese(param.surname)){
+    } else if (!API.isChinese(param.surname)) {
       wx.showToast({
         title: '请输入汉字',
-        icon:'none'
+        icon: 'none'
       })
-    }else if(param.time==''){
+    } else if (param.time == '') {
       wx.showToast({
         title: '请选择时间',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else if(param.address=='请选择出生地'){
+    } else if (param.address == '请选择出生地') {
       wx.showToast({
         title: '请选择出生地',
-        icon:'none'
+        icon: 'none'
       })
       return false
-    }else{
+    } else {
       param = JSON.stringify(param)
       wx.navigateTo({
-        url: '../babyName/babyName?param='+param,
+        url: '../babyName/babyName?param=' + param,
       })
     }
   },
@@ -213,6 +269,12 @@ Page({
    */
   onLoad: function (options) {
     // this.getCarouselData()
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
   },
 
   /**
@@ -264,7 +326,31 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '名师起名',
+      path: '/pages/naming/naming?p=' + code
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: '名师起名',
+      query: {
+        p: code
+      },
+    }
+  }
 })

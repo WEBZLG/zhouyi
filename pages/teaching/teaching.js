@@ -8,7 +8,9 @@ Page({
    */
   data: {
     content:'',
-    article:''
+    article:'',
+    id:'',
+    title:''
   },
   getContent(id){
     API.teachingTypeDetail({},id).then(res=>{
@@ -23,8 +25,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.p) {
+      let code = options.p
+      wx.setStorageSync('p_code', code);
+    }else{
+      wx.setStorageSync('p_code', '');
+    }
     let id = options.id
     let title = options.title
+    this.setData({
+      id:id,
+      title:title
+    })
     if(title){
       wx.setNavigationBarTitle({
         title: title
@@ -78,7 +90,32 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-
-  // }
+  onShareAppMessage: function (res) {
+    var that = this;
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ''
+    }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: this.data.title,
+      path: '/pages/teaching/teaching?p=' + code+'&id='+this.data.id
+    }
+  },
+  onShareTimeline(res) {
+    let code = wx.getStorageSync('userInfo').p_code;
+    if (code == undefined) {
+      code = ""
+    }
+    return {
+      title: this.data.title,
+      query: {
+        p: code,
+        id:this.data.id
+      },
+    }
+  }
 })
