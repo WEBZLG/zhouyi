@@ -31,7 +31,7 @@ Page({
     iconNav: [{
         id: 1,
         imgPath: '../../images/bbqm.png',
-        title: "宝宝起名"
+        title: "起名改名"
       },
       {
         id: 3,

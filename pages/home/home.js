@@ -16,8 +16,8 @@ Page({
     interval: '',
     duration: 500,
     page: 1,
-    province: '黑龙江省',
-    city: '哈尔滨市',
+    province: '',
+    city: '',
     area: '',
     latitude: '',
     longitude: '',
@@ -103,6 +103,7 @@ Page({
       city: typeof (e.detail.values[1]) == 'undefined' || e.detail.values[1].code == '' ? '' : e.detail.values[1].name,
       area: typeof (e.detail.values[2]) == 'undefined' || e.detail.values[2].code == '' ? '' : e.detail.values[2].name,
     })
+    console.log( _this.data.province, _this.data.city, _this.data.area)
     this.getMaster('1', _this.data.province, _this.data.city, _this.data.area)
     this.onClose();
   },

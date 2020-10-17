@@ -89,3 +89,7 @@
   color: #ff0000;
   font-weight: bold;
 }
+.notice{
+  padding: 30rpx;
+  line-height: 48rpx;
+}

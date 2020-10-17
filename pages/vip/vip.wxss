@@ -27,3 +27,9 @@
   color: #ffffff;
   background-color: #1989FA;
 }
+.text-style{
+  text-decoration: line-through;
+}
+.red-color{
+  color: #ff0000;
+}

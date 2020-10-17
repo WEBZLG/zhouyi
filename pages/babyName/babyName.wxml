@@ -51,7 +51,7 @@
       </van-radio-group>
     </view>
     <view class="btn-box">
-      <van-button type="info" round catchtap="isSign">立即起名</van-button>
+      <van-button type="info" round catchtap="onSubmit">立即起名</van-button>
     </view>
   </view>
   <van-panel title="{{content.title}}">

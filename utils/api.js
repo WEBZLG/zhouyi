@@ -407,6 +407,9 @@ module.exports = {
   // 订单、提款状态
   getStatus(data){
     return request('/query/status', 'post', data,true,true)
+  },
+  //类型分类
+  getType(data){
+    return request('/query/type', 'post', data,true,true)
   }
-  
 }

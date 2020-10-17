@@ -1,13 +1,13 @@
 <!--pages/myOrder/myOrder.wxml-->
 <view>
-  <van-sticky>
+  <!-- <van-sticky>
     <van-dropdown-menu>
       <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
       <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
     </van-dropdown-menu>
-  </van-sticky>
+  </van-sticky> -->
 
-  <view wx:for="{{dataList}}" wx:key="index" data-id="{{item.id}}" data-type="{{item.type}}" catchtap="orderDetail">
+  <view wx:for="{{dataList}}" wx:key="index" data-id="{{item.id}}" data-type="{{item.type}}" catchtap="{{(item.status_name=='已付款'||item.type=='购买商品')?'orderDetail':''}}">
     <van-panel title="订单类型：{{item.type}}" desc="订单时间：{{item.created_at}}" status="{{item.status_name}}" use-footer-slot>
       <block wx:for="{{item.order_goods}}" wx:for-item="goods" wx:key="index">
         <van-card num="{{goods.num}}" tag="" price="{{goods.price}}" title="{{goods.goods_name}}"

@@ -17,6 +17,7 @@ Page({
     chooseAddress: '',
     name: '',
     sex: '1',
+    num:'2',
     birth: '',
     postTime: '',
     areaList: AREA.default,
@@ -97,6 +98,12 @@ Page({
       sex: event.detail,
     });
   },
+  // 获取字个数
+  onChangeNum(event){
+    this.setData({
+      num: event.detail,
+    });
+  },
   getContent(){
     API.teachingTypeDetail({},14).then(res=>{
       let article = UTIL.formatRichText(res.data.content.content)
@@ -136,6 +143,7 @@ Page({
       real_name: this.data.name,
       sex: this.data.sex == 1 ? '男' : '女',
       time: this.data.postTime,
+      zi_num:this.data.num,
       order_no:''
     }
     if (param.city == '') {

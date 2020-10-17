@@ -12,7 +12,13 @@
     <view class="content">
       <view>出生时间：{{content.gregorian_calendar}}</view>
       <view>出生地点：{{content.address}}</view>
-      <view>五行分析：<text class="wh-item" wx:for="{{wuxing}}" wx:key="index">{{item.title}}:{{item.num}}</text></view>
+      <view wx:for="{{wuxing}}" wx:key="index" class="flex">
+        <view>{{item.title}}:</view>
+        <view class="process">
+          <van-progress percentage="{{item.num/total*100}}" stroke-width="8" />
+        </view>
+      </view>
+      <view>五行统计：<text class="wh-item" wx:for="{{wuxing}}" wx:key="index">{{item.title}}:{{item.num}}</text></view>
       <view>八字分析：{{content.fazifenxi}}</view>
     </view>
   </van-panel>
@@ -26,7 +32,7 @@
     </view>
   </van-panel>
   <van-panel title="起名结果">
-    <view class="company-name" wx:for="{{content.ming}}" wx:key="index" >{{item.mingzi}}</view>
+    <view class="company-name" wx:for="{{content.ming}}" wx:key="index" ><rich-text nodes="{{item.mingzi}}"></rich-text></view>
     <view class="view-more" wx:if="{{content.is_vip==false}}">
       <van-image width="100" height="100" lazy-load src="/images/suo.png" />
       <view>开通起名会员解锁更多名字</view>

@@ -16,7 +16,16 @@
 				</view>
 				<view>子女情况：{{content.child==1?'有女子':'无子女'}}</view>
 			</view>
+			<view class="notice">
+				已有<text class="red-color">1586859人</text>进行姓名分析，<text class="red-color">97.89%</text>的用户都觉得对婚姻、事业、财运都有很大的帮助！准确分析姓名对您一生的影响，让您<text class="red-color">收货好姻缘，工作升职加薪，家庭美满幸福，马上开启一生好运！</text>
+			</view>
 		</van-panel>
+		<van-panel title="名字命格">
+			<view class="content">
+					{{content.xinggefenxi}}
+			</view>
+		</van-panel>
+		<block wx:if="{{content.is_vip==true}}">
 		<van-panel title="用字分析">
 			<view class="content">
 				<view>
@@ -46,7 +55,7 @@
 				</view>
 			</view>
 		</van-panel>
-		<block wx:if="{{content.is_vip==true}}">
+		
 		<van-panel title="您的姓名测算结果" custom-class="size" wx:if="{{userInfo.ceming_vip!==0}}">
 			<view class="content">
 				<view>

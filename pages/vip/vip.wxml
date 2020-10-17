@@ -20,22 +20,22 @@
     <van-cell title="{{vipList.ceming.name}}"/>
     <van-grid column-num="1" gutter="{{10}}" data-type="ceming" catchtap="checkPrice">
       <van-grid-item use-slot custom-class="{{'ceming'==type?'checked':''}}">
-        <!-- <view>{{vipList.ceming.name}}</view> -->
-        <view>{{vipList.ceming.price}}元 点击下方【开通会员】</view>
+        <view class="red-color">优惠价:{{vipList.ceming.price}}元</view>
+        <view>原价：<text class="text-style">{{vipList.ceming.y_price}}元</text> 点击下方【开通会员】</view>
       </van-grid-item>
     </van-grid>
     <van-cell title="{{vipList.qiming.name}}"/>
     <van-grid column-num="1" gutter="{{10}}" data-type="qiming"  catchtap="checkPrice">
       <van-grid-item use-slot  custom-class="{{'qiming'==type?'checked':''}}">
-        <!-- <view>{{vipList.qiming.name}}</view> -->
-        <view>{{vipList.qiming.price}}元 点击下方【开通会员】</view>
+        <view class="red-color">优惠价:{{vipList.qiming.price}}元</view>
+        <view>原价：<text class="text-style">{{vipList.qiming.y_price}}元</text> 点击下方【开通会员】</view>
       </van-grid-item>
     </van-grid>
     <van-cell title="{{vipList.business_qiming.name}}"/>
     <van-grid column-num="1" gutter="{{10}}" data-type="business_qiming"  catchtap="checkPrice">
       <van-grid-item use-slot  custom-class="{{'business_qiming'==type?'checked':''}}">
-        <!-- <view>{{vipList.business_qiming.name}}</view> -->
-        <view>{{vipList.business_qiming.price}}元 点击下方【开通会员】</view>
+        <view class="red-color">优惠价:{{vipList.business_qiming.price}}元</view>
+        <view>原价：<text class="text-style">{{vipList.business_qiming.y_price}}元</text> 点击下方【开通会员】</view>
       </van-grid-item>
     </van-grid>
   </van-skeleton>

@@ -25,10 +25,14 @@ swiper{
   width: 100rpx !important;
   min-width: 0 !important;
   margin-right: 0 !important;
+  font-size: 16px !important;
+  color: #000000 !important;
 }
 
 .van-cell__value{
   display: flex;
+  font-size: 16px !important;
+  color: #000000 !important;
 }
 .van-radio{
   margin-right: 30rpx;

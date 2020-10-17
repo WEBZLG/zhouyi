@@ -2,5 +2,5 @@
   "usingComponents": {
     "rui-datepicker": "/components/rui-datepicker"
   },
-  "navigationBarTitleText": "宝宝起名"
+  "navigationBarTitleText": "起名改名"
 }

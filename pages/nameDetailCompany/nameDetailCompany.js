@@ -10,14 +10,17 @@ Page({
     wuxing:[],
     isOrder:false,
     param:'',
-    userInfo:''
+    userInfo:'',
+    total:''
   },
   getData(param){
     API.companyName(param).then(res=>{
       let wuxing = new Array()
+      let total = 0
       for (var prop in res.data.wuxingfenxi) {
         if (res.data.wuxingfenxi.hasOwnProperty(prop)) {
           let val = res.data.wuxingfenxi[prop]
+          total = total + val
           let obj = {
             title:prop,
             num:val
@@ -27,7 +30,8 @@ Page({
       }
       this.setData({
         content:res.data,
-        wuxing:wuxing
+        wuxing:wuxing,
+        total:total
       })
     })
   },
