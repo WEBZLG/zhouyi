@@ -1,8 +1,10 @@
 <!--pages/teaching/teaching.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
 <view class="content">
 	<view class="title center">{{content.title}}</view>
 	<view class="time center">{{content.created_at}}</view>
 	<view>
-		<rich-text nodes="{{article}}"></rich-text>
+		<!-- <rich-text nodes="{{article}}"></rich-text> -->
+		<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
 	</view>
 </view>

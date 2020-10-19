@@ -1,4 +1,5 @@
 /* pages/teaching/teaching.wxss */
+@import "../../wxParse/wxParse.wxss";
 .content {
   font-size: 14px;
   line-height: 24px;

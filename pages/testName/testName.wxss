@@ -19,10 +19,12 @@ page{
   width: 160rpx !important;
   min-width: 0 !important;
   margin-right: 0 !important;
+  font-size: 16px !important;
 }
 
 .van-cell__value{
   display: flex;
+  font-size: 16px !important;
 }
 .van-radio{
   margin-right: 30rpx;

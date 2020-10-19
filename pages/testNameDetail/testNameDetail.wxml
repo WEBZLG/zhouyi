@@ -140,6 +140,34 @@
 				<view class="btn-box">
 					<van-button type="info" round catchtap="onView">开通测名会员</van-button>
 				</view>
+				<van-panel title="开通会员将获得以下内容">
+					<view class="content">
+						<view class="flex-bet">
+							<view>·您的生辰命格</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+						<view class="flex-bet">
+							<view>·您的姓名数理事业分析</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+						<view class="flex-bet">
+							<view>·您的财运运势分析</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+						<view class="flex-bet">
+							<view>·您的贵人运势分析</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+						<view class="flex-bet">
+							<view>·一生姻缘分析</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+						<view class="flex-bet">
+							<view>·未来运势分析</view>
+							<view class="suotou"><image src="../../images/suotou.png"></image></view>
+						</view>
+					</view>
+				</van-panel>
     </view>
 	</van-skeleton>
 </view>

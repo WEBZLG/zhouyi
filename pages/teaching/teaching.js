@@ -1,6 +1,7 @@
 // pages/teaching/teaching.js
 const API = require('../../utils/api');
 const UTIL = require('../../utils/util.js')
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -13,12 +14,15 @@ Page({
     title:''
   },
   getContent(id){
-    API.teachingTypeDetail({},id).then(res=>{
-      let article = UTIL.formatRichText(res.data.content.content)
+    var that = this;
+    API.teachingListDetail({},id).then(res=>{
+      // let article = UTIL.formatRichText(res.data.content.content)
+      let article = res.data.content.content
       this.setData({
         article:article,
         content:res.data.content
       })
+      WxParse.wxParse('article', 'html', article, that, 5);
     })
   },
   /**

@@ -61,7 +61,7 @@ swiper{
   background:rgba(0,0,0,.6);
 }
 #shareCanvas{
-  height: 400px;
+  height: 250px;
   width: 250px;
   margin: 20% auto 0;
 }

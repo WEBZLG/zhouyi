@@ -93,3 +93,12 @@
   padding: 30rpx;
   line-height: 48rpx;
 }
+.suotou{
+  height: 40rpx;
+  width: 40rpx;
+}
+.flex-bet{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}

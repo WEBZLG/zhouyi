@@ -311,9 +311,9 @@ Page({
                         API.getImageAll([codePath, backPath]).then((res) => {
                           const ctx = wx.createCanvasContext('shareCanvas')
                           // 底图
-                          ctx.drawImage(res[1].path, 0, 0, 250, 400);
+                          ctx.drawImage(res[1].path, 0, 0, 250, 250);
                           // 小程序码
-                          ctx.drawImage(res[0].path, 85, 300, 80, 80)
+                          ctx.drawImage(res[0].path, 190, 0, 60, 60)
                           ctx.stroke()
                           ctx.draw()
                           wx.hideLoading()
